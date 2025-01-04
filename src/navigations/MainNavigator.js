@@ -10,6 +10,10 @@ import ComplaintNavigator from './ComplaintNavigator';
 import DrawerNavigator from './DrawerNavigator';
 // import HomeNavigator from './HomeNavigator';
 import BottomTab from './BottomTab';
+import HomeTabNavigator from './HomeTabNavigator';
+import Profile from '../screens/drawerScreen/Profile';
+import PersonDoument from '../screens/drawerScreen/PersonDoument';
+import Payment from '../screens/bottomTabSceen/Payment';
 
 const MainNavigation = () => {
   const Stack = createStackNavigator();
@@ -23,7 +27,12 @@ const MainNavigation = () => {
           name="ComplaintNavigator"
           component={ComplaintNavigator}
         />
-        <Stack.Screen name="DrawerNavigator" component={DrawerNavigator} /> 
+        <Stack.Screen name="DrawerNavigator" component={DrawerNavigator} />
+
+        {/* <Stack.Screen name="HomeTabNavigator" component={HomeTabNavigator} /> */}
+        <Stack.Screen name="Profile" component={Profile} />
+        <Stack.Screen name="PersonDoument" component={PersonDoument} />
+        <Stack.Screen name="Payment" component={Payment} />
       </Stack.Navigator>
     </NavigationContainer>
   );

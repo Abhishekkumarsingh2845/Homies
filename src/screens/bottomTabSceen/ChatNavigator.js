@@ -9,8 +9,8 @@ const Stack = createStackNavigator();
 
 const ChatNavigator = () => {
   return (
-    <Stack.Navigator screenOptions={{headerShown: false}}>
-      {/* <Stack.Screen name="Chat" component={Chat} /> */}
+    <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName='Chat'>
+      <Stack.Screen name="Chat" component={Chat} />
       <Stack.Screen name="ChatMessage" component={ChatMessage} />
       <Stack.Screen name="AdminMessage" component={AdminMessage} />
     </Stack.Navigator>

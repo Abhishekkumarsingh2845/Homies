@@ -2,10 +2,12 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { FontText } from '../utlis/CustomFont';
 import { Color } from '../utlis/Color';
+import { useNavigation } from '@react-navigation/native';
 
 const ChatCmp = ({mrntop,message,updatetime,Imgsource,chatmsg}) => {
+  const navigation=useNavigation();
     return (
-        <TouchableOpacity style={[styles.container,{marginTop:mrntop}]}>
+        <TouchableOpacity style={[styles.container,{marginTop:mrntop}]} onPress={navigation.navigate("ChatMessage")}>
           <Image
             source={Imgsource}
             style={styles.notificationiconstyle}

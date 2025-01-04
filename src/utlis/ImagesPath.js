@@ -38,6 +38,12 @@ const Img = {
   tickicon:require('../assets/images/tick.png'),
   uncheckicon:require('../assets/images/uncheck.png'),
   helpicon:require('../assets/images/help.png'),
+  breakfasticon:require('../assets/images/breakfast.png'),
+  videoicon:require("../assets/images/video.png"),
+  hostelrentoutsucess:require("../assets/images/hostelrentoutsucess.png"),
+  profileicon:require("../assets/images/profile.png"),
+  greentick:require("../assets/images/greentick.png"),
+  lastprofileicon:require("../assets/images/lastprofile.png")
 };
 
 export {Img};

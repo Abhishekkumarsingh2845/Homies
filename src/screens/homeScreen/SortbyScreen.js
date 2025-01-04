@@ -1,5 +1,5 @@
 import {FlatList, StyleSheet, Text, View} from 'react-native';
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import Header from '../../components/Header';
 import SecondaryHeader from '../../components/SecondaryHeader';
 import {Img} from '../../utlis/ImagesPath';
@@ -7,6 +7,7 @@ import SearchBar from '../../components/SearchBar';
 import HostelInfoCard from '../../components/HostelInfoCard';
 import SortByBtn from '../../components/SortByBtn';
 import SearchBarr from '../../components/SearchBarr';
+import SortBymodal from '../../components/SortBymodal';
 
 const SortbyScreen = ({navigation}) => {
   // useEffect(() => {
@@ -35,6 +36,7 @@ const SortbyScreen = ({navigation}) => {
           renderItem={({item}) => <HostelInfoCard />}
         />
       </View>
+      <SortBymodal />
       <SortByBtn mrntop={50} />
     </View>
   );

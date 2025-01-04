@@ -4,11 +4,13 @@ import SecondaryHeader from '../../components/SecondaryHeader';
 import {FontText} from '../../utlis/CustomFont';
 import {Color} from '../../utlis/Color';
 import PrimaryBtn from '../../components/PrimaryBtn';
+import { useNavigation } from '@react-navigation/native';
 
-const Help = ({navigation}) => {
+const Help = () => {
+  const navigation=useNavigation();
   return (
     <View style={styles.container}>
-      <SecondaryHeader detailtxt={'Raise a Quary'} />
+      <SecondaryHeader detailtxt={'Raise a Quary'}   onPress={() => navigation.openDrawer()}/>
       <TouchableOpacity
         style={styles.subcontainer}
         onPress={() => navigation.openDrawer()}>

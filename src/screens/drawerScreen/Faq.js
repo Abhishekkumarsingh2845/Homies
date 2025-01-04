@@ -1,12 +1,18 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import Faquestion from '../../components/Faquestion';
 import SecondaryHeader from '../../components/SecondaryHeader';
+import {useNavigation} from '@react-navigation/native';
 
 const Faq = () => {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
-      <SecondaryHeader detailtxt={'FAQ'} />
+      <SafeAreaView/>
+      <SecondaryHeader
+        detailtxt={'FAQ'}
+        onPress={() => navigation.openDrawer()}
+      />
       <View style={styles.subcontainer}>
         <Faquestion
           question="1: What amenities do hostels provide?"
@@ -16,10 +22,7 @@ const Faq = () => {
           question="2: Can I book a private room in a hostel?"
           answer={`Yes, many hostels offer private rooms in addition to dormitory-style accommodations.`}
         />
-         <Faquestion
-          question="3: Do hostels/PG provide meals?"
-          
-        />
+        <Faquestion question="3: Do hostels/PG provide meals?" />
       </View>
     </View>
   );

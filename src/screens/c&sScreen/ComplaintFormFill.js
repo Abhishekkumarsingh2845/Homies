@@ -1,12 +1,18 @@
 import {Image, StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import SecondaryHeader from '../../components/SecondaryHeader';
 import {Img} from '../../utlis/ImagesPath';
 import Tick from 'react-native-vector-icons/EvilIcons';
 import {FontText} from '../../utlis/CustomFont';
 import {Color} from '../../utlis/Color';
 import PrimaryBtn from '../../components/PrimaryBtn';
-const ComplaintFormFill = () => {
+const ComplaintFormFill = ({navigation}) => {
+      useEffect(() => {
+        const timer = setTimeout(() => {
+          navigation.navigate("Disputes");
+        }, 2000);
+        return () => clearTimeout(timer);
+      }, [navigation]);
   return (
     <View style={styles.container}>
       <SecondaryHeader detailtxt={'Complaint Form'} />

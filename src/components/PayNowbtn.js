@@ -1,32 +1,36 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import { FontText } from '../utlis/CustomFont'
-import { Color } from '../utlis/Color'
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import React from 'react';
+import {FontText} from '../utlis/CustomFont';
+import {Color} from '../utlis/Color';
+import {useNavigation} from '@react-navigation/native';
 
 const PayNowbtn = () => {
+  const navigation = useNavigation();
   return (
-    <View style={styles.container}>
-      <Text  style={styles.txt}>Pay Now</Text>
-    </View>
-  )
-}
+    <TouchableOpacity
+      style={styles.container}
+      onPress={() => navigation.navigate('PaymentForm')}>
+      <Text style={styles.txt}>Pay Now</Text>
+    </TouchableOpacity>
+  );
+};
 
-export default PayNowbtn
+export default PayNowbtn;
 
 const styles = StyleSheet.create({
-  container:{
+  container: {
     // width:100,
     // height:50,
-    alignItems:"center",
-    justifyContent:"center",
-    backgroundColor:"#257500",
-    paddingVertical:5,
-    paddingHorizontal:20,
-    borderRadius:10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#257500',
+    paddingVertical: 5,
+    paddingHorizontal: 20,
+    borderRadius: 10,
   },
-  txt:{
-    fontSize:16,
-    fontFamily:FontText.medium,
-    color:Color.white,
-  }
-})
+  txt: {
+    fontSize: 16,
+    fontFamily: FontText.medium,
+    color: Color.white,
+  },
+});

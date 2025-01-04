@@ -22,7 +22,7 @@ const PropertyInfoCard = () => {
   return (
     <TouchableOpacity
       style={styles.container}
-      onPress={() => navigation.navigate('BottomTab', {screen: 'Payment'})}>
+      onPress={() => navigation.navigate('PaymentHomeForm')}>
       <View style={styles.imgcontainer}>
         <View style={styles.largehosteimgstyle}>
           <Image source={Img.hstdetail} style={styles.hstdetailstyle} />
@@ -115,8 +115,8 @@ const styles = StyleSheet.create({
   },
   largehosteimgstyle: {},
   hstdetailstyle: {
-    width: 300,
-    height: 300,
+    width: 200,
+    height: 200,
     // backgroundColor: 'red',
     resizeMode: 'stretch',
   },

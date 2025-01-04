@@ -1,10 +1,16 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {Color} from '../../utlis/Color';
 import PropertyInfoCard from '../../components/PropertyInfoCard';
 import SecondaryHeader from '../../components/SecondaryHeader';
 import Amenity from '../../components/Amenity';
 import Sharing from '../../components/Sharing';
+import Video from '../../components/Video';
+import Nearby from '../../components/Nearby';
+import NearLocationProperty from '../../components/NearLocationProperty';
+import PermonthRent from '../../components/PermonthRent';
+import VisitRequestbtn from '../../components/VisitRequestbtn';
+import SignUpModal from '../../components/SignUpModal';
 
 const PropertyDetail = () => {
   // useEffect(() => {
@@ -16,6 +22,7 @@ const PropertyDetail = () => {
   return (
     <View style={styles.container}>
       <SecondaryHeader detailtxt={'Property Details'} />
+      <ScrollView>
       <View style={styles.subcontainer}>
         <PropertyInfoCard />
         <View style={styles.amenitycontainer}>
@@ -25,7 +32,15 @@ const PropertyDetail = () => {
           <Amenity txt={'Gym'} mrgnleft={5} />
         </View>
         <Sharing />
+        <Video/>
+        <NearLocationProperty/>
+        <PermonthRent/>
+        <VisitRequestbtn/>
+        <SignUpModal/>
+        <View  style={{marginVertical:80}}/>
       </View>
+
+      </ScrollView>
     </View>
   );
 };

@@ -4,11 +4,13 @@ import SecondaryHeader from '../../components/SecondaryHeader';
 import ContactDetail from '../../components/ContactDetail';
 import {Img} from '../../utlis/ImagesPath';
 import LogoutModal from '../../components/LogoutModal';
+import { useNavigation } from '@react-navigation/native';
 
 const ContactUs = () => {
+  const navigation=useNavigation();
   return (
     <View style={styles.container}>
-      <SecondaryHeader detailtxt={'FAQs'} />
+      <SecondaryHeader detailtxt={'FAQs'}   onPress={() => navigation.openDrawer()}/>
       <View style={styles.subcontainer}>
         <ContactDetail
           title="We’re Here to Help!"

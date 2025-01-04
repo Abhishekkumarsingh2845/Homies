@@ -5,6 +5,7 @@ import Header from '../../components/Header'
 import DisputesCmp from '../../components/DisputesCmp'
 import PrimaryBtn from '../../components/PrimaryBtn'
 import { Color } from '../../utlis/Color'
+import DisputesDetail from './DisputesDetail'
 
 const Disputes = () => {
   return (
@@ -14,7 +15,7 @@ const Disputes = () => {
       <DisputesCmp status = 'Pending' statusColor = '#FF1C1C'/>
       <DisputesCmp  status = 'Pending' statusColor = '#FF1C1C'/>
       <DisputesCmp  status = 'Completed' statusColor = '#027516'/>
-      <PrimaryBtn txt={"+ADD"} bgcolor={Color.primary} mgntop={200}/>
+      <PrimaryBtn  destination={DisputesDetail}txt={"+ADD"} bgcolor={Color.primary} mgntop={200}/>
       </View>
     </View>
   )

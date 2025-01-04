@@ -8,6 +8,9 @@ import SortbyScreen from '../screens/homeScreen/SortbyScreen';
 import PropertyDetail from '../screens/homeScreen/PropertyDetail';
 import HostelRentOut from '../screens/homeScreen/HostelRentOut';
 import Notification from '../screens/homeScreen/Notification';
+import FilterScreen from '../screens/homeScreen/FilterScreen';
+import PaymentForm from '../screens/paymentScreen/PaymentForm';
+import PaymentHomeForm from '../screens/homeScreen/PaymentHomeForm';
 
 const HomeNavigator = () => {
   const Stack = createStackNavigator();
@@ -17,9 +20,14 @@ const HomeNavigator = () => {
       <Stack.Screen name="AllHome" component={AllHome} />
       <Stack.Screen name="BookMark" component={BookMark} />
       <Stack.Screen name="SortbyScreen" component={SortbyScreen} />
-      <Stack.Screen name="PropertyDetail" component={PropertyDetail} />
-      <Stack.Screen name="HostelRentOut" component={HostelRentOut} />
+      {/* <Stack.Screen name="HostelRentOut" component={HostelRentOut} /> */}
       <Stack.Screen name="Notification" component={Notification} />
+      <Stack.Screen name="FilterScreen" component={FilterScreen} />
+      <Stack.Screen name="PropertyDetail" component={PropertyDetail} />
+      <Stack.Screen name="PaymentForm" component={PaymentForm} />
+      <Stack.Screen name="HostelRentOut" component={HostelRentOut} />
+      <Stack.Screen name="PaymentHomeForm" component={PaymentHomeForm} />
+    
     </Stack.Navigator>
   );
 };
@@ -27,3 +35,4 @@ const HomeNavigator = () => {
 export default HomeNavigator;
 
 const styles = StyleSheet.create({});
+

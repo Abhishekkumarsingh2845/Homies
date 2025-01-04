@@ -5,8 +5,9 @@ import YesNoBtn from './YesNoBtn';
 import {Color} from '../utlis/Color';
 import {FontText} from '../utlis/CustomFont';
 
-const LogoutModal = () => {
-  const [modalVisible, setModalVisible] = useState(false);
+const LogoutModal = ({ modalVisible, setModalVisible }) => {
+  // const [modalVisible, setModalVisible] = useState(false);
+  
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.centeredView}>
@@ -15,7 +16,7 @@ const LogoutModal = () => {
           transparent={true}
           visible={modalVisible}
           onRequestClose={() => {
-            Alert.alert('Modal has been closed.');
+           
             setModalVisible(!modalVisible);
           }}>
           <View style={styles.centeredView}>
@@ -84,7 +85,7 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   buttonOpen: {
-    backgroundColor: '#F194FF',
+    // backgroundColor: 'red',
   },
   buttonClose: {
     backgroundColor: '#2196F3',

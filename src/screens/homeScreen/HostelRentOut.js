@@ -1,15 +1,15 @@
 import {Image, SafeAreaView, StatusBar, StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import {Img} from '../../utlis/ImagesPath';
 import { Color } from '../../utlis/Color';
 
-const HostelRentOut = () => {
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     navigation.replace('Home');
-  //   }, 4000);
-  //   return () => clearTimeout(timer);
-  // }, [navigation])
+const HostelRentOut = ({navigation}) => {
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      navigation.replace('FilterScreen');
+    }, 4000);
+    return () => clearTimeout(timer);
+  }, [navigation])
   return (
     <View style={styles.container}>
         {/* <StatusBar  barStyle={"light-content"} backgroundColor={"red"} /> */}

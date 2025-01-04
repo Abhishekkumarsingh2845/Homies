@@ -16,19 +16,22 @@ import DisputesDetail from '../screens/c&sScreen/DisputesDetail';
 import DisputesFormFill from '../screens/c&sScreen/DisputesFormFill';
 import PaymentForm from '../screens/paymentScreen/PaymentForm';
 import PaymentSucces from '../screens/paymentScreen/PaymentSucces';
+import HomeTabNavigator from './HomeTabNavigator';
+import ComplaintNavigator from './ComplaintNavigator';
+import PaymentNavigator from './PaymentNavigator';
 
 const BottomTab = () => {
   const Tab = createBottomTabNavigator();
   return (
     <Tab.Navigator screenOptions={{headerShown: false}}>
       <Tab.Screen
-        name="Home"
-        component={Home}
+        name="HomeTabNavigator"
+        component={HomeTabNavigator}
         options={{tabBarIcon: () => <HomeIcon name="home" size={20} />}}
       />
       <Tab.Screen
         name="Payment"
-        component={PaymentForm}
+        component={PaymentNavigator}
         options={{
           tabBarIcon: () => (
             <Image
@@ -39,7 +42,7 @@ const BottomTab = () => {
         }}
       />
       <Tab.Screen
-        name="Chat"
+        name="ChatNavigator"
         component={ChatNavigator}
         options={{
           tabBarIcon: () => (
@@ -51,8 +54,8 @@ const BottomTab = () => {
         }}
       />
       <Tab.Screen
-        name="Cd"
-        component={DisputesFormFill}
+        name="ComplaintNavigator"
+        component={ComplaintNavigator}
         options={{
           tabBarIcon: () => (
             <Image

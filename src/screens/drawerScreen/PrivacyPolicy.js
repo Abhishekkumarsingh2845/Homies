@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View, ScrollView} from 'react-native';
+import {StyleSheet, Text, View, ScrollView, SafeAreaView} from 'react-native';
 import React from 'react';
 import CommonHeader from '../../components/CommonHeader';
 import {FontText} from '../../utlis/CustomFont';
@@ -7,6 +7,7 @@ import {Color} from '../../utlis/Color';
 const PrivacyPolicy = () => {
   return (
     <View style={styles.container}>
+      <SafeAreaView/>
       <CommonHeader title="Privacy Policy" />
       <ScrollView contentContainerStyle={styles.content}>
         <View style={styles.section}>

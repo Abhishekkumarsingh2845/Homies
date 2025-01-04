@@ -4,6 +4,7 @@ import SecondaryHeader from '../../components/SecondaryHeader';
 import PrimaryBtn from '../../components/PrimaryBtn';
 import {Color} from '../../utlis/Color';
 import Opencamera from '../../components/Opencamera';
+import ComplaintFormFill from './ComplaintFormFill';
 
 const ComplaintForm = () => {
   return (
@@ -14,7 +15,7 @@ const ComplaintForm = () => {
         <Text style={styles.label}>Description</Text>
         <Text style={styles.label}>Upload Photo & Video</Text>
         <Opencamera />
-        <PrimaryBtn txt={'Submit'} bgcolor={Color.primary} mgntop={350} />
+        <PrimaryBtn  destination={ComplaintFormFill}txt={'Submit'} bgcolor={Color.primary} mgntop={350} />
       </View>
     </View>
   );

@@ -1,14 +1,16 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import LeftArrow from 'react-native-vector-icons/AntDesign';
-import { FontText } from '../utlis/CustomFont';
+import {FontText} from '../utlis/CustomFont';
+import { useNavigation } from '@react-navigation/native';
 
 const CommonHeader = ({title}) => {
+  const navigation=useNavigation();
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={() => navigation.openDrawer()}>
       <LeftArrow name="arrowleft" size={20} />
       <Text style={styles.txt}>{title}</Text>
-    </View>
+    </TouchableOpacity>
   );
 };
 

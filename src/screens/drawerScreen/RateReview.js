@@ -5,12 +5,14 @@ import {Img} from '../../utlis/ImagesPath';
 import PrimaryBtn from '../../components/PrimaryBtn';
 import {Color} from '../../utlis/Color';
 import {FontText} from '../../utlis/CustomFont';
+import { useNavigation } from '@react-navigation/native';
 
 const RateReview = () => {
   const StarArray = new Array(5).fill(0);
+  const navigation=useNavigation();
   return (
     <View style={styles.conatiner}>
-      <SecondaryHeader detailtxt={'Rate & Review'} />
+      <SecondaryHeader detailtxt={'Rate & Review'}  onPress={() => navigation.openDrawer()}/>
       <View style={styles.subcontainer}>
         <Text style={styles.ratereviewtxt}>RateReview</Text>
         <Text style={styles.rateexperiecetxt}>

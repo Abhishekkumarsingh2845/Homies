@@ -5,6 +5,8 @@ import {FontText} from '../../utlis/CustomFont';
 import {Color} from '../../utlis/Color';
 import PaymentMethod from '../../components/PaymentMethod';
 import PrimaryBtn from '../../components/PrimaryBtn';
+import HostelRentOut from '../homeScreen/HostelRentOut';
+import PaymentSucces from './PaymentSucces';
 
 const PaymentForm = () => {
   return (
@@ -23,7 +25,13 @@ const PaymentForm = () => {
           <Text style={styles.dueamounttxt}>CVV</Text>
         </View>
         <PaymentMethod labelText={'Cash'} />
-        <PrimaryBtn txt={'Pay Now'} bgcolor={'#257500'} mgntop={300}/>
+        <PrimaryBtn
+          // destination={HostelRentOut}
+          txt={'Pay Now'}
+          bgcolor={'#257500'}
+          mgntop={300}
+          destination={PaymentSucces}
+        />
       </View>
     </View>
   );

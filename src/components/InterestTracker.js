@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     // paddingHorizontal:20,
     width: 200,
     // borderTopLeftRadius:5,
-    borderBottomRightRadius:Platform.OS=="ios"? 10:0,
+    borderBottomRightRadius:Platform.OS==="ios"? 10:0,
   },
   peopleinterested: {
     fontSize: 15,

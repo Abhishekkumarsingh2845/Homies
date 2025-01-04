@@ -17,7 +17,7 @@ const SecondaryHeader = ({detailtxt, gobackImage, onPress}) => {
       <StatusBar backgroundColor={'#010101'} barStyle={'light-content'} />
       <TouchableOpacity style={styles.subcontainer} onPress={onPress}>
         {/* Dynamic Image Source */}
-        <Image source={gobackImage} style={styles.gobackstyle} />
+        <Image source={gobackImage} style={styles.gobackstyle}  />
         <Text style={styles.textstyle}>{detailtxt}</Text>
       </TouchableOpacity>
     </ImageBackground>

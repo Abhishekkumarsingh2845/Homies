@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
     marginTop:20,
     height: 120,
     paddingHorizontal:20,
+  
   },
   dueamountcontainer:
   {

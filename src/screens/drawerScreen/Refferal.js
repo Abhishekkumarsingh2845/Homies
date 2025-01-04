@@ -5,11 +5,13 @@ import {FontText} from '../../utlis/CustomFont';
 import ReferralField from '../../components/ReferralField';
 import PrimaryBtn from '../../components/PrimaryBtn';
 import { Color } from '../../utlis/Color';
+import { useNavigation } from '@react-navigation/native';
 
 const Refferal = () => {
+  const navigation=useNavigation();
   return (
     <View style={styles.conatiner}>
-      <SecondaryHeader detailtxt={'Referral'} />
+      <SecondaryHeader detailtxt={'Referral'}  onPress={() => navigation.openDrawer()} />
       <View style={styles.subconatiner}>
         <ReferralField refertxt={"Name"}/>
         <ReferralField refertxt={"Phone Number"}/>
