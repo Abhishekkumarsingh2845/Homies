@@ -9,7 +9,7 @@ const VisitRequestbtn = () => {
         <Text style={styles.txtstyle}>VisitRequestbtn</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.paynowbtncontainer}>
-        <Text style={styles.paynowtxtstyle}>Pay Nw</Text>
+        <Text style={styles.paynowtxtstyle}>Pay Now</Text>
       </TouchableOpacity>
     </View>
   );
@@ -23,12 +23,12 @@ const styles = StyleSheet.create({
     marginTop:10,
   },
   visitbtncontainer: {
-    width: 170,
+    width: 180,
     height: 50,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#FFB83A',
-    borderRadius: 20,
+    borderRadius: 15,
   },
   txtstyle: {
     fontSize: 16,
@@ -41,12 +41,12 @@ const styles = StyleSheet.create({
     color: '#FFB83A',
   },
   paynowbtncontainer: {
-    width: 170,
+    width: 180,
     height: 50,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'white',
-    borderRadius: 20,
+    borderRadius: 15,
     marginLeft: 10,
     borderColor: '#FFB83A',
     borderWidth: 1,

@@ -32,7 +32,7 @@ const Intro = () => {
       <Text style={styles.price}>at an affordable price</Text>
       <PrimaryBtn
         txt={'Next'}
-        destination={'LoginSignup'}
+        destination={'Login'}
         clr={Color.white}
         bgcolor={Color.primary}
         mgntop={Platform.OS === 'android' ? 70 : 30}

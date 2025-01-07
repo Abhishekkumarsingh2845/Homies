@@ -26,8 +26,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   imgstyle: {
-    width: 60,
-    height: 60,
+    width: 40,
+    height: 40,
   },
   txtstyle: {
     fontSize: 12,

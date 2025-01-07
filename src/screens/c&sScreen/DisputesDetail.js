@@ -6,16 +6,19 @@ import Tick from 'react-native-vector-icons/EvilIcons';
 import {FontText} from '../../utlis/CustomFont';
 import {Color} from '../../utlis/Color';
 import PrimaryBtn from '../../components/PrimaryBtn';
-const DisputesDetail = ({navigation}) => {
+import { useNavigation } from '@react-navigation/native';
+const DisputesDetail = () => {
+  const navigation=useNavigation();
     useEffect(() => {
       const timer = setTimeout(() => {
         navigation.navigate("DisputesFormFill");
       }, 2000);
       return () => clearTimeout(timer);
     }, [navigation]);
+
   return (
     <View style={styles.container}>
-      <SecondaryHeader detailtxt={'Complaint Form'} />
+      <SecondaryHeader gobackImage={Img.goback} detailtxt={'Complaint Form'} onPress={()=>navigation.goBack()} />
       <View style={styles.subconatiner}>
         <Text style={styles.topictxt}>Landlord Name</Text>
         <Text style={styles.topictype}>Mukesh Kumar</Text>
@@ -100,7 +103,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontFamily: FontText.light,
     lineHeight: 20,
-    color: '#7D7D7D',
+    color: Color.clr87,
     lineHeight: 18,
   },
   statuscontainer:

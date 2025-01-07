@@ -4,15 +4,19 @@ import SecondaryHeader from '../../components/SecondaryHeader';
 import CatergoryComponenet from '../../components/CatergoryComponenet';
 import {Img} from '../../utlis/ImagesPath';
 import StoreDetail from '../../components/StoreDetail';
+import { FontText } from '../../utlis/CustomFont';
+import { Color } from '../../utlis/Color';
 
 const Store = () => {
-  const storedata = [{id: 1}, {id: 2},{id: 3}];
+  const storedata = [{id: 1}, {id: 2}, {id: 3}];
 
   return (
     <View style={styles.container}>
-      <SecondaryHeader />
+      <SecondaryHeader gobackImage={Img.draw} notificationIcon={Img.bellicon} />
       <View style={styles.subcontainer}>
+      <Text style={styles.catergorytxt}>Category</Text>
         <View style={styles.catergorycontainer}>
+       
           <CatergoryComponenet
             Imgsource={Img.vegetableicon}
             toptxt={'Vegetable'}
@@ -63,4 +67,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginVertical: 10,
   },
+  catergorytxt:
+  {
+    fontSize:14,
+    fontFamily:FontText.medium,
+    color:Color.black,
+    marginHorizontal:10,
+    marginTop:10,
+  }
 });

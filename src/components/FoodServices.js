@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 25,
     borderRadius: 10,
+    marginTop:10,
   },
   breakfastcontainer: {},
   dinnercontainer: {},

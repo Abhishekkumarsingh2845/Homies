@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {Img} from '../../utlis/ImagesPath';
 import PersonalDetailCard from '../../components/PersonalDetailCard';
 import SeeAllDocument from '../../components/SeeAllDocument';
@@ -16,9 +16,10 @@ import {FontText} from '../../utlis/CustomFont';
 import {Color} from '../../utlis/Color';
 import SecondaryHeader from '../../components/SecondaryHeader';
 import LogoutModal from '../../components/LogoutModal';
+import {useNavigation} from '@react-navigation/native';
 const Profile = () => {
   const [modalVisible, setModalVisible] = useState(false);
-
+  const navigation = useNavigation();
   // Function to toggle the modal visibility
   const toggleModal = () => {
     setModalVisible(!modalVisible);
@@ -26,9 +27,12 @@ const Profile = () => {
   return (
     <View style={styles.container}>
       <SafeAreaView />
-    
+      <SecondaryHeader
+        detailtxt={'My Profile'}
+        gobackImage={Img.goback}
+        onPress={() => navigation.goBack('DrawerNavigator')}
+      />
       <ImageBackground source={Img.headerbg} style={styles.imageBackground}>
-
         {/* <Text style={{fontSize:18,fontFamily:FontText.medium,color:Color.white}}>My Profile</Text> */}
         <View style={styles.circle}>
           <Image
@@ -49,17 +53,17 @@ const Profile = () => {
             marginVertical: 10,
           }}>
           <Logout name="logout" size={20} />
-          <TouchableOpacity  onPress={toggleModal}>
-          <Text
-            style={{
-              fontSize: 18,
-              fontFamily: FontText.medium,
-              color: Color.black,
-              marginVertical: 10,
-              marginLeft: 10,
-            }}>
-            Logout
-          </Text>
+          <TouchableOpacity onPress={toggleModal}>
+            <Text
+              style={{
+                fontSize: 18,
+                fontFamily: FontText.medium,
+                color: Color.black,
+                marginVertical: 10,
+                marginLeft: 10,
+              }}>
+              Logout
+            </Text>
           </TouchableOpacity>
         </View>
         <Text
@@ -81,9 +85,9 @@ const Profile = () => {
           Delete account
         </Text>
         <LogoutModal
-        modalVisible={modalVisible}
-        setModalVisible={setModalVisible}
-      />
+          modalVisible={modalVisible}
+          setModalVisible={setModalVisible}
+        />
       </View>
     </View>
   );

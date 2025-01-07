@@ -1,14 +1,17 @@
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet, Text, View,TouchableOpacity} from 'react-native';
 import React from 'react';
 import {Img} from '../../utlis/ImagesPath';
 import Otp from '../../components/Otp';
 import PrimaryBtn from '../../components/PrimaryBtn';
 import {Color} from '../../utlis/Color';
-
+import {useNavigation} from '@react-navigation/native';
 const LoginSignup = () => {
+  const navigation = useNavigation(); // Initialize navigation
   return (
     <View style={styles.container}>
-      <Image source={Img.goback} style={styles.arrow} />
+      <TouchableOpacity onPress={() => navigation.goBack()}>
+        <Image source={Img.goback} style={styles.arrow} />
+      </TouchableOpacity>
       <Text style={styles.verify}>Verify your mobile number</Text>
       <Text style={styles.sendotp}>We have sent you an OTP on your mobile</Text>
       <Text style={styles.sendno}>number +1 8745XXXX2 </Text>

@@ -7,7 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 const ChatCmp = ({mrntop,message,updatetime,Imgsource,chatmsg}) => {
   const navigation=useNavigation();
     return (
-        <TouchableOpacity style={[styles.container,{marginTop:mrntop}]} onPress={navigation.navigate("ChatMessage")}>
+        <TouchableOpacity style={[styles.container,{marginTop:mrntop}]} onPress={()=>navigation.navigate("ChatMessage")}>
           <Image
             source={Imgsource}
             style={styles.notificationiconstyle}

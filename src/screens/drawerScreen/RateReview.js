@@ -5,14 +5,19 @@ import {Img} from '../../utlis/ImagesPath';
 import PrimaryBtn from '../../components/PrimaryBtn';
 import {Color} from '../../utlis/Color';
 import {FontText} from '../../utlis/CustomFont';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
+import ComplaintTxtInpt from '../../components/ComplaintTxtInpt';
 
 const RateReview = () => {
   const StarArray = new Array(5).fill(0);
-  const navigation=useNavigation();
+  const navigation = useNavigation();
   return (
     <View style={styles.conatiner}>
-      <SecondaryHeader detailtxt={'Rate & Review'}  onPress={() => navigation.openDrawer()}/>
+      <SecondaryHeader
+      gobackImage={Img.goback}
+        detailtxt={'Rate & Review'}
+        onPress={() => navigation.openDrawer()}
+      />
       <View style={styles.subcontainer}>
         <Text style={styles.ratereviewtxt}>RateReview</Text>
         <Text style={styles.rateexperiecetxt}>
@@ -33,8 +38,17 @@ const RateReview = () => {
           ))}
         </View>
         <Text style={styles.starcounttxt}>4/5 stars</Text>
-        <Text>Additional feedback</Text>
-        <PrimaryBtn txt={'Submit Feedback'} bgcolor={Color.primary} mgntop={350} />
+      </View>
+      <View style={{paddingHorizontal:20}}>
+      <Text style={{marginVertical: 20, textAlign: 'left'}}>
+        Additional feedback
+      </Text>
+      <ComplaintTxtInpt height={140} multiline={false} />
+      <PrimaryBtn
+        txt={'Submit Feedback'}
+        bgcolor={Color.primary}
+        mgntop={350}
+      />
       </View>
     </View>
   );
@@ -58,21 +72,21 @@ const styles = StyleSheet.create({
     // resizeMode:"contain",
   },
   ratereviewtxt: {
-    marginTop:20,
+    marginTop: 20,
     fontSize: 16,
     fontFamily: FontText.medium,
     lineHeight: 18,
     color: Color.black,
   },
   rateexperiecetxt: {
-    marginTop:10,
+    marginTop: 10,
     fontSize: 12,
     fontFamily: FontText.medium,
     // lineHeight:18,
     color: Color.black,
   },
   starcounttxt: {
-    marginTop:10,
+    marginTop: 10,
     fontSize: 14,
     fontFamily: FontText.light,
     lineHeight: 18,

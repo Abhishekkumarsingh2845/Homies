@@ -23,58 +23,88 @@ import PaymentNavigator from './PaymentNavigator';
 const BottomTab = () => {
   const Tab = createBottomTabNavigator();
   return (
-    <Tab.Navigator screenOptions={{headerShown: false}}>
+    <Tab.Navigator
+      screenOptions={{
+        headerShown: false,
+        tabBarActiveTintColor: '#FFB83A', // Color when tab is selected
+        tabBarInactiveTintColor: '#AFAEAE',
+      }}>
       <Tab.Screen
         name="HomeTabNavigator"
         component={HomeTabNavigator}
-        options={{tabBarIcon: () => <HomeIcon name="home" size={20} />}}
+        options={{
+          tabBarIcon: ({focused}) => (
+            <HomeIcon
+              name="home"
+              size={20}
+              color={focused ? '#FFB83A' : '#AFAEAE'}
+            />
+          ),
+          tabBarLabel: 'Home',
+        }}
       />
       <Tab.Screen
         name="Payment"
         component={PaymentNavigator}
         options={{
-          tabBarIcon: () => (
+          tabBarIcon: ({focused}) => (
             <Image
               source={require('./../assets/images/wallet.png')}
-              style={styles.imgstyle}
+              style={[
+                styles.imgstyle,
+                {tintColor: focused ? '#FFB83A' : '#AFAEAE'},
+              ]}
             />
           ),
+          tabBarLabel: 'Payment',
         }}
       />
       <Tab.Screen
         name="ChatNavigator"
         component={ChatNavigator}
         options={{
-          tabBarIcon: () => (
+          tabBarIcon: ({focused}) => (
             <Image
               source={require('./../assets/images/c/d.png')}
-              style={styles.imgstyle}
+              style={[
+                styles.imgstyle,
+                {tintColor: focused ? '#FFB83A' : '#AFAEAE'},
+              ]}
             />
           ),
+          tabBarLabel: 'C/D',
         }}
       />
       <Tab.Screen
         name="ComplaintNavigator"
         component={ComplaintNavigator}
         options={{
-          tabBarIcon: () => (
+          tabBarIcon: ({focused}) => (
             <Image
               source={require('./../assets/images/chat.png')}
-              style={styles.imgstyle}
+              style={[
+                styles.imgstyle,
+                {tintColor: focused ? '#FFB83A' : '#AFAEAE'},
+              ]}
             />
           ),
+          tabBarLabel: 'Chat',
         }}
       />
       <Tab.Screen
         name="Store"
         component={Store}
         options={{
-          tabBarIcon: () => (
+          tabBarIcon: ({focused}) => (
             <Image
               source={require('./../assets/images/store.png')}
-              style={styles.imgstyle}
+              style={[
+                styles.imgstyle,
+                {tintColor: focused ? '#FFB83A' : '#AFAEAE'},
+              ]}
             />
           ),
+          tabBarLabel: 'Store',
         }}
       />
     </Tab.Navigator>

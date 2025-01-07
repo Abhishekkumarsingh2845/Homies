@@ -4,11 +4,13 @@ import NotifyMsg from '../../components/NotifyMsg';
 import Header from '../../components/Header';
 import SecondaryHeader from '../../components/SecondaryHeader';
 import { Img } from '../../utlis/ImagesPath';
+import { useNavigation } from '@react-navigation/native';
 
 const Notification = () => {
+  const naviagtion=useNavigation();
   return (
     <View style={styles.container}>
-      <SecondaryHeader detailtxt={'Notifications'} />
+      <SecondaryHeader gobackImage={Img.goback} detailtxt={'Notifications'}  onPress={()=>naviagtion.goBack("Home")}/>
       <View style={styles.subcontainer}>
         <NotifyMsg
           mrntop={20}

@@ -10,6 +10,7 @@ import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint.load
 import com.facebook.react.defaults.DefaultReactHost.getDefaultReactHost
 import com.facebook.react.defaults.DefaultReactNativeHost
 import com.facebook.soloader.SoLoader
+import com.appsflyer.AppsFlyerLib // <-- Import AppsFlyerLib
 
 class MainApplication : Application(), ReactApplication {
 
@@ -39,5 +40,11 @@ class MainApplication : Application(), ReactApplication {
       // If you opted-in for the New Architecture, we load the native entry point for this app.
       load()
     }
+
+    // Initialize AppsFlyer SDK
+    val devKey = "jM5UQCpNnhNqvHx6LV9S6h" // Replace with your actual DevKey
+    AppsFlyerLib.getInstance().init(devKey, null, this)
+    AppsFlyerLib.getInstance().setDebugLog(true) // Enable debug logs for testing (disable in production)
+    AppsFlyerLib.getInstance().start(this) // Start the SDK
   }
 }

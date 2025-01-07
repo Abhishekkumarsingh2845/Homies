@@ -43,7 +43,11 @@ const Img = {
   hostelrentoutsucess:require("../assets/images/hostelrentoutsucess.png"),
   profileicon:require("../assets/images/profile.png"),
   greentick:require("../assets/images/greentick.png"),
-  lastprofileicon:require("../assets/images/lastprofile.png")
+  lastprofileicon:require("../assets/images/lastprofile.png"),
+  bellicon:require("../assets/images/bell.png"),
+  lunchicon:require("../assets/images/lunch.png"),
+  snackicon:require("../assets/images/snack.png"),
+  lefticon:require("../assets/images/drawerarrow.png"),
 };
 
 export {Img};

@@ -2,12 +2,15 @@ import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import SecondaryHeader from '../../components/SecondaryHeader';
 import DownloadDoc from '../../components/DownloadDoc';
+import { Img } from '../../utlis/ImagesPath';
+import { useNavigation } from '@react-navigation/native';
 
 const PersonDoument = () => {
+  const navigation=useNavigation();
   return (
     <View style={styles.container}>
       <SafeAreaView />
-      <SecondaryHeader detailtxt={'Document'} />
+      <SecondaryHeader  gobackImage={Img.goback}detailtxt={'Document'} onPress={()=>navigation.goBack("DrawerNavigator")} />
       <View style={{paddingHorizontal:20}}> 
       <Text style={{marginTop:10}}>Student Aadhar Card</Text>
       <DownloadDoc/>

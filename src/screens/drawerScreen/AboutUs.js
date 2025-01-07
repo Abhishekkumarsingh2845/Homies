@@ -1,4 +1,11 @@
-import {StyleSheet, Text, View, ScrollView} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  SafeAreaView,
+  StatusBar,
+} from 'react-native';
 import React from 'react';
 import CommonHeader from '../../components/CommonHeader';
 import {FontText} from '../../utlis/CustomFont';
@@ -6,10 +13,10 @@ import {Color} from '../../utlis/Color';
 const AboutUs = () => {
   return (
     <View style={styles.container}>
+      <StatusBar backgroundColor={'white'} />
       <CommonHeader title="About Us" />
       <ScrollView contentContainerStyle={styles.content}>
         <View style={styles.section}>
-         
           <Text style={styles.text}>
             Welcome to Asteria hostel, where comfort meets community! We are
             dedicated to providing a welcoming and affordable living environment
@@ -22,10 +29,10 @@ const AboutUs = () => {
             your stay comfortable and enjoyable.
           </Text>
           <Text style={styles.text}>
-          Join our vibrant community at Asteria hostel and experience a home away from home!
+            Join our vibrant community at Asteria hostel and experience a home
+            away from home!
           </Text>
         </View>
-       
       </ScrollView>
     </View>
   );

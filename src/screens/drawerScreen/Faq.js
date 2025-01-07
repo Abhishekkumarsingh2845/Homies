@@ -3,6 +3,9 @@ import React from 'react';
 import Faquestion from '../../components/Faquestion';
 import SecondaryHeader from '../../components/SecondaryHeader';
 import {useNavigation} from '@react-navigation/native';
+import { Img } from '../../utlis/ImagesPath';
+import PrimaryBtn from '../../components/PrimaryBtn';
+import { Color } from '../../utlis/Color';
 
 const Faq = () => {
   const navigation = useNavigation();
@@ -10,6 +13,7 @@ const Faq = () => {
     <View style={styles.container}>
       <SafeAreaView/>
       <SecondaryHeader
+      gobackImage={Img.goback}
         detailtxt={'FAQ'}
         onPress={() => navigation.openDrawer()}
       />
@@ -22,7 +26,9 @@ const Faq = () => {
           question="2: Can I book a private room in a hostel?"
           answer={`Yes, many hostels offer private rooms in addition to dormitory-style accommodations.`}
         />
-        <Faquestion question="3: Do hostels/PG provide meals?" />
+        <Faquestion question="3: Do hostels/PG provide meals?" 
+        answer={`Yes, many hostels offer private rooms in addition to dormitory-style accommodations.`}/>
+           <PrimaryBtn bgcolor={Color.btnclr} txt={"Raise a Query"} mgntop={240}/>
       </View>
     </View>
   );

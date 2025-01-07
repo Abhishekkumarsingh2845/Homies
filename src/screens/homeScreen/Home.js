@@ -1,55 +1,55 @@
-import {FlatList, StyleSheet, Text, View} from 'react-native';
-import React, {useEffect} from 'react';
+import {FlatList, Image, ScrollView, StyleSheet, View} from 'react-native';
+import React, {useState} from 'react';
 import Header from '../../components/Header';
 import SearchBar from '../../components/SearchBar';
-import HostelImg from '../../components/HostelImg';
 import HstDetail from '../../components/HostelDetail';
 import NearbySeeAll from '../../components/NearbySeeAll';
+import {Img} from '../../utlis/ImagesPath';
+import Swiper from 'react-native-swiper';
+import {Color} from '../../utlis/Color';
+import DotindictaorImg from '../../components/DotindictaorImg';
 
 const Home = ({navigation}) => {
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     navigation.replace('AllHome');
-  //   }, 4000);
-  //   return () => clearTimeout(timer);
-  // }, [navigation]);
+  const images = [Img.hstimgage, Img.hstimgage, Img.hstimgage];
   const hostelData = [
-    {
-      id: 1,
-      mrntop: 0,
-    },
-    {
-      id: 2,
-      mrntop: 20,
-      showRoomAvailability: true,
-    },
-    {
-      id: 3,
-      mrntop: 20,
-    },
-    {
-      id: 4,
-      mrntop: 20,
-    },
+    {id: 1, mrntop: 0},
+    {id: 2, mrntop: 20, showRoomAvailability: true},
+    {id: 3, mrntop: 20},
+    {id: 4, mrntop: 20},
   ];
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  // Function to handle scroll position and update active index
+  const handleScroll = event => {
+    const contentOffsetX = event.nativeEvent.contentOffset.x;
+    const index = Math.floor(contentOffsetX / 350); // Image width is 350
+    setActiveIndex(index);
+  };
   return (
     <View style={styles.container}>
       <Header />
       <View style={styles.subcontainer}>
         <SearchBar />
-        {/* <HostelImg/> */}
-        <NearbySeeAll />
-        <FlatList
-          showsVerticalScrollIndicator={false}
-          data={hostelData}
-          keyExtractor={item => item.id}
-          renderItem={({item}) => (
-            <HstDetail
-              mrntop={item.mrntop}
-              showRoomAvailability={item.showRoomAvailability}
-            />
-          )}
-        />
+        <ScrollView  contentContainerStyle={{marginTop:10}}showsVerticalScrollIndicator={false}>
+
+          <Image
+            source={require('../../assets/images/map.png')}
+            style={styles.mapImage}
+          />
+        <DotindictaorImg/>
+          <NearbySeeAll />
+          <FlatList
+            showsVerticalScrollIndicator={false}
+            data={hostelData}
+            keyExtractor={item => item.id.toString()}
+            renderItem={({item}) => (
+              <HstDetail
+                mrntop={item.mrntop}
+                showRoomAvailability={item.showRoomAvailability}
+              />
+            )}
+          />
+        </ScrollView>
       </View>
     </View>
   );
@@ -65,5 +65,57 @@ const styles = StyleSheet.create({
   subcontainer: {
     width: '100%',
     paddingHorizontal: 20,
+  },
+  mapImage: {
+    width: '100%',
+    height: 200,
+    resizeMode: 'cover',
+    borderRadius: 20,
+  },
+  wrapper: {
+    height: 200,
+  },
+  image: {
+    width: 350, // Adjust width for horizontal scroll
+    height: 150, // Adjust height for horizontal scroll
+    resizeMode: 'cover',
+    marginRight: 10, // Add spacing between images
+    borderRadius: 10,
+  },
+  inactiveDot: {
+    backgroundColor: '#D3D3D3',
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    marginHorizontal: 3,
+  },
+  activeDot: {
+    backgroundColor: '#007BFF',
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+    marginHorizontal: 3,
+  },
+  horiscrollviewcontainer: {
+    marginVertical: 20,
+  },
+
+  dotContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginTop: 10,
+  },
+  dot: {
+    width: 5,
+    height: 5,
+    borderRadius: 2,
+    backgroundColor: '#D3D3D3',
+    marginHorizontal: 5,
+  },
+  activeDot: {
+    backgroundColor: Color.btnclr,
+    width: 8,
+    height: 8,
+    borderRadius: 5,
   },
 });

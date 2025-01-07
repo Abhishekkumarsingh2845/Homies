@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import SecondaryHeader from '../../components/SecondaryHeader';
 import ContactDetail from '../../components/ContactDetail';
@@ -10,7 +10,8 @@ const ContactUs = () => {
   const navigation=useNavigation();
   return (
     <View style={styles.container}>
-      <SecondaryHeader detailtxt={'FAQs'}   onPress={() => navigation.openDrawer()}/>
+      <SafeAreaView/>
+      <SecondaryHeader  gobackImage={Img.goback} detailtxt={'FAQs'}   onPress={() => navigation.openDrawer()}/>
       <View style={styles.subcontainer}>
         <ContactDetail
           title="We’re Here to Help!"
@@ -35,7 +36,7 @@ const ContactUs = () => {
           imageSource={Img.helpicon}
           contactInfo="admin@gmail.com"
         />
-        <LogoutModal />
+        {/* <LogoutModal /> */}
       </View>
     </View>
   );

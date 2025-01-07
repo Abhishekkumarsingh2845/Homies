@@ -1,18 +1,20 @@
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import {Img} from '../utlis/ImagesPath';
+import { FontText } from '../utlis/CustomFont';
+import { Color } from '../utlis/Color';
 
 const Video = () => {
   const videoarray = new Array(3).fill(null);
   return (
     <View style={styles.container}>
-      <Text>Virtual Videos</Text>
-      <TouchableOpacity style={{flexDirection: 'row', justifyContent: 'space-around',marginTop:10}}>
+     <Text style={styles.amenttxt}>Virtual Videos</Text>
+      <TouchableOpacity style={{flexDirection: 'row', justifyContent: "flex-start",marginTop:5}}>
         {videoarray.map((_, index) => (
           <Image
             key={index}
             source={Img.videoicon}
-            style={{width: 90, height: 70, borderRadius: 10}}
+            style={{width: 90, height: 70, borderRadius: 10,marginLeft:10}}
           />
         ))}
       </TouchableOpacity>
@@ -24,6 +26,14 @@ export default Video;
 
 const styles = StyleSheet.create({
   container: {
-    marginTop:10
+    // marginTop:10
+  },
+  amenttxt: {
+    fontSize: 14,
+    fontFamily: FontText.medium,
+    color: Color.black,
+    marginLeft:10,
+    marginTop:10,
+    // marginVertical: 10,
   },
 });

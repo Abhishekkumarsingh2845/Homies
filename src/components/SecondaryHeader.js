@@ -10,15 +10,26 @@ import {
 import React from 'react';
 import {Img} from '../utlis/ImagesPath';
 import {FontText} from '../utlis/CustomFont';
+import { useNavigation } from '@react-navigation/native';
 
-const SecondaryHeader = ({detailtxt, gobackImage, onPress}) => {
+const SecondaryHeader = ({
+  detailtxt,
+  gobackImage,
+  onPress,
+  notificationIcon,
+}) => {
+  const navigation=useNavigation();
   return (
     <ImageBackground source={Img.headerbg} style={styles.container}>
       <StatusBar backgroundColor={'#010101'} barStyle={'light-content'} />
       <TouchableOpacity style={styles.subcontainer} onPress={onPress}>
         {/* Dynamic Image Source */}
-        <Image source={gobackImage} style={styles.gobackstyle}  />
+        <Image source={gobackImage} style={styles.gobackstyle} />
         <Text style={styles.textstyle}>{detailtxt}</Text>
+        {/* <Image source={Img.bellicon} style={styles.imgcontainer} /> */}
+        <TouchableOpacity style={{position: 'absolute', right: 10}} onPress={()=>navigation.navigate("Notification")}>
+          <Image source={notificationIcon} style={styles.imgcontainer} />
+        </TouchableOpacity>
       </TouchableOpacity>
     </ImageBackground>
   );
@@ -50,5 +61,11 @@ const styles = StyleSheet.create({
     lineHeight: 20,
     marginLeft: 10,
     color: '#FFFFFF',
+  },
+  imgcontainer: {
+    width: 25,
+    height: 25,
+    // position: 'absolute',
+    // right: 10,
   },
 });

@@ -11,6 +11,7 @@ import Notification from '../screens/homeScreen/Notification';
 import FilterScreen from '../screens/homeScreen/FilterScreen';
 import PaymentForm from '../screens/paymentScreen/PaymentForm';
 import PaymentHomeForm from '../screens/homeScreen/PaymentHomeForm';
+import LocationSearch from '../screens/homeScreen/LocationSearch';
 
 const HomeNavigator = () => {
   const Stack = createStackNavigator();
@@ -20,6 +21,7 @@ const HomeNavigator = () => {
       <Stack.Screen name="AllHome" component={AllHome} />
       <Stack.Screen name="BookMark" component={BookMark} />
       <Stack.Screen name="SortbyScreen" component={SortbyScreen} />
+      <Stack.Screen name="LocationSearch" component={LocationSearch} />
       {/* <Stack.Screen name="HostelRentOut" component={HostelRentOut} /> */}
       <Stack.Screen name="Notification" component={Notification} />
       <Stack.Screen name="FilterScreen" component={FilterScreen} />

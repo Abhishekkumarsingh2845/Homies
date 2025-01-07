@@ -1,33 +1,106 @@
+// import {
+//   Image,
+//   Platform,
+//   StyleSheet,
+//   Text,
+//   TextInput,
+//   TouchableOpacity,
+//   View,
+// } from 'react-native';
+// import React from 'react';
+// import Search from 'react-native-vector-icons/AntDesign';
+// import {Img} from '../utlis/ImagesPath';
+
+// const SearchBar = () => {
+//   return (
+//     <View style={styles.contianer}>
+//       <TouchableOpacity>
+//         <Image source={Img.srch} style={styles.searchicon} />
+//       </TouchableOpacity>
+
+//       <TextInput
+//         style={styles.searchbar}
+//         placeholder="Find Property"
+//         placeholderTextColor={'#737373'}
+//       />
+
+//       <TouchableOpacity>
+//         <Image source={Img.sttng} style={styles.setting} />
+//       </TouchableOpacity>
+//     </View>
+//   );
+// };
+
+// export default SearchBar;
+
+// const styles = StyleSheet.create({
+//   searchbar: {
+//     flex: 1,
+//     marginLeft: 10,
+//     fontSize: 14,
+//     fontWeight: '400',
+//     lineHeight: 18,
+
+//   },
+//   contianer: {
+//     width: '100%',
+//     flexDirection: 'row',
+//     alignItems: 'center',
+//     backgroundColor: '#EFEFEF',
+//     // backgroundColor:"red",
+//     paddingHorizontal: 25,
+//     paddingVertical: Platform.OS === 'android' ? 5 : 15,
+//     borderRadius: 10,
+//     marginTop: 10,
+//   },
+//   searchicon: {
+//     width: 20,
+//     height: 20,
+//   },
+//   setting: {
+//     width: 25,
+//     height: 25,
+//   },
+// });
+
 import {
   Image,
   Platform,
   StyleSheet,
-  Text,
   TextInput,
   TouchableOpacity,
   View,
 } from 'react-native';
 import React from 'react';
-import Search from 'react-native-vector-icons/AntDesign';
 import {Img} from '../utlis/ImagesPath';
+import { useNavigation } from '@react-navigation/native';
 
-const SearchBar = () => {
+const SearchBar = ({ placeholderText = 'Find Property', containerBgColor = '#EFEFEF',destination}) => {
+   const navigation = useNavigation();
+  
+    const handleNavigation = () => {
+      if (destination) {
+        navigation.navigate(destination);
+      }
+    };
+  
   return (
-    <View style={styles.contianer}>
+    <TouchableOpacity
+      style={[styles.container, {backgroundColor: containerBgColor}]}   onPress={handleNavigation} >
       <TouchableOpacity>
         <Image source={Img.srch} style={styles.searchicon} />
       </TouchableOpacity>
 
       <TextInput
         style={styles.searchbar}
-        placeholder="Find Property"
+        placeholder={placeholderText} // Dynamic placeholder
         placeholderTextColor={'#737373'}
       />
-     
+
       <TouchableOpacity>
         <Image source={Img.sttng} style={styles.setting} />
       </TouchableOpacity>
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -40,16 +113,13 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '400',
     lineHeight: 18,
-    // backgroundColor:"red",
   },
-  contianer: {
+  container: {
     width: '100%',
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#EFEFEF',
-    // backgroundColor:"red",
     paddingHorizontal: 25,
-    paddingVertical: Platform.OS === 'android' ? 5 : 15,
+    paddingVertical: Platform.OS === 'android' ? 2 : 15,
     borderRadius: 10,
     marginTop: 10,
   },

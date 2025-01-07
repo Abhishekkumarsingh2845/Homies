@@ -1,4 +1,4 @@
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {Color} from '../../utlis/Color';
 import PropertyInfoCard from '../../components/PropertyInfoCard';
@@ -11,8 +11,12 @@ import NearLocationProperty from '../../components/NearLocationProperty';
 import PermonthRent from '../../components/PermonthRent';
 import VisitRequestbtn from '../../components/VisitRequestbtn';
 import SignUpModal from '../../components/SignUpModal';
+import {Img} from '../../utlis/ImagesPath';
+import {useNavigation} from '@react-navigation/native';
+import {FontText} from '../../utlis/CustomFont';
 
 const PropertyDetail = () => {
+  const navigation = useNavigation();
   // useEffect(() => {
   //   const timer = setTimeout(() => {
   //     navigation.replace('Home');
@@ -21,25 +25,32 @@ const PropertyDetail = () => {
   // }, [navigation])
   return (
     <View style={styles.container}>
-      <SecondaryHeader detailtxt={'Property Details'} />
+      <SafeAreaView/>
+      <SecondaryHeader
+        gobackImage={Img.goback}
+        detailtxt={'Property Details'}
+        onPress={() => navigation.goBack()}
+      />
       <ScrollView>
-      <View style={styles.subcontainer}>
-        <PropertyInfoCard />
-        <View style={styles.amenitycontainer}>
-          <Amenity txt={'Wifi'} />
-          <Amenity txt={'Parking'} mrgnleft={5} />
-          <Amenity txt={'Gym'} mrgnleft={5} />
-          <Amenity txt={'Gym'} mrgnleft={5} />
-        </View>
-        <Sharing />
-        <Video/>
-        <NearLocationProperty/>
-        <PermonthRent/>
-        <VisitRequestbtn/>
-        <SignUpModal/>
-        <View  style={{marginVertical:80}}/>
-      </View>
+        <View style={styles.subcontainer}>
+          <PropertyInfoCard />
+          <Text style={styles.amenttxt}>Amenities</Text>
+          <View style={styles.amenitycontainer}>
+            <Amenity txt={'Wifi'} />
+            <Amenity txt={'Parking'} mrgnleft={5} />
+            <Amenity txt={'Gym'} mrgnleft={5} />
+            <Amenity txt={'Gym'} mrgnleft={5} />
+          </View>
+          <Sharing />
 
+          <Video />
+          <Text style={styles.neaerbytxt}>Near by Property </Text>
+          <NearLocationProperty />
+          <PermonthRent />
+          <VisitRequestbtn />
+          <SignUpModal />
+          <View style={{marginVertical: 80}} />
+        </View>
       </ScrollView>
     </View>
   );
@@ -58,6 +69,19 @@ const styles = StyleSheet.create({
   amenitycontainer: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    marginTop: 10,
+    // marginTop: 10,
   },
+  amenttxt: {
+    fontSize: 14,
+    fontFamily: FontText.medium,
+    color: Color.black,
+    marginVertical: 10,
+  },
+  neaerbytxt:{
+    fontSize: 14,
+    fontFamily: FontText.medium,
+    color: Color.black,
+    marginLeft:5,
+    marginVertical: 10,
+  }
 });

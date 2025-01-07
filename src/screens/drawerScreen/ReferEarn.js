@@ -6,12 +6,14 @@ import {useNavigation} from '@react-navigation/native';
 import PayNow from '../../components/PayNow';
 import Invite from '../../components/Invite';
 import Invitebtn from '../../components/Invitebtn';
+import {Img} from '../../utlis/ImagesPath';
 
 const ReferEarn = () => {
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <SecondaryHeader
+        gobackImage={Img.goback}
         detailtxt={'Invite'}
         onPress={() => navigation.openDrawer()}
       />
@@ -20,10 +22,9 @@ const ReferEarn = () => {
         <Invite />
         <Invite />
         <Invite />
-        <View style={{alignItems:"flex-end",marginTop:190}}>
-        <Invitebtn/>
+        <View style={{alignItems: 'flex-end', marginTop: 190}}>
+          <Invitebtn />
         </View>
-       
       </View>
       {/* <PaymentBottomSheet /> */}
     </View>

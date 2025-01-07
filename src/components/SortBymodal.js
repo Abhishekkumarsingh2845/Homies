@@ -86,15 +86,19 @@ const SortBymodal = () => {
             </View>
           </View>
         </Modal>
-        {/* <Pressable
+        <Pressable
           style={[styles.button, styles.buttonOpen]}
           onPress={() => setModalVisible(true)}>
           <Text style={styles.textStyle}>Show Modal</Text>
-        </Pressable> */}
-           <TouchableOpacity onPress={() => setModalVisible(true)}>
-      <Text style={styles.sortbytxt}>Short By</Text>
-      <Image source={Img.sortbyicon} style={styles.sortbystyle} />
-    </TouchableOpacity>
+        </Pressable>
+        <TouchableOpacity onPress={() => setModalVisible(true)} style={{width:40,height:40}}>
+          <Text style={styles.sortbytxt}>Short By</Text>
+          <Image source={Img.sortbyicon} style={styles.sortbystyle} />
+        </TouchableOpacity>
+         {/* <TouchableOpacity style={[styles.subcontainer]} onPress={() => setModalVisible(true)}>
+              <Text style={styles.sortbytxt}>Short By</Text>
+              <Image source={Img.sortbyicon} style={styles.sortbystyle} />
+            </TouchableOpacity> */}
       </SafeAreaView>
     </SafeAreaProvider>
   );
@@ -102,10 +106,10 @@ const SortBymodal = () => {
 
 const styles = StyleSheet.create({
   centeredView: {
-    flex: 1,
+    // flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundColor: '#F1F1F1',
     paddingHorizontal: 10,
   },
   modalView: {
@@ -195,6 +199,31 @@ const styles = StyleSheet.create({
     fontFamily: FontText.medium,
     color: Color.black,
   },
+  sortbystyle: {
+    width: 15,
+    height: 15,
+  },
+  sortbytxt: {
+    fontSize: 14,
+    fontFamily: FontText.medium,
+    color: Color.black,
+  },
+    subcontainer: {
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      flexDirection: 'row',
+      backgroundColor: Color.white,
+      marginHorizontal: 100,
+      borderRadius: 10,
+      paddingVertical: 10,
+      paddingHorizontal: (Platform.OS === 'android' ? 18 : 15),
+      shadowColor: '#000', // Shadow color (iOS)
+      shadowOffset: {width: 0, height: 2}, // Shadow position (iOS)
+      shadowOpacity: 0.2, // Shadow transparency (iOS)
+      shadowRadius: 4,
+      elevation: 10,
+      marginTop:40,
+    },
 });
 
 export default SortBymodal;

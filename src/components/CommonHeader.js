@@ -26,5 +26,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: FontText.bold,
     lineHeight: 20,
+    color:"black"
   },
 });

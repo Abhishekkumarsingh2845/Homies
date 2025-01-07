@@ -6,18 +6,25 @@ import ReferralField from '../../components/ReferralField';
 import PrimaryBtn from '../../components/PrimaryBtn';
 import { Color } from '../../utlis/Color';
 import { useNavigation } from '@react-navigation/native';
+import ComplaintTxtInpt from '../../components/ComplaintTxtInpt';
+import { Img } from '../../utlis/ImagesPath';
 
 const Refferal = () => {
   const navigation=useNavigation();
   return (
     <View style={styles.conatiner}>
-      <SecondaryHeader detailtxt={'Referral'}  onPress={() => navigation.openDrawer()} />
+      <SecondaryHeader gobackImage={Img.goback} detailtxt={'Referral'}  onPress={() => navigation.openDrawer()} />
       <View style={styles.subconatiner}>
         <ReferralField refertxt={"Name"}/>
+        <ComplaintTxtInpt placeholder='Enter Name' />
         <ReferralField refertxt={"Phone Number"}/>
+        <ComplaintTxtInpt placeholder='Enter Code' />
         <ReferralField refertxt={"College/Job/Location"}/>
+        <ComplaintTxtInpt placeholder='Enter College/Job/Location' />
         <ReferralField refertxt={"Hostel/PG"}/>
-        <PrimaryBtn txt={"Submit"} bgcolor={Color.primary}/>
+        <ComplaintTxtInpt placeholder='Enter Hostel / PG' />
+        <PrimaryBtn txt={"Submit"} bgcolor={Color.primary}
+        mgntop={240}/>
       </View>
     </View>
   );

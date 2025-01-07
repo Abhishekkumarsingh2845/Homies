@@ -1,28 +1,34 @@
 import {Image, StyleSheet, Text, View} from 'react-native';
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import SecondaryHeader from '../../components/SecondaryHeader';
 import {Img} from '../../utlis/ImagesPath';
 import Tick from 'react-native-vector-icons/EvilIcons';
 import {FontText} from '../../utlis/CustomFont';
 import {Color} from '../../utlis/Color';
 import PrimaryBtn from '../../components/PrimaryBtn';
-const ComplaintFormFill = ({navigation}) => {
-      useEffect(() => {
-        const timer = setTimeout(() => {
-          navigation.navigate("Disputes");
-        }, 2000);
-        return () => clearTimeout(timer);
-      }, [navigation]);
+import {useNavigation} from '@react-navigation/native';
+const ComplaintFormFill = () => {
+  const navigation = useNavigation();
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      navigation.navigate("Disputes");
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, [navigation]);
   return (
     <View style={styles.container}>
-      <SecondaryHeader detailtxt={'Complaint Form'} />
+      <SecondaryHeader
+        gobackImage={Img.goback}
+        detailtxt={'Complaint Form'}
+        onPress={() => navigation.goBack()}
+      />
       <View style={styles.subconatiner}>
         <Text style={styles.topictxt}>Topic</Text>
         <Text style={styles.topictype}>Cleanliness</Text>
         <Text style={styles.descriptiontxt}>Description</Text>
         <Text style={styles.detaildescription}>
           Cleanliness: The common areas and bathrooms are not being cleaned
-          regularly, leading to an unhygienic environment.
+          regularly, leading to an unhygienic env
         </Text>
         <Text
           style={{

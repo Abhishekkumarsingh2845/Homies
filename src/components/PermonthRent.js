@@ -2,13 +2,17 @@ import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {Color} from '../utlis/Color';
 
-const PermonthRent = () => {
+const PermonthRent = ({
+  rent = 'Rent',
+  amount = '₹6,500',
+  period = 'Per Month',
+}) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.rentText}>Rent</Text>
+      <Text style={styles.rentText}>{rent}</Text>
       <View style={styles.amountContainer}>
-        <Text style={styles.amountText}>₹6,500</Text>
-        <Text style={styles.perMonthText}>Per Month</Text>
+        <Text style={styles.amountText}>{amount}</Text>
+        <Text style={styles.perMonthText}>{period}</Text>
       </View>
     </View>
   );
@@ -18,27 +22,29 @@ export default PermonthRent;
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row', // Align children horizontally
-    justifyContent: 'space-between', // Distribute children evenly across the container
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: 10, // Vertically align elements in the center
+    marginTop: 20,
+    marginHorizontal: 10,
+    marginTop: 140,
   },
   rentText: {
-    fontSize: 14, // Customize the font size for "Rent"
-    fontWeight: 'bold', // Make "Rent" text bold
-    color: '#000', // Set color to black
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: '#000',
   },
   amountContainer: {
-    flexDirection: 'column', // Stack the texts vertically
-    alignItems: 'flex-end', // Align text to the right
+    flexDirection: 'column',
+    alignItems: 'flex-end',
   },
   amountText: {
-    fontSize: 18, // Customize the font size for the rent amount
-    fontWeight: 'bold', // Make the amount bold
-    color: Color.btnclr, // Set a custom color for the amount (e.g., tomato red)
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: Color.btnclr,
   },
   perMonthText: {
-    fontSize: 14, // Customize the font size for "Per Month"
-    color: 'gray', // Change the color of the "Per Month" text to gray
+    fontSize: 14,
+    color: 'gray',
   },
 });

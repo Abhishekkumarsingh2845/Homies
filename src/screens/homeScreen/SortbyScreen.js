@@ -8,6 +8,7 @@ import HostelInfoCard from '../../components/HostelInfoCard';
 import SortByBtn from '../../components/SortByBtn';
 import SearchBarr from '../../components/SearchBarr';
 import SortBymodal from '../../components/SortBymodal';
+import LocationSearch from './LocationSearch';
 
 const SortbyScreen = ({navigation}) => {
   // useEffect(() => {
@@ -29,7 +30,7 @@ const SortbyScreen = ({navigation}) => {
       <SecondaryHeader />
       <View style={styles.subcontainer}>
         {/* <HostelInfoCard /> */}
-        {/* <SearchBarr/> */}
+        <SearchBar destination={LocationSearch} placeholderText='Hostel Near Me' containerBgColor='white' />
         <FlatList
           data={HostelInfoCardData}
           keyExtractor={item => item.id}
@@ -37,7 +38,7 @@ const SortbyScreen = ({navigation}) => {
         />
       </View>
       <SortBymodal />
-      <SortByBtn mrntop={50} />
+      <SortByBtn mrntop={10} />
     </View>
   );
 };
