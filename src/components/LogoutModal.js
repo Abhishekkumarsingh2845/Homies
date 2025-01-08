@@ -5,52 +5,44 @@ import YesNoBtn from './YesNoBtn';
 import {Color} from '../utlis/Color';
 import {FontText} from '../utlis/CustomFont';
 
-const LogoutModal = ({ modalVisible, setModalVisible }) => {
+const LogoutModal = ({
+  modalVisible,
+  setModalVisible,
+  msg = 'Are you Sure leave the Property',
+}) => {
   // const [modalVisible, setModalVisible] = useState(false);
-  
+
   return (
-    <SafeAreaProvider>
-      <SafeAreaView style={styles.centeredView}>
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={modalVisible}
-          onRequestClose={() => {
-           
-            setModalVisible(!modalVisible);
-          }}>
-          <View style={styles.centeredView}>
-            <View style={styles.modalView}>
-              <Text style={styles.modalText}>
-                Are you Sure leave the Property
-              </Text>
-              <View style={styles.btncontainer}>
-                <YesNoBtn
-                  text="Yes"
-                  backgroundColor={Color.btnclr}
-                  textColor={Color.white}
-                  borderColor="green"
-                  onPress={() => setModalVisible(!modalVisible)}
-                />
-                <YesNoBtn
-                  text="No"
-                  backgroundColor={Color.white}
-                  textColor={Color.btnclr}
-                  borderColor={Color.btnclr}
-                  borderWidth={1}
-                  onPress={() => setModalVisible(!modalVisible)}
-                />
-              </View>
-            </View>
+    <Modal
+      animationType="slide"
+      transparent={true}
+      visible={modalVisible}
+      onRequestClose={() => {
+        setModalVisible(!modalVisible);
+      }}>
+      <View style={styles.centeredView}>
+        <View style={styles.modalView}>
+          <Text style={styles.modalText}>{msg}</Text>
+          <View style={styles.btncontainer}>
+            <YesNoBtn
+              text="Yes"
+              backgroundColor={Color.btnclr}
+              textColor={Color.white}
+              borderColor="green"
+              onPress={() => setModalVisible(!modalVisible)}
+            />
+            <YesNoBtn
+              text="No"
+              backgroundColor={Color.white}
+              textColor={Color.btnclr}
+              borderColor={Color.btnclr}
+              borderWidth={1}
+              onPress={() => setModalVisible(!modalVisible)}
+            />
           </View>
-        </Modal>
-        <Pressable
-          style={[styles.button, styles.buttonOpen]}
-          onPress={() => setModalVisible(true)}>
-          <Text style={styles.textStyle}>Show Modal</Text>
-        </Pressable>
-      </SafeAreaView>
-    </SafeAreaProvider>
+        </View>
+      </View>
+    </Modal>
   );
 };
 
@@ -100,6 +92,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     lineHeight: 18,
     fontFamily: FontText.medium,
+    color: Color.black,
     textAlign: 'center',
   },
   btncontainer: {

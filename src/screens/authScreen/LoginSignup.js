@@ -1,4 +1,4 @@
-import {Image, StyleSheet, Text, View,TouchableOpacity} from 'react-native';
+import {Image, StyleSheet, Text, View,TouchableOpacity, SafeAreaView} from 'react-native';
 import React from 'react';
 import {Img} from '../../utlis/ImagesPath';
 import Otp from '../../components/Otp';
@@ -9,6 +9,7 @@ const LoginSignup = () => {
   const navigation = useNavigation(); // Initialize navigation
   return (
     <View style={styles.container}>
+      <SafeAreaView/>
       <TouchableOpacity onPress={() => navigation.goBack()}>
         <Image source={Img.goback} style={styles.arrow} />
       </TouchableOpacity>
@@ -73,9 +74,9 @@ const styles = StyleSheet.create({
     color: '#7D7D7D',
   },
   enterotp: {
-    fontSize: 14,
+    fontSize: 16,
     fontWeight: '500',
-    lineHeight: 18,
+    lineHeight: 20,
     color: Color.black,
     marginTop: 40,
   },

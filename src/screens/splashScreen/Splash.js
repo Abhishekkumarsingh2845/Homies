@@ -15,6 +15,7 @@ const Splash = ({navigation}) => {
       source={Img.splashscr}
       style={styles.container}
       resizeMode="cover"></ImageBackground>
+   
   );
 };
 

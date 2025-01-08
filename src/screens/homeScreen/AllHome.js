@@ -8,6 +8,7 @@ import AllHostelDetail from '../../components/AllHostelDetail';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {useNavigation} from '@react-navigation/native';
 import DotindictaorImg from '../../components/DotindictaorImg';
+import { Img } from '../../utlis/ImagesPath';
 // SortbyScreen
 const AllHome = ({navigation}) => {
   // const navigation= useNavigation();
@@ -60,7 +61,8 @@ const AllHome = ({navigation}) => {
           source={require('../../assets/images/map.png')}
           style={styles.mapImage}
         />
-        <DotindictaorImg />
+        <DotindictaorImg imageSource={Img.hstimgage} activeDotColor={Color.primary} />
+        <NearbySeeAll />
         <FlatList
           showsVerticalScrollIndicator={false}
           data={alldetaildata}

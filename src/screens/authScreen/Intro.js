@@ -1,7 +1,9 @@
 import {
+  Dimensions,
   Image,
   ImageBackground,
   Platform,
+  SafeAreaView,
   StyleSheet,
   Text,
   View,
@@ -11,20 +13,26 @@ import Swiper from 'react-native-swiper';
 import {Color} from '../../utlis/Color';
 import {Img} from '../../utlis/ImagesPath';
 import PrimaryBtn from '../../components/PrimaryBtn';
+import DotindictaorImg from '../../components/DotindictaorImg';
 const Intro = () => {
+  const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
   return (
     <View style={styles.container}>
+      <SafeAreaView />
       <Text style={styles.skiptxt}>Skip</Text>
-      <Swiper
-        style={styles.imgcontainer1}
-        showsButtons={false}
-        dotStyle={styles.dot}
-        activeDotStyle={styles.activeDot}>
-        <ImageBackground source={Img.intro} style={styles.introimg} />
-        <ImageBackground source={Img.intro} style={styles.introimg} />
-        <ImageBackground source={Img.intro} style={styles.introimg} />
-      </Swiper>
-      <Text style={styles.letfind}>Let’s Find Your Sweet &</Text>
+
+      <DotindictaorImg
+        imageSource={require('../../assets/images/introimg1.png')}
+        // height={380}
+        // width={335}
+        height={screenHeight * 0.50} // 45% of the screen height
+        width={screenWidth * 0.90}  // 85% of the screen width
+        activeDotColor={Color.primary}
+      />
+      <View style={{marginTop: 20}} />
+      <Text style={styles.letfind}>
+        Let’s Find Your <Text style={styles.sweettxt}> Sweet &</Text>
+      </Text>
       <Text style={styles.dream}>Dream Place</Text>
       <Text style={styles.getoptuty}>
         Get the opportunity to stay that you dream of
@@ -79,28 +87,36 @@ const styles = StyleSheet.create({
     // lineHeight: 33.6,
     color: Color.primary,
     alignSelf: 'center',
-    letterSpacing: 4,
-    // marginBottom:90
+    letterSpacing: 2,
+    // marginBottom:20
+  },
+  sweettxt: {
+    fontSize: 26,
+    fontWeight: '700',
+    // lineHeight: 33.6,
+    color: Color.black,
+    alignSelf: 'center',
+    letterSpacing: 2,
   },
   dream: {
     fontSize: 26,
     fontWeight: '700',
     // lineHeight: 33.6,
-    color: Color.primary,
+    color: Color.black,
     alignSelf: 'center',
-    letterSpacing: 4,
+    letterSpacing: 2,
   },
   getoptuty: {
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: '400',
     // lineHeight: 19.6,
     color: Color.black,
     alignSelf: 'center',
     letterSpacing: 0.3,
-    marginTop: 15,
+    marginTop: 5,
   },
   price: {
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: '400',
     // lineHeight: 19.6,
     color: Color.black,

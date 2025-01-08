@@ -24,8 +24,9 @@ const HostelInfoCard = () => {
             Block E, Near Sector 52 Metro Station
           </Text>
           <View style={styles.homeverifycontainer}>
-            <Icon name="verified" color="#027516" size={20} />
+            <Icon name="verified" color="#027516" size={16} />
             <Text style={styles.homeverify}>Homies Verified</Text>
+            <View style={{marginVertical:15}}></View>
           </View>
         </View>
         <View>
@@ -70,6 +71,8 @@ const styles = StyleSheet.create({
     height: 170,
     marginVertical: 10,
     borderRadius: 15,
+    overflow:"hidden",
+    borderRadius:10,
   },
   PgDetail: {
     width: '100%',
@@ -90,14 +93,14 @@ const styles = StyleSheet.create({
     // resizeMode:"contain",
   },
   description: {
-    fontSize: 12,
+    fontSize: 14,
     fontFamily: FontText.medium,
     color: Color.black,
     lineHeight: 16,
     marginTop: 5,
   },
   location: {
-    fontSize: 10,
+    fontSize: 12,
     fontFamily: FontText.medium,
     color: Color.clr87,
     lineHeight: 14,

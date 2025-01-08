@@ -13,7 +13,7 @@ const Img = {
   sttng: require('../assets/images/setting.png'),
   hstimgage: require('../assets/images/hostel.png'),
   hstdetail: require('../assets/images/hosteldetail.png'),
-  locationdetail: require('../assets/images/locationdtl.png'),
+  locationdetail: require('../assets/images/locationnew.png'),
   verifiedicon: require('../assets/images/verified.png'),
   ratingstaricon: require('../assets/images/ratingstar.png'),
   noroomicon: require('../assets/images/noroom.png'),
@@ -48,6 +48,9 @@ const Img = {
   lunchicon:require("../assets/images/lunch.png"),
   snackicon:require("../assets/images/snack.png"),
   lefticon:require("../assets/images/drawerarrow.png"),
+  shareicon:require("../assets/images/share.png"),
+  parkingicon:require("../assets/images/parking.png"),
+  gymicon:require("../assets/images/parking.png"),
 };
 
 export {Img};

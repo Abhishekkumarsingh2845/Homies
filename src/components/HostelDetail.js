@@ -10,10 +10,11 @@ import React from 'react';
 import {Img} from '../utlis/ImagesPath';
 import {Color} from '../utlis/Color';
 import RoomAvailability from './RoomAvailability';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
+import {FontText} from '../utlis/CustomFont';
 
 const HstDetail = ({mrntop, showRoomAvailability}) => {
-    const navigation = useNavigation();
+  const navigation = useNavigation();
   return (
     <TouchableOpacity
       style={[styles.container, {marginTop: mrntop}]}
@@ -37,24 +38,28 @@ const HstDetail = ({mrntop, showRoomAvailability}) => {
         </View>
         <View style={styles.right}>
           <Image source={Img.verifiedicon} style={styles.verifiedIconStyle} />
+          <TouchableOpacity onPress={()=>navigation.navigate("BookMark")}>
           <Image
             source={Img.hrt}
             tintColor={'black'}
             style={styles.hrtIconStyle}
           />
+          </TouchableOpacity>
         </View>
       </View>
       <View style={styles.lineStyle}></View>
       <View style={styles.rentratingcontainer}>
         <View style={styles.rentcontainer}>
-          <Text>₹ Rent - 5K/Month</Text>
+          <Text style={styles.rentamounttxt}>
+            ₹ Rent - 5K/<Text style={styles.month}>Month</Text>
+          </Text>
         </View>
         <View style={styles.ratingstarcontainer}>
           <Image
             source={Img.ratingstaricon}
             style={styles.ratingstariconcontainer}
           />
-          <Text>4.1</Text>
+          <Text style={styles.ratingstaramounttxt}>4.1</Text>
         </View>
       </View>
     </TouchableOpacity>
@@ -74,6 +79,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2, // Shadow transparency (iOS)
     shadowRadius: 4, // Shadow blur radius (iOS),
     paddingHorizontal: 10,
+    // overflow:"hidden"
+
   },
   img: {
     width: '100%',
@@ -82,7 +89,10 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
     height: 120,
     marginVertical: 10,
-    borderRadius: 10,
+    borderRadius:10,
+
+    overflow:'hidden'
+ 
   },
   detailcontainer: {
     width: '100%',
@@ -106,6 +116,21 @@ const styles = StyleSheet.create({
   person: {
     paddingHorizontal: 5,
     marginVertical: 5,
+    fontSize: 14,
+    color: Color.black,
+    fontWeight: FontText.medium,
+  },
+  rentamounttxt: {
+    fontSize: 16,
+    color: Color.black,
+    fontWeight: FontText.medium,
+    lineStyle: 18,
+  },
+  month: {
+    fontSize: 14,
+    color: 'grey',
+    fontWeight: FontText.medium,
+    lineStyle: 18,
   },
   address: {
     marginLeft: 5,
@@ -115,13 +140,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   verifiedIconStyle: {
-    width: 20,
-    height: 20,
+    width: 18,
+    height: 18,
     marginRight: 15,
   },
   hrtIconStyle: {
-    width: 23,
-    height: 23,
+    width: 20,
+    height: 20,
   },
   lineStyle: {
     borderWidth: 0.3,
@@ -136,8 +161,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   ratingstariconcontainer: {
-    width: 20,
-    height: 20,
+    width: 15,
+    height: 15,
+  
   },
   rentratingcontainer: {
     flexDirection: 'row',
@@ -164,5 +190,11 @@ const styles = StyleSheet.create({
   },
   noroomtxt: {
     color: Color.white,
+  },
+  ratingstaramounttxt: {
+    fontSize: 14,
+    fontWeight: FontText.bold,
+    color: Color.black,
+    marginLeft: 5,
   },
 });

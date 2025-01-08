@@ -23,7 +23,7 @@ const Login = () => {
         brdcolor={Color.primary}
         brdwdth={1.5}
         destination={'LoginSignup'}
-        mgntop={430}
+        mgntop={320}
       />
       <PrimaryBtn
         txt={'Continue as a Guest'}
@@ -36,7 +36,7 @@ const Login = () => {
       />
       <Account
         txt1={"Don't have an account ?"}
-        txt2={'Sign Up'}
+        txt2={' Sign Up'}
         dest={'SignUp'}
         mgntop={15}
       />

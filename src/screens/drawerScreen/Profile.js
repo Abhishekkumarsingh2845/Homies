@@ -19,9 +19,11 @@ import LogoutModal from '../../components/LogoutModal';
 import {useNavigation} from '@react-navigation/native';
 const Profile = () => {
   const [modalVisible, setModalVisible] = useState(false);
+  const [modalMsg, setModalMsg] = useState('');
   const navigation = useNavigation();
   // Function to toggle the modal visibility
-  const toggleModal = () => {
+  const toggleModal = message => {
+    setModalMsg(message);
     setModalVisible(!modalVisible);
   };
   return (
@@ -53,7 +55,8 @@ const Profile = () => {
             marginVertical: 10,
           }}>
           <Logout name="logout" size={20} />
-          <TouchableOpacity onPress={toggleModal}>
+          <TouchableOpacity
+            onPress={() => toggleModal('Are you Sure Logout the Property')}>
             <Text
               style={{
                 fontSize: 18,
@@ -66,25 +69,32 @@ const Profile = () => {
             </Text>
           </TouchableOpacity>
         </View>
-        <Text
-          style={{
-            fontSize: 18,
-            fontFamily: FontText.medium,
-            color: Color.black,
-            marginVertical: 10,
-          }}>
-          Leave Property
-        </Text>
-        <Text
-          style={{
-            fontSize: 18,
-            fontFamily: FontText.medium,
-            color: Color.black,
-            marginVertical: 10,
-          }}>
-          Delete account
-        </Text>
+        <TouchableOpacity
+          onPress={() => toggleModal('Are you Sure leave the Property')}>
+          <Text
+            style={{
+              fontSize: 18,
+              fontFamily: FontText.medium,
+              color: Color.black,
+              marginVertical: 10,
+            }}>
+            Leave Property
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => toggleModal('Are you Sure delete Your Account')}>
+          <Text
+            style={{
+              fontSize: 18,
+              fontFamily: FontText.medium,
+              color: Color.black,
+              marginVertical: 10,
+            }}>
+            Delete account
+          </Text>
+        </TouchableOpacity>
         <LogoutModal
+          msg={modalMsg}
           modalVisible={modalVisible}
           setModalVisible={setModalVisible}
         />

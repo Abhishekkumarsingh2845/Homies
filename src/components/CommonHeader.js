@@ -8,7 +8,7 @@ const CommonHeader = ({title}) => {
   const navigation=useNavigation();
   return (
     <TouchableOpacity style={styles.container} onPress={() => navigation.openDrawer()}>
-      <LeftArrow name="arrowleft" size={20} />
+      <LeftArrow name="arrowleft" size={20} color={"black"} />
       <Text style={styles.txt}>{title}</Text>
     </TouchableOpacity>
   );
@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
+    marginVertical:10,
   },
   txt: {
     marginLeft: 15,

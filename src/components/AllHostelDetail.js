@@ -41,6 +41,7 @@ const AllHostelDetail = ({mrntop}) => {
           paddingVertical: 5,
           paddingHorizontal: 5,
         }}>
+          
         <Text style={styles.person}>Girls-001 </Text>
         <Text style={styles.addresStyle}>Ram Nagar , NT 0872, Katraj</Text>
         <Text style={styles.rentStyle}>Rent - 5K/Month</Text>
@@ -84,7 +85,6 @@ const styles = StyleSheet.create({
     width: '100%',
     backgroundColor: Color.white,
     borderRadius: 15,
-
     paddingHorizontal: 10,
     elevation: 5,
     flexDirection: 'row',
@@ -99,6 +99,8 @@ const styles = StyleSheet.create({
   allhosteliconStyle: {
     width: 120,
     height: 120,
+    borderRadius: 10,
+
     // resizeMode:"contain",
     borderRadius: 15,
   },
@@ -111,11 +113,15 @@ const styles = StyleSheet.create({
   verifiedIconStyle: {
     width: 20,
     height: 20,
-    marginRight: 15,
+    // backgroundColor:"red",
+
   },
   hrtIconStyle: {
     width: 20,
     height: 20,
+    // marginRight: 25,
+    marginLeft:10,
+    // backgroundColor:"red",
   },
   addresStyle: {
     marginTop: 8,

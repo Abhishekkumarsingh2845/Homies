@@ -13,7 +13,7 @@ import {Color} from '../../utlis/Color';
 const AboutUs = () => {
   return (
     <View style={styles.container}>
-      <StatusBar backgroundColor={'white'} />
+      <StatusBar backgroundColor={'white'} barStyle={'dark-content'} />
       <CommonHeader title="About Us" />
       <ScrollView contentContainerStyle={styles.content}>
         <View style={styles.section}>
@@ -27,6 +27,13 @@ const AboutUs = () => {
             amenities, making your daily commute hassle-free. We pride ourselves
             on our attentive staff, who are always ready to assist you in making
             your stay comfortable and enjoyable.
+          </Text>
+          <Text style={styles.text}>
+            Our convenient location ensures easy access to public transport,
+            educational institutions, and local amenities, making your daily
+            commute hassle-free. We pride ourselves on our attentive staff, who
+            are always ready to assist you in making your stay comfortable and
+            enjoyable.
           </Text>
           <Text style={styles.text}>
             Join our vibrant community at Asteria hostel and experience a home
@@ -70,6 +77,7 @@ const styles = StyleSheet.create({
     lineHeight: 22,
     fontFamily: FontText.light,
     color: '#7D7D7D',
+    marginVertical: 10,
   },
   bulletPoint: {
     fontSize: 14,

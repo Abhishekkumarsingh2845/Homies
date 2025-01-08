@@ -5,15 +5,21 @@ import Header from '../../components/Header';
 import SecondaryHeader from '../../components/SecondaryHeader';
 import AllHostelDetail from '../../components/AllHostelDetail';
 import HostelInfoCard from '../../components/HostelInfoCard';
+import {Img} from '../../utlis/ImagesPath';
+import {useNavigation} from '@react-navigation/native';
 
 const BookMark = () => {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
-      <SecondaryHeader detailtxt={'Bookmark'} />
+      <SecondaryHeader
+        gobackImage={Img.goback}
+        detailtxt={'Bookmark'}
+        onPress={() => navigation.goBack()}
+      />
       <View style={styles.detailcontainer}>
         <AllHostelDetail mrntop={15} />
         <AllHostelDetail mrntop={15} />
-       
       </View>
     </View>
   );

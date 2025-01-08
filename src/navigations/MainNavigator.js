@@ -20,7 +20,7 @@ const MainNavigation = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{headerShown: false}}>
-        <Stack.Screen name="AuthNavigator" component={AuthNavigator} />
+        {/* <Stack.Screen name="AuthNavigator" component={AuthNavigator} /> */}
         <Stack.Screen name="HomeNavigator" component={HomeNavigator} />
         <Stack.Screen name="BottomTab" component={BottomTab} />
         <Stack.Screen

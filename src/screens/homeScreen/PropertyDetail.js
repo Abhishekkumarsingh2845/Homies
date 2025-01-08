@@ -14,32 +14,45 @@ import SignUpModal from '../../components/SignUpModal';
 import {Img} from '../../utlis/ImagesPath';
 import {useNavigation} from '@react-navigation/native';
 import {FontText} from '../../utlis/CustomFont';
-
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import Wifi from 'react-native-vector-icons/FontAwesome5';
+import Pool from 'react-native-vector-icons/MaterialIcons';
+import {Image} from 'react-native-svg';
 const PropertyDetail = () => {
   const navigation = useNavigation();
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     navigation.replace('Home');
-  //   }, 4000);
-  //   return () => clearTimeout(timer);
-  // }, [navigation])
+
   return (
     <View style={styles.container}>
-      <SafeAreaView/>
+      <SafeAreaView />
       <SecondaryHeader
         gobackImage={Img.goback}
         detailtxt={'Property Details'}
         onPress={() => navigation.goBack()}
+        notificationIcon={Img.hrt}
+        share={Img.shareicon}
       />
       <ScrollView>
         <View style={styles.subcontainer}>
           <PropertyInfoCard />
           <Text style={styles.amenttxt}>Amenities</Text>
           <View style={styles.amenitycontainer}>
-            <Amenity txt={'Wifi'} />
-            <Amenity txt={'Parking'} mrgnleft={5} />
-            <Amenity txt={'Gym'} mrgnleft={5} />
-            <Amenity txt={'Gym'} mrgnleft={5} />
+            <Amenity
+              iconName="Wifi"
+              txt={'Wifi'}
+              iconType={FontAwesome5}
+              icon={<Wifi name="wifi" size={16} color={'black'} />}
+            />
+            <Amenity
+              txt={'Parking'}
+              mrgnleft={5}
+              icon={<Wifi name="wifi" size={16} color={'black'} />}
+            />
+            <Amenity txt={'Gym'} mrgnleft={5}  icon={<Pool name="pool" size={16} color={'black'} />} />
+            <Amenity
+              txt={'Pool'}
+              mrgnleft={5}
+              icon={<Pool name="pool" size={16} color={'black'} />}
+            />
           </View>
           <Sharing />
 
@@ -48,7 +61,7 @@ const PropertyDetail = () => {
           <NearLocationProperty />
           <PermonthRent />
           <VisitRequestbtn />
-          <SignUpModal />
+          {/* <SignUpModal /> */}
           <View style={{marginVertical: 80}} />
         </View>
       </ScrollView>
@@ -77,11 +90,11 @@ const styles = StyleSheet.create({
     color: Color.black,
     marginVertical: 10,
   },
-  neaerbytxt:{
+  neaerbytxt: {
     fontSize: 14,
     fontFamily: FontText.medium,
     color: Color.black,
-    marginLeft:5,
+    marginLeft: 5,
     marginVertical: 10,
-  }
+  },
 });

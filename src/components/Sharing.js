@@ -1,7 +1,7 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {useState} from 'react';
-import { FontText } from '../utlis/CustomFont';
-import { Color } from '../utlis/Color';
+import {FontText} from '../utlis/CustomFont';
+import {Color} from '../utlis/Color';
 
 const Sharing = () => {
   const [selectedSharing, setSelectedSharing] = useState('Double Sharing'); // Track the selected sharing type
@@ -12,7 +12,7 @@ const Sharing = () => {
     <View style={styles.container}>
       <View style={styles.bedsharingcontainer}>
         <TouchableOpacity
-          onPress={() => handleSharingSelection('Double Sharing')} >
+          onPress={() => handleSharingSelection('Double Sharing')}>
           <Text style={styles.sharingtxtstyle}>Double Sharing</Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -33,43 +33,31 @@ const Sharing = () => {
               <Text>₹8,500</Text>
             </View>
             <View>
-              <Text>Rent per Person</Text>
+              <Text>Deposit</Text>
               <Text>₹8,500</Text>
             </View>
           </View>
 
-
-
-
-
           <View style={styles.withaccontainer}>
-            <View>
-            <View style={styles.outercircle}>
-              <View style={styles.innercircle}></View>
+            <View style={{flexDirection: 'row'}}>
+              <View style={styles.outercircle}>
+                <View style={styles.innercircle}></View>
+              </View>
+              <View style={{marginLeft: 10}}>
+                <Text>With AC</Text>
+                <Text>₹9,500</Text>
+              </View>
             </View>
-            </View>
-            <View>
-            <View>
-              <Text>With AC</Text>
-              <Text>₹9,500</Text>
-            </View>
-            </View>
-            <View style={styles.outercircle}>
-              <View style={styles.innercircle}></View>
-            </View>
-            <View>
-              <Text>With AC</Text>
-              <Text>₹9,500</Text>
+            <View style={{flexDirection: 'row'}}>
+              <View style={styles.outercircle}>
+                <View style={styles.innercircle}></View>
+              </View>
+              <View style={{marginLeft: 10}}>
+                <Text>With AC</Text>
+                <Text>₹9,500</Text>
+              </View>
             </View>
           </View>
-
-
-
-
-
-
-
-
 
           <View style={styles.line}></View>
           <View style={styles.timecontainer}>
@@ -82,7 +70,7 @@ const Sharing = () => {
               <Text>30 Rooms</Text>
             </View>
           </View>
-          <View style={{marginVertical:10}}/>
+          <View style={{marginVertical: 10}} />
         </>
       )}
       {selectedSharing === 'Three Sharing' && (
@@ -97,6 +85,43 @@ const Sharing = () => {
               <Text>₹8,500</Text>
             </View>
           </View>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
           <View style={styles.withaccontainer}>
             <View style={styles.outercircle}>
               <View style={styles.innercircle}></View>
@@ -113,6 +138,43 @@ const Sharing = () => {
               <Text>₹9,500</Text>
             </View>
           </View>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
           <View style={styles.line}></View>
           <View style={styles.timecontainer}>
             <View>
@@ -124,7 +186,7 @@ const Sharing = () => {
               <Text>30 Rooms</Text>
             </View>
           </View>
-          <View style={{marginVertical:10}}/>
+          <View style={{marginVertical: 10}} />
         </>
       )}
       {selectedSharing === 'Five Sharing' && (
@@ -166,7 +228,7 @@ const Sharing = () => {
               <Text>30 Rooms</Text>
             </View>
           </View>
-          <View style={{marginVertical:10}}/>
+          <View style={{marginVertical: 10}} />
         </>
       )}
     </View>
@@ -180,17 +242,18 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     marginTop: 20,
     borderRadius: 10,
+    color: Color.black,
   },
   bedsharingcontainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    marginTop:10,
+    marginTop: 10,
   },
   rentcontainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: 20,
-    marginTop:10,
+    marginTop: 10,
   },
   outercircle: {
     width: 20,
@@ -209,29 +272,26 @@ const styles = StyleSheet.create({
   withaccontainer: {
     flexDirection: 'row',
     paddingHorizontal: 20,
-    justifyContent:"space-between",
-    marginTop:10,
+    // justifyContent: "space-around",
+    marginTop: 10,
     // backgroundColor:"red"
   },
   line: {
     borderWidth: 1,
     borderColor: '#BEC1C4',
     marginHorizontal: 20,
-    marginTop:10,
+    marginTop: 10,
   },
   timecontainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: 20,
-    marginTop:10,
+    marginTop: 10,
   },
-  rentpercontainer:{
-   
+  rentpercontainer: {},
+  sharingtxtstyle: {
+    fontSize: 14,
+    fontFamily: FontText.medium,
+    color: Color.black,
   },
-  sharingtxtstyle:
-  {
-    fontSize:14,
-    fontFamily:FontText.medium,
-    color:Color.black
-  }
 });

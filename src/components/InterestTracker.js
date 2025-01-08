@@ -6,12 +6,12 @@ import {Color} from '../utlis/Color';
 const InterestTracker = () => {
   return (
     <TouchableOpacity style={styles.container}>
-      <Eye name="eyeo" color={'#FFFFFF'} size={15} style={{marginLeft: 5}} />
+      <Eye name="eyeo" color={'#FFFFFF'} size={18} style={{marginLeft: 10}} />
       <View
         style={{
           borderColor: '#FFFFFF',
           borderWidth: 0.6,
-          height: 15,
+          height: 22,
           marginLeft: 5,
         }}
       />
@@ -28,10 +28,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingVertical: 5,
+    // borderBottomRightRadius:30,
     // paddingHorizontal:20,
     width: 200,
     // borderTopLeftRadius:5,
-    borderBottomRightRadius:Platform.OS==="ios"? 10:0,
+    borderBottomRightRadius:Platform.OS==="ios"? 10:10,
   },
   peopleinterested: {
     fontSize: 15,

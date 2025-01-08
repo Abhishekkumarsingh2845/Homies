@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import PrimaryTxtInp from '../../components/PrimaryTxtInp';
 import PrimaryBtn from '../../components/PrimaryBtn';
@@ -8,6 +8,7 @@ import Account from '../../components/Account';
 const SignUp = () => {
   return (
     <View style={styles.container}>
+      <SafeAreaView/>
       <Text style={styles.create}>Create your account</Text>
       <Text style={styles.getthe}>
         Get the opportunity to stay that you dream of at an affordable price
@@ -33,7 +34,7 @@ const SignUp = () => {
         bgcolor={Color.primary}
         clr={Color.white}
         destination={'LoginSignup'}
-        mgntop={300}
+        mgntop={200}
        
       />
       <Account

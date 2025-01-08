@@ -19,7 +19,7 @@ const HomeNavigator = () => {
     <Stack.Navigator screenOptions={{headerShown: false}}>
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="AllHome" component={AllHome} />
-      <Stack.Screen name="BookMark" component={BookMark} />
+      <Stack.Screen name="BookMark" component={BookMark}/>
       <Stack.Screen name="SortbyScreen" component={SortbyScreen} />
       <Stack.Screen name="LocationSearch" component={LocationSearch} />
       {/* <Stack.Screen name="HostelRentOut" component={HostelRentOut} /> */}

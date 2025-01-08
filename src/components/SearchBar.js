@@ -63,6 +63,13 @@
 //   },
 // });
 
+
+
+
+
+
+
+
 import {
   Image,
   Platform,
@@ -74,6 +81,8 @@ import {
 import React from 'react';
 import {Img} from '../utlis/ImagesPath';
 import { useNavigation } from '@react-navigation/native';
+import { FontText } from '../utlis/CustomFont';
+import { Color } from '../utlis/Color';
 
 const SearchBar = ({ placeholderText = 'Find Property', containerBgColor = '#EFEFEF',destination}) => {
    const navigation = useNavigation();
@@ -90,11 +99,11 @@ const SearchBar = ({ placeholderText = 'Find Property', containerBgColor = '#EFE
       <TouchableOpacity>
         <Image source={Img.srch} style={styles.searchicon} />
       </TouchableOpacity>
-
       <TextInput
         style={styles.searchbar}
         placeholder={placeholderText} // Dynamic placeholder
         placeholderTextColor={'#737373'}
+        onFocus={handleNavigation}
       />
 
       <TouchableOpacity>
@@ -110,7 +119,10 @@ const styles = StyleSheet.create({
   searchbar: {
     flex: 1,
     marginLeft: 10,
-    fontSize: 14,
+    fontSize: 16,
+    fontFamily:FontText.light,
+    color:Color.clr73,
+    lineHeight:18,
     fontWeight: '400',
     lineHeight: 18,
   },
@@ -118,14 +130,14 @@ const styles = StyleSheet.create({
     width: '100%',
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 25,
+    paddingHorizontal: 18,
     paddingVertical: Platform.OS === 'android' ? 2 : 15,
     borderRadius: 10,
     marginTop: 10,
   },
   searchicon: {
-    width: 20,
-    height: 20,
+    width: 18,
+    height: 18,
   },
   setting: {
     width: 25,

@@ -8,6 +8,7 @@ import {Img} from '../../utlis/ImagesPath';
 import Swiper from 'react-native-swiper';
 import {Color} from '../../utlis/Color';
 import DotindictaorImg from '../../components/DotindictaorImg';
+import LocationSearch from './LocationSearch';
 
 const Home = ({navigation}) => {
   const images = [Img.hstimgage, Img.hstimgage, Img.hstimgage];
@@ -27,16 +28,21 @@ const Home = ({navigation}) => {
   };
   return (
     <View style={styles.container}>
-      <Header />
+      <Header Img1={Img.draw} />
       <View style={styles.subcontainer}>
-        <SearchBar />
-        <ScrollView  contentContainerStyle={{marginTop:10}}showsVerticalScrollIndicator={false}>
-
+        <SearchBar 
+                  destination={LocationSearch}/>
+        <ScrollView
+          contentContainerStyle={{marginTop: 10}}
+          showsVerticalScrollIndicator={false}>
           <Image
             source={require('../../assets/images/map.png')}
             style={styles.mapImage}
           />
-        <DotindictaorImg/>
+          <DotindictaorImg
+            imageSource={Img.hstimgage}
+            activeDotColor={Color.primary}
+          />
           <NearbySeeAll />
           <FlatList
             showsVerticalScrollIndicator={false}

@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View, ScrollView} from 'react-native';
+import {StyleSheet, Text, View, ScrollView, StatusBar} from 'react-native';
 import React from 'react';
 import CommonHeader from '../../components/CommonHeader';
 import {FontText} from '../../utlis/CustomFont';
@@ -6,6 +6,7 @@ import {Color} from '../../utlis/Color';
 const TermsCondition = () => {
   return (
     <View style={styles.container}>
+        <StatusBar backgroundColor={'white'}  barStyle={"dark-content"} />
       <CommonHeader title="Terms & Conditions" />
       <ScrollView contentContainerStyle={styles.content}>
         <View style={styles.section}>

@@ -1,4 +1,4 @@
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import SecondaryHeader from '../../components/SecondaryHeader';
 import {Img} from '../../utlis/ImagesPath';
@@ -19,7 +19,7 @@ const RateReview = () => {
         onPress={() => navigation.openDrawer()}
       />
       <View style={styles.subcontainer}>
-        <Text style={styles.ratereviewtxt}>RateReview</Text>
+        <Text style={styles.ratereviewtxt}>Rate & Review</Text>
         <Text style={styles.rateexperiecetxt}>
           Please rate your experience below
         </Text>
@@ -29,25 +29,46 @@ const RateReview = () => {
             marginTop: 5,
             justifyContent: 'space-between',
           }}>
+
+
+
+
+
+
+
+
+
+
+
+
+
           {StarArray.map((_, index) => (
+            <TouchableOpacity>
             <Image
               key={index}
               source={Img.ratingstaricon}
               style={styles.ratingstarstyle}
             />
+            </TouchableOpacity>
           ))}
+
+
+
+
+
+
         </View>
         <Text style={styles.starcounttxt}>4/5 stars</Text>
       </View>
       <View style={{paddingHorizontal:20}}>
-      <Text style={{marginVertical: 20, textAlign: 'left'}}>
+      <Text style={{marginVertical: 10, textAlign: 'left'}}>
         Additional feedback
       </Text>
       <ComplaintTxtInpt height={140} multiline={false} />
       <PrimaryBtn
         txt={'Submit Feedback'}
         bgcolor={Color.primary}
-        mgntop={350}
+        mgntop={280}
       />
       </View>
     </View>
@@ -79,7 +100,7 @@ const styles = StyleSheet.create({
     color: Color.black,
   },
   rateexperiecetxt: {
-    marginTop: 10,
+    marginTop: 5,
     fontSize: 12,
     fontFamily: FontText.medium,
     // lineHeight:18,

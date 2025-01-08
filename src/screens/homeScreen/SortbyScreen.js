@@ -1,4 +1,4 @@
-import {FlatList, StyleSheet, Text, View} from 'react-native';
+import {FlatList, SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import React, {useEffect} from 'react';
 import Header from '../../components/Header';
 import SecondaryHeader from '../../components/SecondaryHeader';
@@ -9,6 +9,7 @@ import SortByBtn from '../../components/SortByBtn';
 import SearchBarr from '../../components/SearchBarr';
 import SortBymodal from '../../components/SortBymodal';
 import LocationSearch from './LocationSearch';
+import CommonHeader from '../../components/CommonHeader';
 
 const SortbyScreen = ({navigation}) => {
   // useEffect(() => {
@@ -24,21 +25,30 @@ const SortbyScreen = ({navigation}) => {
     {
       id: 2,
     },
+    // {
+    //   id: 3,
+    // },
   ];
   return (
     <View style={styles.container}>
-      <SecondaryHeader />
+      <SafeAreaView />
+      <Header Img1={Img.goback}/>
       <View style={styles.subcontainer}>
         {/* <HostelInfoCard /> */}
-        <SearchBar destination={LocationSearch} placeholderText='Hostel Near Me' containerBgColor='white' />
+        <SearchBar
+          destination={LocationSearch}
+          placeholderText="Hostel Near Me"
+          containerBgColor="white"
+        />
         <FlatList
           data={HostelInfoCardData}
+          showsVerticalScrollIndicator={false}
           keyExtractor={item => item.id}
           renderItem={({item}) => <HostelInfoCard />}
         />
       </View>
       <SortBymodal />
-      <SortByBtn mrntop={10} />
+      {/* <SortByBtn mrntop={10} /> */}
     </View>
   );
 };
