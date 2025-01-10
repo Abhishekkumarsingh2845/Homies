@@ -1,23 +1,25 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import Slider from '@react-native-community/slider';
+import {Color} from '../utlis/Color';
+import {FontText} from '../utlis/CustomFont';
 
 const Seater = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.titletxt}>Seater</Text>
       <View style={styles.textContainer}>
-        <Text>Min</Text>
-        <Text>Max</Text>
+        <Text style={styles.mintxt}>Min</Text>
+        <Text style={styles.maxtxt}>Max</Text>
       </View>
       <View style={styles.textContainer}>
         <Text>0</Text>
 
         <Slider
-          style={{width: 300, height: 40}}
+          style={{width: 280, height: 40}}
           minimumValue={0}
           maximumValue={1}
-           thumbTintColor="#FFB83A"
+          thumbTintColor="#FFB83A"
           minimumTrackTintColor="#FFB83A"
           maximumTrackTintColor="#FFB83A"
         />
@@ -49,11 +51,25 @@ const styles = StyleSheet.create({
     flexDirection: 'row', // Places Min and Max in a horizontal row
     justifyContent: 'space-between', // Distributes space between them
     marginTop: 10, // Adds space above the row
-    paddingHorizontal: 10, // Adds padding on both sides
+    paddingHorizontal: 15, // Adds padding on both sides
     alignItems: 'center',
   },
-  titletxt:
-  {
-    marginHorizontal:10,
-  }
+  titletxt: {
+    marginHorizontal: 10,
+    fontSize: 14,
+    color: Color.black,
+    fontFamily: FontText.medium,
+  },
+  mintxt: {
+    fontSize: 16,
+    fontFamily: FontText.medium,
+    lineHeight: 24,
+    Color: '#575555',
+  },
+  maxtxt: {
+    fontSize: 16,
+    fontFamily: FontText.medium,
+    lineHeight: 24,
+    Color: '#575555',
+  },
 });

@@ -66,6 +66,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     marginVertical: 10,
+  color:Color.black,
   },
   catergorytxt:
   {

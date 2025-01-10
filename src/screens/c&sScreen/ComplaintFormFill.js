@@ -11,7 +11,7 @@ const ComplaintFormFill = () => {
   const navigation = useNavigation();
   useEffect(() => {
     const timer = setTimeout(() => {
-      navigation.navigate("Disputes");
+      navigation.navigate('Disputes');
     }, 2000);
     return () => clearTimeout(timer);
   }, [navigation]);
@@ -44,8 +44,12 @@ const ComplaintFormFill = () => {
           <Image source={Img.attachmenticon} style={styles.imgstyle} />
           <Image source={Img.attachmenticon} style={styles.imgstyle} />
         </View>
+
         <View style={styles.progresscontainer}>
-          <Image source={Img.tickicon} style={styles.progressstyle} />
+          <View style={{alignItems: 'center', marginTop: 10}}>
+            <Image source={Img.tickicon} style={styles.progressstyle} />
+            <Text>Accept</Text>
+          </View>
           <View
             style={{
               flex: 1,
@@ -53,7 +57,10 @@ const ComplaintFormFill = () => {
               backgroundColor: '#000000',
               marginHorizontal: 5,
             }}></View>
-          <Image source={Img.uncheckicon} style={styles.progressstyle} />
+       <View style={{alignItems: 'center', marginTop: 10}}>
+            <Image source={Img.uncheckicon} style={styles.progressstyle} />
+            <Text>In Progress</Text>
+          </View>
           <View
             style={{
               flex: 1,
@@ -61,7 +68,10 @@ const ComplaintFormFill = () => {
               backgroundColor: '#000000',
               marginHorizontal: 5,
             }}></View>
-          <Image source={Img.uncheckicon} style={styles.progressstyle} />
+  <View style={{alignItems: 'center', marginTop: 10}}>
+            <Image source={Img.uncheckicon} style={styles.progressstyle} />
+            <Text>Completed</Text>
+          </View>
         </View>
       </View>
     </View>
@@ -99,7 +109,7 @@ const styles = StyleSheet.create({
   topictxt: {
     marginTop: 10,
     fontSize: 14,
-    fontFamily: FontText.light,
+    fontFamily: FontText.medium,
     lineHeight: 20,
     color: '#000000',
   },
@@ -109,11 +119,12 @@ const styles = StyleSheet.create({
     lineHeight: 20,
     color: '#7D7D7D',
     lineHeight: 18,
+    marginTop: 10,
   },
   descriptiontxt: {
     marginTop: 10,
     fontSize: 14,
-    fontFamily: FontText.light,
+    fontFamily: FontText.medium,
     lineHeight: 20,
     color: '#000000',
   },
@@ -123,5 +134,6 @@ const styles = StyleSheet.create({
     lineHeight: 20,
     color: '#7D7D7D',
     lineHeight: 18,
+    marginTop: 10,
   },
 });

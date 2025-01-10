@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   hostellogoiconstyle: {
-    width: 90,
+    width: 70,
     height: 50,
     resizeMode: 'contain',
     // backgroundColor:"red"

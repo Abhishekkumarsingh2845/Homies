@@ -7,6 +7,7 @@ import InterestTracker from './InterestTracker';
 import LikeShare from './LikeShare';
 import {FontText} from '../utlis/CustomFont';
 import { useNavigation } from '@react-navigation/native';
+import DotIndicatorImg from './DotindictaorImg';
 
 const HostelInfoCard = () => {
   const StarArray = new Array(5).fill(0);
@@ -16,6 +17,7 @@ const HostelInfoCard = () => {
       <ImageBackground source={Img.hstdetail} style={styles.hostelimg}>
         <InterestTracker />
         <LikeShare />
+        {/* <DotIndicatorImg activeDotColor='red'/>  */}
       </ImageBackground>
       <View style={styles.PgDetail}>
         <View>

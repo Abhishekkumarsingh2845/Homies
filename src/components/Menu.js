@@ -1,11 +1,15 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {ImageBackground, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {Color} from '../utlis/Color';
 import Calendar from 'react-native-vector-icons/Ionicons';
-const Menu = () => {
+import {Img} from '../utlis/ImagesPath';
+const Menu = ({Maintxt}) => {
   return (
-    <View style={styles.container}>
-      <Text style={styles.maintxt}>Breakfast</Text>
+    <ImageBackground
+      style={styles.container}
+      source={Img.Foodmenuicon} // Replace with your image path
+      resizeMode="cover">
+      <Text style={styles.maintxt}>{Maintxt}</Text>
       <View style={styles.divider} />
       <View style={styles.calendarcontainer}>
         <Calendar name="calendar-outline" color={Color.btnclr} size={18} />
@@ -43,7 +47,7 @@ const Menu = () => {
           </View>
         </View>
       </View>
-    </View>
+    </ImageBackground>
   );
 };
 
@@ -57,7 +61,8 @@ const styles = StyleSheet.create({
     borderColor: Color.btnclr,
     paddingVertical: 10,
     paddingHorizontal: 10,
-    borderRadius: 10,
+    borderRadius: 12,
+    overflow:"hidden",
   },
   divider: {
     width: '100%',
@@ -68,6 +73,8 @@ const styles = StyleSheet.create({
   },
   maintxt: {
     alignSelf: 'center',
+    fontSize:16,
+    color:"#FFB83A",
   },
   calendarcontainer: {
     marginTop: 10,
@@ -78,8 +85,8 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   dot: {
-    width: 5, // Diameter of the dot
-    height: 5, // Diameter of the dot
+    width: 5,
+    height: 5,
     backgroundColor: 'black', // Color of the dot
     borderRadius: 5, // Half of the width/height to make it circular
     marginRight: 5,

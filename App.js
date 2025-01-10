@@ -32,8 +32,6 @@ const styles = StyleSheet.create({
 
 
 
-
-
 // xcrun simctl list
 
 // import React, {useEffect, useState} from 'react';

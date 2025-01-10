@@ -3,17 +3,26 @@ import React from 'react';
 import {Img} from '../utlis/ImagesPath';
 import PayNowbtn from './PayNowbtn';
 import { FontText } from '../utlis/CustomFont';
-
-const PayNow = () => {
+import Refresh from "react-native-vector-icons/Ionicons";
+const PayNow = ({icon,msg=""}) => {
   return (
     <ImageBackground source={Img.headerbg} style={styles.conatiner}>
       <View style={styles.dueamountcontainer}>
         <Text style={styles.dueamounttxt}>Total Due Amount</Text>
-        <Text style={styles.refresh}>Refresh</Text>
+        <View style={styles.refreshcontainer}>
+          <View style={{marginRight:5}}>
+
+          <Refresh name="refresh" color={"white"} size={14}/>
+          </View>
+      
+        <Text style={styles.refresh}>{msg}</Text> 
+        </View>
+     
       </View>
       <View style={styles.amountcontainer}>
         <Text style={styles.amount}>₹5000/-</Text>
-       <PayNowbtn/>
+        {icon}
+       {/* <PayNowbtn/> */}
       </View>
     </ImageBackground>
   );
@@ -26,6 +35,8 @@ const styles = StyleSheet.create({
     marginTop:20,
     height: 120,
     paddingHorizontal:20,
+    overflow:"hidden",
+    borderRadius:15,
   
   },
   dueamountcontainer:
@@ -42,10 +53,10 @@ const styles = StyleSheet.create({
     lineHeight:18
   },
   refresh:{
-    fontSize:14,
+    fontSize:13,
     fontFamily:FontText.medium,
     color:"#FFFFFF",
-    lineHeight:16
+    // lineHeight:16
   },amount:{
     fontSize:20,
     fontFamily:FontText.medium,
@@ -55,6 +66,11 @@ const styles = StyleSheet.create({
      flexDirection:"row",
     justifyContent:"space-between",
     marginTop:10,
+    alignItems:"center",
+  },
+  refreshcontainer:
+  {
+    flexDirection:"row",
     alignItems:"center",
   }
 });

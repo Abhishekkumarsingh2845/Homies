@@ -38,9 +38,13 @@ const Profile = () => {
         {/* <Text style={{fontSize:18,fontFamily:FontText.medium,color:Color.white}}>My Profile</Text> */}
         <View style={styles.circle}>
           <Image
-            source={Img.beautyicon}
+            source={Img.profilepicicon}
             style={{width: 90, height: 90, borderRadius: 40}}
           />
+           <Image
+            source={Img.editicon}
+            style={{width: 20, height: 20, resizeMode:"contain", borderRadius: 5,position:"absolute",right:10,bottom:0}}
+          /> 
         </View>
       </ImageBackground>
 
@@ -125,14 +129,15 @@ const styles = StyleSheet.create({
     height: 100, // Circle height
     borderRadius: 50, // Makes it a circle
 
-    borderWidth: 4, // Optional border for the circle
+    // borderWidth: 4, // Optional border for the circle
     borderColor: '#fff', // Border color
   },
   profileText: {
     textAlign: 'center',
-    marginTop: 40, // Adds spacing below the circle
-    fontSize: 18,
+    marginTop: 50, // Adds spacing below the circle
+    fontSize: 14,
     fontWeight: 'bold',
-    color: '#333',
+    color:Color.black,
+    // marginTop:10
   },
 });

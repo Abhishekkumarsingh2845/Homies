@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
   seemoretxt:
   {
     fontSize:12,
-    fontFamily:FontText.light,
+    fontFamily:FontText.medium,
     color:Color.black,
   }
 

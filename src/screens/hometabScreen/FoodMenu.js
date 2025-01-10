@@ -17,10 +17,11 @@ const FoodMenu = () => {
         detailtxt={'Food Menu'}
         onPress={() => navigation.goBack()}
       />
-      <ScrollView>
+      <ScrollView >
         <View style={styles.subcontainer}>
           {/* Scrollable row for FoodCatergory */}
-          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}
+            showsVerticalScrollIndicator={false}>
             <View
               style={{flexDirection: 'row', justifyContent: 'space-between'}}>
               <FoodCatergory />
@@ -39,14 +40,21 @@ const FoodMenu = () => {
                 title="Dinner"
                 time="7:00 PM - 9:00 PM"
               />
+              <View style={{marginVertical: 50}}></View>
+              {/* <FoodCategory
+                imageSource={Img.dinnericon}
+                title="Dinner"
+                time="7:00 PM - 9:00 PM"
+              /> */}
             </View>
-          </ScrollView>
+          </ScrollView >
 
           <DaySelector />
-          <Menu />
-          <Menu />
-          <Menu />
+          <Menu  Maintxt={"Breakfast"}/>
+          <Menu  Maintxt={"Lunch"}/>
+          <Menu Maintxt={"Dinner"} />
         </View>
+        <View style={{marginVertical: 50}}></View>
       </ScrollView>
     </View>
   );

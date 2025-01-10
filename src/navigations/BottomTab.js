@@ -60,8 +60,8 @@ const BottomTab = () => {
         }}
       />
       <Tab.Screen
-        name="ChatNavigator"
-        component={ChatNavigator}
+        name="ComplaintNavigator"
+        component={ComplaintNavigator}
         options={{
           tabBarIcon: ({focused}) => (
             <Image
@@ -76,8 +76,8 @@ const BottomTab = () => {
         }}
       />
       <Tab.Screen
-        name="ComplaintNavigator"
-        component={ComplaintNavigator}
+        name="ChatNavigator"
+        component={ChatNavigator}
         options={{
           tabBarIcon: ({focused}) => (
             <Image

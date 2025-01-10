@@ -1,11 +1,12 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {Color} from '../utlis/Color';
+import { FontText } from '../utlis/CustomFont';
 
 const PermonthRent = ({
   rent = 'Rent',
   amount = '₹6,500',
-  period = 'Per Month',
+  period = 'Per Months',
 }) => {
   return (
     <View style={styles.container}>
@@ -27,7 +28,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 20,
     marginHorizontal: 10,
-    marginTop: 140,
+
   },
   rentText: {
     fontSize: 14,
@@ -35,8 +36,9 @@ const styles = StyleSheet.create({
     color: '#000',
   },
   amountContainer: {
-    flexDirection: 'column',
-    alignItems: 'flex-end',
+    // flexDirection: 'column',
+    alignItems: 'flex-start',
+    // backgroundColor:"red",
   },
   amountText: {
     fontSize: 18,
@@ -45,6 +47,8 @@ const styles = StyleSheet.create({
   },
   perMonthText: {
     fontSize: 14,
-    color: 'gray',
+    color: '#000000',
+    fontFamily:FontText.light,
+
   },
 });

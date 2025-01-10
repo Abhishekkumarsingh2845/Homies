@@ -19,6 +19,7 @@ const DaySelector = () => {
   return (
     <View style={styles.container}>
       <FlatList
+      showsHorizontalScrollIndicator={false}
         data={data}
         horizontal={true}
         keyExtractor={item => item.id.toString()}
@@ -27,7 +28,8 @@ const DaySelector = () => {
             style={[
               styles.dateTxtContainer,
               {
-                backgroundColor: selectedId === item.id ? Color.white : Color.btnclr,
+                backgroundColor:
+                  selectedId === item.id ? Color.white : Color.btnclr,
               },
             ]}
             onPress={() => setSelectedId(item.id)}>
@@ -57,7 +59,7 @@ const styles = StyleSheet.create({
     backgroundColor: Color.btnclr,
     paddingVertical: 5,
     borderRadius: 10,
-    marginTop:20,
+    marginTop: 20,
   },
   listContainer: {
     // paddingHorizontal: 10, // Adds padding to the FlatList container
@@ -68,7 +70,8 @@ const styles = StyleSheet.create({
     marginHorizontal: 15, // Adds spacing around text
   },
   dateTxtContainer: {
-    paddingVertical:5,
+    paddingVertical: 5,
+    marginHorizontal:4,
     // padding: 10, // Adds padding inside each item
     borderRadius: 8, // Optional for rounded corners
     // Adds spacing between items

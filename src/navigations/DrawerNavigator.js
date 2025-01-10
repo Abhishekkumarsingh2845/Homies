@@ -17,8 +17,9 @@ import ReferEarn from '../screens/drawerScreen/ReferEarn';
 import {Img} from '../utlis/ImagesPath';
 import Profile from '../screens/drawerScreen/Profile';
 import {useNavigation} from '@react-navigation/native';
-import { FontText } from '../utlis/CustomFont';
-import { Color } from '../utlis/Color';
+import {FontText} from '../utlis/CustomFont';
+import {Color} from '../utlis/Color';
+import DocumentVerify from '../screens/drawerScreen/DocumentVerify';
 
 const Drawer = createDrawerNavigator();
 
@@ -31,13 +32,13 @@ const CustomDrawerContent = props => {
         style={styles.imageContainer}
         onPress={() => navigation.navigate('Profile')}>
         <Image
-          source={Img.beautyicon} // Replace with your image path
+          source={Img.profilepicicon} // Replace with your image path
           style={styles.drawerImage}
         />
         <View>
           <Text style={styles.imageText}>Daniela Chikitani</Text>
-          <Text style={styles.imageText}>daniela@gmail.com</Text>
-          <Text style={styles.imageText}>View Profile</Text>
+          <Text style={styles.emailText}>daniela@gmail.com</Text>
+          <Text style={styles.viewprofileText}>View Profile</Text>
         </View>
       </TouchableOpacity>
 
@@ -50,28 +51,36 @@ const CustomDrawerContent = props => {
 const DrawerNavigator = () => {
   return (
     <Drawer.Navigator
+      initialRouteName="DocumentVerify"
       drawerContent={props => <CustomDrawerContent {...props} />}
       screenOptions={{
-        headerShown: false, // To hide headers for all screens
+        headerShown: false,
       }}>
-      <Drawer.Screen
+      <Drawer.Screen 
+      
         name="ReferEarn"
         component={ReferEarn}
         options={{
-          drawerIcon: () => (
-            <Image
-              source={Img.lefticon}
-              style={{
-                width: 15,
-                height: 15,
-                resizeMode: 'contain',
-                position: 'absolute',
-                right: 20,
-              }}
-            />
-          ),
           drawerLabel: () => (
-            <Text style={styles.drawerLabel}>Referral & Earn</Text>
+            <View
+              style={{
+                borderBottomWidth: 1,
+                justifyContent: 'center',
+                paddingVertical: 5,
+                borderColor:"#D9D9D9",
+              }}>
+              <Text style={styles.drawerLabel}>Referral & Earn</Text>
+              <Image
+                source={Img.lefticon}
+                style={{
+                  width: 10,
+                  height: 10,
+                  resizeMode: 'contain',
+                  position: 'absolute',
+                  right: 5,
+                }}
+              />
+            </View>
           ),
         }}
       />
@@ -79,20 +88,26 @@ const DrawerNavigator = () => {
         name="RateReview"
         component={RateReview}
         options={{
-          drawerIcon: () => (
-            <Image
-              source={Img.lefticon}
-              style={{
-                width: 15,
-                height: 15,
-                resizeMode: 'contain',
-                position: 'absolute',
-                right: 20,
-              }}
-            />
-          ),
           drawerLabel: () => (
-            <Text style={styles.drawerLabel}>Rate & Reviews</Text>
+            <View
+              style={{
+                borderBottomWidth: 1,
+                justifyContent: 'center',
+                paddingVertical: 10,
+                borderColor:"#D9D9D9",
+              }}>
+              <Text style={styles.drawerLabel}>Referral & Earn</Text>
+              <Image
+                source={Img.lefticon}
+                style={{
+                  width: 12,
+                  height: 12,
+                  resizeMode: 'contain',
+                  position: 'absolute',
+                  right: 5,
+                }}
+              />
+            </View>
           ),
         }}
       />
@@ -100,20 +115,39 @@ const DrawerNavigator = () => {
         name="ContactUs"
         component={ContactUs}
         options={{
-          drawerIcon: () => (
-            <Image
-              source={Img.lefticon}
-              style={{
-                width: 15,
-                height: 15,
-                resizeMode: 'contain',
-                position: 'absolute',
-                right: 20,
-              }}
-            />
-          ),
+          // drawerIcon: () => (
+          //   <Image
+          //     source={Img.lefticon}
+          //     style={{
+          //       width: 15,
+          //       height: 15,
+          //       resizeMode: 'contain',
+          //       position: 'absolute',
+          //       right: 20,
+          //     }}
+          //   />
+          // ),
+          // drawerLabel: () => <Text style={styles.drawerLabel}>Contact Us</Text>
           drawerLabel: () => (
-            <Text style={styles.drawerLabel}>Contact Us</Text>
+            <View
+              style={{
+                borderBottomWidth: 1,
+                justifyContent: 'center',
+                paddingVertical: 10,
+                borderColor:"#D9D9D9",
+              }}>
+              <Text style={styles.drawerLabel}>Contact Us</Text>
+              <Image
+                source={Img.lefticon}
+                style={{
+                  width: 12,
+                  height: 12,
+                  resizeMode: 'contain',
+                  position: 'absolute',
+                  right: 5,
+                }}
+              />
+            </View>
           ),
         }}
       />
@@ -121,20 +155,41 @@ const DrawerNavigator = () => {
         name="PrivacyPolicy"
         component={PrivacyPolicy}
         options={{
-          drawerIcon: () => (
-            <Image
-              source={Img.lefticon}
-              style={{
-                width: 15,
-                height: 15,
-                resizeMode: 'contain',
-                position: 'absolute',
-                right: 20,
-              }}
-            />
-          ),
+          // drawerIcon: () => (
+          //   <Image
+          //     source={Img.lefticon}
+          //     style={{
+          //       width: 15,
+          //       height: 15,
+          //       resizeMode: 'contain',
+          //       position: 'absolute',
+          //       right: 20,
+          //     }}
+          //   />
+          // ),
+          // drawerLabel: () => (
+          //   <Text style={styles.drawerLabel}>Privacy Policy</Text>
+          // ),
           drawerLabel: () => (
-            <Text style={styles.drawerLabel}>Privacy Policy</Text>
+            <View
+              style={{
+                borderBottomWidth: 1,
+                justifyContent: 'center',
+                paddingVertical: 10,
+                borderColor:"#D9D9D9",
+              }}>
+              <Text style={styles.drawerLabel}>Privacy Policy</Text>
+              <Image
+                source={Img.lefticon}
+                style={{
+                  width: 12,
+                  height: 12,
+                  resizeMode: 'contain',
+                  position: 'absolute',
+                  right: 5,
+                }}
+              />
+            </View>
           ),
         }}
       />
@@ -142,20 +197,41 @@ const DrawerNavigator = () => {
         name="TermsCondition"
         component={TermsCondition}
         options={{
-          drawerIcon: () => (
-            <Image
-              source={Img.lefticon}
-              style={{
-                width: 15,
-                height: 15,
-                resizeMode: 'contain',
-                position: 'absolute',
-                right: 20,
-              }}
-            />
-          ),
+          // drawerIcon: () => (
+          //   <Image
+          //     source={Img.lefticon}
+          //     style={{
+          //       width: 15,
+          //       height: 15,
+          //       resizeMode: 'contain',
+          //       position: 'absolute',
+          //       right: 20,
+          //     }}
+          //   />
+          // ),
+          // drawerLabel: () => (
+          //   <Text style={styles.drawerLabel}>Terms & Conditions</Text>
+          // ),
           drawerLabel: () => (
-            <Text style={styles.drawerLabel}>Terms & Conditions</Text>
+            <View
+              style={{
+                borderBottomWidth: 1,
+                justifyContent: 'center',
+                paddingVertical: 10,
+                borderColor:"#D9D9D9",
+              }}>
+              <Text style={styles.drawerLabel}>Terms & Conditions</Text>
+              <Image
+                source={Img.lefticon}
+                style={{
+                  width: 12,
+                  height: 12,
+                  resizeMode: 'contain',
+                  position: 'absolute',
+                  right: 5,
+                }}
+              />
+            </View>
           ),
         }}
       />
@@ -163,20 +239,39 @@ const DrawerNavigator = () => {
         name="AboutUs"
         component={AboutUs}
         options={{
-          drawerIcon: () => (
-            <Image
-              source={Img.lefticon}
-              style={{
-                width: 15,
-                height: 15,
-                resizeMode: 'contain',
-                position: 'absolute',
-                right: 20,
-              }}
-            />
-          ),
+          // drawerIcon: () => (
+          //   <Image
+          //     source={Img.lefticon}
+          //     style={{
+          //       width: 15,
+          //       height: 15,
+          //       resizeMode: 'contain',
+          //       position: 'absolute',
+          //       right: 20,
+          //     }}
+          //   />
+          // ),
+          // drawerLabel: () => <Text style={styles.drawerLabel}>About us</Text>
           drawerLabel: () => (
-            <Text style={styles.drawerLabel}>About us</Text>
+            <View
+              style={{
+                borderBottomWidth: 1,
+                justifyContent: 'center',
+                paddingVertical: 10,
+                borderColor:"#D9D9D9",
+              }}>
+              <Text style={styles.drawerLabel}>About us</Text>
+              <Image
+                source={Img.lefticon}
+                style={{
+                  width: 12,
+                  height: 12,
+                  resizeMode: 'contain',
+                  position: 'absolute',
+                  right: 5,
+                }}
+              />
+            </View>
           ),
         }}
       />
@@ -184,41 +279,39 @@ const DrawerNavigator = () => {
         name="Faq"
         component={Faq}
         options={{
-          drawerIcon: () => (
-            <Image
-              source={Img.lefticon}
-              style={{
-                width: 15,
-                height: 15,
-                resizeMode: 'contain',
-                position: 'absolute',
-                right: 20,
-              }}
-            />
-          ),
+          // drawerIcon: () => (
+          //   <Image
+          //     source={Img.lefticon}
+          //     style={{
+          //       width: 15,
+          //       height: 15,
+          //       resizeMode: 'contain',
+          //       position: 'absolute',
+          //       right: 20,
+          //     }}
+          //   />
+          // ),
+          // drawerLabel: () => <Text style={styles.drawerLabel}>FAQ</Text>
           drawerLabel: () => (
-            <Text style={styles.drawerLabel}>FAQ</Text>
-          ),
-        }}
-      />
-      <Drawer.Screen
-        name="Refferal"
-        component={Refferal}
-        options={{
-          drawerIcon: () => (
-            <Image
-              source={Img.lefticon}
+            <View
               style={{
-                width: 15,
-                height: 15,
-                resizeMode: 'contain',
-                position: 'absolute',
-                right: 20,
-              }}
-            />
-          ),
-          drawerLabel: () => (
-            <Text style={styles.drawerLabel}>Contact Us</Text>
+                borderBottomWidth: 1,
+                justifyContent: 'center',
+                paddingVertical: 10,
+                borderColor:"#D9D9D9",
+              }}>
+              <Text style={styles.drawerLabel}>FAQ</Text>
+              <Image
+                source={Img.lefticon}
+                style={{
+                  width: 12,
+                  height: 12,
+                  resizeMode: 'contain',
+                  position: 'absolute',
+                  right: 5,
+                }}
+              />
+            </View>
           ),
         }}
       />
@@ -227,20 +320,81 @@ const DrawerNavigator = () => {
         name="Help"
         component={Help}
         options={{
-          drawerIcon: () => (
-            <Image
-              source={Img.lefticon}
-              style={{
-                width: 15,
-                height: 15,
-                resizeMode: 'contain',
-                position: 'absolute',
-                right: 20,
-              }}
-            />
-          ),
+          // drawerIcon: () => (
+          //   <Image
+          //     source={Img.lefticon}
+          //     style={{
+          //       width: 15,
+          //       height: 15,
+          //       resizeMode: 'contain',
+          //       position: 'absolute',
+          //       right: 20,
+          //     }}
+          //   />
+          // ),
+          // drawerLabel: () => <Text style={styles.drawerLabel}>Help</Text>
           drawerLabel: () => (
-            <Text style={styles.drawerLabel}>Help</Text>
+            <View
+              style={{
+                borderBottomWidth: 1,
+                justifyContent: 'center',
+                paddingVertical: 10,
+                borderColor:"#D9D9D9",
+              }}>
+              <Text style={styles.drawerLabel}>Help</Text>
+              <Image
+                source={Img.lefticon}
+                style={{
+                  width: 12,
+                  height: 12,
+                  resizeMode: 'contain',
+                  position: 'absolute',
+                  right: 5,
+                }}
+              />
+            </View>
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="DocumentVerify"
+        component={DocumentVerify}
+        options={{
+          // drawerIcon: () => (
+          //   <Image
+          //     source={Img.lefticon}
+          //     style={{
+          //       width: 15,
+          //       height: 15,
+          //       resizeMode: 'contain',
+          //       position: 'absolute',
+          //       right: 20,
+          //     }}
+          //   />
+          // ),
+          // drawerLabel: () => (
+          //   <Text style={styles.drawerLabel}>DocumentVerify</Text>
+          // ),
+          drawerLabel: () => (
+            <View
+              style={{
+                borderBottomWidth: 1,
+                justifyContent: 'center',
+                paddingVertical: 10,
+                borderColor:"#D9D9D9",
+              }}>
+              <Text style={styles.drawerLabel}>DocumentVerify</Text>
+              <Image
+                source={Img.lefticon}
+                style={{
+                  width: 12,
+                  height: 12,
+                  resizeMode: 'contain',
+                  position: 'absolute',
+                  right: 5,
+                }}
+              />
+            </View>
           ),
         }}
       />
@@ -254,7 +408,7 @@ const styles = StyleSheet.create({
   imageContainer: {
     alignItems: 'center',
     padding: 20,
-    borderBottomWidth: 1,
+    // borderBottomWidth: 1,
     borderBottomColor: '#ccc',
     flexDirection: 'row',
   },
@@ -267,16 +421,30 @@ const styles = StyleSheet.create({
   imageText: {
     marginLeft: 10,
     marginTop: 5,
-    fontSize: 13,
-    fontWeight: 'bold',
-    color: '#333',
+    fontSize: 12,
+    fontFamily: FontText.bold,
+    color: Color.black,
   },
-  drawerLabel:
-  {
-    fontSize:16,
-    fontFamily:FontText.medium,
-    color:Color.black
-  }
+  emailText: {
+    marginLeft: 10,
+
+    fontSize: 12,
+    fontFamily: FontText.light,
+    color: Color.clr73,
+  },
+  viewprofileText: {
+    marginLeft: 10,
+
+    fontSize: 12,
+    fontFamily: FontText.light,
+    color: Color.black,
+  },
+
+  drawerLabel: {
+    fontSize: 16,
+    fontFamily: FontText.medium,
+    color: Color.black,
+  },
 });
 
 // import React from 'react';

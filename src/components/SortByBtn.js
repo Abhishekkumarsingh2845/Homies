@@ -62,6 +62,9 @@ import { Color } from '../utlis/Color';
 import { FontText } from '../utlis/CustomFont';
 
 const SortByBtn = ({ mrntop, onPress }) => {
+
+
+  
   return (
     <TouchableOpacity style={[styles.container, { marginTop: mrntop }]} onPress={onPress}>
       <Text style={styles.sortByText}>Sort By</Text>
@@ -78,7 +81,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     flexDirection: 'row',
     backgroundColor: Color.white,
-    marginHorizontal: 150,
+    marginHorizontal: 120,
     borderRadius: 10,
     paddingVertical: 10,
     paddingHorizontal: Platform.OS === 'android' ? 18 : 15,

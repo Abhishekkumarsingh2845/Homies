@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import SecondaryHeader from '../../components/SecondaryHeader';
 import {FontText} from '../../utlis/CustomFont';
@@ -21,7 +21,9 @@ const PaymentForm = () => {
         detailtxt={'Payment'}
         onPress={() => navigation.goBack()}
       />
-      <View style={styles.subcontainer}>
+      <ScrollView contentContainerStyle={styles.subcontainer}
+      
+      keyboardShouldPersistTaps="handled">
         <Text style={styles.dueamounttxt}>Due Amount</Text>
         <PaymenttxtInpt placeholder="5000/-" />
         <Text style={styles.selectpayment}>Select payment method</Text>
@@ -39,9 +41,9 @@ const PaymentForm = () => {
 
               <PaymenttxtInpt width="100%" placeholder="MM/YY" />
             </View>
-            <View>
+            <View style={{marginRight:45}}>
               <Text style={styles.dueamounttxt}>CVV</Text>
-              <PaymenttxtInpt width="200%" placeholder="CVV" />
+              <PaymenttxtInpt  width="200%"placeholder='CVV' />
             </View>
           </View>
         </View>
@@ -53,7 +55,7 @@ const PaymentForm = () => {
           bgcolor={'#257500'}
           mgntop={10}
         />
-      </View>
+      </ScrollView>
     </View>
   );
 };
@@ -82,6 +84,7 @@ const styles = StyleSheet.create({
   },
   expirydatecontainer: {
     flexDirection: 'row',
+    justifyContent:"space-between",
   },
   detailcontainerr: {
     marginLeft: 35,

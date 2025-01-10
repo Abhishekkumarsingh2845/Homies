@@ -1,4 +1,11 @@
-import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+  Image,
+} from 'react-native';
 import React from 'react';
 import {Color} from '../../utlis/Color';
 import PropertyInfoCard from '../../components/PropertyInfoCard';
@@ -17,7 +24,7 @@ import {FontText} from '../../utlis/CustomFont';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Wifi from 'react-native-vector-icons/FontAwesome5';
 import Pool from 'react-native-vector-icons/MaterialIcons';
-import {Image} from 'react-native-svg';
+// import {Image} from 'react-native-svg';
 const PropertyDetail = () => {
   const navigation = useNavigation();
 
@@ -45,9 +52,20 @@ const PropertyDetail = () => {
             <Amenity
               txt={'Parking'}
               mrgnleft={5}
-              icon={<Wifi name="wifi" size={16} color={'black'} />}
+              icon={
+                <Image
+                  source={Img.parkingicon}
+                  style={{width: 25, height: 25, resizeMode: 'contain'}}
+                />
+              }
             />
-            <Amenity txt={'Gym'} mrgnleft={5}  icon={<Pool name="pool" size={16} color={'black'} />} />
+            <Amenity
+              txt={'Gym'}
+              mrgnleft={5}
+              icon={
+                <Image source={Img.gymicon} style={{width: 25, height: 25}} />
+              }
+            />
             <Amenity
               txt={'Pool'}
               mrgnleft={5}

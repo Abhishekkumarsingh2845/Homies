@@ -1,13 +1,35 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View,Alert, Share,} from 'react-native';
 import React from 'react';
 import {Color} from '../utlis/Color';
 import { FontText } from '../utlis/CustomFont';
+import { useNavigation } from '@react-navigation/native';
 
 const Invitebtn = () => {
+  const navigation= useNavigation();
+
+  const onShare = async () => {
+    try {
+      const result = await Share.share({
+        message:
+          'React Native | A framework for building native apps using React',
+      });
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      Alert.alert(error.message);
+    }
+  };
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={onShare}>
       <Text style={styles.txtstyle}>Invite</Text>
-    </View>
+    </TouchableOpacity>
   );
 };
 

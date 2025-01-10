@@ -8,15 +8,19 @@ import DateSelect from '../../components/DateSelect';
 import Transactiondetail from '../../components/Transactiondetail';
 import { FontText } from '../../utlis/CustomFont';
 import { Color } from '../../utlis/Color';
+import { Img } from '../../utlis/ImagesPath';
+import PayNowbtn from '../../components/PayNowbtn';
+import NearLocationProperty from '../../components/NearLocationProperty';
 
 const Payment = () => {
   return (
     <View style={styles.conatiner}>
-      <SecondaryHeader detailtxt={'Transaction'} />
+      <SecondaryHeader gobackImage={Img.goback} detailtxt={'Transaction'} />
       <View style={styles.subcontainer}>
-        <PayNow />
+        <PayNow icon={<PayNowbtn/> } msg={"Refresh"} />
         <Text style={styles.propertydetailtxt}>Property Details</Text>
-        <AllHostelDetail mrntop={10} />
+        {/* <AllHostelDetail mrntop={10} /> */}
+        <NearLocationProperty />
         <View style={styles.datecontainer}>
           <Text style={styles.listtxt}>Transaction List</Text>
           <DateSelect/>
@@ -27,7 +31,7 @@ const Payment = () => {
       </View>
     </View>
   );
-};
+};  
 
 export default Payment;
 
@@ -48,7 +52,7 @@ const styles = StyleSheet.create({
   },
   propertydetailtxt:
   {
-    marginTop:10,
+    marginVertical:10,
     fontSize:16,
     fontFamily:FontText.medium,
     color:Color.black,

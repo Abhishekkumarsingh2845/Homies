@@ -21,9 +21,11 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     marginTop:10,
+    // justifyContent:"space-between",
   },
   visitbtncontainer: {
-    width: 180,
+    // width: 160,
+    paddingHorizontal:20,
     height: 50,
     alignItems: 'center',
     justifyContent: 'center',
@@ -41,14 +43,15 @@ const styles = StyleSheet.create({
     color: '#FFB83A',
   },
   paynowbtncontainer: {
-    width: 180,
+    paddingHorizontal:50,
     height: 50,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'white',
     borderRadius: 15,
     marginLeft: 10,
-    borderColor: '#FFB83A',
+    borderColor: '#F1F1F1',
     borderWidth: 1,
+    borderColor:"#FFB83A"
   },
 });

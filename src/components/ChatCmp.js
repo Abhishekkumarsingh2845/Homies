@@ -51,23 +51,25 @@ const ChatCmp = ({mrntop,message,updatetime,Imgsource,chatmsg}) => {
       },
       time: {
         fontSize: 12,
-        fontFamily: FontText.medium,
+        fontFamily: FontText.light,
         lineHeight: 16,
         color: Color.clr87,
-       textAlign:"right"
+       textAlign:"right",
+       marginLeft:160,
       },
       chatmsgstyle:
       {
         fontSize: 12,
-        fontFamily: FontText.medium,
+        fontFamily: FontText.light,
         lineHeight: 16,
         color: Color.clr87,
         
       },
       msgAtimecontainer:{
         flexDirection:"row",
-        alignItems:"center"
-        // justifyContent:"space-between",
+        alignItems:"center",
+        justifyContent:"space-between",
+
       }
     });
     

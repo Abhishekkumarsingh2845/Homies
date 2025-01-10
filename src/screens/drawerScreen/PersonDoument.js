@@ -4,6 +4,8 @@ import SecondaryHeader from '../../components/SecondaryHeader';
 import DownloadDoc from '../../components/DownloadDoc';
 import { Img } from '../../utlis/ImagesPath';
 import { useNavigation } from '@react-navigation/native';
+import { FontText } from '../../utlis/CustomFont';
+import { Color } from '../../utlis/Color';
 
 const PersonDoument = () => {
   const navigation=useNavigation();
@@ -12,19 +14,19 @@ const PersonDoument = () => {
       <SafeAreaView />
       <SecondaryHeader  gobackImage={Img.goback}detailtxt={'Document'} onPress={()=>navigation.goBack("DrawerNavigator")} />
       <View style={{paddingHorizontal:20}}> 
-      <Text style={{marginTop:10}}>Student Aadhar Card</Text>
+      <Text style={styles.boldtxt}>Student Aadhar Card</Text>
       <DownloadDoc/>
-      <Text style={{marginTop:10}}>Student / Job ID</Text>
+      <Text style={styles.boldtxt}>Student / Job ID</Text>
 
       <DownloadDoc/>
-      <Text style={{marginTop:10}}>College Name</Text>
+      <Text style={styles.boldtxt}>College Name</Text>
       <Text style={{marginTop:10}}>G.L Bajaj university</Text>
-      <Text style={{marginTop:10}}>Parents Details</Text>
-      <Text style={{marginTop:10}}>Name</Text>
+      <Text style={styles.boldtxt}>Parents Details</Text>
+      <Text style={styles.boldtxt}>Name</Text>
       <Text style={{marginTop:10}}>Rohit Kumar</Text>
-      <Text style={{marginTop:10}}>Phone Number</Text>
+      <Text style={styles.boldtxt}>Phone Number</Text>
       <Text style={{marginTop:10}}>+917654327865</Text>
-      <Text style={{marginTop:10}}>Phone Number</Text>
+      <Text style={styles.boldtxt}>Phone Number</Text>
       <Text style={{marginTop:10}}>Ram Nagar, noida</Text>
       </View>
     </View>
@@ -38,5 +40,13 @@ const styles = StyleSheet.create({
     {
         flex:1,
         backgroundColor:"#F1F1F1",
+    },
+    boldtxt:
+    {
+      marginTop:10,
+      fontSize:14,
+      fontFamily:FontText.medium,
+      color:Color.black,
     }
+
 });

@@ -58,7 +58,7 @@ const StarComponent = () => {
                   color: selectedId === item.id ? 'white' : '#9AA6AC', // Change text color
                 },
               ]}>
-              {item.rate}
+              {item.rate.toFixed(1)}
             </Text>
           </TouchableOpacity>
         )}
@@ -87,30 +87,36 @@ const styles = StyleSheet.create({
   flatlistcontainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    // justifyContent:"center",
+
     //  paddingVertical:3,
     borderWidth: 1,
     borderColor: '#DDE2E4',
-    justifyContent: 'center',
-    paddingHorizontal: 5,
-    marginRight: 12,
+    justifyContent: "space-between",
+    paddingHorizontal: 5 ,
+    marginRight: 10,
     borderRadius: 5,
   },
   image: {
     width: 15,
     height: 15,
+    resizeMode:"contain",
+    // backgroundColor:"red",
   },
   ratetxt: {
+    marginTop:5,
     fontSize: 14,
     fontFamily: FontText.light,
-    marginHorizontal: 8,
+    marginHorizontal: 5,
+    
   },
   flatliststyle: {
     marginTop: 10,
-    paddingHorizontal: 20,
+    paddingHorizontal: 15,
   },
   starratingtxt: {
     fontSize: 14,
-    marginHorizontal: 20,
+    marginHorizontal: 15,
     marginTop: 5,
     fontFamily: FontText.medium,
   },

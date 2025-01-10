@@ -9,25 +9,35 @@ import Distance from '../../components/Distance';
 import Price from '../../components/Price';
 import GenderSelector from '../../components/GenderSelector';
 import PrimaryBtn from '../../components/PrimaryBtn';
-import { Color } from '../../utlis/Color';
+import {Color} from '../../utlis/Color';
 import BottomTab from '../../navigations/BottomTab';
+import {useNavigation} from '@react-navigation/native';
 
 const FilterScreen = () => {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
-    
-      <SecondaryHeader gobackImage={Img.goback} detailtxt={'Search'} />
-      <ScrollView>
-      <View style={styles.subcontainer}>
-        <StarComponent />
-        <Seater />
-        <Amentity />
-       <Distance/>
-       <Price/>
-       <GenderSelector/>
-       <PrimaryBtn txt={"Apply"} bgcolor={Color.btnclr} mgntop={20} destination={BottomTab}/>
-       <View style={{marginVertical:50}}/>
-      </View>
+      <SecondaryHeader
+        gobackImage={Img.goback}
+        detailtxt={'Search'}
+        goback={() => navigation.goBack()}
+      />
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View style={styles.subcontainer}>
+          <StarComponent />
+          <Seater />
+          <Amentity />
+          <Distance />
+          <Price />
+          <GenderSelector />
+          <PrimaryBtn
+            txt={'Apply'}
+            bgcolor={Color.btnclr}
+            mgntop={20}
+            destination={BottomTab}
+          />
+          <View style={{marginVertical: 50}} />
+        </View>
       </ScrollView>
     </View>
   );
@@ -38,6 +48,7 @@ export default FilterScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#FFFFFF',
   },
   subcontainer: {
     paddingHorizontal: 20,

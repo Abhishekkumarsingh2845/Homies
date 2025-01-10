@@ -86,42 +86,6 @@ const Sharing = () => {
             </View>
           </View>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
           <View style={styles.withaccontainer}>
             <View style={styles.outercircle}>
               <View style={styles.innercircle}></View>
@@ -138,42 +102,6 @@ const Sharing = () => {
               <Text>₹9,500</Text>
             </View>
           </View>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
           <View style={styles.line}></View>
           <View style={styles.timecontainer}>
@@ -248,6 +176,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     marginTop: 10,
+    paddingHorizontal: 10,
   },
   rentcontainer: {
     flexDirection: 'row',
@@ -290,7 +219,7 @@ const styles = StyleSheet.create({
   },
   rentpercontainer: {},
   sharingtxtstyle: {
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: FontText.medium,
     color: Color.black,
   },

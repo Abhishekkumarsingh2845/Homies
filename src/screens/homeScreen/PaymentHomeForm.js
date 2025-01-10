@@ -33,7 +33,7 @@ const PaymentHomeForm = () => {
  
               <PaymenttxtInpt width='100%' placeholder='MM/YY' />
             </View>
-            <View>
+            <View style={{marginRight:45}}>
               <Text style={styles.dueamounttxt}>CVV</Text>
               <PaymenttxtInpt  width="200%"placeholder='CVV' />
             </View>
@@ -45,7 +45,7 @@ const PaymentHomeForm = () => {
           destination={HostelRentOut}
           txt={'Pay Now'}
           bgcolor={Color.btnclr}
-          mgntop={10}
+          mgntop={5}
         />
       </View>
     </View>
@@ -66,14 +66,18 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontFamily: FontText.medium,
     color: Color.black,
+    marginTop:5,
   },
   selectpayment: {
     fontSize: 14,
-    fontFamily: FontText.bold,
+    fontFamily: FontText.medium,
     color: Color.black,
+    marginTop:15,
   },
   expirydatecontainer: {
     flexDirection: 'row',
+    justifyContent:"space-between",
+    marginTop:10,
 
   },
   detailcontainerr: {

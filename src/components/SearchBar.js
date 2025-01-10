@@ -78,14 +78,20 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import {Img} from '../utlis/ImagesPath';
 import { useNavigation } from '@react-navigation/native';
 import { FontText } from '../utlis/CustomFont';
 import { Color } from '../utlis/Color';
+import SortByModal from './SortBymodal';
 
 const SearchBar = ({ placeholderText = 'Find Property', containerBgColor = '#EFEFEF',destination}) => {
    const navigation = useNavigation();
+   const [modalVisible, setModalVisible] = useState(false);
+   
+     const openModal = () => setModalVisible(true);
+     const closeModal = () => setModalVisible(false);
+   
   
     const handleNavigation = () => {
       if (destination) {
@@ -106,9 +112,13 @@ const SearchBar = ({ placeholderText = 'Find Property', containerBgColor = '#EFE
         onFocus={handleNavigation}
       />
 
-      <TouchableOpacity>
+      <TouchableOpacity  onPress={openModal}>
         <Image source={Img.sttng} style={styles.setting} />
       </TouchableOpacity>
+      <SortByModal
+          closemodal={closeModal}
+          openthemodal={modalVisible} // Pass the modal visibility
+        />
     </TouchableOpacity>
   );
 };

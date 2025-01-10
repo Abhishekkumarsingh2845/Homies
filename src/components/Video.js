@@ -9,12 +9,12 @@ const Video = () => {
   return (
     <View style={styles.container}>
      <Text style={styles.amenttxt}>Virtual Videos</Text>
-      <TouchableOpacity style={{flexDirection: 'row', justifyContent: "flex-start",marginTop:5}}>
+      <TouchableOpacity style={{flexDirection: 'row', justifyContent: "flex-start",marginTop:5,marginLeft:5}}>
         {videoarray.map((_, index) => (
           <Image
             key={index}
-            source={Img.videoicon}
-            style={{width: 90, height: 70, borderRadius: 10,marginLeft:10}}
+            source={Img.newvideoicon}
+            style={{width: 105, height: 85, borderRadius: 10,marginLeft:10}}
           />
         ))}
       </TouchableOpacity>

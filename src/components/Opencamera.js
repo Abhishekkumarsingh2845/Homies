@@ -3,11 +3,11 @@ import React from 'react';
 import Cloud from 'react-native-vector-icons/AntDesign';
 import { FontText } from '../utlis/CustomFont';
 
-const Opencamera = () => {
+const Opencamera = ({operationtxt="Open your Gallery",fixheight}) => {
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity style={[styles.container,{height:fixheight}]}>
       <Cloud name="clouduploado" size={20}  />
-      <Text style={styles.txt}>Open your Camera</Text>
+      <Text style={styles.txt}>{operationtxt}</Text>
       </TouchableOpacity>
   );
 };
@@ -19,8 +19,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 40,
+    paddingVertical: 30,
     borderRadius:10,
+    // height:80,
   },
   txt:
   {

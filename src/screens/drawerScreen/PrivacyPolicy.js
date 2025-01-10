@@ -10,14 +10,15 @@ import React from 'react';
 import CommonHeader from '../../components/CommonHeader';
 import {FontText} from '../../utlis/CustomFont';
 import {Color} from '../../utlis/Color';
+import Aligntext from '../../components/Aligntext';
 
 const PrivacyPolicy = () => {
   return (
     <View style={styles.container}>
       <SafeAreaView />
-      <StatusBar backgroundColor={'white'}  barStyle={"dark-content"} />
+      <StatusBar backgroundColor={'white'} barStyle={'dark-content'} />
       <CommonHeader title="Privacy Policy" />
-      <ScrollView contentContainerStyle={styles.content} >
+      <ScrollView contentContainerStyle={styles.content}>
         <View style={styles.section}>
           <Text style={styles.heading}>1. Introduction</Text>
           <Text style={styles.text}>
@@ -29,40 +30,57 @@ const PrivacyPolicy = () => {
         <View style={styles.section}>
           <Text style={styles.heading}>2. Information We Collect</Text>
 
-          <Text style={styles.text}>
-            • Personal Information When you register or book a room, we may
-            collect personal information such as your name, contact details,
-            identification documents, and payment information.
-          </Text>
+          <Aligntext
+            detailtxt={
+              'Personal Information When you register or book a room, we may  collect personal information such as your name, contact details identification documents, and payment information'
+            }
+          />
 
-          <Text style={styles.text}>
-            • Usage Data We may collect information about how you access and use
-            our website and services, including your IP address, browser type,
-            and pages visited.
-          </Text>
+          <Aligntext
+            detailtxt={
+              'Usage Data We may collect information about how you access and use our website and services, including your IP address, browser type  and pages visited'
+            }
+          />
         </View>
         <View style={styles.section}>
           <Text style={styles.heading}>3. How We Use Your Information</Text>
 
-          <Text style={styles.text}>
+          {/* <Text style={styles.text}>
             We may use your information for the following purposes:
-          </Text>
+          </Text> */}
           <View style={{paddingHorizontal: 20}}>
-            <Text style={styles.text}>
-              • Booking and Reservations:To process and manage your bookings.
-            </Text>
-            <Text style={styles.text}>
+            <Aligntext
+              detailtxt={
+                'Communication: To send you confirmation details, updates'
+              }
+            />
+            {/* <Text style={styles.text}>
               • Communication: To send you confirmation details, updates, and
               important information related to your stay.
-            </Text>
-            <Text style={styles.text}>
+            </Text> */}
+            <Aligntext
+              detailtxt={
+                'Communication: To send you confirmation detail  '
+              }
+            />
+            {/* <Text style={styles.text}>
               • Customer Support:To send you promotional materials, if you have
               opted in to receive them.
-            </Text>
-            <Text style={styles.text}>
+            </Text> */}
+            <Aligntext
+              detailtxt={
+                'Customer Support:To send you promotional materials, if you have'
+              }
+            />
+            {/* <Text style={styles.text}>
               • Marketing: To send you promotional materials, if you have opted
               in to receive them.
-            </Text>
+            </Text> */}
+            <Aligntext
+              detailtxt={
+                'Marketing: To send you promotional materials'
+              }
+            />
           </View>
         </View>
       </ScrollView>

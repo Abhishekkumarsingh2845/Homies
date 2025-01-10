@@ -13,12 +13,16 @@ const Amentity = ({labelText}) => {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.Amentitytxt}>Amenity</Text>
       <View style={styles.subcontainer}>
         <TouchableOpacity style={styles.checkbox} onPress={toggleCheckbox}>
           {isChecked ? (
             <Check name="checkbox-outline" size={25} color={'#FFB83A'} />
           ) : (
-            <Uncheck name="checkbox-blank-outline" size={25} />
+            <View style={styles.uncheckbox}>
+
+            </View>
+            // <Uncheck name="checkbox-blank-outline" size={25} />
           )}
         </TouchableOpacity>
         <Text style={styles.text}>Personalized welcome gifts</Text>
@@ -28,7 +32,10 @@ const Amentity = ({labelText}) => {
           {isChecked ? (
             <Check name="checkbox-outline" size={25} color={'#FFB83A'} />
           ) : (
-            <Uncheck name="checkbox-blank-outline" size={25} />
+            // <Uncheck name="checkbox-blank-outline" size={25} />
+            <View style={styles.uncheckbox}>
+
+            </View>
           )}
         </TouchableOpacity>
         <Text style={styles.text}>Snack baskets with local flavor.</Text>
@@ -38,7 +45,10 @@ const Amentity = ({labelText}) => {
           {isChecked ? (
             <Check name="checkbox-outline" size={25} color={'#FFB83A'} />
           ) : (
-            <Uncheck name="checkbox-blank-outline" size={25} />
+            // <Uncheck name="checkbox-blank-outline" size={25} />
+            <View style={styles.uncheckbox}>
+
+            </View>
           )}
         </TouchableOpacity>
         <Text style={styles.text}>WI-FI</Text>
@@ -53,6 +63,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#FFFFFF',
     paddingVertical: 10,
+    paddingHorizontal: 10,
     marginTop: 20,
     elevation: 5,
     // flexDirection: 'row',
@@ -75,5 +86,19 @@ const styles = StyleSheet.create({
   },
   subcontainer: {
     flexDirection: 'row',
+    marginTop:5,
   },
+  Amentitytxt: {
+    fontSize: 14,
+    fontFamily: FontText.medium,
+    color: '#252C32',
+  },
+  uncheckbox:
+  {
+    width:18,
+    height:18,
+    borderWidth:1,
+   borderRadius:5,
+    BorderColor:"#B0BABF",
+  }
 });

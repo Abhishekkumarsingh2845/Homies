@@ -1,5 +1,12 @@
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React from 'react';
+import {
+  Dimensions,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import React, {useState} from 'react';
 import SecondaryHeader from '../../components/SecondaryHeader';
 import {Img} from '../../utlis/ImagesPath';
 import PrimaryBtn from '../../components/PrimaryBtn';
@@ -9,12 +16,17 @@ import {useNavigation} from '@react-navigation/native';
 import ComplaintTxtInpt from '../../components/ComplaintTxtInpt';
 
 const RateReview = () => {
+  const {width, height} = Dimensions.get('window');
+  const [selected, setselected] = useState(0);
   const StarArray = new Array(5).fill(0);
   const navigation = useNavigation();
+  const handlestar = index => {
+    setselected(index + 1);
+  };
   return (
     <View style={styles.conatiner}>
       <SecondaryHeader
-      gobackImage={Img.goback}
+        gobackImage={Img.goback}
         detailtxt={'Rate & Review'}
         onPress={() => navigation.openDrawer()}
       />
@@ -29,47 +41,28 @@ const RateReview = () => {
             marginTop: 5,
             justifyContent: 'space-between',
           }}>
-
-
-
-
-
-
-
-
-
-
-
-
-
           {StarArray.map((_, index) => (
-            <TouchableOpacity>
-            <Image
-              key={index}
-              source={Img.ratingstaricon}
-              style={styles.ratingstarstyle}
-            />
+            <TouchableOpacity onPress={() => handlestar(index)}>
+              <Image
+                source={index < selected ? Img.ratingstaricon : Img.uncheckstaricon}
+                style={styles.ratingstarstyle}
+              />
             </TouchableOpacity>
           ))}
-
-
-
-
-
-
         </View>
         <Text style={styles.starcounttxt}>4/5 stars</Text>
       </View>
-      <View style={{paddingHorizontal:20}}>
-      <Text style={{marginVertical: 10, textAlign: 'left'}}>
-        Additional feedback
-      </Text>
-      <ComplaintTxtInpt height={140} multiline={false} />
-      <PrimaryBtn
-        txt={'Submit Feedback'}
-        bgcolor={Color.primary}
-        mgntop={280}
-      />
+      <View style={{paddingHorizontal: 20}}>
+        <Text style={{marginVertical: 10, textAlign: 'left'}}>
+          Additional feedback
+        </Text>
+        <ComplaintTxtInpt height={140} multiline={false} />
+        <PrimaryBtn
+          txt={'Submit Feedback'}
+          bgcolor={Color.primary}
+          mgntop={height * 0.3}
+          // mrgnbm={50}
+        />
       </View>
     </View>
   );

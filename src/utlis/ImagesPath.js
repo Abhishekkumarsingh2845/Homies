@@ -50,7 +50,13 @@ const Img = {
   lefticon:require("../assets/images/drawerarrow.png"),
   shareicon:require("../assets/images/share.png"),
   parkingicon:require("../assets/images/parking.png"),
-  gymicon:require("../assets/images/parking.png"),
+  gymicon:require("../assets/images/gym.png"),
+  msgicon:require("../assets/images/msg.png"),
+  profilepicicon:require("../assets/images/profilepic.png"),
+  editicon:require("../assets/images/edit.png"),
+  newvideoicon:require("../assets/images/newvideo.png"),
+  uncheckstaricon:require("../assets/images/uncheckstar.png"),
+  Foodmenuicon:require("../assets/images/Foodmenu.png"),
 };
 
 export {Img};

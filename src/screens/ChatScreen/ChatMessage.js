@@ -26,7 +26,7 @@ const ChatMessage = () => {
         />
         <Chattingmsg bgColor={'#FAFAFA'} />
       </View>
-      <View style={{marginTop: 370}}>
+      <View style={{marginTop: 320}}>
         <MessageTypeBar />
       </View>
     </View>

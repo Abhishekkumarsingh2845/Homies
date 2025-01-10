@@ -1,4 +1,11 @@
-import {Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  Image,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React from 'react';
 import Header from '../../components/Header';
 import SecondaryHeader from '../../components/SecondaryHeader';
@@ -16,15 +23,15 @@ const Home = () => {
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
-      <SafeAreaView/>
+      <SafeAreaView />
       <SecondaryHeader
         gobackImage={Img.draw}
         notificationIcon={Img.bellicon}
-        onPress={() => navigation.navigate("DrawerNavigator")}
+        onPress={() => navigation.navigate('DrawerNavigator')}
       />
       <View style={styles.subcontainer}>
         <Text style={styles.bannertxt}>Banner</Text>
-        <DotindictaorImg />
+        <DotindictaorImg imageSource={Img.hstdetail} activeDotColor="#FF9457" />
         <TouchableOpacity>
           <Text style={styles.foodservicetxt}>Food Services</Text>
         </TouchableOpacity>
@@ -53,6 +60,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: FontText.medium,
     color: Color.black,
+    marginTop:10,
   },
   foodservicetxt: {
     fontSize: 16,

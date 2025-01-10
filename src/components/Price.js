@@ -1,13 +1,14 @@
 import {StyleSheet, Text, TextInput, View} from 'react-native';
 import React from 'react';
+import { FontText } from '../utlis/CustomFont';
 
 const Price = () => {
   return (
     <View style={styles.container}>
-      <Text>Price, $</Text>
+      <Text style={styles.pricetxt}>Price, $</Text>
       <View style={styles.maxmincontainer}>
-        <TextInput placeholder="Min" style={styles.minplacehldcontainer} />
-        <TextInput placeholder="Max" style={styles.maxplacehldcontainer} />
+        <TextInput placeholder="Min" placeholderTextColor={"#9AA6AC"} style={styles.minplacehldcontainer} />
+        <TextInput placeholder="Max" placeholderTextColor={"#9AA6AC"} style={styles.maxplacehldcontainer} />
       </View>
     </View>
   );
@@ -35,12 +36,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     width: 120,
     alignItems: 'center',
+    
     justifyContent: 'center',
     padding: 5,
-    height: 25,
+    height: 30,
     borderRadius: 5,
     borderColor: '#DDE2E4',
     borderWidth: 1,
+    marginVertical:5,
   },
   maxplacehldcontainer:
   {
@@ -50,13 +53,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     padding: 5,
-    height: 25,
+    height: 30,
     borderRadius: 5,
     borderColor: '#DDE2E4',
     borderWidth: 1,
+    marginVertical:5,
   },
   maxmincontainer:
   {
     flexDirection:"row"
+  },
+  pricetxt:
+  {
+    fontSize: 14,
+    fontFamily: FontText.medium,
+    color: '#252C32',
   }
 });

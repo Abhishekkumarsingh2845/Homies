@@ -19,7 +19,7 @@ const HomeNavigator = () => {
     <Stack.Navigator screenOptions={{headerShown: false}}>
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="AllHome" component={AllHome} />
-      <Stack.Screen name="BookMark" component={BookMark}/>
+      <Stack.Screen name="BookMark" component={BookMark} />
       <Stack.Screen name="SortbyScreen" component={SortbyScreen} />
       <Stack.Screen name="LocationSearch" component={LocationSearch} />
       {/* <Stack.Screen name="HostelRentOut" component={HostelRentOut} /> */}
@@ -29,7 +29,6 @@ const HomeNavigator = () => {
       <Stack.Screen name="PaymentForm" component={PaymentForm} />
       <Stack.Screen name="HostelRentOut" component={HostelRentOut} />
       <Stack.Screen name="PaymentHomeForm" component={PaymentHomeForm} />
-    
     </Stack.Navigator>
   );
 };
@@ -37,4 +36,3 @@ const HomeNavigator = () => {
 export default HomeNavigator;
 
 const styles = StyleSheet.create({});
-

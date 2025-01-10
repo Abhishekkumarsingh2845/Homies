@@ -3,7 +3,7 @@ import React from 'react';
 import { Color } from '../utlis/Color';
 import { useNavigation } from '@react-navigation/native';
 
-const PrimaryBtn = ({ txt, destination, clr=Color.white, bgcolor, brdcolor, brdwdth,mgntop }) => {
+const PrimaryBtn = ({ txt, destination, clr=Color.white, bgcolor, brdcolor, brdwdth,mgntop,mrgnbm }) => {
   const navigation = useNavigation();
 
   const handleNavigation = () => {
@@ -20,7 +20,8 @@ const PrimaryBtn = ({ txt, destination, clr=Color.white, bgcolor, brdcolor, brdw
           backgroundColor: bgcolor,
           borderColor: brdcolor,
           borderWidth: brdwdth, // Dynamically set border width
-          marginTop:mgntop
+          marginTop:mgntop,
+          marginBottom:mrgnbm
         },
       ]}
       onPress={handleNavigation}

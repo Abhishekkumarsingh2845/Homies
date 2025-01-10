@@ -3,10 +3,11 @@ import React from 'react';
 import CommonHeader from '../../components/CommonHeader';
 import {FontText} from '../../utlis/CustomFont';
 import {Color} from '../../utlis/Color';
+import Aligntext from '../../components/Aligntext';
 const TermsCondition = () => {
   return (
     <View style={styles.container}>
-        <StatusBar backgroundColor={'white'}  barStyle={"dark-content"} />
+      <StatusBar backgroundColor={'white'} barStyle={'dark-content'} />
       <CommonHeader title="Terms & Conditions" />
       <ScrollView contentContainerStyle={styles.content}>
         <View style={styles.section}>
@@ -18,23 +19,29 @@ const TermsCondition = () => {
         </View>
         <View style={styles.section}>
           <Text style={styles.heading}>2.Cancellation Policy</Text>
-
-          <Text style={styles.text}>
-            •Cancellations must be made [insert cancellation notice period,
-            e.g., 48 hours] prior to check-in for a full refund.
-          </Text>
-
+          <Aligntext
+            detailtxt={
+              'Cancellations must be made [insert cancellation notice period, e.g., 48 hours] prior to check-in for a full refund.'
+            }
+          />
+          {/* 
           <Text style={styles.text}>
             • Cancellations made after this period may incur a cancellation fee.
-          </Text>
+          </Text> */}
+          <Aligntext
+            detailtxt={
+              'Cancellations made after this period may incur a cancellation fee'
+            }
+          />
         </View>
         <View style={styles.section}>
           <Text style={styles.heading}>3. Termination of Stay</Text>
 
-          <Text style={styles.text}>
-            •Management reserves the right to terminate a guest's stay if they
-            violate any house rules or terms outlined herein
-          </Text>
+          <Aligntext
+            detailtxt={
+              "Management reserves the right to terminate a guest's stay if they violate any house rules or terms outlined herein"
+            }
+          />
         </View>
       </ScrollView>
     </View>

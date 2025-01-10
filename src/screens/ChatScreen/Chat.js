@@ -9,7 +9,7 @@ import {Color} from '../../utlis/Color';
 const Chat = () => {
   return (
     <View style={styles.container}>
-      <Header />
+      <Header Img1={Img.draw}  bellIcon={Img.bellicon}/>
       <Text style={styles.groupchattxt}>Group Chat</Text>
       <View style={styles.subcontainer}>
         <ChatCmp
