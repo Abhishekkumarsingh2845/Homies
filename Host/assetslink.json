@@ -1,0 +1,13 @@
+[
+    {
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "com.home_new_one",
+        "package_name": "com.home_new_one",
+        "sha256_cert_fingerprints": [
+          "E2:03:F1:3B:E9:F3:51:96:F6:49:FB:2A:C8:9A:85:62:87:32:11:61:34:21:54:59:10:E1:FD:86:0F:B2:0B:D9"
+        ]
+      }
+    }
+  ]
+  
