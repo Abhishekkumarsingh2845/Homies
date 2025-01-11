@@ -24,6 +24,7 @@ const BottomTab = () => {
   const Tab = createBottomTabNavigator();
   return (
     <Tab.Navigator
+    initialRouteName='ComplaintNavigator'
       screenOptions={{
         headerShown: false,
         tabBarActiveTintColor: '#FFB83A', // Color when tab is selected

@@ -14,6 +14,7 @@ import HomeTabNavigator from './HomeTabNavigator';
 import Profile from '../screens/drawerScreen/Profile';
 import PersonDoument from '../screens/drawerScreen/PersonDoument';
 import Payment from '../screens/bottomTabSceen/Payment';
+import Refferal from '../screens/drawerScreen/Refferal';
 
 const MainNavigation = () => {
   const Stack = createStackNavigator();
@@ -21,7 +22,7 @@ const MainNavigation = () => {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen name="AuthNavigator" component={AuthNavigator} /> 
-   <Stack.Screen name="HomeNavigator" component={HomeNavigator} />
+        <Stack.Screen name="HomeNavigator" component={HomeNavigator} />
         <Stack.Screen name="BottomTab" component={BottomTab} />
         <Stack.Screen
           name="ComplaintNavigator"
@@ -33,6 +34,7 @@ const MainNavigation = () => {
         <Stack.Screen name="Profile" component={Profile} />
         <Stack.Screen name="PersonDoument" component={PersonDoument} />
         <Stack.Screen name="Payment" component={Payment} />
+        <Stack.Screen name="Referral" component={Refferal} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -19,21 +19,7 @@ const styles = StyleSheet.create({
   },
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 // xcrun simctl list
-
 // import React, {useEffect, useState} from 'react';
 // import {View, Text, Button, Linking} from 'react-native';
 // import appsFlyer from 'react-native-appsflyer';
@@ -126,8 +112,6 @@ const styles = StyleSheet.create({
 // };
 
 // export default App;
-
-
 
 // import React, {useEffect, useState} from 'react';
 // import {View, Text, Button, Linking, Alert} from 'react-native';
@@ -256,71 +240,73 @@ const styles = StyleSheet.create({
 
 // export default App;
 
-// // // import React, { useEffect } from 'react';
-// // // import { Linking, View, Text } from 'react-native';
-// // // import { NavigationContainer } from '@react-navigation/native';
-// // // import { createStackNavigator } from '@react-navigation/stack';
+// import React from 'react';
+// import {View, Text, TouchableOpacity, StyleSheet, Alert} from 'react-native';
+// import appsFlyer from 'react-native-appsflyer';
 
-// // // // Create Stack Navigator
-// // // const Stack = createStackNavigator();
+// const App = () => {
+//   const generateInviteLink = () => {
+//     const linkData = {
+//       channel: 'wholesomee',
+//       campaign: 'wholesomee',
+//       customerID: '1234',
+//       userParams: {
+//         deep_link_value: 'productDetails',
+//         deep_link_sub1: 'electronics',
+//         custom_param: 'special_offer',
+//         brandDomain: 'www.wholesomebywh.com',
+//       },
 
-// // // // Main Screen Component
-// // // const MainScreen = () => (
-// // //   <View style={{ backgroundColor: 'green', flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-// // //     <Text>Welcome to Main Screen!</Text>
-// // //   </View>
-// // // );
+//       af_ios_url: 'https://www.wholesomebywh.com/',
+//       af_android_url: 'https://www.wholesomebywh.com/',
+//     };
 
-// // // // Home Screen Component
-// // // const HomeScreen = () => {
-// // //   useEffect(() => {
-// // //     const handleDeepLink = ({ url }) => {
-// // //       console.log('Deep link received:', url);
+//     appsFlyer.generateInviteLink(
+//       linkData,
+//       link => {
+//         // Success callback
+//         Alert.alert('Invite Link Generated', link);
+//         console.log('Generated Invite Link:', link);
+//       },
+//       err => {
+//         // Error callback
+//         Alert.alert('Error Generating Link', JSON.stringify(err));
+//         console.error('Error Generating Invite Link:', err);
+//       },
+//     );
+//   };
 
-// // //       // Always navigate to MainScreen when deep link is received
-// // //       // Here, we're just logging the deep link and staying on the HomeScreen
-// // //     };
+//   return (
+//     <View style={styles.container}>
+//       <Text style={styles.title}>AppsFlyer Invite Link Demo</Text>
+//       <TouchableOpacity style={styles.button} onPress={generateInviteLink}>
+//         <Text style={styles.buttonText}>Generate Invite Link</Text>
+//       </TouchableOpacity>
+//     </View>
+//   );
+// };
 
-// // //     // Listen for incoming deep links
-// // //     Linking.addEventListener('url', handleDeepLink);
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//     backgroundColor: '#f5f5f5',
+//   },
+//   title: {
+//     fontSize: 20,
+//     marginBottom: 20,
+//     fontWeight: 'bold',
+//   },
+//   button: {
+//     backgroundColor: '#007BFF',
+//     padding: 15,
+//     borderRadius: 8,
+//   },
+//   buttonText: {
+//     color: '#fff',
+//     fontSize: 16,
+//   },
+// });
 
-// // //     // Handle the case where the app was opened via a deep link
-// // //     Linking.getInitialURL().then(url => {
-// // //       if (url) {
-// // //         handleDeepLink({ url });
-// // //       }
-// // //     });
-
-// // //     return () => {
-// // //       Linking.removeEventListener('url', handleDeepLink);
-// // //     };
-// // //   }, []);
-
-// // //   return (
-// // //     <View style={{ backgroundColor: 'green', flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-// // //       <Text>Welcome to the App!</Text>
-// //     </View>
-// //   );
-// // };
-
-// // // Deep Link Configuration for React Navigation
-// // const linking = {
-// //   prefixes: ['testapp://'], // Prefixes for deep linking
-// //   config: {
-// //     screens: {
-// //       MainScreen: 'testdata', // Mapping deep link path to screen
-// //     },
-// //   },
-// // };
-
-// // // App Component with Navigation Setup
-// // export default function App() {
-// //   return (
-// //     <NavigationContainer linking={linking}>
-// //       <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
-// //         <Stack.Screen name="Home" component={HomeScreen} />
-// //         <Stack.Screen name="MainScreen" component={MainScreen} />
-// //       </Stack.Navigator>
-// //     </NavigationContainer>
-// //   );
-// // }
+// export default App;

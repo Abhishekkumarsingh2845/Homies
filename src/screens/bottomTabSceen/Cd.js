@@ -4,7 +4,7 @@ import SecondaryHeader from '../../components/SecondaryHeader';
 import Header from '../../components/Header';
 import Complaint from '../../components/Complaint';
 import PrimaryBtn from '../../components/PrimaryBtn';
-import { Color } from '../../utlis/Color';
+import {Color} from '../../utlis/Color';
 
 const Cd = () => {
   return (
@@ -14,7 +14,7 @@ const Cd = () => {
         <Complaint />
         <Complaint />
         <Complaint />
-        <PrimaryBtn txt={"+ADD"} bgcolor={Color.primary} mgntop={200}/>
+        <PrimaryBtn txt={'+ADD'} bgcolor={Color.primary} mgntop={200} />
       </View>
     </View>
   );

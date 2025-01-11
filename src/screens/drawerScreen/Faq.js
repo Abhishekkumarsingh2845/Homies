@@ -14,7 +14,7 @@ const Faq = () => {
       <SafeAreaView />
       <SecondaryHeader
         gobackImage={Img.goback}
-        detailtxt={'FAQ'}
+        detailtxt={'FAQs'}
         onPress={() => navigation.openDrawer()}
       />
       <View style={styles.subcontainer}>

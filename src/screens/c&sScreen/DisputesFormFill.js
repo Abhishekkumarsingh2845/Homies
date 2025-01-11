@@ -8,6 +8,7 @@ import {Color} from '../../utlis/Color';
 import PrimaryBtn from '../../components/PrimaryBtn';
 import {useNavigation} from '@react-navigation/native';
 import ComplaintTxtInpt from '../../components/ComplaintTxtInpt';
+import { ScreenDimensions } from '../../utlis/DimensionApi';
 const DisputesFormFill = () => {
   const navigation = useNavigation();
   return (
@@ -29,7 +30,7 @@ const DisputesFormFill = () => {
           regularly, leading to an unhygienic environment.
         </Text> */}
         <ComplaintTxtInpt height={160} multiline={false} bgcolor="#F2F2F2" />
-        <PrimaryBtn bgcolor={Color.primary} txt={'Submit'} mgntop={290} />
+        <PrimaryBtn bgcolor={Color.primary} txt={'Submit'}  mgntop={ScreenDimensions.screenHeight*0.25} />
       </View>
     </View>
   );

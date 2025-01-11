@@ -52,8 +52,7 @@ const styles = StyleSheet.create({
 
     color: '#333',
   },
-  uploadlabel:
-  {
+  uploadlabel: {
     fontSize: 16,
     fontFamily: FontText.medium,
     marginVertical: 10,

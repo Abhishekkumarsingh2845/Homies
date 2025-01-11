@@ -11,7 +11,7 @@ const ContactUs = () => {
   return (
     <View style={styles.container}>
       <SafeAreaView/>
-      <SecondaryHeader  gobackImage={Img.goback} detailtxt={'FAQs'}   onPress={() => navigation.openDrawer()}/>
+      <SecondaryHeader  gobackImage={Img.goback} detailtxt={'Contact Us'}   onPress={() => navigation.openDrawer()}/>
       <View style={styles.subcontainer}>
         <ContactDetail
           title="We’re Here to Help!"

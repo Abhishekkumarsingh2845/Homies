@@ -8,6 +8,7 @@ import Invite from '../../components/Invite';
 import Invitebtn from '../../components/Invitebtn';
 import {Img} from '../../utlis/ImagesPath';
 import PayNowbtn from '../../components/PayNowbtn';
+import { ScreenDimensions } from '../../utlis/DimensionApi';
 
 const ReferEarn = () => {
   const navigation = useNavigation();
@@ -24,8 +25,8 @@ const ReferEarn = () => {
         <Invite />
         <Invite />
         <Invite />
-        <View style={{alignItems: 'flex-end', marginTop: 190}}>
-          <Invitebtn />
+        <View style={{alignItems: 'flex-end', marginTop: ScreenDimensions.screenHeight*0.2}}>
+          <Invitebtn msg='+ADD' />
         </View>
       </View>
       {/* <PaymentBottomSheet /> */}

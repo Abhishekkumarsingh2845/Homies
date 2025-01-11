@@ -4,7 +4,7 @@ import {Color} from '../utlis/Color';
 import { FontText } from '../utlis/CustomFont';
 import { useNavigation } from '@react-navigation/native';
 
-const Invitebtn = () => {
+const Invitebtn = ({msg="Invite"}) => {
   const navigation= useNavigation();
 
   const onShare = async () => {
@@ -28,7 +28,7 @@ const Invitebtn = () => {
   };
   return (
     <TouchableOpacity style={styles.container} onPress={onShare}>
-      <Text style={styles.txtstyle}>Invite</Text>
+      <Text style={styles.txtstyle}>{msg}</Text>
     </TouchableOpacity>
   );
 };

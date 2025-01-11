@@ -129,12 +129,15 @@ import {
   ImageBackground,
   StatusBar,
   StyleSheet,
+  Text,
   TouchableOpacity,
   View,
 } from 'react-native';
 import React from 'react';
 import { Img } from '../utlis/ImagesPath';
 import { useNavigation } from '@react-navigation/native';
+import { FontText } from '../utlis/CustomFont';
+import { ScreenDimensions } from '../utlis/DimensionApi';
 
 const Header = ({
   Img1,
@@ -145,11 +148,13 @@ const Header = ({
   locationIcon,
   heartIcon,
   bellIcon,
+  hght=100,
+  complaintbtn
 }) => {
   const navigation = useNavigation();
 
   return (
-    <ImageBackground source={Img.headerbg} style={styles.container}>
+    <ImageBackground source={Img.headerbg} style={[styles.container,{height:hght}]}>
       <StatusBar backgroundColor={'#010101'} barStyle={'light-content'} />
       <View style={styles.logocontainer}>
         <View style={styles.leftcontinaer}>
@@ -196,6 +201,11 @@ const Header = ({
           </TouchableOpacity>
         </View>
       </View>
+{complaintbtn}
+      {/* <View style={styles.complaintcontainer}>
+        <Text style={styles.complainttxt}>Complaint</Text>
+        <Text style={styles.complainttxt}>Disputes</Text>
+      </View> */}
     </ImageBackground>
   );
 };
@@ -204,7 +214,7 @@ export default Header;
 
 const styles = StyleSheet.create({
   container: {
-    height: 100,
+    // height: 100,
     // backgroundColor:"red"
   },
   leftcontinaer: {
@@ -254,4 +264,20 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     // backgroundColor: 'red',
   },
+  complaintcontainer:
+  {
+    flexDirection:"row",
+    width:"100%",
+    justifyContent:"space-around",
+    paddingHorizontal:40,
+    
+
+    
+  },
+  complainttxt:
+  {
+    fontSize:16,
+    fontFamily:FontText.medium,
+
+  }
 });

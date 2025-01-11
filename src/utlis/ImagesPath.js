@@ -24,7 +24,7 @@ const Img = {
   hostelrentouticon: require('../assets/images/hostelrentout.png'),
   buildingicon: require('../assets/images/build.png'),
   pword: require('../assets/images/p.png'),
-  noitificationicon: require('../assets/images/notificationImg.png'),
+  noitificationicon: require('../assets/images/notification.png'),
   walleticon: require('../assets/images/wallet.png'),
   vegetableicon: require('../assets/images/vegtable.png'),
   groceryicon: require('../assets/images/grocery.png'),
@@ -57,6 +57,7 @@ const Img = {
   newvideoicon:require("../assets/images/newvideo.png"),
   uncheckstaricon:require("../assets/images/uncheckstar.png"),
   Foodmenuicon:require("../assets/images/Foodmenu.png"),
+  verifytickicon:require("../assets/images/verifytick.png"),
 };
 
 export {Img};

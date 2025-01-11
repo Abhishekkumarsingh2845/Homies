@@ -12,16 +12,37 @@ const Sharing = () => {
     <View style={styles.container}>
       <View style={styles.bedsharingcontainer}>
         <TouchableOpacity
+          style={[selectedSharing == 'Double Sharing' && styles.selectbtnstyle]}
           onPress={() => handleSharingSelection('Double Sharing')}>
-          <Text style={styles.sharingtxtstyle}>Double Sharing</Text>
+          <Text
+            style={[
+              styles.sharingtxtstyle,
+              selectedSharing == 'Double Sharing' && styles.selectedtxt,
+            ]}>
+            Double Sharing
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
+          style={[selectedSharing == 'Three Sharing' && styles.selectbtnstyle]}
           onPress={() => handleSharingSelection('Three Sharing')}>
-          <Text style={styles.sharingtxtstyle}>Three Sharing</Text>
+          <Text
+            style={[
+              styles.sharingtxtstyle,
+              selectedSharing == 'Three Sharing' && styles.selectedtxt,
+            ]}>
+            Three Sharing
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
+          style={[selectedSharing == 'Five Sharing' && styles.selectbtnstyle]}
           onPress={() => handleSharingSelection('Five Sharing')}>
-          <Text style={styles.sharingtxtstyle}>Five Sharing</Text>
+          <Text
+            style={[
+              styles.sharingtxtstyle,
+              selectedSharing == 'Five Sharing' && styles.selectedtxt,
+            ]}>
+            Five Sharing
+          </Text>
         </TouchableOpacity>
       </View>
 
@@ -29,12 +50,12 @@ const Sharing = () => {
         <>
           <View style={styles.rentcontainer}>
             <View style={styles.rentpercontainer}>
-              <Text>Rent per Person</Text>
-              <Text>₹8,500</Text>
+              <Text style={styles.rentperperson}>Rent per Person</Text>
+              <Text style={styles.amounttxt}>₹8,500</Text>
             </View>
             <View>
-              <Text>Deposit</Text>
-              <Text>₹8,500</Text>
+              <Text style={styles.deposittxt}>Deposit</Text>
+              <Text style={styles.amounttxt}>₹8,500</Text>
             </View>
           </View>
 
@@ -44,8 +65,8 @@ const Sharing = () => {
                 <View style={styles.innercircle}></View>
               </View>
               <View style={{marginLeft: 10}}>
-                <Text>With AC</Text>
-                <Text>₹9,500</Text>
+                <Text style={styles.withxtxt}>With AC</Text>
+                <Text style={styles.amounttxt}>₹9,500</Text>
               </View>
             </View>
             <View style={{flexDirection: 'row'}}>
@@ -53,8 +74,8 @@ const Sharing = () => {
                 <View style={styles.innercircle}></View>
               </View>
               <View style={{marginLeft: 10}}>
-                <Text>With AC</Text>
-                <Text>₹9,500</Text>
+                <Text style={styles.withxtxt}>With AC</Text>
+                <Text style={styles.amounttxt}>₹9,500</Text>
               </View>
             </View>
           </View>
@@ -62,55 +83,60 @@ const Sharing = () => {
           <View style={styles.line}></View>
           <View style={styles.timecontainer}>
             <View>
-              <Text>Lock in Period</Text>
+              <Text style={styles.lockintxt}>Lock in Period</Text>
               <Text>11 Months</Text>
             </View>
             <View>
-              <Text>Numbers of Room</Text>
+              <Text style={styles.noofroomtxt}>Numbers of Room</Text>
               <Text>30 Rooms</Text>
             </View>
           </View>
           <View style={{marginVertical: 10}} />
         </>
       )}
+
       {selectedSharing === 'Three Sharing' && (
         <>
           <View style={styles.rentcontainer}>
-            <View>
-              <Text>Rent per Person</Text>
-              <Text>₹,500</Text>
+            <View style={styles.rentpercontainer}>
+              <Text style={styles.rentperperson}>Rent per Person</Text>
+              <Text style={styles.amounttxt}>₹8,500</Text>
             </View>
             <View>
-              <Text>Rent per Person</Text>
-              <Text>₹8,500</Text>
+              <Text style={styles.deposittxt}>Deposit</Text>
+              <Text style={styles.amounttxt}>₹8,500</Text>
             </View>
           </View>
 
           <View style={styles.withaccontainer}>
-            <View style={styles.outercircle}>
-              <View style={styles.innercircle}></View>
+            <View style={{flexDirection: 'row'}}>
+              <View style={styles.outercircle}>
+                <View style={styles.innercircle}></View>
+              </View>
+              <View style={{marginLeft: 10}}>
+                <Text style={styles.withxtxt}>With AC</Text>
+                <Text style={styles.amounttxt}>₹9,500</Text>
+              </View>
             </View>
-            <View>
-              <Text>With AC</Text>
-              <Text>₹9,500</Text>
-            </View>
-            <View style={styles.outercircle}>
-              <View style={styles.innercircle}></View>
-            </View>
-            <View>
-              <Text>With AC</Text>
-              <Text>₹9,500</Text>
+            <View style={{flexDirection: 'row'}}>
+              <View style={styles.outercircle}>
+                <View style={styles.innercircle}></View>
+              </View>
+              <View style={{marginLeft: 10}}>
+                <Text style={styles.withxtxt}>With AC</Text>
+                <Text style={styles.amounttxt}>₹9,500</Text>
+              </View>
             </View>
           </View>
 
           <View style={styles.line}></View>
           <View style={styles.timecontainer}>
             <View>
-              <Text>Lock in Period</Text>
+              <Text style={styles.lockintxt}>Lock in Period</Text>
               <Text>11 Months</Text>
             </View>
             <View>
-              <Text>Numbers of Room</Text>
+              <Text style={styles.noofroomtxt}>Numbers of Room</Text>
               <Text>30 Rooms</Text>
             </View>
           </View>
@@ -120,39 +146,45 @@ const Sharing = () => {
       {selectedSharing === 'Five Sharing' && (
         <>
           <View style={styles.rentcontainer}>
-            <View>
-              <Text>Rent per Person</Text>
-              <Text>₹8,500</Text>
+            <View style={styles.rentpercontainer}>
+              <Text style={styles.rentperperson}>Rent per Person</Text>
+              <Text style={styles.amounttxt}>₹8,500</Text>
             </View>
             <View>
-              <Text>Rent per Person</Text>
-              <Text>₹8,500</Text>
+              <Text style={styles.deposittxt}>Deposit</Text>
+              <Text style={styles.amounttxt}>₹8,500</Text>
             </View>
           </View>
+
           <View style={styles.withaccontainer}>
-            <View style={styles.outercircle}>
-              <View style={styles.innercircle}></View>
+            <View style={{flexDirection: 'row'}}>
+              <View style={styles.outercircle}>
+                <View style={styles.innercircle}></View>
+              </View>
+              <View style={{marginLeft: 10}}>
+                <Text style={styles.withxtxt}>With AC</Text>
+                <Text style={styles.amounttxt}>₹9,500</Text>
+              </View>
             </View>
-            <View>
-              <Text>With AC</Text>
-              <Text>₹9,500</Text>
-            </View>
-            <View style={styles.outercircle}>
-              <View style={styles.innercircle}></View>
-            </View>
-            <View>
-              <Text>With AC</Text>
-              <Text>₹9,500</Text>
+            <View style={{flexDirection: 'row'}}>
+              <View style={styles.outercircle}>
+                <View style={styles.innercircle}></View>
+              </View>
+              <View style={{marginLeft: 10}}>
+                <Text style={styles.withxtxt}>With AC</Text>
+                <Text style={styles.amounttxt}>₹9,500</Text>
+              </View>
             </View>
           </View>
+
           <View style={styles.line}></View>
           <View style={styles.timecontainer}>
             <View>
-              <Text>Lock in Period</Text>
+              <Text style={styles.lockintxt}>Lock in Period</Text>
               <Text>11 Months</Text>
             </View>
             <View>
-              <Text>Numbers of Room</Text>
+              <Text style={styles.noofroomtxt}>Numbers of Room</Text>
               <Text>30 Rooms</Text>
             </View>
           </View>
@@ -201,7 +233,7 @@ const styles = StyleSheet.create({
   withaccontainer: {
     flexDirection: 'row',
     paddingHorizontal: 20,
-    // justifyContent: "space-around",
+    justifyContent: 'space-between',
     marginTop: 10,
     // backgroundColor:"red"
   },
@@ -221,6 +253,46 @@ const styles = StyleSheet.create({
   sharingtxtstyle: {
     fontSize: 12,
     fontFamily: FontText.medium,
+    color: '#989898',
+  },
+  selectedtxt: {
+    fontSize: 12,
+    fontFamily: FontText.medium,
+    color: '#989898',
     color: Color.black,
+  },
+  rentperperson: {
+    fontSize: 12,
+    color: Color.black,
+    fontFamily: FontText.light,
+  },
+  deposittxt: {
+    fontSize: 12,
+    color: Color.black,
+    fontFamily: FontText.light,
+  },
+  amounttxt: {
+    fontSize: 12,
+    color: Color.black,
+    fontFamily: FontText.light,
+  },
+  withxtxt: {
+    fontSize: 12,
+    color: Color.black,
+    fontFamily: FontText.light,
+  },
+  lockintxt: {
+    fontSize: 12,
+    color: Color.black,
+    fontFamily: FontText.light,
+  },
+  noofroomtxt: {
+    fontSize: 12,
+    color: Color.black,
+    fontFamily: FontText.light,
+  },
+  selectbtnstyle: {
+    borderBottomWidth: 1,
+    borderColor: 'red',
   },
 });

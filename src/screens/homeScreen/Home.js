@@ -28,12 +28,11 @@ const Home = ({navigation}) => {
   };
   return (
     <View style={styles.container}>
-      <Header Img1={Img.draw} />
+      <Header Img1={Img.draw} locationIcon={Img.lcn} heartIcon={Img.hrt} bellIcon={Img.noitificationicon} />
       <View style={styles.subcontainer}>
-        <SearchBar 
-                  destination={LocationSearch}/>
+        <SearchBar destination={LocationSearch} />
         <ScrollView
-          contentContainerStyle={{marginTop: 10}}
+          contentContainerStyle={{marginTop: 10,}}
           showsVerticalScrollIndicator={false}>
           <Image
             source={require('../../assets/images/map.png')}
@@ -55,6 +54,7 @@ const Home = ({navigation}) => {
               />
             )}
           />
+          <View style={{marginTop: 20}}></View>
         </ScrollView>
       </View>
     </View>

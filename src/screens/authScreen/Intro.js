@@ -14,6 +14,7 @@ import {Color} from '../../utlis/Color';
 import {Img} from '../../utlis/ImagesPath';
 import PrimaryBtn from '../../components/PrimaryBtn';
 import DotindictaorImg from '../../components/DotindictaorImg';
+import { ScreenDimensions } from '../../utlis/DimensionApi';
 const Intro = () => {
   const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
   return (
@@ -29,7 +30,7 @@ const Intro = () => {
         width={screenWidth * 0.90}  // 85% of the screen width
         activeDotColor={Color.primary}
       />
-      <View style={{marginTop: 20}} />
+      <View style={{marginTop: ScreenDimensions.screenHeight*0.01}} />
       <Text style={styles.letfind}>
         Let’s Find Your <Text style={styles.sweettxt}> Sweet &</Text>
       </Text>

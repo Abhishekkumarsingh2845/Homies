@@ -5,8 +5,9 @@ import {
   Text,
   View,
   Image,
+  TouchableOpacity,
 } from 'react-native';
-import React from 'react';
+import React, {useRef, useState} from 'react';
 import {Color} from '../../utlis/Color';
 import PropertyInfoCard from '../../components/PropertyInfoCard';
 import SecondaryHeader from '../../components/SecondaryHeader';
@@ -24,9 +25,23 @@ import {FontText} from '../../utlis/CustomFont';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Wifi from 'react-native-vector-icons/FontAwesome5';
 import Pool from 'react-native-vector-icons/MaterialIcons';
+import CalendarModal from '../../components/Calendarcmp';
+import RequestSentBtnSht from '../../components/RequestSentBtnSht';
 // import {Image} from 'react-native-svg';
 const PropertyDetail = () => {
   const navigation = useNavigation();
+  const [isModalVisible, setModalVisible] = useState(false);
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  };
+
+  const bottomSheetRef = useRef(null); // Create a reference for the bottom sheet
+
+  // Function to open the bottom sheet
+  const handleRequestSent = () => {
+    console.log('Button Pressed!'); 
+    bottomSheetRef.current?.open(); // Call the open function
+  };
 
   return (
     <View style={styles.container}>
@@ -55,7 +70,7 @@ const PropertyDetail = () => {
               icon={
                 <Image
                   source={Img.parkingicon}
-                  style={{width: 25, height: 25, resizeMode: 'contain'}}
+                  style={{width: 25, height: 20, resizeMode: 'contain'}}
                 />
               }
             />
@@ -63,23 +78,41 @@ const PropertyDetail = () => {
               txt={'Gym'}
               mrgnleft={5}
               icon={
-                <Image source={Img.gymicon} style={{width: 25, height: 25}} />
+                <Image
+                  source={Img.gymicon}
+                  style={{width: 25, height: 20, resizeMode: 'contain'}}
+                />
               }
             />
             <Amenity
               txt={'Pool'}
               mrgnleft={5}
-              icon={<Pool name="pool" size={16} color={'black'} />}
+              icon={<Pool name="pool" size={19} color={'black'} />}
             />
           </View>
           <Sharing />
-
           <Video />
           <Text style={styles.neaerbytxt}>Near by Property </Text>
           <NearLocationProperty />
           <PermonthRent />
-          <VisitRequestbtn />
+          <VisitRequestbtn
+            OnPaynowprs={handleRequestSent}
+            Onprs={toggleModal}
+          />
           {/* <SignUpModal /> */}
+          <CalendarModal
+            Submitbtn={
+              <TouchableOpacity
+                style={styles.closeButton}
+                onPress={toggleModal}>
+                <Text style={styles.closeButtonText}>Submit</Text>
+              </TouchableOpacity>
+            }
+            toggleModal={toggleModal}
+            isVisible={isModalVisible}
+          />
+          <RequestSentBtnSht ref={bottomSheetRef} />
+          {/* <RequestSentBtnSht /> */}
           <View style={{marginVertical: 80}} />
         </View>
       </ScrollView>
@@ -114,5 +147,20 @@ const styles = StyleSheet.create({
     color: Color.black,
     marginLeft: 5,
     marginVertical: 10,
+  },
+  closeButton: {
+    // marginTop: 20,
+    position: 'absolute',
+    bottom: 100,
+    alignSelf: 'center',
+    backgroundColor: Color.primary,
+    paddingHorizontal: 40,
+    paddingVertical: 10,
+    borderRadius: 10,
+  },
+  closeButtonText: {
+    color: '#fff',
+    textAlign: 'center',
+    fontSize: 16,
   },
 });
