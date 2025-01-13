@@ -193,7 +193,7 @@ const Header = ({
           </TouchableOpacity>
 
           {/* Dynamic bell icon */}
-          <TouchableOpacity>
+          <TouchableOpacity onPress={()=>navigation.navigate("Notification")}>
             <Image
               source={bellIcon }  // Default to Img.bll if no prop is provided
               style={styles.bell}

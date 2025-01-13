@@ -6,6 +6,7 @@ import {useNavigation} from '@react-navigation/native';
 import {Img} from '../../utlis/ImagesPath';
 import PrimaryBtn from '../../components/PrimaryBtn';
 import {Color} from '../../utlis/Color';
+import {ScreenDimensions} from '../../utlis/DimensionApi';
 
 const Faq = () => {
   const navigation = useNavigation();
@@ -30,7 +31,12 @@ const Faq = () => {
           question="3: Do hostels/PG provide meals?"
           answer={`Yes, many hostels offer private rooms in addition to dormitory-style accommodations.`}
         />
-        <PrimaryBtn bgcolor={Color.btnclr} txt={'Raise a Query'} mgntop={240} destination={"Help"} />
+        <PrimaryBtn
+          bgcolor={Color.btnclr}
+          txt={'Raise a Query'}
+          mgntop={ScreenDimensions.screenHeight * 0.23}
+          destination={'Help'}
+        />
       </View>
     </View>
   );

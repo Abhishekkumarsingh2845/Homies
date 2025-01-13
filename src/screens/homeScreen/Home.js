@@ -32,7 +32,7 @@ const Home = ({navigation}) => {
       <View style={styles.subcontainer}>
         <SearchBar destination={LocationSearch} />
         <ScrollView
-          contentContainerStyle={{marginTop: 10,}}
+          contentContainerStyle={{paddingBottom: 100,backgroundColor:"#F1F1F1"}}
           showsVerticalScrollIndicator={false}>
           <Image
             source={require('../../assets/images/map.png')}
@@ -41,9 +41,11 @@ const Home = ({navigation}) => {
           <DotindictaorImg
             imageSource={Img.hstimgage}
             activeDotColor={Color.primary}
+ 
           />
           <NearbySeeAll />
           <FlatList
+           contentContainerStyle={{paddingBottom: 120, paddingTop: 20}}
             showsVerticalScrollIndicator={false}
             data={hostelData}
             keyExtractor={item => item.id.toString()}
@@ -54,7 +56,7 @@ const Home = ({navigation}) => {
               />
             )}
           />
-          <View style={{marginTop: 20}}></View>
+         
         </ScrollView>
       </View>
     </View>

@@ -9,12 +9,12 @@ import PrimaryBtn from '../../components/PrimaryBtn';
 import {useNavigation} from '@react-navigation/native';
 const ComplaintFormFill = () => {
   const navigation = useNavigation();
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      navigation.navigate('Disputes');
-    }, 2000);
-    return () => clearTimeout(timer);
-  }, [navigation]);
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     navigation.navigate('Disputes');
+  //   }, 2000);
+  //   return () => clearTimeout(timer);
+  // }, [navigation]);
   return (
     <View style={styles.container}>
       <SecondaryHeader

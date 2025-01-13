@@ -17,7 +17,15 @@ const HostelInfoCard = () => {
       <ImageBackground source={Img.hstdetail} style={styles.hostelimg}>
         <InterestTracker />
         <LikeShare />
-        {/* <DotIndicatorImg activeDotColor='red'/>  */}
+        <View style={styles.dotContainer}>
+    {/* Example of 3 dots with the first one styled differently */}
+    {[...Array(3)].map((_, index) => (
+      <View 
+        key={index} 
+        style={[styles.dot, index === 0 && styles.activeDot]} // Apply `activeDot` only to the first dot
+      />
+    ))}
+  </View>
       </ImageBackground>
       <View style={styles.PgDetail}>
         <View>
@@ -129,5 +137,22 @@ const styles = StyleSheet.create({
     color: '#0094FD',
     lineHeight: 16.28,
     // marginTop:5,
+  },
+  dotContainer: {
+    position: 'absolute',
+    bottom: 10, // Adjust the vertical position
+    left: '50%', // Center horizontally
+    flexDirection: 'row', // Align dots horizontally
+    transform: [{ translateX: -30 }], // Adjust this based on total dot width
+  },
+  dot: {
+    width: 8, // Dot size
+    height: 8,
+    borderRadius: 4, // Makes it circular
+    backgroundColor: '#FFF', // Default dot color
+    marginHorizontal: 5, // Space between dots
+  },
+  activeDot: {
+    backgroundColor: '#007BFF', // Different color for the first dot
   },
 });

@@ -6,11 +6,14 @@ import {Color} from '../../utlis/Color';
 import ComplaintTxtInpt from '../../components/ComplaintTxtInpt';
 import Opencamera from '../../components/Opencamera';
 import {FontText} from '../../utlis/CustomFont';
+import { Img } from '../../utlis/ImagesPath';
+import { useNavigation } from '@react-navigation/native';
 
 const DocumentVerify = () => {
+  const navigation= useNavigation();
   return (
     <View style={styles.conttainer}>
-      <SecondaryHeader />
+      <SecondaryHeader gobackImage={Img.goback}  detailtxt={"Document verfiy"} onPress={()=>navigation.goBack()}  />
       <ScrollView contentContainerStyle ={styles.subcontainer}>
         <Text style={styles.uploadtxt}>Upload your Documents</Text>
         <Text style={styles.uploadtxt}>Student Aadhar Card</Text>

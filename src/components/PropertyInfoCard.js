@@ -1,5 +1,6 @@
 import {
   Image,
+  ImageBackground,
   Platform,
   StyleSheet,
   Text,
@@ -17,6 +18,7 @@ import Location from 'react-native-vector-icons/Entypo';
 import {FontText} from '../utlis/CustomFont';
 import {useNavigation} from '@react-navigation/native';
 import {Screen} from 'react-native-screens';
+import {ScreenDimensions} from '../utlis/DimensionApi';
 const PropertyInfoCard = () => {
   const navigation = useNavigation();
   return (
@@ -33,10 +35,13 @@ const PropertyInfoCard = () => {
             source={Img.morehostelicon}
             style={styles.morehosteliconstyle}
           />
-          <Image
+          <ImageBackground
             source={Img.morehostelicon}
-            style={styles.morehosteliconstyle}
-          />
+            style={styles.mmorehostelicon}>
+            <Text style={{alignSelf: 'center', fontSize: 20, color: 'white'}}>
+              +5
+            </Text>
+          </ImageBackground>
         </View>
       </View>
       <View style={styles.idcontainer}>
@@ -115,16 +120,25 @@ const styles = StyleSheet.create({
   },
   largehosteimgstyle: {},
   hstdetailstyle: {
-    width: 200,
-    height: 200,
-    // backgroundColor: 'red',
+    width: ScreenDimensions.screenWidth * 0.55,
+    height: ScreenDimensions.screenHeight * 0.25,
     resizeMode: 'stretch',
+    // backgroundColor: 'red',
+    // resizeMode: 'cover',
   },
 
   morehosteliconstyle: {
-    width: 100,
-    height: 100,
+    width: ScreenDimensions.screenWidth * 0.22,
+    height: ScreenDimensions.screenHeight * 0.12,
     resizeMode: 'cover',
+  },
+  mmorehostelicon: {
+    marginTop: 10,
+    width: ScreenDimensions.screenWidth * 0.22,
+    height: ScreenDimensions.screenHeight * 0.12,
+    resizeMode: 'cover',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   subimagecontainer: {},
   imgcontainer: {

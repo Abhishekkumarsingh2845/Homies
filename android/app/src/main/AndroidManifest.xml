@@ -30,16 +30,28 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-
-            <!-- <intent-filter android:autoVerify="true">
+            <intent-filter  android:autoVerify="true">
+               <action android:name="android.intent.action.VIEW" />
+               <category android:name="android.intent.category.DEFAULT" />
+               <category android:name="android.intent.category.BROWSABLE" />
+               <data android:scheme="https"
+                    android:host="wholesome.onelink.me" />
+            </intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data
-                    android:scheme="https://"
-                    android:host="wvar56-app.appsflyersdk.com" />
-            </intent-filter> -->
+                    android:host="mainactivity"
+                    android:scheme="wholesome" />
+            </intent-filter>
+
         </activity>
     </application>
 </manifest>
+
+
+
+
+

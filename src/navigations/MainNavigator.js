@@ -15,13 +15,18 @@ import Profile from '../screens/drawerScreen/Profile';
 import PersonDoument from '../screens/drawerScreen/PersonDoument';
 import Payment from '../screens/bottomTabSceen/Payment';
 import Refferal from '../screens/drawerScreen/Refferal';
+import PaymentNavigator from './PaymentNavigator';
+import ChatNavigator from '../screens/bottomTabSceen/ChatNavigator';
+import Notification from '../screens/homeScreen/Notification';
 
 const MainNavigation = () => {
   const Stack = createStackNavigator();
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{headerShown: false}}>
-        <Stack.Screen name="AuthNavigator" component={AuthNavigator} /> 
+      <Stack.Navigator
+        initialRouteName="AuthNavigator"
+        screenOptions={{headerShown: false}}>
+        <Stack.Screen name="AuthNavigator" component={AuthNavigator} />
         <Stack.Screen name="HomeNavigator" component={HomeNavigator} />
         <Stack.Screen name="BottomTab" component={BottomTab} />
         <Stack.Screen
@@ -29,15 +34,23 @@ const MainNavigation = () => {
           component={ComplaintNavigator}
         />
         <Stack.Screen name="DrawerNavigator" component={DrawerNavigator} />
-
+        <Stack.Screen name="Home" component={DrawerNavigator} />
+        <Stack.Screen name="ChatNavigator" component={ChatNavigator} />
         <Stack.Screen name="HomeTabNavigator" component={HomeTabNavigator} />
         <Stack.Screen name="Profile" component={Profile} />
         <Stack.Screen name="PersonDoument" component={PersonDoument} />
+        <Stack.Screen name="PaymentNavigator" component={PaymentNavigator} />
         <Stack.Screen name="Payment" component={Payment} />
         <Stack.Screen name="Referral" component={Refferal} />
+        <Stack.Screen name="Notification" component={Notification} />
       </Stack.Navigator>
     </NavigationContainer>
   );
 };
 
 export default MainNavigation;
+
+
+
+
+

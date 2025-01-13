@@ -58,6 +58,9 @@ const Img = {
   uncheckstaricon:require("../assets/images/uncheckstar.png"),
   Foodmenuicon:require("../assets/images/Foodmenu.png"),
   verifytickicon:require("../assets/images/verifytick.png"),
+  notificationladyicon:require("../assets/images/notificationImg.png"),
+  phoneiconcontact:require("../assets/images/honeicon.png"),
+  msgicon:require("../assets/images/messageicon.png"),
 };
 
 export {Img};

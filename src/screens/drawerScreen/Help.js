@@ -7,6 +7,7 @@ import PrimaryBtn from '../../components/PrimaryBtn';
 import {useNavigation} from '@react-navigation/native';
 import {Img} from '../../utlis/ImagesPath';
 import ComplaintTxtInpt from '../../components/ComplaintTxtInpt';
+import { ScreenDimensions } from '../../utlis/DimensionApi';
 
 const Help = () => {
   const navigation = useNavigation();
@@ -14,7 +15,7 @@ const Help = () => {
     <View style={styles.container}>
       <SecondaryHeader
         gobackImage={Img.goback}
-        detailtxt={'Raise a Quary'}
+        detailtxt={'Raise a Query'}
         onPress={() => navigation.openDrawer()}
       />
       <TouchableOpacity
@@ -24,7 +25,7 @@ const Help = () => {
         <ComplaintTxtInpt />
         <Text style={styles.titletxt}>Description</Text>
         <ComplaintTxtInpt height={150} multiline={false} />
-        <PrimaryBtn txt={'Submit'} bgcolor={Color.primary} mgntop={350} />
+        <PrimaryBtn txt={'Submit'} bgcolor={Color.primary} mgntop={ScreenDimensions.screenHeight*0.25} />
       </TouchableOpacity>
     </View>
   );

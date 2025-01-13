@@ -16,13 +16,13 @@ const Notification = () => {
           mrntop={20}
           message={'Daniela has sent you a message'}
           updatetime={'1m ago'}
-          Imgsource={Img.noitificationicon}
+          Imgsource={Img.notificationladyicon}
         />
         <NotifyMsg
           mrntop={20}
           message={'Monthly Rent Receiving Reminder'}
           updatetime={'1m ago'}
-          Imgsource={Img.noitificationicon}
+          Imgsource={Img.notificationladyicon}
 
         />
         <NotifyMsg
@@ -35,7 +35,7 @@ const Notification = () => {
           mrntop={20}
           message={'Daniela has sent you a message'}
           updatetime={'1m ago'}
-          Imgsource={Img.noitificationicon}
+          Imgsource={Img.notificationladyicon}
         />
       </View>
     </View>

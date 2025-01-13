@@ -4,12 +4,14 @@ import {FontText} from '../utlis/CustomFont';
 import {Color} from '../utlis/Color';
 import {useNavigation} from '@react-navigation/native';
 
-const PayNowbtn = ({msg="Pay Now"}) => {
+const PayNowbtn = ({msg = 'Pay Now'}) => {
   const navigation = useNavigation();
   return (
     <TouchableOpacity
       style={styles.container}
-      onPress={() => navigation.navigate('PaymentForm')}>
+      onPress={() =>
+        navigation.navigate('PaymentNavigator', {screen: 'PaymentForm'})
+      }>
       <Text style={styles.txt}>{msg}</Text>
     </TouchableOpacity>
   );

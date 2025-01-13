@@ -10,7 +10,7 @@ const HomeTabNavigator = () => {
   const Stack = createStackNavigator();
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
-          <Stack.Screen name="Home" component={Home} />
+          {/* <Stack.Screen name="Home" component={Home} /> */}
           <Stack.Screen name="FoodMenu" component={FoodMenu} />
           <Stack.Screen name="Notification" component={Notification} />
     

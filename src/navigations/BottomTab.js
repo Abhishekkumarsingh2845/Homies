@@ -19,20 +19,23 @@ import PaymentSucces from '../screens/paymentScreen/PaymentSucces';
 import HomeTabNavigator from './HomeTabNavigator';
 import ComplaintNavigator from './ComplaintNavigator';
 import PaymentNavigator from './PaymentNavigator';
+import Chat from '../screens/ChatScreen/Chat';
+import ComplaintScr from '../screens/c&sScreen/ComplaintScr';
 
 const BottomTab = () => {
   const Tab = createBottomTabNavigator();
   return (
     <Tab.Navigator
-    initialRouteName='ComplaintNavigator'
+    initialRouteName='Home'
       screenOptions={{
         headerShown: false,
         tabBarActiveTintColor: '#FFB83A', // Color when tab is selected
         tabBarInactiveTintColor: '#AFAEAE',
       }}>
+             {/* <Stack.Screen name="Home" component={Home} /> */}
       <Tab.Screen
-        name="HomeTabNavigator"
-        component={HomeTabNavigator}
+        name="Home"
+        component={Home}
         options={{
           tabBarIcon: ({focused}) => (
             <HomeIcon
@@ -46,7 +49,7 @@ const BottomTab = () => {
       />
       <Tab.Screen
         name="Payment"
-        component={PaymentNavigator}
+        component={Payment}
         options={{
           tabBarIcon: ({focused}) => (
             <Image
@@ -77,8 +80,8 @@ const BottomTab = () => {
         }}
       />
       <Tab.Screen
-        name="ChatNavigator"
-        component={ChatNavigator}
+        name="Chat"
+        component={Chat}
         options={{
           tabBarIcon: ({focused}) => (
             <Image

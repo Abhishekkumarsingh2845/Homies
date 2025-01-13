@@ -2,6 +2,7 @@ import {
   Image,
   ImageBackground,
   SafeAreaView,
+  StatusBar,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -21,7 +22,6 @@ const Profile = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalMsg, setModalMsg] = useState('');
   const navigation = useNavigation();
-  // Function to toggle the modal visibility
   const toggleModal = message => {
     setModalMsg(message);
     setModalVisible(!modalVisible);
@@ -29,22 +29,33 @@ const Profile = () => {
   return (
     <View style={styles.container}>
       <SafeAreaView />
-      <SecondaryHeader
+      {/* <SecondaryHeader
         detailtxt={'My Profile'}
         gobackImage={Img.goback}
         onPress={() => navigation.goBack('DrawerNavigator')}
-      />
+      /> */}
       <ImageBackground source={Img.headerbg} style={styles.imageBackground}>
-        {/* <Text style={{fontSize:18,fontFamily:FontText.medium,color:Color.white}}>My Profile</Text> */}
+        <StatusBar backgroundColor={'#010101'} barStyle={'light-content'} />
+        <TouchableOpacity style={styles.subcontainer} onPress={()=>navigation.navigate("DrawerNavigator")}>
+          <Image source={Img.goback} style={styles.gobackstyle} />
+        </TouchableOpacity>
         <View style={styles.circle}>
           <Image
             source={Img.profilepicicon}
             style={{width: 90, height: 90, borderRadius: 40}}
           />
-           <Image
+          <Image
             source={Img.editicon}
-            style={{width: 20, height: 20, resizeMode:"contain", borderRadius: 5,position:"absolute",right:10,bottom:0}}
-          /> 
+            style={{
+              width: 20,
+              height: 20,
+              resizeMode: 'contain',
+              borderRadius: 5,
+              position: 'absolute',
+              right: 10,
+              bottom: 0,
+            }}
+          />
         </View>
       </ImageBackground>
 
@@ -114,8 +125,9 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   imageBackground: {
+    // backgroundColor:"#010101",
     width: '100%',
-    height: 90,
+    height: 140,
     justifyContent: 'center', // Aligns content within ImageBackground
     alignItems: 'center',
   },
@@ -137,7 +149,27 @@ const styles = StyleSheet.create({
     marginTop: 50, // Adds spacing below the circle
     fontSize: 14,
     fontWeight: 'bold',
-    color:Color.black,
+    color: Color.black,
     // marginTop:10
+  },
+  subcontainer: {
+    width: '100%',
+    flexDirection: 'row',
+    marginBottom: 25,
+    alignItems: 'center',
+    paddingHorizontal: 20,
+  },
+  gobackstyle: {
+    tintColor: 'white',
+    width: 20,
+    height: 20,
+    resizeMode: 'contain',
+  },
+  textstyle: {
+    fontSize: 16,
+    fontFamily: FontText.bold,
+    lineHeight: 20,
+    marginLeft: 10,
+    color: '#FFFFFF',
   },
 });

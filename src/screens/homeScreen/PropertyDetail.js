@@ -39,7 +39,7 @@ const PropertyDetail = () => {
 
   // Function to open the bottom sheet
   const handleRequestSent = () => {
-    console.log('Button Pressed!'); 
+    console.log('Button Pressed!');
     bottomSheetRef.current?.open(); // Call the open function
   };
 
@@ -96,7 +96,7 @@ const PropertyDetail = () => {
           <NearLocationProperty />
           <PermonthRent />
           <VisitRequestbtn
-            OnPaynowprs={handleRequestSent}
+            // OnPaynowprs={handleRequestSent}
             Onprs={toggleModal}
           />
           {/* <SignUpModal /> */}
@@ -112,7 +112,7 @@ const PropertyDetail = () => {
             isVisible={isModalVisible}
           />
           <RequestSentBtnSht ref={bottomSheetRef} />
-          {/* <RequestSentBtnSht /> */}
+          
           <View style={{marginVertical: 80}} />
         </View>
       </ScrollView>

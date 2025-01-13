@@ -66,7 +66,7 @@ const DrawerNavigator = () => {
               style={{
                 borderBottomWidth: 1,
                 justifyContent: 'center',
-                paddingVertical: 5,
+                paddingVertical: 3,
                 borderColor:"#D9D9D9",
               }}>
               <Text style={styles.drawerLabel}>Referral & Earn</Text>
@@ -93,10 +93,10 @@ const DrawerNavigator = () => {
               style={{
                 borderBottomWidth: 1,
                 justifyContent: 'center',
-                paddingVertical: 10,
+                paddingVertical: 3,
                 borderColor:"#D9D9D9",
               }}>
-              <Text style={styles.drawerLabel}>Referral & Earn</Text>
+              <Text style={styles.drawerLabel}>Rate & Review</Text>
               <Image
                 source={Img.lefticon}
                 style={{
@@ -133,7 +133,7 @@ const DrawerNavigator = () => {
               style={{
                 borderBottomWidth: 1,
                 justifyContent: 'center',
-                paddingVertical: 10,
+                paddingVertical: 3,
                 borderColor:"#D9D9D9",
               }}>
               <Text style={styles.drawerLabel}>Contact Us</Text>
@@ -175,7 +175,7 @@ const DrawerNavigator = () => {
               style={{
                 borderBottomWidth: 1,
                 justifyContent: 'center',
-                paddingVertical: 10,
+                paddingVertical: 3,
                 borderColor:"#D9D9D9",
               }}>
               <Text style={styles.drawerLabel}>Privacy Policy</Text>
@@ -217,7 +217,7 @@ const DrawerNavigator = () => {
               style={{
                 borderBottomWidth: 1,
                 justifyContent: 'center',
-                paddingVertical: 10,
+                paddingVertical: 3,
                 borderColor:"#D9D9D9",
               }}>
               <Text style={styles.drawerLabel}>Terms & Conditions</Text>
@@ -257,7 +257,7 @@ const DrawerNavigator = () => {
               style={{
                 borderBottomWidth: 1,
                 justifyContent: 'center',
-                paddingVertical: 10,
+          paddingVertical: 3,
                 borderColor:"#D9D9D9",
               }}>
               <Text style={styles.drawerLabel}>About us</Text>
@@ -297,7 +297,7 @@ const DrawerNavigator = () => {
               style={{
                 borderBottomWidth: 1,
                 justifyContent: 'center',
-                paddingVertical: 10,
+                paddingVertical: 3,
                 borderColor:"#D9D9D9",
               }}>
               <Text style={styles.drawerLabel}>FAQ</Text>
@@ -338,7 +338,7 @@ const DrawerNavigator = () => {
               style={{
                 borderBottomWidth: 1,
                 justifyContent: 'center',
-                paddingVertical: 10,
+                paddingVertical: 3,
                 borderColor:"#D9D9D9",
               }}>
               <Text style={styles.drawerLabel}>Help</Text>
@@ -380,10 +380,10 @@ const DrawerNavigator = () => {
               style={{
                 borderBottomWidth: 1,
                 justifyContent: 'center',
-                paddingVertical: 10,
+                paddingVertical: 3,
                 borderColor:"#D9D9D9",
               }}>
-              <Text style={styles.drawerLabel}>DocumentVerify</Text>
+              <Text style={styles.drawerLabel}>Document Verify</Text>
               <Image
                 source={Img.lefticon}
                 style={{
@@ -394,6 +394,7 @@ const DrawerNavigator = () => {
                   right: 5,
                 }}
               />
+         
             </View>
           ),
         }}
@@ -441,7 +442,7 @@ const styles = StyleSheet.create({
   },
 
   drawerLabel: {
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: FontText.medium,
     color: Color.black,
   },

@@ -1,7 +1,6 @@
-
 // import React, {useState} from 'react';
 // import {Modal, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
-// import {Color} from '../utlis/Color'; 
+// import {Color} from '../utlis/Color';
 // import {FontText} from '../utlis/CustomFont';
 
 // const SortByModal = ({closemodal, openthemodal}) => {
@@ -104,26 +103,31 @@
 
 // export default SortByModal;
 
-
-import React from 'react';
+import React, {useState} from 'react';
 import {Modal, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
-import {Color} from '../utlis/Color'; 
+import {Color} from '../utlis/Color';
 import {FontText} from '../utlis/CustomFont';
 
 const SortByModal = ({closemodal, openthemodal}) => {
+  const [selectedOption, setSelectedOption] = useState(null); // Track the selected option
+
+  const handleOptionSelect = option => {
+    setSelectedOption(option); // Set the selected option
+    closemodal(); // Close the modal after selection
+  };
+
   return (
     <Modal
       animationType="slide"
       transparent={true}
       visible={openthemodal}
-      onRequestClose={closemodal}
-    >
+      onRequestClose={closemodal}>
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
           <Text style={styles.modalText}>Sort By</Text>
           <View
             style={{
-              width: 350,
+              width: "100%",
               borderWidth: 0.5,
               borderColor: '#857E7E',
             }}
@@ -137,12 +141,23 @@ const SortByModal = ({closemodal, openthemodal}) => {
             'Price--High to Low',
           ].map((option, index) => (
             <View style={styles.ratingContainer} key={index}>
-              <Text>{option}</Text>
+              <Text
+                style={[
+                  selectedOption === option && styles.selectedOptionText, // Apply red color if selected
+                ]}>
+                {option}
+              </Text>
               <TouchableOpacity
-                style={styles.outerCircle}
-                onPress={closemodal} // Call the passed function to close the modal
+                style={[
+                  styles.outerCircle,
+                  selectedOption === option && {borderColor: '#FFB83A'}, // Apply border color when selected
+                ]}
+                onPress={() => handleOptionSelect(option)} // Select the option
               >
-                <View style={styles.innerCircle} />
+                {selectedOption === option && (
+                  <View style={styles.innerCircle} />
+                )}
+                {/* Only show inner circle if selected */}
               </TouchableOpacity>
             </View>
           ))}
@@ -167,7 +182,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 10,
     paddingVertical: 25,
-    alignItems: 'center',
+    // alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -181,14 +196,17 @@ const styles = StyleSheet.create({
     fontSize: 14,
     lineHeight: 18,
     fontFamily: FontText.medium,
-    textAlign: 'center',
+    textAlign: "left",
+    paddingHorizontal:20,
+    marginBottom:5,
+    color:"#787070",
   },
   outerCircle: {
     width: 20,
     height: 20,
     borderRadius: 10,
-    borderColor: '#D9D9D9',
-    borderWidth: 1,
+    borderColor: '#D9D9D9', // Default border color
+    borderWidth: 2.5,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -205,6 +223,9 @@ const styles = StyleSheet.create({
     width: '100%',
     paddingHorizontal: 20,
     alignItems: 'center',
+  },
+  selectedOptionText: {
+    color: '#000000', // Change text color to black when selected (you can change this color)
   },
 });
 

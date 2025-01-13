@@ -1,24 +1,28 @@
 import {Image, StyleSheet, Text, View} from 'react-native';
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import SecondaryHeader from '../../components/SecondaryHeader';
 import {Img} from '../../utlis/ImagesPath';
 import Tick from 'react-native-vector-icons/EvilIcons';
 import {FontText} from '../../utlis/CustomFont';
 import {Color} from '../../utlis/Color';
 import PrimaryBtn from '../../components/PrimaryBtn';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 const DisputesDetail = () => {
-  const navigation=useNavigation();
-    useEffect(() => {
-      const timer = setTimeout(() => {
-        navigation.navigate("DisputesFormFill");
-      }, 2000);
-      return () => clearTimeout(timer);
-    }, [navigation]);
+  const navigation = useNavigation();
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      navigation.navigate('DisputesFormFill');
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, [navigation]);
 
   return (
     <View style={styles.container}>
-      <SecondaryHeader gobackImage={Img.goback} detailtxt={'Complaint Form'} onPress={()=>navigation.goBack()} />
+      <SecondaryHeader
+        gobackImage={Img.goback}
+        detailtxt={'Details'}
+        onPress={() => navigation.goBack()}
+      />
       <View style={styles.subconatiner}>
         <Text style={styles.topictxt}>Landlord Name</Text>
         <Text style={styles.topictype}>Mukesh Kumar</Text>
@@ -42,8 +46,8 @@ const DisputesDetail = () => {
           <Image source={Img.tickicon} style={styles.progressstyle} />
         </View>
         <View style={styles.statuscontainer}>
-         <Text>Pending</Text>
-         <Text>Resolved</Text>
+          <Text>Pending</Text>
+          <Text>Resolved</Text>
         </View>
       </View>
     </View>
@@ -81,7 +85,7 @@ const styles = StyleSheet.create({
   topictxt: {
     marginTop: 10,
     fontSize: 14,
-    fontFamily: FontText.light,
+    fontFamily:FontText.medium,
     lineHeight: 20,
     color: '#000000',
   },
@@ -95,7 +99,7 @@ const styles = StyleSheet.create({
   descriptiontxt: {
     marginTop: 10,
     fontSize: 14,
-    fontFamily: FontText.light,
+    fontFamily:FontText.medium,
     lineHeight: 20,
     color: '#000000',
   },
@@ -106,11 +110,10 @@ const styles = StyleSheet.create({
     color: Color.clr87,
     lineHeight: 18,
   },
-  statuscontainer:
-  {
-    marginTop:10,
-    paddingHorizontal:10,
-    flexDirection:"row",
-    justifyContent:"space-between"
-  }
+  statuscontainer: {
+    marginTop: 10,
+    paddingHorizontal: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
 });

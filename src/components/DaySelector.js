@@ -7,13 +7,13 @@ const DaySelector = () => {
   const [selectedId, setSelectedId] = useState(null);
 
   const data = [
-    {id: 1, txt: 'mon'},
-    {id: 2, txt: 'tue'},
-    {id: 3, txt: 'wed'},
-    {id: 4, txt: 'thu'},
-    {id: 5, txt: 'fri'},
-    {id: 6, txt: 'sat'},
-    {id: 7, txt: 'sun'},
+    {id: 1, txt: 'Mon'},
+    {id: 2, txt: 'Tue'},
+    {id: 3, txt: 'Wed'},
+    {id: 4, txt: 'Thu'},
+    {id: 5, txt: 'Fri'},
+    {id: 6, txt: 'Sat'},
+    {id: 7, txt: 'Sun'},
   ];
 
   return (

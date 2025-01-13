@@ -18,7 +18,7 @@ const ComplaintNavigator = () => {
       <Stack.Screen name="ComplaintScr" component={ComplaintScr} />
       <Stack.Screen name="ComplaintForm" component={ComplaintForm} />
       <Stack.Screen name="ComplaintFormFill" component={ComplaintFormFill} />
-      <Stack.Screen name="Disputes" component={Disputes} />
+      {/* <Stack.Screen name="Disputes" component={Disputes} /> */}
       <Stack.Screen name="DisputesFormFill" component={DisputesFormFill} />
       <Stack.Screen name="DisputesDetail" component={DisputesDetail} />
     </Stack.Navigator>

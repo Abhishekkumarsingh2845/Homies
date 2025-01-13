@@ -8,7 +8,7 @@ const BillBoard = () => {
   return (
     <View style={styles.container}>
       <Image
-        source={Img.noitificationicon}
+        source={Img.notificationladyicon}
         style={{width: 50, height: 50, resizeMode: 'contain'}}
       />
       <View style={styles.commentcontainer}>

@@ -4,14 +4,18 @@ import SecondaryHeader from '../../components/SecondaryHeader';
 import ContactDetail from '../../components/ContactDetail';
 import {Img} from '../../utlis/ImagesPath';
 import LogoutModal from '../../components/LogoutModal';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 
 const ContactUs = () => {
-  const navigation=useNavigation();
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
-      <SafeAreaView/>
-      <SecondaryHeader  gobackImage={Img.goback} detailtxt={'Contact Us'}   onPress={() => navigation.openDrawer()}/>
+      <SafeAreaView />
+      <SecondaryHeader
+        gobackImage={Img.goback}
+        detailtxt={'Contact Us'}
+        onPress={() => navigation.openDrawer()}
+      />
       <View style={styles.subcontainer}>
         <ContactDetail
           title="We’re Here to Help!"
@@ -25,15 +29,15 @@ const ContactUs = () => {
           message={
             'If you need assistance or have any\nquestions, please reach out to us using one\nof the options below'
           }
-          imageSource={Img.helpicon}
+          imageSource={Img.phoneiconcontact}
           contactInfo="+1 80 80 8888 001"
         />
         <ContactDetail
-          title="We’re Here to Help!"
+          title="Email US"
           message={
             'If you need assistance or have any\nquestions, please reach out to us using one\nof the options below'
           }
-          imageSource={Img.helpicon}
+          imageSource={Img.msgicon}
           contactInfo="admin@gmail.com"
         />
         {/* <LogoutModal /> */}

@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
   topictxt: {
     marginTop: 10,
     fontSize: 14,
-    fontFamily: FontText.light,
+    fontFamily: FontText.bold,
     lineHeight: 20,
     color: '#000000',
   },
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
   descriptiontxt: {
     marginTop: 10,
     fontSize: 14,
-    fontFamily: FontText.light,
+    fontFamily: FontText.bold,
     lineHeight: 20,
     color: '#000000',
   },

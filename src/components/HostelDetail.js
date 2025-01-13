@@ -71,7 +71,7 @@ export default HstDetail;
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    elevation: 8,
+    elevation: 3,
     borderRadius: 15,
     backgroundColor: '#FFFFFF',
     shadowColor: '#000', // Shadow color (iOS)

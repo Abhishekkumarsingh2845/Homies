@@ -9,7 +9,7 @@ const PaymentNavigator = () => {
     const Stack=createStackNavigator();
   return (
    <Stack.Navigator screenOptions={{headerShown:false}}>
-      <Stack.Screen name='Payment' component={Payment}/>
+      {/* <Stack.Screen name='Payment' component={Payment}/> */}
     <Stack.Screen name='PaymentForm' component={PaymentForm}/>
     <Stack.Screen name='PaymentSucces' component={PaymentSucces}/>
    </Stack.Navigator>

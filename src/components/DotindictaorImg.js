@@ -88,8 +88,8 @@
 //     borderRadius: 5,
 //   },
 // });
-import React, { useState } from 'react';
-import { Image, ScrollView, StyleSheet, View } from 'react-native';
+import React, {useState} from 'react';
+import {Image, ScrollView, StyleSheet, View} from 'react-native';
 
 const DotIndicatorImg = ({
   imageSource,
@@ -104,9 +104,9 @@ const DotIndicatorImg = ({
   const images = Array(count).fill(imageSource);
 
   // Function to handle scroll position and update active index
-  const handleScroll = (event) => {
+  const handleScroll = event => {
     const contentOffsetX = event.nativeEvent.contentOffset.x;
-    const index = Math.floor(contentOffsetX / width); // Adjust based on dynamic width
+    const index = Math.round(contentOffsetX / width); // Adjust based on dynamic width
     setActiveIndex(index);
   };
 
@@ -124,7 +124,7 @@ const DotIndicatorImg = ({
             source={img}
             style={[
               styles.image,
-              { width: width, height: height }, // Dynamic width and height from props
+              {width: width, height: height}, // Dynamic width and height from props
             ]}
           />
         ))}
@@ -136,7 +136,7 @@ const DotIndicatorImg = ({
             key={index}
             style={[
               styles.dot,
-              index === activeIndex && { backgroundColor: activeDotColor }, // Dynamic active dot style
+              index === activeIndex && {backgroundColor: activeDotColor}, // Dynamic active dot style
             ]}
           />
         ))}

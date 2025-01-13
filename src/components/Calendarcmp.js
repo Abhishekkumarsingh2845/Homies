@@ -33,6 +33,35 @@ const CalendarModal = ({isVisible, toggleModal, Submitbtn}) => {
             </TouchableOpacity> */}
           </View>
         </View>
+        <View
+          style={{
+            position: 'absolute',
+            bottom: 180,
+            backgroundColor: 'white',
+            width: '94%',
+            alignSelf: 'center',
+            borderRadius: 15,
+            paddingVertical: 8,
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            paddingHorizontal: 15,
+            alignItems: 'center',
+          }}>
+          <Text style={{fontSize: 16, color: 'black'}}>Time</Text>
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <Text style={{fontSize: 16, color: 'black', marginRight: 5}}>
+              02:00
+            </Text>
+            <TouchableOpacity
+              style={{
+                backgroundColor: '#FFB83A',
+                padding: 10,
+                borderRadius: 10,
+              }}>
+              <Text style={{fontSize: 16, color: '#FFFFFF'}}>AM</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
         {Submitbtn}
         {/* <TouchableOpacity style={styles.closeButton} onPress={toggleModal}>
           <Text style={styles.closeButtonText}>Submit</Text>

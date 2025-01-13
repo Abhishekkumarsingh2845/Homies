@@ -2,12 +2,18 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import {Color} from '../utlis/Color';
 import {FontText} from '../utlis/CustomFont';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 
 const FoodServices = () => {
-  const Navigation=useNavigation();
+  const navigation = useNavigation();
   return (
-    <TouchableOpacity style={styles.container} onPress={()=>Navigation.navigate("FoodMenu")}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={() =>
+        navigation.navigate('HomeTabNavigator', {
+          screen: 'FoodMenu',
+        })
+      }>
       <Text style={styles.daytxt}>Monday</Text>
       <View style={styles.breakfastcontainer}>
         <Text style={styles.breakfasttxt}>Breakfast</Text>
@@ -31,7 +37,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 25,
     borderRadius: 10,
-    marginTop:10,
+    marginTop: 10,
   },
   breakfastcontainer: {},
   dinnercontainer: {},
