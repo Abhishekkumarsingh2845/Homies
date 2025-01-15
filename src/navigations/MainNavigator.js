@@ -44,7 +44,7 @@ const MainNavigation = () => {
         <Stack.Screen name="Referral" component={Refferal} />
         <Stack.Screen name="Notification" component={Notification} />
       </Stack.Navigator>
-    </NavigationContainer>
+   </NavigationContainer>
   );
 };
 

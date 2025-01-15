@@ -10,6 +10,8 @@ const PrimaryTxtInp = ({plchldtxt, mrgtop}) => {
         style={styles.txtipt}
         placeholder={plchldtxt}
         placeholderTextColor={Color.clr87}
+        keyboardType="phone-pad"
+        maxLength={10}
       />
     </View>
   );

@@ -14,9 +14,9 @@ import {Color} from '../../utlis/Color';
 import {Img} from '../../utlis/ImagesPath';
 import PrimaryBtn from '../../components/PrimaryBtn';
 import DotindictaorImg from '../../components/DotindictaorImg';
-import { ScreenDimensions } from '../../utlis/DimensionApi';
+import {ScreenDimensions} from '../../utlis/DimensionApi';
 const Intro = () => {
-  const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
+  const {width: screenWidth, height: screenHeight} = Dimensions.get('window');
   return (
     <View style={styles.container}>
       <SafeAreaView />
@@ -26,11 +26,11 @@ const Intro = () => {
         imageSource={require('../../assets/images/introimg1.png')}
         // height={380}
         // width={335}
-        height={screenHeight * 0.50} // 45% of the screen height
-        width={screenWidth * 0.90}  // 85% of the screen width
+        height={screenHeight * 0.5} // 45% of the screen height
+        width={screenWidth * 0.9} // 85% of the screen width
         activeDotColor={Color.primary}
       />
-      <View style={{marginTop: ScreenDimensions.screenHeight*0.01}} />
+      <View style={{marginTop: ScreenDimensions.screenHeight * 0.01}} />
       <Text style={styles.letfind}>
         Let’s Find Your <Text style={styles.sweettxt}> Sweet &</Text>
       </Text>
@@ -44,7 +44,7 @@ const Intro = () => {
         destination={'Login'}
         clr={Color.white}
         bgcolor={Color.primary}
-        mgntop={Platform.OS === 'android' ? 70 : 30}
+        mgntop={ScreenDimensions.screenHeight * 0.07}
       />
       <View style={{marginBottom: 50}}></View>
     </View>
@@ -126,6 +126,45 @@ const styles = StyleSheet.create({
     // marginTop:15
   },
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // import {
 //   ImageBackground,

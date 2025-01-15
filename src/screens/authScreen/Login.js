@@ -1,21 +1,21 @@
-
 import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {Color} from '../../utlis/Color';
 import PrimaryBtn from '../../components/PrimaryBtn';
 import Account from '../../components/Account';
 import PrimaryTxtInp from '../../components/PrimaryTxtInp';
+import {ScreenDimensions} from '../../utlis/DimensionApi';
 
 const Login = () => {
   return (
     <View style={styles.container}>
-      <SafeAreaView/>
+      <SafeAreaView />
       <Text style={styles.logIn}>Log In</Text>
       <Text style={styles.getthe}>
         Get the opportunity to stay that you dream of at an affordable price
       </Text>
       <Text style={styles.phno}>Phone number</Text>
-      <PrimaryTxtInp plchldtxt={"Enter your phone number"} mrgtop={10}/>
+      <PrimaryTxtInp plchldtxt={'Enter your phone number'} mrgtop={10} />
       <PrimaryBtn
         txt={'Log In'}
         clr={Color.white}
@@ -23,7 +23,7 @@ const Login = () => {
         brdcolor={Color.primary}
         brdwdth={1.5}
         destination={'LoginSignup'}
-        mgntop={320}
+        mgntop={ScreenDimensions.screenHeight*0.4}
       />
       <PrimaryBtn
         txt={'Continue as a Guest'}
@@ -32,13 +32,13 @@ const Login = () => {
         brdcolor={Color.primary}
         brdwdth={1.5}
         destination={'LoginSignup'}
-        mgntop={20}
+        mgntop={ScreenDimensions.screenHeight * 0.03}
       />
       <Account
         txt1={"Don't have an account ?"}
         txt2={' Sign Up'}
         dest={'SignUp'}
-        mgntop={15}
+        mgntop={ScreenDimensions.screenHeight * 0.009}
       />
     </View>
   );

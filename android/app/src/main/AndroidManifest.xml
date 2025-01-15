@@ -44,7 +44,9 @@
 
                 <data
                     android:host="mainactivity"
-                    android:scheme="wholesome" />
+                    android:scheme="wholesome" 
+                      />
+                
             </intent-filter>
 
         </activity>

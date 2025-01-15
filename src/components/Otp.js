@@ -1,6 +1,7 @@
 import {StyleSheet, Text, TextInput, View} from 'react-native';
 import React from 'react';
 import {Color} from '../utlis/Color';
+import { ScreenDimensions } from '../utlis/DimensionApi';
 
 const Otp = () => {
   return (
@@ -24,8 +25,8 @@ const styles = StyleSheet.create({
   },
   otpcontainer: {
     backgroundColor: "#F0F0F0",
-    width: 80,
-    height: 50,
+    width: ScreenDimensions.screenWidth*0.20,
+    height: ScreenDimensions.screenHeight*0.07,
     borderRadius: 10,
     textAlign:"center"
   },
