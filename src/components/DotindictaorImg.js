@@ -113,6 +113,7 @@ const DotIndicatorImg = ({
   return (
     <View>
       <ScrollView
+      pagingEnabled={true}
         horizontal
         showsHorizontalScrollIndicator={false}
         style={styles.horiscrollviewcontainer}

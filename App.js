@@ -21,7 +21,7 @@ const App = () => {
       {
         devKey: 'jM5UQCpNnhNqvHx6LV9S6h', // Replace with your AppsFlyer Dev Key
         isDebug: true,
-        appId: '154785576', // Replace with your App ID
+        // appId: '154785576', // Replace with your App ID
         onInstallConversionDataListener: true,
         onDeepLinkListener: true,
         timeToWaitForATTUserAuthorization: 10, // for iOS 14.5
@@ -31,7 +31,7 @@ const App = () => {
 
         // Set the OneLink template ID
         appsFlyer.setAppInviteOneLinkID(
-          'zweS', // Replace with your OneLink template ID
+          'rjOn', // Replace with your OneLink template ID
           result => {
             console.log('OneLink template ID set successfully:', result);
           },
@@ -94,13 +94,13 @@ const App = () => {
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor={'white'} barStyle={'dark-content'} />
-      <Button title="Generate Invite Link" onPress={generateInviteLink} />
+      {/* <Button title="Generate Invite Link" onPress={generateInviteLink} />
       {inviteLink && (
         <>
           <Text style={styles.linkText}>{inviteLink}</Text>
           <Button title="Share Invite Link" onPress={handleShareInviteLink} />
         </>
-      )}
+      )} */}
       <MainNavigation />
     </View>
   );

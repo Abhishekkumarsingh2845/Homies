@@ -10,7 +10,7 @@
         android:label="Homie"
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:allowBackup="false" 
+        android:allowBackup="true" 
         tools:replace="android:allowBackup" 
         android:theme="@style/AppTheme"
         android:supportsRtl="true">
@@ -35,7 +35,7 @@
                <category android:name="android.intent.category.DEFAULT" />
                <category android:name="android.intent.category.BROWSABLE" />
                <data android:scheme="https"
-                    android:host="wholesome.onelink.me" />
+                    android:host="testingwholsome.onelink.me" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -44,7 +44,7 @@
 
                 <data
                     android:host="mainactivity"
-                    android:scheme="wholesome" 
+                    android:scheme="testingwholsome" 
                       />
                 
             </intent-filter>
