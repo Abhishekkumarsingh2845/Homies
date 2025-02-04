@@ -263,7 +263,7 @@ const styles = StyleSheet.create({
   },
   rentperperson: {
     fontSize: 12,
-    color: Color.black,
+    color:"black",
     fontFamily: FontText.light,
   },
   deposittxt: {

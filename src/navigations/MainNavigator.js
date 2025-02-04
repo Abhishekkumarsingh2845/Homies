@@ -28,18 +28,18 @@ const MainNavigation = () => {
         screenOptions={{headerShown: false}}>
         <Stack.Screen name="AuthNavigator" component={AuthNavigator} />
         <Stack.Screen name="HomeNavigator" component={HomeNavigator} />
-        <Stack.Screen name="BottomTab" component={BottomTab} />
+        {/* <Stack.Screen name="BottomTab" component={BottomTab} />
         <Stack.Screen
           name="ComplaintNavigator"
           component={ComplaintNavigator}
-        />
+        /> */}
         <Stack.Screen name="DrawerNavigator" component={DrawerNavigator} />
-        <Stack.Screen name="Home" component={DrawerNavigator} />
+        <Stack.Screen name="Home" component={DrawerNavigator} /> 
         <Stack.Screen name="ChatNavigator" component={ChatNavigator} />
         <Stack.Screen name="HomeTabNavigator" component={HomeTabNavigator} />
         <Stack.Screen name="Profile" component={Profile} />
         <Stack.Screen name="PersonDoument" component={PersonDoument} />
-        <Stack.Screen name="PaymentNavigator" component={PaymentNavigator} />
+    <Stack.Screen name="PaymentNavigator" component={PaymentNavigator} />
         <Stack.Screen name="Payment" component={Payment} />
         <Stack.Screen name="Referral" component={Refferal} />
         <Stack.Screen name="Notification" component={Notification} />

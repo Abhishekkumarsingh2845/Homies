@@ -1,12 +1,14 @@
 import {Platform, StyleSheet, Text, TextInput, View} from 'react-native';
 import React from 'react';
 import {Color} from '../utlis/Color';
-import { FontText } from '../utlis/CustomFont';
+import {FontText} from '../utlis/CustomFont';
 
-const PrimaryTxtInp = ({plchldtxt, mrgtop}) => {
+const PrimaryTxtInp = ({plchldtxt, mrgtop, val, onChangetxt}) => {
   return (
     <View style={[styles.container, {marginTop: mrgtop}]}>
       <TextInput
+        value={val}
+        onChangeText={onChangetxt}
         style={styles.txtipt}
         placeholder={plchldtxt}
         placeholderTextColor={Color.clr87}
@@ -26,14 +28,12 @@ const styles = StyleSheet.create({
     borderColor: '#E6E6E6',
     borderRadius: 5,
     paddingHorizontal: 5,
-
-    
   },
   txtipt: {
     width: '100%',
     fontSize: 14,
-    fontFamily:FontText.light,
-    lineHeight:18,
-    color:Color.clr87,
+    fontFamily: FontText.light,
+    lineHeight: 18,
+    color: Color.clr87,
   },
 });

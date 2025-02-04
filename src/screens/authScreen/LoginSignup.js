@@ -1,15 +1,41 @@
-import {Image, StyleSheet, Text, View,TouchableOpacity, SafeAreaView} from 'react-native';
-import React from 'react';
+import {
+  Image,
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  SafeAreaView,
+  TextInput,
+} from 'react-native';
+import React, {useState} from 'react';
 import {Img} from '../../utlis/ImagesPath';
 import Otp from '../../components/Otp';
 import PrimaryBtn from '../../components/PrimaryBtn';
 import {Color} from '../../utlis/Color';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
+import {useSelector} from 'react-redux';
 const LoginSignup = () => {
-  const navigation = useNavigation(); // Initialize navigation
+ 
+  const route = useRoute();
+  const {otpR} = route.params || '';
+  console.log('otp received from the logn screen->>>>>>', otpR);
+
+  const navigation = useNavigation();
+  const [otp, setOtp] = useState('');
+  const [loading, setLoading] = useState(false);
+  const handleVerfiyotp = async () => {
+    if (otp === otpR) {
+      navigation.navigate('OtpVerify');
+    } else {
+      // console.log('error while matching the otp');
+      navigation.navigate('OtpVerify');
+
+    }
+  };
+
   return (
     <View style={styles.container}>
-      <SafeAreaView/>
+      <SafeAreaView />
       <TouchableOpacity onPress={() => navigation.goBack()}>
         <Image source={Img.goback} style={styles.arrow} />
       </TouchableOpacity>
@@ -17,12 +43,19 @@ const LoginSignup = () => {
       <Text style={styles.sendotp}>We have sent you an OTP on your mobile</Text>
       <Text style={styles.sendno}>number +1 8745XXXX2 </Text>
       <Text style={styles.enterotp}>Enter OTP here</Text>
-      <Otp />
+      {/* <Otp /> */}
+      <TextInput
+        style={{backgroundColor: 'grey'}}
+        maxLength={4}
+        value={otp}
+        onChangeText={setOtp}
+      />
       <View style={styles.timer}>
         <Text>00 : 29</Text>
         <Text>Resend Code</Text>
       </View>
       <PrimaryBtn
+        Onpress={() => handleVerfiyotp()}
         txt={'Verify OTP'}
         bgcolor={Color.primary}
         clr={Color.white}
@@ -39,12 +72,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 20,
-    backgroundColor:Color.white
+    backgroundColor: Color.white,
   },
   timer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop:15
+    marginTop: 15,
   },
   arrow: {
     width: 25,
@@ -65,7 +98,7 @@ const styles = StyleSheet.create({
     lineHeight: 18,
     color: '#7D7D7D',
     marginTop: 10,
-    letterSpacing:1
+    letterSpacing: 1,
   },
   sendno: {
     fontSize: 15,

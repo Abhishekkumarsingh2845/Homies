@@ -5,41 +5,62 @@ import {
   ScrollView,
   SafeAreaView,
   StatusBar,
+  RefreshControl,
 } from 'react-native';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import CommonHeader from '../../components/CommonHeader';
 import {FontText} from '../../utlis/CustomFont';
 import {Color} from '../../utlis/Color';
+import {get} from '../../utlis/Api';
+import { useSelector } from 'react-redux';
 const AboutUs = () => {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const token = useSelector(state => state.auth.token);
+  console.log('token received from redux in aboutus', token);
+  // const token =
+  //   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzYwMGJmYWRlMTdlNWRiNzEzOTYyODUiLCJpYXQiOjE3MzQ1OTQ4NzF9.6MvhJVvtCCTdWiqANEFF7GBshBi3-19AV4INZNUgJTA'; // Replace with your valid token
+
+  const handleAboutdata = async () => {
+    try {
+      setLoading(true);
+      const response = await get('websiteAboutUsContent', {}, token);
+console.log("response of the aboutus",response);
+      if (response.success) {
+        setData(response.data[0]);
+      } else {
+        console.log('failed to fetch About us data');
+      }
+    } catch (error) {
+      console.log('Error in AboutApi:', error?.response?.data || error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    handleAboutdata();
+  }, []);
+
   return (
     <View style={styles.container}>
+      <SafeAreaView />
       <StatusBar backgroundColor={'white'} barStyle={'dark-content'} />
       <CommonHeader title="About Us" />
-      <ScrollView contentContainerStyle={styles.content}>
-        <View style={styles.section}>
-          <Text style={styles.text}>
-            Welcome to Asteria hostel, where comfort meets community! We are
-            dedicated to providing a welcoming and affordable living environment
-            for students and working professionals. Our hostel is designed to
-            meet the needs of modern lifestyles, offering clean, safe, and
-            well-furnished accommodations Our convenient location ensures easy
-            access to public transport, educational institutions, and local
-            amenities, making your daily commute hassle-free. We pride ourselves
-            on our attentive staff, who are always ready to assist you in making
-            your stay comfortable and enjoyable.
-          </Text>
-          <Text style={styles.text}>
-            Our convenient location ensures easy access to public transport,
-            educational institutions, and local amenities, making your daily
-            commute hassle-free. We pride ourselves on our attentive staff, who
-            are always ready to assist you in making your stay comfortable and
-            enjoyable.
-          </Text>
-          <Text style={styles.text}>
-            Join our vibrant community at Asteria hostel and experience a home
-            away from home!
-          </Text>
-        </View>
+      <ScrollView
+        refreshControl={
+          <RefreshControl onRefresh={handleAboutdata} refreshing={loading} />
+        }
+        contentContainerStyle={styles.content}>
+        {loading ? (
+          <Text style={styles.text}>Loading...</Text>
+        ) : (
+          <View style={styles.section}>
+            <Text style={styles.text}>
+              {data?.description || 'no about us '}
+            </Text>
+          </View>
+        )}
       </ScrollView>
     </View>
   );

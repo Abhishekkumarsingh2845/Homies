@@ -18,7 +18,7 @@ const HstDetail = ({mrntop, showRoomAvailability}) => {
   return (
     <TouchableOpacity
       style={[styles.container, {marginTop: mrntop}]}
-      onPress={() => navigation.navigate('AllHome')}>
+      onPress={() => navigation.navigate('SortbyScreen')}>
       <ImageBackground source={Img.hstdetail} style={styles.img}>
         {showRoomAvailability && (
           <RoomAvailability
@@ -38,12 +38,12 @@ const HstDetail = ({mrntop, showRoomAvailability}) => {
         </View>
         <View style={styles.right}>
           <Image source={Img.verifiedicon} style={styles.verifiedIconStyle} />
-          <TouchableOpacity onPress={()=>navigation.navigate("BookMark")}>
-          <Image
-            source={Img.hrt}
-            tintColor={'black'}
-            style={styles.hrtIconStyle}
-          />
+          <TouchableOpacity onPress={() => navigation.navigate('BookMark')}>
+            <Image
+              source={Img.hrt}
+              tintColor={'black'}
+              style={styles.hrtIconStyle}
+            />
           </TouchableOpacity>
         </View>
       </View>
@@ -80,7 +80,6 @@ const styles = StyleSheet.create({
     shadowRadius: 4, // Shadow blur radius (iOS),
     paddingHorizontal: 10,
     // overflow:"hidden"
-
   },
   img: {
     width: '100%',
@@ -89,10 +88,9 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
     height: 120,
     marginVertical: 10,
-    borderRadius:10,
+    borderRadius: 10,
 
-    overflow:'hidden'
- 
+    overflow: 'hidden',
   },
   detailcontainer: {
     width: '100%',
@@ -163,7 +161,6 @@ const styles = StyleSheet.create({
   ratingstariconcontainer: {
     width: 15,
     height: 15,
-  
   },
   rentratingcontainer: {
     flexDirection: 'row',

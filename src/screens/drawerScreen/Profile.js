@@ -36,7 +36,9 @@ const Profile = () => {
       /> */}
       <ImageBackground source={Img.headerbg} style={styles.imageBackground}>
         <StatusBar backgroundColor={'#010101'} barStyle={'light-content'} />
-        <TouchableOpacity style={styles.subcontainer} onPress={()=>navigation.navigate("DrawerNavigator")}>
+        <TouchableOpacity
+          style={styles.subcontainer}
+          onPress={() => navigation.navigate('DrawerNavigator')}>
           <Image source={Img.goback} style={styles.gobackstyle} />
         </TouchableOpacity>
         <View style={styles.circle}>

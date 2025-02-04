@@ -15,8 +15,20 @@ import {Img} from '../../utlis/ImagesPath';
 import PrimaryBtn from '../../components/PrimaryBtn';
 import DotindictaorImg from '../../components/DotindictaorImg';
 import {ScreenDimensions} from '../../utlis/DimensionApi';
+import {useNavigation} from '@react-navigation/native';
+import {useDispatch, useSelector} from 'react-redux';
 const Intro = () => {
+  const dispatch = useDispatch();
   const {width: screenWidth, height: screenHeight} = Dimensions.get('window');
+  const Navigation = useNavigation();
+  const isExist = useSelector(state => state.auth.isExist);
+  const handleNext = async () => {
+    if (isExist) {
+      Navigation.navigate('Login');
+    } else {
+      Navigation.navigate('Login');
+    }
+  };
   return (
     <View style={styles.container}>
       <SafeAreaView />
@@ -45,6 +57,7 @@ const Intro = () => {
         clr={Color.white}
         bgcolor={Color.primary}
         mgntop={ScreenDimensions.screenHeight * 0.07}
+        Onpress={() => handleNext()}
       />
       <View style={{marginBottom: 50}}></View>
     </View>
@@ -126,45 +139,6 @@ const styles = StyleSheet.create({
     // marginTop:15
   },
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // import {
 //   ImageBackground,

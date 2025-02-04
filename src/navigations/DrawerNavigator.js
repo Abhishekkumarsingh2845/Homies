@@ -51,7 +51,7 @@ const CustomDrawerContent = props => {
 const DrawerNavigator = () => {
   return (
     <Drawer.Navigator
-      initialRouteName="DocumentVerify"
+      initialRouteName="Faq"
       drawerContent={props => <CustomDrawerContent {...props} />}
       screenOptions={{
         headerShown: false,

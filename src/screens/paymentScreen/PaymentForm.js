@@ -21,9 +21,9 @@ const PaymentForm = () => {
         detailtxt={'Payment'}
         onPress={() => navigation.goBack()}
       />
-      <ScrollView contentContainerStyle={styles.subcontainer}
-      
-      keyboardShouldPersistTaps="handled">
+      <ScrollView
+        contentContainerStyle={styles.subcontainer}
+        keyboardShouldPersistTaps="handled">
         <Text style={styles.dueamounttxt}>Due Amount</Text>
         <PaymenttxtInpt placeholder="5000/-" />
         <Text style={styles.selectpayment}>Select payment method</Text>
@@ -41,16 +41,17 @@ const PaymentForm = () => {
 
               <PaymenttxtInpt width="100%" placeholder="MM/YY" />
             </View>
-            <View style={{marginRight:45}}>
+            <View style={{marginRight: 45}}>
               <Text style={styles.dueamounttxt}>CVV</Text>
-              <PaymenttxtInpt  width="200%"placeholder='CVV' />
+              <PaymenttxtInpt width="200%" placeholder="CVV" />
             </View>
           </View>
         </View>
         <PaymentMethod labelText={'Cash'} />
         {/* <PermonthRent rent='Total Payment' /> */}
         <PrimaryBtn
-          destination={PaymentSucces}
+          onPress={() => navigation.navigate('PaymentSucces')}
+          // destination={PaymentSucces}
           txt={'Pay Now'}
           bgcolor={'#257500'}
           mgntop={10}
@@ -84,7 +85,7 @@ const styles = StyleSheet.create({
   },
   expirydatecontainer: {
     flexDirection: 'row',
-    justifyContent:"space-between",
+    justifyContent: 'space-between',
   },
   detailcontainerr: {
     marginLeft: 35,

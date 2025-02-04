@@ -59,6 +59,10 @@
 //     paddingHorizontal: 10,
 //   },
 // });
+
+
+
+
 import {FlatList, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {useState} from 'react';
 import Header from '../../components/Header';

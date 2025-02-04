@@ -1,47 +1,72 @@
-import {StyleSheet, Text, View, ScrollView, StatusBar} from 'react-native';
-import React from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  StatusBar,
+  SafeAreaView,
+  RefreshControl,
+} from 'react-native';
+import React, {useEffect, useState} from 'react';
 import CommonHeader from '../../components/CommonHeader';
 import {FontText} from '../../utlis/CustomFont';
 import {Color} from '../../utlis/Color';
 import Aligntext from '../../components/Aligntext';
+import {get} from '../../utlis/Api';
+import axios from 'axios';
+import {useSelector} from 'react-redux';
 const TermsCondition = () => {
+  const [data, setDate] = useState(null);
+  console.log('data;;', data);
+  const token = useSelector(state => state.auth.token);
+  console.log('token received from redux in termcondition', token);
+  const [loading, setLoading] = useState(true);
+  // const token =
+  //   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzYwMGJmYWRlMTdlNWRiNzEzOTYyODUiLCJpYXQiOjE3MzQ1OTQ4NzF9.6MvhJVvtCCTdWiqANEFF7GBshBi3-19AV4INZNUgJTA';
+  const fetchtermandcondition = async () => {
+    setLoading(true);
+    try {
+      const response = await get('websiteTermsAndCondition', {}, token);
+
+      console.log('>>> terms and condition', response, response.success);
+      if (response.success) {
+        setDate(response.data[0]);
+      } else {
+        console.log('failed to fetch the privacy policy');
+      }
+    } catch (error) {
+      console.log('Error', error?.reponse?.data || error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchtermandcondition();
+  }, []);
   return (
     <View style={styles.container}>
+      <SafeAreaView />
       <StatusBar backgroundColor={'white'} barStyle={'dark-content'} />
       <CommonHeader title="Terms & Conditions" />
-      <ScrollView contentContainerStyle={styles.content}>
-        <View style={styles.section}>
-          <Text style={styles.heading}>1. Acceptance of Terms</Text>
-          <Text style={styles.text}>
-            By booking a room at Asteria hostel, you agree to these Terms and
-            Conditions. If you do not agree, please do not use our services.
-          </Text>
-        </View>
-        <View style={styles.section}>
-          <Text style={styles.heading}>2.Cancellation Policy</Text>
-          <Aligntext
-            detailtxt={
-              'Cancellations must be made [insert cancellation notice period, e.g., 48 hours] prior to check-in for a full refund.'
-            }
+      <ScrollView
+        refreshControl={
+          <RefreshControl
+            onRefresh={fetchtermandcondition}
+            refreshing={loading}
           />
-          {/* 
-          <Text style={styles.text}>
-            • Cancellations made after this period may incur a cancellation fee.
-          </Text> */}
-          <Aligntext
-            detailtxt={
-              'Cancellations made after this period may incur a cancellation fee'
-            }
-          />
-        </View>
+        }
+        contentContainerStyle={styles.content}>
         <View style={styles.section}>
-          <Text style={styles.heading}>3. Termination of Stay</Text>
-
-          <Aligntext
-            detailtxt={
-              "Management reserves the right to terminate a guest's stay if they violate any house rules or terms outlined herein"
-            }
-          />
+          {loading ? (
+            <Text>Loading..</Text>
+          ) : (
+            <View style={styles.section}>
+              <Text style={styles.text}>
+                {data?.description || 'no term and condition'}
+              </Text>
+            </View>
+          )}
         </View>
       </ScrollView>
     </View>

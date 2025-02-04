@@ -1,9 +1,19 @@
-import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 import React from 'react';
-import { Color } from '../utlis/Color';
-import { useNavigation } from '@react-navigation/native';
+import {Color} from '../utlis/Color';
+import {useNavigation} from '@react-navigation/native';
 
-const PrimaryBtn = ({ txt, destination, clr=Color.white, bgcolor, brdcolor, brdwdth,mgntop,mrgnbm }) => {
+const PrimaryBtn = ({
+  txt,
+  destination,
+  clr = Color.white,
+  bgcolor,
+  brdcolor,
+  brdwdth,
+  mgntop,
+  mrgnbm,
+  Onpress,
+}) => {
   const navigation = useNavigation();
 
   const handleNavigation = () => {
@@ -20,13 +30,13 @@ const PrimaryBtn = ({ txt, destination, clr=Color.white, bgcolor, brdcolor, brdw
           backgroundColor: bgcolor,
           borderColor: brdcolor,
           borderWidth: brdwdth, // Dynamically set border width
-          marginTop:mgntop,
-          marginBottom:mrgnbm
+          marginTop: mgntop,
+          marginBottom: mrgnbm,
         },
       ]}
-      onPress={handleNavigation}
-    >
-      <Text style={[styles.txt, { color: clr }]}>{txt}</Text>
+      // onPress={handleNavigation}
+      onPress={Onpress}>
+      <Text style={[styles.txt, {color: clr}]}>{txt}</Text>
     </TouchableOpacity>
   );
 };

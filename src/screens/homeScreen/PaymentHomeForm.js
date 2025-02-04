@@ -42,7 +42,7 @@ const PaymentHomeForm = () => {
         <PaymentMethod labelText={'Cash'} />
         <PermonthRent rent='Total Payment' />
         <PrimaryBtn
-          destination={HostelRentOut}
+          onPress={() => navigation.navigate('PaymentSucces')}
           txt={'Pay Now'}
           bgcolor={Color.btnclr}
           mgntop={5}
