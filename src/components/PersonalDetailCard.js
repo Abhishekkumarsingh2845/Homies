@@ -11,8 +11,10 @@ const PersonalDetailCard = () => {
   const [profile, setProfile] = useState({});
   const token = useSelector(state => state.auth.token);
   console.log('token received from redux in termcondition', token);
-const emaildredux = useSelector(state => state.auth.email);
+  const emaildredux = useSelector(state => state.auth.email);
   // Dispatch the email to the Redux store
+  const nameredux = useSelector(state=>state.auth.name);
+  console.log("name id in the redux->>",nameredux);
   console.log('email id in the redux', emaildredux);
   const editUserName = async () => {
     try {
@@ -37,7 +39,7 @@ const emaildredux = useSelector(state => state.auth.email);
       <PersonalDetailElement
         Icons={<Image source={Img.profileicon} style={styles.profileIcon} />}
         title="Name"
-        subtitle={profile.name || 'no Name Avaiable'}
+        subtitle={nameredux || 'no Name Avaiable'}
       />
       <PersonalDetailElement
         TickIcon={<Image source={Img.greentick} style={styles.greenTick} />}
@@ -56,7 +58,7 @@ const emaildredux = useSelector(state => state.auth.email);
       <PersonalDetailElement
         TickIcon={<Image source={Img.greentick} style={styles.greenTick} />}
         title="Email"
-        subtitle={emaildredux||"No Email"}
+        subtitle={emaildredux || 'No Email'}
         Icons={<Image source={Img.msgicon} style={styles.profileIcon} />}
       />
       <PersonalDetailElement

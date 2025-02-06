@@ -1,71 +1,3 @@
-// import {
-//   Image,
-//   StyleSheet,
-//   Text,
-//   View,
-//   TouchableOpacity,
-//   SafeAreaView,
-//   TextInput,
-// } from 'react-native';
-// import React, {useState} from 'react';
-// import {Img} from '../../utlis/ImagesPath';
-// import Otp from '../../components/Otp';
-// import PrimaryBtn from '../../components/PrimaryBtn';
-// import {Color} from '../../utlis/Color';
-// import {useNavigation, useRoute} from '@react-navigation/native';
-// import {useSelector} from 'react-redux';
-// const LoginSignup = () => {
-
-//   const route = useRoute();
-//   const {otpR} = route.params || '';
-//   console.log('otp received from the logn screen->>>>>>', otpR);
-
-//   const navigation = useNavigation();
-//   const [otp, setOtp] = useState('');
-//   const [loading, setLoading] = useState(false);
-//   const handleVerfiyotp = async () => {
-//     if (otp === otpR ) {
-
-//       navigation.navigate('OtpVerify');
-//     } else {
-//       // console.log('error while matching the otp');
-//       navigation.navigate('OtpVerify');
-
-//     }
-//   };
-
-//   return (
-//     <View style={styles.container}>
-//       <SafeAreaView />
-//       <TouchableOpacity onPress={() => navigation.goBack()}>
-//         <Image source={Img.goback} style={styles.arrow} />
-//       </TouchableOpacity>
-//       <Text style={styles.verify}>Verify your mobile number</Text>
-//       <Text style={styles.sendotp}>We have sent you an OTP on your mobile</Text>
-//       <Text style={styles.sendno}>number +1 8745XXXX2 </Text>
-//       <Text style={styles.enterotp}>Enter OTP here</Text>
-//       <Otp />
-//       <TextInput
-//         style={{backgroundColor: 'grey'}}
-//         maxLength={4}
-//         value={otp}
-//         onChangeText={setOtp}
-//       />
-//       <View style={styles.timer}>
-//         <Text>00 : 29</Text>
-//         <Text>Resend Code</Text>
-//       </View>
-//       <PrimaryBtn
-//         Onpress={() => handleVerfiyotp()}
-//         txt={'Verify OTP'}
-//         bgcolor={Color.primary}
-//         clr={Color.white}
-//         destination={'Otpverify'}
-//         mgntop={20}
-//       />
-//     </View>
-//   );
-// };
 import {
   Image,
   StyleSheet,
@@ -73,11 +5,11 @@ import {
   View,
   TouchableOpacity,
   SafeAreaView,
-  TextInput,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import Toast from 'react-native-toast-message';
 import {Img} from '../../utlis/ImagesPath';
-import Otp from '../../components/Otp'; // Assuming Otp is your custom OTP input component
+import Otp from '../../components/Otp';
 import PrimaryBtn from '../../components/PrimaryBtn';
 import {Color} from '../../utlis/Color';
 import {useNavigation, useRoute} from '@react-navigation/native';
@@ -87,18 +19,28 @@ const LoginSignup = () => {
   const navigation = useNavigation();
   const route = useRoute();
   const {otpR} = route.params || '';
-  console.log('otp received from the logn screen->>>>>>', otpR);
-  const phone = useSelector(state => state.auth.phoneNo);
-  console.log('phone stored in the redux check', phone);
+  console.log('OTP received from the login screen:', otpR);
+
+  const phone = useSelector(state => state.auth.phone);
+  console.log('Phone stored in Redux:', phone);
   const [otp, setOtp] = useState('');
-  const [loading, setLoading] = useState(false);
   const isExistvr = useSelector(state => state.auth.isExist);
-  console.log('->>', isExistvr);
-  const handleVerfiyotp = async () => {
+
+  useEffect(() => {
+    if (otpR) {
+      Toast.show({
+        type: 'info',
+        text1: 'Your OTP',
+        text2: `OTP: ${otpR}`,
+        position: 'bottom',
+      });
+    }
+  }, [otpR]);
+
+  const handleVerfiyotp = () => {
     if (otp === otpR && isExistvr) {
       navigation.navigate('OtpVerify');
     } else {
-      // console.log('error while matching the otp');
       navigation.navigate('OtpVerify');
     }
   };
@@ -106,26 +48,25 @@ const LoginSignup = () => {
   return (
     <View style={styles.container}>
       <SafeAreaView />
+      <Toast />
       <TouchableOpacity onPress={() => navigation.goBack()}>
         <Image source={Img.goback} style={styles.arrow} />
       </TouchableOpacity>
       <Text style={styles.verify}>Verify your mobile number</Text>
       <Text style={styles.sendotp}>We have sent you an OTP on your mobile</Text>
-      <Text style={styles.sendno}>number {phone}</Text>
+      <Text style={styles.sendno}>number{phone}</Text>
+
       <Text style={styles.enterotp}>Enter OTP here</Text>
-
       <Otp setOtp={setOtp} />
-
       <View style={styles.timer}>
         <Text>00 : 29</Text>
         <Text>Resend Code</Text>
       </View>
       <PrimaryBtn
-        Onpress={() => handleVerfiyotp()}
+        Onpress={handleVerfiyotp}
         txt={'Verify OTP'}
         bgcolor={Color.primary}
         clr={Color.white}
-        destination={'Otpverify'}
         mgntop={20}
       />
     </View>

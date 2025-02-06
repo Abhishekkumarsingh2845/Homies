@@ -12,33 +12,34 @@ import {setExist, setPhone} from '../../store/AuthSlice';
 import Toast from 'react-native-toast-message';
 
 const Login = () => {
-  const [phoneNo, setPhoneo] = useState('');
+  const [phoneNo, setPhoneo] = useState();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
   const handleLogIn = async () => {
-    if (!phoneNo) {
-      setError('Phone Number is Required');
-      console.log('Phone Number is Required');
-      Toast.show({
-        type: 'error',
-        text1: 'Validation Error',
-        text2: '10 digti Phone Number is Required',
-      });
-      return;
-    }
-    if (!/^\d{10}$/.test(phoneNo)) {
-      Toast.show({
-        type: 'error',
-        text1: 'Validation Error',
-        text2: 'Phone Number  is Required',
-      });
-      setError('Phone Number must be 10 digits');
-      console.log('Invalid Phone Number');
-      return;
-    }
+    // if (!phoneNo) {
+    //   setError('Phone Number is Required');
+    //   console.log('Phone Number is Required');
+    //   Toast.show({
+    //     type: 'error',
+    //     text1: 'Validation Error',
+    //     text2: '10 digti Phone Number is Required',
+    //   });
+    //   return;
+    // }
+    // if (!/^\d{10}$/.test(phoneNo)) {
+    //   Toast.show({
+    //     type: 'error',
+    //     text1: 'Validation Error',
+    //     text2: 'Phone Number  is Required',
+    //   });
+    //   setError('Phone Number must be 10 digits');
+    //   console.log('Invalid Phone Number');
+    //   return;
+    // }
+
 
     setLoading(true);
     setError(null);
@@ -51,7 +52,7 @@ const Login = () => {
       console.log('Login Response', response);
       const isExistcheck = response?.data?.isExist;
       console.log('cdjknfn', isExistcheck);
-      navigation.navigate('LoginSignup', {otpR: response.data.otp,});
+      navigation.navigate('LoginSignup', {otpR: response.data.otp});
       dispatch(setExist(isExistcheck));
       setError('Login Failed');
       d;
@@ -74,7 +75,7 @@ const Login = () => {
         plchldtxt={'Enter your phone number'}
         mrgtop={10}
         val={phoneNo}
-        onChangetxt={setPhoneo}
+        onChangetext={setPhoneo}
       />
       <PrimaryBtn
         txt={'Log In'}
@@ -88,7 +89,7 @@ const Login = () => {
       />
       <PrimaryBtn
         txt={'Continue as a Guest'}
-        Onpress={() => navigation.navigate("LoginSignup")}
+        Onpress={() => navigation.navigate('LoginSignup')}
         clr={Color.primary}
         bgcolor={Color.white}
         brdcolor={Color.primary}
