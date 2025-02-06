@@ -4,21 +4,22 @@ import PersonalDetailElement from './PersonalDetailElement';
 import {Img} from '../utlis/ImagesPath';
 import Phone from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Color} from '../utlis/Color';
-import {post} from '../utlis/Api';
-import { useSelector } from 'react-redux';
+import {get, post} from '../utlis/Api';
+import {useSelector} from 'react-redux';
 
 const PersonalDetailCard = () => {
-  const [data, setData] = useState(null);
+  const [profile, setProfile] = useState({});
   const token = useSelector(state => state.auth.token);
   console.log('token received from redux in termcondition', token);
-  // const token =
-  //   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzlmYTc1OTNlNjZiMWY4YmNmYjYwMDkiLCJpYXQiOjE3Mzg1MTYzMTN9.JuLwf9Pwv1qLzcvxmvRiZOpbIywWM-zw6NI6mjDUc5s';
+const emaildredux = useSelector(state => state.auth.email);
+  // Dispatch the email to the Redux store
+  console.log('email id in the redux', emaildredux);
   const editUserName = async () => {
     try {
-      const response = await post('updateProfile', {name: 'Abhishek'}, token);
-      console.log('response of the editUserprofile', response);
+      const response = await get('userProfile', {}, token);
+      console.log('response of the userProfile', response);
       if (response.success) {
-        setData(response.data.name);
+        setProfile(response.data);
         console.log('name->>', response.data[0].name);
       }
     } catch (error) {
@@ -36,12 +37,12 @@ const PersonalDetailCard = () => {
       <PersonalDetailElement
         Icons={<Image source={Img.profileicon} style={styles.profileIcon} />}
         title="Name"
-        subtitle={data || 'no Name Avaiable'}
+        subtitle={profile.name || 'no Name Avaiable'}
       />
       <PersonalDetailElement
         TickIcon={<Image source={Img.greentick} style={styles.greenTick} />}
         title="Mobile Number"
-        subtitle=" +463 634 6774"
+        subtitle={profile.phone || 'no Phone no Avaiable'}
         Icons={
           <Phone
             TickIcon={<Image source={Img.greentick} style={styles.greenTick} />}
@@ -55,7 +56,7 @@ const PersonalDetailCard = () => {
       <PersonalDetailElement
         TickIcon={<Image source={Img.greentick} style={styles.greenTick} />}
         title="Email"
-        subtitle="daniela@gmail.com"
+        subtitle={emaildredux||"No Email"}
         Icons={<Image source={Img.msgicon} style={styles.profileIcon} />}
       />
       <PersonalDetailElement

@@ -9,6 +9,7 @@ import Swiper from 'react-native-swiper';
 import {Color} from '../../utlis/Color';
 import DotindictaorImg from '../../components/DotindictaorImg';
 import LocationSearch from './LocationSearch';
+import MapSelect from '../../components/Map';
 
 const Home = ({navigation}) => {
   const images = [Img.hstimgage, Img.hstimgage, Img.hstimgage];
@@ -28,24 +29,32 @@ const Home = ({navigation}) => {
   };
   return (
     <View style={styles.container}>
-      <Header Img1={Img.draw} locationIcon={Img.lcn} heartIcon={Img.hrt} bellIcon={Img.noitificationicon} />
+      <Header
+        Img1={Img.draw}
+        locationIcon={Img.lcn}
+        heartIcon={Img.hrt}
+        bellIcon={Img.noitificationicon}
+      />
       <View style={styles.subcontainer}>
         <SearchBar destination={LocationSearch} />
         <ScrollView
-          contentContainerStyle={{paddingBottom: 100,backgroundColor:"#F1F1F1"}}
+          contentContainerStyle={{
+            paddingBottom: 100,
+            backgroundColor: '#F1F1F1',
+          }}
           showsVerticalScrollIndicator={false}>
-          <Image
+          {/* <Image
             source={require('../../assets/images/map.png')}
             style={styles.mapImage}
-          />
+          /> */}
+          <MapSelect />
           <DotindictaorImg
             imageSource={Img.hstimgage}
             activeDotColor={Color.primary}
- 
           />
           <NearbySeeAll />
           <FlatList
-           contentContainerStyle={{paddingBottom: 120, paddingTop: 20}}
+            contentContainerStyle={{paddingBottom: 120, paddingTop: 20}}
             showsVerticalScrollIndicator={false}
             data={hostelData}
             keyExtractor={item => item.id.toString()}
@@ -56,7 +65,6 @@ const Home = ({navigation}) => {
               />
             )}
           />
-         
         </ScrollView>
       </View>
     </View>

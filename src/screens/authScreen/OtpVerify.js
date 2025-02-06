@@ -15,13 +15,22 @@ const OtpVerify = ({navigation}) => {
 
   const isExist = useSelector(state => state.auth.isExist);
   const token = useSelector(state => state.auth.token);
+  const phone= useSelector(state=>state.auth.phoneNo)
+  console.log('phone stored in the redux check', phone);
   console.log('token stored in the redux check', token);
   console.log('isExist of the Otp verify screen', isExist);
 
+  // if (!isExist) {
+  //   // Redirect to login screen if not logged in
+  //   navigation.replace('LoginScreen');
+  //   return null; // Prevent rendering of Home screen
+  // }
   useEffect(() => {
     const timer = setTimeout(() => {
       if (isExist) {
-        navigation.navigate('DrawerNavigator');
+        console.log("isexist at the image otpverify")
+        navigation.navigate('HomeNavigator');
+       
       } else {
         navigation.navigate('SignUp');
       }

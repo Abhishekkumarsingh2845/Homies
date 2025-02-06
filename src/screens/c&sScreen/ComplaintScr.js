@@ -1,5 +1,5 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import SecondaryHeader from '../../components/SecondaryHeader';
 import Complaint from '../../components/Complaint';
 import PrimaryBtn from '../../components/PrimaryBtn';
@@ -10,10 +10,32 @@ import {Img} from '../../utlis/ImagesPath';
 import {FontText} from '../../utlis/CustomFont';
 import DisputesCmp from '../../components/DisputesCmp';
 import DisputesDetail from './DisputesDetail';
+import {get} from '../../utlis/Api';
+import {useSelector} from 'react-redux';
+import {useNavigation} from '@react-navigation/native';
 
 const ComplaintScr = () => {
+  const navigation = useNavigation();
   const [selected, setselected] = useState('Complaint');
+  const [complaint, setComplaint] = useState({});
+  const token = useSelector(state => state.auth.token);
+  console.log('token received from redux in complaint screen', token);
 
+  const getComplaint = async () => {
+    try {
+      const response = await get('getAllComplaints', {}, token);
+      console.log('response of the getCompliantapi', response);
+      if (response.success) {
+        setComplaint(response?.data);
+        console.log('kdf', response?.data);
+      }
+    } catch (error) {
+      console.log('Error:', error?.response?.data || error.message);
+    }
+  };
+  useEffect(() => {
+    getComplaint();
+  }, []);
   return (
     <View style={styles.container}>
       <Header
@@ -32,10 +54,11 @@ const ComplaintScr = () => {
       />
       {selected == 'Complaint' && (
         <View style={styles.subcontainer}>
-          <Complaint />
-          <Complaint />
-          <Complaint />
+          <Complaint ComplaintNo={complaint.complaintTitle} />
+          {/* <Complaint /> */}
+          {/* <Complaint /> */}
           <PrimaryBtn
+            Onpress={() => navigation.navigate('ComplaintForm')}
             destination={'ComplaintForm'}
             mgntop={ScreenDimensions.screenHeight * 0.15}
             txt={'+ADD'}

@@ -57,7 +57,7 @@ const ComplaintFormFill = () => {
               backgroundColor: '#000000',
               marginHorizontal: 5,
             }}></View>
-       <View style={{alignItems: 'center', marginTop: 10}}>
+          <View style={{alignItems: 'center', marginTop: 10}}>
             <Image source={Img.uncheckicon} style={styles.progressstyle} />
             <Text>In Progress</Text>
           </View>
@@ -68,7 +68,7 @@ const ComplaintFormFill = () => {
               backgroundColor: '#000000',
               marginHorizontal: 5,
             }}></View>
-  <View style={{alignItems: 'center', marginTop: 10}}>
+          <View style={{alignItems: 'center', marginTop: 10}}>
             <Image source={Img.uncheckicon} style={styles.progressstyle} />
             <Text>Completed</Text>
           </View>
