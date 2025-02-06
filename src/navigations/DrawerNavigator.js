@@ -20,11 +20,16 @@ import { useNavigation } from '@react-navigation/native';
 import { FontText } from '../utlis/CustomFont';
 import { Color } from '../utlis/Color';
 import DocumentVerify from '../screens/drawerScreen/DocumentVerify';
+import {useSelector} from 'react-redux';
 
 const Drawer = createDrawerNavigator();
 
 const CustomDrawerContent = props => {
   const navigation = useNavigation();
+  const emaildredux = useSelector(state => state.auth.email);
+  const nameredux = useSelector(state => state.auth.name);
+  console.log('name id in the redux->>', nameredux);
+  console.log('email id in the redux', emaildredux);
   return (
     <DrawerContentScrollView {...props}>
       {/* Image Section */}
@@ -36,8 +41,8 @@ const CustomDrawerContent = props => {
           style={styles.drawerImage}
         />
         <View>
-          <Text style={styles.imageText}>Daniela Chikitani</Text>
-          <Text style={styles.emailText}>daniela@gmail.com</Text>
+          <Text style={styles.imageText}>{nameredux}</Text>
+          <Text style={styles.emailText}>{emaildredux}</Text>
           <Text style={styles.viewprofileText}>View Profile</Text>
         </View>
       </TouchableOpacity>

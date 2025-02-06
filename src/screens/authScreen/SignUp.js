@@ -8,7 +8,7 @@ import {post} from '../../utlis/Api';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import axios from 'axios';
 import {useDispatch, useSelector} from 'react-redux';
-import {setExist, setToken, setEmail} from '../../store/AuthSlice';
+import {setExist, setToken, setEmail, setName} from '../../store/AuthSlice';
 import Toast from 'react-native-toast-message';
 
 const SignUp = () => {
@@ -16,20 +16,13 @@ const SignUp = () => {
   const route = useRoute();
   const [phonee, setPhone] = useState('');
   const [emailid, setEmailId] = useState(null);
+  const [nameId, setNameId] = useState('');
   const [token, settoken] = useState(null);
   const dispatch = useDispatch();
-  const emaildredux = useSelector(state => state.auth.email);
-  // Dispatch the email to the Redux store
+  const emaildredux = useSelector(state => state.auth);
+
   console.log('email id in the redux', emaildredux);
   const handleSignUp = async () => {
-    if (phonee.length !== 10 || !/^\d+$/.test(phonee)) {
-      Toast.show({
-        type: 'error',
-        text1: 'Validation Error',
-        text2: '10 digit Phone Number  is Required',
-      });
-      return; // Stop execution if validation fails
-    }
     try {
       const response = await post('login', {phone: phonee});
       console.log('succes in the Sign Up', response);
@@ -48,9 +41,12 @@ const SignUp = () => {
   const handleEmailChange = text => {
     setEmailId(text);
     dispatch(setEmail(text));
-  
   };
 
+  const handleName = text => {
+    setNameId(text);
+    dispatch(setName(text));
+  };
   return (
     <View style={styles.container}>
       <SafeAreaView />
@@ -60,13 +56,18 @@ const SignUp = () => {
       </Text>
       <View style={styles.fullnm}>
         <Text style={styles.txt}>Full Name*</Text>
-        <PrimaryTxtInp plchldtxt={'Abhishek'} mrgtop={5} />
+        <PrimaryTxtInp
+          plchldtxt={'Abhishek'}
+          val={nameId}
+          onChangeText={handleName}
+          mrgtop={5}
+        />
       </View>
       <View style={styles.fullnm}>
         <Text style={styles.txt}>Phone number*</Text>
         <PrimaryTxtInp
           val={phonee}
-          onChangetxt={setPhone}
+          onChangeText={setPhone}
           plchldtxt={'Enter your phone number'}
           mrgtop={5}
         />
@@ -78,6 +79,7 @@ const SignUp = () => {
           val={emailid}
           onChangeText={handleEmailChange}
           mrgtop={5}
+          maxlen={50}
         />
       </View>
       <View style={styles.fullnm}>
