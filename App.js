@@ -17,8 +17,10 @@ import {Color} from './src/utlis/Color';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import appsFlyer from 'react-native-appsflyer';
 import {Provider} from 'react-redux';
-import store from './src/store/Store';
+import store, { persistor } from './src/store/Store';
 import Toast from 'react-native-toast-message';
+import { PersistGate } from 'redux-persist/integration/react';
+
 
 
 const App = () => {
@@ -101,11 +103,13 @@ const App = () => {
 
   return (
     <Provider store={store}>
+         <PersistGate loading={null} persistor={persistor}>
       <View style={styles.container}>
         <StatusBar backgroundColor={'white'} barStyle={'dark-content'} />
         <Toast/>
         <MainNavigation />
       </View>
+      </PersistGate>
     </Provider>
   );
 };

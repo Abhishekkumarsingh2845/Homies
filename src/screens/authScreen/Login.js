@@ -17,6 +17,7 @@ const Login = () => {
   const [error, setError] = useState(null);
   const dispatch = useDispatch();
   const navigation = useNavigation();
+  console.log("phoneNo" , phoneNo)
 
   const handleLogIn = async () => {
     if (!phoneNo) {
