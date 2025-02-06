@@ -7,15 +7,19 @@ import PaymentMethod from '../../components/PaymentMethod';
 import PrimaryBtn from '../../components/PrimaryBtn';
 import HostelRentOut from '../homeScreen/HostelRentOut';
 import PaymenttxtInpt from '../../components/PaymenttxtInpt';
-import { Img } from '../../utlis/ImagesPath';
-import { useNavigation } from '@react-navigation/native';
+import {Img} from '../../utlis/ImagesPath';
+import {useNavigation} from '@react-navigation/native';
 import PermonthRent from '../../components/PermonthRent';
 
 const PaymentHomeForm = () => {
-  const navigation=useNavigation();
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
-      <SecondaryHeader gobackImage={Img.goback} detailtxt={'Payment'} onPress={()=>navigation.goBack()} />
+      <SecondaryHeader
+        gobackImage={Img.goback}
+        detailtxt={'Payment'}
+        onPress={() => navigation.goBack()}
+      />
       <View style={styles.subcontainer}>
         {/* <Text style={styles.dueamounttxt}>Due Amount</Text> */}
         <Text style={styles.selectpayment}>Select payment method</Text>
@@ -30,19 +34,19 @@ const PaymentHomeForm = () => {
           <View style={styles.expirydatecontainer}>
             <View>
               <Text style={styles.dueamounttxt}>Expiry Date</Text>
- 
-              <PaymenttxtInpt width='100%' placeholder='MM/YY' />
+
+              <PaymenttxtInpt width="100%" placeholder="MM/YY" />
             </View>
-            <View style={{marginRight:45}}>
+            <View style={{marginRight: 45}}>
               <Text style={styles.dueamounttxt}>CVV</Text>
-              <PaymenttxtInpt  width="200%"placeholder='CVV' />
+              <PaymenttxtInpt width="200%" placeholder="CVV" />
             </View>
           </View>
         </View>
         <PaymentMethod labelText={'Cash'} />
-        <PermonthRent rent='Total Payment' />
+        <PermonthRent rent="Total Payment" />
         <PrimaryBtn
-          onPress={() => navigation.navigate('PaymentSucces')}
+          Onpress={() => navigation.navigate('FilterScreen')}
           txt={'Pay Now'}
           bgcolor={Color.btnclr}
           mgntop={5}
@@ -66,19 +70,18 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontFamily: FontText.medium,
     color: Color.black,
-    marginTop:5,
+    marginTop: 5,
   },
   selectpayment: {
     fontSize: 14,
     fontFamily: FontText.medium,
     color: Color.black,
-    marginTop:15,
+    marginTop: 15,
   },
   expirydatecontainer: {
     flexDirection: 'row',
-    justifyContent:"space-between",
-    marginTop:10,
-
+    justifyContent: 'space-between',
+    marginTop: 10,
   },
   detailcontainerr: {
     marginLeft: 35,

@@ -4,15 +4,15 @@ import {Img} from '../utlis/ImagesPath';
 import Dot from 'react-native-vector-icons/Entypo';
 import {FontText} from '../utlis/CustomFont';
 
-const Complaint = () => {
+const Complaint = ({ComplaintNo,title,datee}) => {
   return (
     <TouchableOpacity style={styles.container}>
       <View style={styles.cc}>
         <Image source={Img.complainticon} style={styles.complainticonstyle} />
         <View style={styles.complaintdetail}>
-          <Text style={styles.complainttxt}>Complaint 001</Text>
-          <Text style={styles.complaintno}>Title : Parking Area</Text>
-          <Text style={styles.complaintdate}>Date : 18-09-2024</Text>
+          <Text style={styles.complainttxt}>{ComplaintNo}</Text>
+          <Text style={styles.complaintno}>Title :{title}</Text>
+          <Text style={styles.complaintdate}>Date :{datee}</Text>
         </View>
       </View>
 

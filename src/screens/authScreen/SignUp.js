@@ -7,29 +7,48 @@ import Account from '../../components/Account';
 import {post} from '../../utlis/Api';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import axios from 'axios';
-import {useDispatch} from 'react-redux';
-import {setExist, setToken} from '../../store/AuthSlice';
+import {useDispatch, useSelector} from 'react-redux';
+import {setExist, setToken, setEmail} from '../../store/AuthSlice';
+import Toast from 'react-native-toast-message';
 
 const SignUp = () => {
   const navigation = useNavigation();
   const route = useRoute();
   const [phonee, setPhone] = useState('');
+  const [emailid, setEmailId] = useState(null);
   const [token, settoken] = useState(null);
   const dispatch = useDispatch();
+  const emaildredux = useSelector(state => state.auth.email);
+  // Dispatch the email to the Redux store
+  console.log('email id in the redux', emaildredux);
   const handleSignUp = async () => {
+    if (phonee.length !== 10 || !/^\d+$/.test(phonee)) {
+      Toast.show({
+        type: 'error',
+        text1: 'Validation Error',
+        text2: '10 digit Phone Number  is Required',
+      });
+      return; // Stop execution if validation fails
+    }
     try {
       const response = await post('login', {phone: phonee});
       console.log('succes in the Sign Up', response);
       if (response?.success) {
         dispatch(setToken(response.data.jwtToken));
+        dispatch(setPhone(response.data.phone));
         console.log('jwt token stored in the redux->>', setToken());
       }
 
       dispatch(setExist(true));
-      navigation.navigate('DrawerNavigator');
+      navigation.navigate('LoginSignup');
     } catch (error) {
       console.log('error in sign up submit');
     }
+  };
+  const handleEmailChange = text => {
+    setEmailId(text);
+    dispatch(setEmail(text));
+  
   };
 
   return (
@@ -54,7 +73,12 @@ const SignUp = () => {
       </View>
       <View style={styles.fullnm}>
         <Text style={styles.txt}>Email ( Optional )</Text>
-        <PrimaryTxtInp plchldtxt={'Email'} mrgtop={5} />
+        <PrimaryTxtInp
+          plchldtxt={'Email'}
+          val={emailid}
+          onChangeText={handleEmailChange}
+          mrgtop={5}
+        />
       </View>
       <View style={styles.fullnm}>
         <Text style={styles.txt}>Referral Code </Text>
@@ -74,6 +98,7 @@ const SignUp = () => {
         dest={'Login'}
         mgntop={10}
       />
+      <Toast />
     </View>
   );
 };

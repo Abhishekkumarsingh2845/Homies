@@ -12,7 +12,7 @@ import CommonHeader from '../../components/CommonHeader';
 import {FontText} from '../../utlis/CustomFont';
 import {Color} from '../../utlis/Color';
 import {get} from '../../utlis/Api';
-import { useSelector } from 'react-redux';
+import {useSelector} from 'react-redux';
 const AboutUs = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -25,7 +25,7 @@ const AboutUs = () => {
     try {
       setLoading(true);
       const response = await get('websiteAboutUsContent', {}, token);
-console.log("response of the aboutus",response);
+      console.log('response of the aboutus', response);
       if (response.success) {
         setData(response.data[0]);
       } else {

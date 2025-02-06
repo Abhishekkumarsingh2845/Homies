@@ -9,10 +9,50 @@ import {Img} from '../../utlis/ImagesPath';
 import {useNavigation} from '@react-navigation/native';
 import ComplaintTxtInpt from '../../components/ComplaintTxtInpt';
 import {FontText} from '../../utlis/CustomFont';
+import {post} from '../../utlis/Api';
 
 const ComplaintForm = () => {
   const {width, height} = Dimensions.get('window');
   const navigation = useNavigation();
+  const token = useSelector(state => state.auth.token);
+  console.log('token received from redux in complaint screen', token);
+  // const SendComplaint=async()=>
+  // {
+  //   try {
+  //     const response=await post("addComplaint",)
+
+  //   } catch (error) {
+
+  //   }
+  // }
+
+  const handleImageSelect = imageUrl => {
+    setPropertyMedia([
+      ...propertyMedia,
+      {mediaType: 'Image', mediaUrl: imageUrl},
+    ]);
+  };
+
+  const SendComplaint = async () => {
+    try {
+      const response = await post(
+        'addComplaint',
+        {
+          propertyId,
+          complaintTitle,
+          complaintDescription,
+          landLordId,
+          propertyMedia,
+        },
+        token,
+      );
+      console.log('Complaint sent successfully:', response);
+      // Handle success (e.g., show success message, navigate to another screen)
+    } catch (error) {
+      console.error('Error sending complaint:', error);
+      // Handle error (e.g., show error message)
+    }
+  };
   return (
     <View style={styles.container}>
       <SecondaryHeader
@@ -22,9 +62,9 @@ const ComplaintForm = () => {
       />
       <View style={styles.subcontainer}>
         <Text style={styles.label}>Topic</Text>
-        <ComplaintTxtInpt />
+        <ComplaintTxtInpt placeholder="" />
         <Text style={styles.label}>Description</Text>
-        <ComplaintTxtInpt height={150} multiline={true} />
+        <ComplaintTxtInpt placeholder="" height={150} multiline={true} />
         <Text style={styles.uploadlabel}>Upload Photo & Video</Text>
         <Opencamera />
         <PrimaryBtn

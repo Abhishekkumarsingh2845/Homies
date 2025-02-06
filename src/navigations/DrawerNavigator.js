@@ -51,13 +51,12 @@ const CustomDrawerContent = props => {
 const DrawerNavigator = () => {
   return (
     <Drawer.Navigator
-      initialRouteName="Faq"
+      initialRouteName="ReferEarn"
       drawerContent={props => <CustomDrawerContent {...props} />}
       screenOptions={{
         headerShown: false,
       }}>
-      <Drawer.Screen 
-      
+      <Drawer.Screen
         name="ReferEarn"
         component={ReferEarn}
         options={{
@@ -67,7 +66,7 @@ const DrawerNavigator = () => {
                 borderBottomWidth: 1,
                 justifyContent: 'center',
                 paddingVertical: 3,
-                borderColor:"#D9D9D9",
+                borderColor: '#D9D9D9',
               }}>
               <Text style={styles.drawerLabel}>Referral & Earn</Text>
               <Image
@@ -94,7 +93,7 @@ const DrawerNavigator = () => {
                 borderBottomWidth: 1,
                 justifyContent: 'center',
                 paddingVertical: 3,
-                borderColor:"#D9D9D9",
+                borderColor: '#D9D9D9',
               }}>
               <Text style={styles.drawerLabel}>Rate & Review</Text>
               <Image
@@ -134,7 +133,7 @@ const DrawerNavigator = () => {
                 borderBottomWidth: 1,
                 justifyContent: 'center',
                 paddingVertical: 3,
-                borderColor:"#D9D9D9",
+                borderColor: '#D9D9D9',
               }}>
               <Text style={styles.drawerLabel}>Contact Us</Text>
               <Image
@@ -176,7 +175,7 @@ const DrawerNavigator = () => {
                 borderBottomWidth: 1,
                 justifyContent: 'center',
                 paddingVertical: 3,
-                borderColor:"#D9D9D9",
+                borderColor: '#D9D9D9',
               }}>
               <Text style={styles.drawerLabel}>Privacy Policy</Text>
               <Image
@@ -218,7 +217,7 @@ const DrawerNavigator = () => {
                 borderBottomWidth: 1,
                 justifyContent: 'center',
                 paddingVertical: 3,
-                borderColor:"#D9D9D9",
+                borderColor: '#D9D9D9',
               }}>
               <Text style={styles.drawerLabel}>Terms & Conditions</Text>
               <Image
@@ -257,8 +256,8 @@ const DrawerNavigator = () => {
               style={{
                 borderBottomWidth: 1,
                 justifyContent: 'center',
-          paddingVertical: 3,
-                borderColor:"#D9D9D9",
+                paddingVertical: 3,
+                borderColor: '#D9D9D9',
               }}>
               <Text style={styles.drawerLabel}>About us</Text>
               <Image
@@ -298,7 +297,7 @@ const DrawerNavigator = () => {
                 borderBottomWidth: 1,
                 justifyContent: 'center',
                 paddingVertical: 3,
-                borderColor:"#D9D9D9",
+                borderColor: '#D9D9D9',
               }}>
               <Text style={styles.drawerLabel}>FAQ</Text>
               <Image
@@ -339,7 +338,7 @@ const DrawerNavigator = () => {
                 borderBottomWidth: 1,
                 justifyContent: 'center',
                 paddingVertical: 3,
-                borderColor:"#D9D9D9",
+                borderColor: '#D9D9D9',
               }}>
               <Text style={styles.drawerLabel}>Help</Text>
               <Image
@@ -381,7 +380,7 @@ const DrawerNavigator = () => {
                 borderBottomWidth: 1,
                 justifyContent: 'center',
                 paddingVertical: 3,
-                borderColor:"#D9D9D9",
+                borderColor: '#D9D9D9',
               }}>
               <Text style={styles.drawerLabel}>Document Verify</Text>
               <Image
@@ -394,7 +393,6 @@ const DrawerNavigator = () => {
                   right: 5,
                 }}
               />
-         
             </View>
           ),
         }}

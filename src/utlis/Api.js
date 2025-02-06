@@ -45,14 +45,15 @@ const BASE_URL = 'http://15.206.16.230:8084/api/v1/user/';
 // };
 export const get = async (endpoint, params = {}, token = '') => {
   try {
+    console.log('token::');
     const response = await axios.get(`${BASE_URL}${endpoint}`, {
-      headers: token ? { Authorization: `${token}` } : {},
-      params, 
+      headers: token ? {Authorization: `${token}`} : {},
+      params,
     });
-    console.log("response::", response.data);
-    return response.data;
+    console.log('response::', response);
+    return response?.data;
   } catch (error) {
-    console.log('Get API error:', error?.response?.data || error.message);
+    console.log('Get API error:', error);
     throw error;
   }
 };
