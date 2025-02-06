@@ -26,7 +26,9 @@ const SignUp = () => {
       }
 
       dispatch(setExist(true));
+      // navigation.navigate('BottomTab');
       navigation.navigate('DrawerNavigator');
+
     } catch (error) {
       console.log('error in sign up submit');
     }

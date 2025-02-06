@@ -1,5 +1,5 @@
 import React from 'react';
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import {
   createDrawerNavigator,
   DrawerContentScrollView,
@@ -14,11 +14,11 @@ import RateReview from '../screens/drawerScreen/RateReview';
 import ContactUs from '../screens/drawerScreen/ContactUs';
 import Help from '../screens/drawerScreen/Help';
 import ReferEarn from '../screens/drawerScreen/ReferEarn';
-import {Img} from '../utlis/ImagesPath';
+import { Img } from '../utlis/ImagesPath';
 import Profile from '../screens/drawerScreen/Profile';
-import {useNavigation} from '@react-navigation/native';
-import {FontText} from '../utlis/CustomFont';
-import {Color} from '../utlis/Color';
+import { useNavigation } from '@react-navigation/native';
+import { FontText } from '../utlis/CustomFont';
+import { Color } from '../utlis/Color';
 import DocumentVerify from '../screens/drawerScreen/DocumentVerify';
 
 const Drawer = createDrawerNavigator();
@@ -56,8 +56,8 @@ const DrawerNavigator = () => {
       screenOptions={{
         headerShown: false,
       }}>
-      <Drawer.Screen 
-      
+      <Drawer.Screen
+
         name="ReferEarn"
         component={ReferEarn}
         options={{
@@ -67,7 +67,7 @@ const DrawerNavigator = () => {
                 borderBottomWidth: 1,
                 justifyContent: 'center',
                 paddingVertical: 3,
-                borderColor:"#D9D9D9",
+                borderColor: "#D9D9D9",
               }}>
               <Text style={styles.drawerLabel}>Referral & Earn</Text>
               <Image
@@ -81,7 +81,7 @@ const DrawerNavigator = () => {
                 }}
               />
             </View>
-          ),
+          )
         }}
       />
       <Drawer.Screen
@@ -94,7 +94,7 @@ const DrawerNavigator = () => {
                 borderBottomWidth: 1,
                 justifyContent: 'center',
                 paddingVertical: 3,
-                borderColor:"#D9D9D9",
+                borderColor: "#D9D9D9",
               }}>
               <Text style={styles.drawerLabel}>Rate & Review</Text>
               <Image
@@ -108,9 +108,9 @@ const DrawerNavigator = () => {
                 }}
               />
             </View>
-          ),
+          )
         }}
-      />
+      /> 
       <Drawer.Screen
         name="ContactUs"
         component={ContactUs}
@@ -134,7 +134,7 @@ const DrawerNavigator = () => {
                 borderBottomWidth: 1,
                 justifyContent: 'center',
                 paddingVertical: 3,
-                borderColor:"#D9D9D9",
+                borderColor: "#D9D9D9",
               }}>
               <Text style={styles.drawerLabel}>Contact Us</Text>
               <Image
@@ -148,7 +148,7 @@ const DrawerNavigator = () => {
                 }}
               />
             </View>
-          ),
+          )
         }}
       />
       <Drawer.Screen
@@ -176,7 +176,7 @@ const DrawerNavigator = () => {
                 borderBottomWidth: 1,
                 justifyContent: 'center',
                 paddingVertical: 3,
-                borderColor:"#D9D9D9",
+                borderColor: "#D9D9D9",
               }}>
               <Text style={styles.drawerLabel}>Privacy Policy</Text>
               <Image
@@ -190,7 +190,7 @@ const DrawerNavigator = () => {
                 }}
               />
             </View>
-          ),
+          )
         }}
       />
       <Drawer.Screen
@@ -218,7 +218,7 @@ const DrawerNavigator = () => {
                 borderBottomWidth: 1,
                 justifyContent: 'center',
                 paddingVertical: 3,
-                borderColor:"#D9D9D9",
+                borderColor: "#D9D9D9",
               }}>
               <Text style={styles.drawerLabel}>Terms & Conditions</Text>
               <Image
@@ -232,7 +232,7 @@ const DrawerNavigator = () => {
                 }}
               />
             </View>
-          ),
+          )
         }}
       />
       <Drawer.Screen
@@ -257,8 +257,8 @@ const DrawerNavigator = () => {
               style={{
                 borderBottomWidth: 1,
                 justifyContent: 'center',
-          paddingVertical: 3,
-                borderColor:"#D9D9D9",
+                paddingVertical: 3,
+                borderColor: "#D9D9D9",
               }}>
               <Text style={styles.drawerLabel}>About us</Text>
               <Image
@@ -272,7 +272,7 @@ const DrawerNavigator = () => {
                 }}
               />
             </View>
-          ),
+          )
         }}
       />
       <Drawer.Screen
@@ -298,7 +298,7 @@ const DrawerNavigator = () => {
                 borderBottomWidth: 1,
                 justifyContent: 'center',
                 paddingVertical: 3,
-                borderColor:"#D9D9D9",
+                borderColor: "#D9D9D9",
               }}>
               <Text style={styles.drawerLabel}>FAQ</Text>
               <Image
@@ -312,7 +312,7 @@ const DrawerNavigator = () => {
                 }}
               />
             </View>
-          ),
+          )
         }}
       />
 
@@ -339,7 +339,7 @@ const DrawerNavigator = () => {
                 borderBottomWidth: 1,
                 justifyContent: 'center',
                 paddingVertical: 3,
-                borderColor:"#D9D9D9",
+                borderColor: "#D9D9D9",
               }}>
               <Text style={styles.drawerLabel}>Help</Text>
               <Image
@@ -353,7 +353,7 @@ const DrawerNavigator = () => {
                 }}
               />
             </View>
-          ),
+          )
         }}
       />
       <Drawer.Screen
@@ -381,7 +381,7 @@ const DrawerNavigator = () => {
                 borderBottomWidth: 1,
                 justifyContent: 'center',
                 paddingVertical: 3,
-                borderColor:"#D9D9D9",
+                borderColor: "#D9D9D9",
               }}>
               <Text style={styles.drawerLabel}>Document Verify</Text>
               <Image
@@ -394,9 +394,9 @@ const DrawerNavigator = () => {
                   right: 5,
                 }}
               />
-         
+
             </View>
-          ),
+          )
         }}
       />
     </Drawer.Navigator>

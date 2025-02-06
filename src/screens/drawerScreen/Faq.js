@@ -162,7 +162,9 @@ const Faq = () => {
                 answer={item.answer}
               />
             ))
-          : 'no faq avaiable'}
+          : 
+          <Text>no faq avaiable</Text>
+          }
 
         <PrimaryBtn
           bgcolor={Color.btnclr}

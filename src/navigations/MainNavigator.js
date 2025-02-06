@@ -18,18 +18,21 @@ import Refferal from '../screens/drawerScreen/Refferal';
 import PaymentNavigator from './PaymentNavigator';
 import ChatNavigator from '../screens/bottomTabSceen/ChatNavigator';
 import Notification from '../screens/homeScreen/Notification';
+import { useSelector } from 'react-redux';
 
 const MainNavigation = () => {
+  const user = useSelector((state) => state.auth)
+  console.log("User=====" , )
   const Stack = createStackNavigator();
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="AuthNavigator"
+        initialRouteName="DrawerNavigator"
         screenOptions={{headerShown: false}}>
         <Stack.Screen name="AuthNavigator" component={AuthNavigator} />
         <Stack.Screen name="HomeNavigator" component={HomeNavigator} />
-        {/* <Stack.Screen name="BottomTab" component={BottomTab} />
-        <Stack.Screen
+        <Stack.Screen name="BottomTab" component={BottomTab} />
+        {/* <Stack.Screen
           name="ComplaintNavigator"
           component={ComplaintNavigator}
         /> */}
