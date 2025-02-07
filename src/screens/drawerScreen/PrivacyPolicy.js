@@ -17,7 +17,6 @@ const PrivacyPolicy = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const token = useSelector(state => state.auth.token);
-  console.log('token received from redux in privacy policy', token);
 
   // const token =
   //   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzYwMGJmYWRlMTdlNWRiNzEzOTYyODUiLCJpYXQiOjE3MzQ1OTQ4NzF9.6MvhJVvtCCTdWiqANEFF7GBshBi3-19AV4INZNUgJTA';
@@ -26,7 +25,6 @@ const PrivacyPolicy = () => {
     setLoading(true);
     try {
       const response = await get('/websitePrivacyPolicy', {}, token);
-      console.log('response of the privacy policy', response);
       if (response.success && response.data?.length > 0) {
         setData(response.data[0]);
       } else {

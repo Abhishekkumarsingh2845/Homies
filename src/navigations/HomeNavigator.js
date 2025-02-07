@@ -12,6 +12,7 @@ import FilterScreen from '../screens/homeScreen/FilterScreen';
 import PaymentForm from '../screens/paymentScreen/PaymentForm';
 import PaymentHomeForm from '../screens/homeScreen/PaymentHomeForm';
 import LocationSearch from '../screens/homeScreen/LocationSearch';
+import DrawerNavigator from './DrawerNavigator';
 
 const HomeNavigator = () => {
   const Stack = createStackNavigator();
@@ -29,6 +30,8 @@ const HomeNavigator = () => {
       <Stack.Screen name="PaymentForm" component={PaymentForm} />
       <Stack.Screen name="HostelRentOut" component={HostelRentOut} />
       <Stack.Screen name="PaymentHomeForm" component={PaymentHomeForm} />
+      <Stack.Screen name="DrawerNavigator" component={DrawerNavigator} />
+
     </Stack.Navigator>
   );
 };

@@ -6,14 +6,17 @@ import Tick from 'react-native-vector-icons/EvilIcons';
 import {FontText} from '../../utlis/CustomFont';
 import {Color} from '../../utlis/Color';
 import PrimaryBtn from '../../components/PrimaryBtn';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 const DisputesDetail = () => {
   const navigation = useNavigation();
+      const {params} = useRoute()
+      const data = params.data
+      console.log("data----------- dispa" , data)
   useEffect(() => {
-    const timer = setTimeout(() => {
-      navigation.navigate('DisputesFormFill');
-    }, 2000);
-    return () => clearTimeout(timer);
+    // const timer = setTimeout(() => {
+    //   navigation.navigate('DisputesFormFill');
+    // }, 2000);
+    // return () => clearTimeout(timer);
   }, [navigation]);
 
   return (
@@ -25,13 +28,12 @@ const DisputesDetail = () => {
       />
       <View style={styles.subconatiner}>
         <Text style={styles.topictxt}>Landlord Name</Text>
-        <Text style={styles.topictype}>Mukesh Kumar</Text>
+        <Text style={styles.topictype}>{data?.landLordName}</Text>
         <Text style={styles.topictxt}>Property Name</Text>
-        <Text style={styles.topictype}>Asteria hostel</Text>
+        <Text style={styles.topictype}>{data?.propertyName}</Text>
         <Text style={styles.descriptiontxt}>Description</Text>
         <Text style={styles.detaildescription}>
-          Cleanliness: The common areas and bathrooms are not being cleaned
-          regularly, leading to an unhygienic environment.
+          {data?.dispute_description}
         </Text>
 
         <View style={styles.progresscontainer}>

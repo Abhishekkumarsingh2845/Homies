@@ -27,7 +27,7 @@ const Home = () => {
       <SecondaryHeader
         gobackImage={Img.draw}
         notificationIcon={Img.bellicon}
-        onPress={() => navigation.navigate('DrawerNavigator')}
+        onPress={() => navigation.openDrawer()}
       />
       <View style={styles.subcontainer}>
         <Text style={styles.bannertxt}>Banner</Text>

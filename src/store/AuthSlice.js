@@ -46,45 +46,59 @@
 
 
 // export default authSlice.reducer;
-import { createSlice } from '@reduxjs/toolkit';
-
+import { createSlice, current } from '@reduxjs/toolkit';
+const initialState ={
+  user : {
+    token : null,
+    isExist : false,
+  }
+}
 const authSlice = createSlice({
   name: 'auth',
-  initialState: {
-    isExist: false,
-    token: null,
-    phoneNo: null,
-    email: null,
-    name: null, // Add name field
-  },
+  initialState: initialState,
   reducers: {
-    setExist(state, action) {
-      state.isExist = action.payload;
+    clearUser(state , action) {
+      console.log("clear user**********************" , current(state))
+      state.user = {
+          token : null,
+          isExist : false,
+        
+      }
     },
-    resetExist(state) {
-      state.isExist = false;
+    setUser(state, action) {
+      console.log("action ===============" , action.payload)
+      let data = action.payload.data
+      state.user = {
+        user_id : data?.user_id,
+        phone :  data?.phone,
+        profileImage : data?.profileImage,
+        token : data?.jwtToken
+      };
     },
-    setToken(state, action) {
-      state.token = action.payload;
-    },
-    clearToken(state) {
-      state.token = null;
-    },
-    setPhone(state, action) {
-      state.phoneNo = action.payload;
-    },
-    setEmail(state, action) {
-      state.email = action.payload;
-    },
-    clearEmail(state) {
-      state.email = null;
-    },
-    setName(state, action) { 
-      state.name = action.payload; 
-    }, 
-    clearName(state) { 
-      state.name = null; 
-    }, 
+    // resetExist(state) {
+    //   state.isExist = false;
+    // },
+    // setToken(state, action) {
+    //   state.token = action.payload;
+    // },
+    // clearToken(state) {
+    //   state.token = null;
+    // },
+    // setPhone(state, action) {
+    //   state.phoneNo = action.payload;
+    // },
+    // setEmail(state, action) {
+    //   state.email = action.payload;
+    // },
+    // clearEmail(state) {
+    //   state.email = null;
+    // },
+    // setName(state, action) { 
+    //   state.name = action.payload; 
+    // }, 
+    // clearName(state) { 
+    //   state.name = null; 
+    // }, 
   },
 });
 
@@ -97,7 +111,9 @@ export const {
   setEmail, 
   clearEmail, 
   setName, 
-  clearName 
+  clearName ,
+  setUser,
+  clearUser
 } = authSlice.actions;
 
 export default authSlice.reducer;

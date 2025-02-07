@@ -4,24 +4,40 @@ import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import Dot from 'react-native-vector-icons/Entypo';
 import {FontText} from '../utlis/CustomFont';
 import {Img} from '../utlis/ImagesPath';
+import moment from 'moment';
+import { get } from '../utlis/Api';
+import { useNavigation } from '@react-navigation/native';
+import { useSelector } from 'react-redux';
 
-const DisputesCmp = ({status, statusColor}) => {
+
+const DisputesCmp = ({status, statusColor , dispute_id , date , _id}) => {
+  const Nav = useNavigation()
+  const {token} = useSelector((state) => state.auth.user)
+
+    const getDetailOfDisputes = async () =>{
+      console.log("call")
+  
+          const response = await get('getOneDispute', { disputeId : _id}, token);
+          if(response.success){
+            Nav.navigate('DisputesDetail' , {data : response?.data})
+          }
+    }
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={getDetailOfDisputes}>
       <View style={styles.cc}>
         <Image source={Img.complainticon} style={styles.complainticonstyle} />
         <View style={styles.complaintdetail}>
-          <Text style={styles.complainttxt}>Complaint 001</Text>
-          <Text style={styles.complaintdate}>Date : 18-09-2024</Text>
+          <Text style={styles.complainttxt}>{dispute_id}</Text>
+          <Text style={styles.complaintdate}>Date : {moment(date).format('DD-MM-YYYY')}</Text>
           <Text style={styles.complaintno}>
-            Status :
+            Status : 
             <Text
               style={{
                 fontSize: 14,
                 fontFamily: FontText.medium,
                 color: statusColor,
               }}>
-              {status}
+                {status}
             </Text>
           </Text>
         </View>

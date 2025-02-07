@@ -21,22 +21,21 @@ import Notification from '../screens/homeScreen/Notification';
 import { useSelector } from 'react-redux';
 
 const MainNavigation = () => {
-  const user = useSelector((state) => state.auth)
-  console.log("User=====" , )
+  const {token} = useSelector((state) => state.auth.user)
+  console.log("token ---------------->>>>>>>>>" , token)
+  
   const Stack = createStackNavigator();
-  const token = useSelector(state => state.auth.token);
-  console.log('Token at the start of MainNavigation:', token);
 
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName={token ? 'DrawerNavigator' : 'AuthNavigator'}
+        initialRouteName={token ? 'HomeNavigator' : 'AuthNavigator'}
         screenOptions={{headerShown: false}}>
         {!token ? (
           <>
             <Stack.Screen name="AuthNavigator" component={AuthNavigator} />
             <Stack.Screen name="HomeNavigator" component={HomeNavigator} />
-            <Stack.Screen name="BottomTab" component={BottomTab} />
+            {/* <Stack.Screen name="BottomTab" component={BottomTab} /> */}
             <Stack.Screen
               name="ComplaintNavigator"
               component={ComplaintNavigator}

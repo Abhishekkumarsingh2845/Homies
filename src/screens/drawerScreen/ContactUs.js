@@ -20,7 +20,6 @@ const ContactUs = () => {
         {appType: 'Website'},
         token,
       );
-      console.log('reponse of the contactuscontent', response);
       if (response.success) {
         setdata(response?.data[0].description);
       }

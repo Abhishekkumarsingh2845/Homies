@@ -8,7 +8,7 @@ import {post} from '../../utlis/Api';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import axios from 'axios';
 import {useDispatch, useSelector} from 'react-redux';
-import {setExist, setToken, setEmail, setName} from '../../store/AuthSlice';
+import {setExist, setToken, setEmail, setName, setUser} from '../../store/AuthSlice';
 import Toast from 'react-native-toast-message';
 
 const SignUp = () => {
@@ -21,31 +21,25 @@ const SignUp = () => {
   const dispatch = useDispatch();
   const emaildredux = useSelector(state => state.auth);
 
-  console.log('email id in the redux', emaildredux);
   const handleSignUp = async () => {
     try {
       const response = await post('login', {phone: phonee});
-      console.log('succes in the Sign Up', response);
       if (response?.success) {
-        dispatch(setToken(response.data.jwtToken));
-        dispatch(setPhone(response.data.phone));
-        console.log('jwt token stored in the redux->>', setToken());
+        dispatch(setUser(response));
+        navigation.navigate('HomeNavigator');
       }
-
-      dispatch(setExist(true));
-      navigation.navigate('LoginSignup');
     } catch (error) {
-      console.log('error in sign up submit');
+      console.log('error in sign up submit' , error);
     }
   };
   const handleEmailChange = text => {
     setEmailId(text);
-    dispatch(setEmail(text));
+    // dispatch(setEmail(text));
   };
 
   const handleName = text => {
     setNameId(text);
-    dispatch(setName(text));
+    // dispatch(setName(text));
   };
   return (
     <View style={styles.container}>

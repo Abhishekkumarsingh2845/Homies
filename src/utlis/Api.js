@@ -45,15 +45,12 @@ const BASE_URL = 'http://15.206.16.230:8084/api/v1/user/';
 // };
 export const get = async (endpoint, params = {}, token = '') => {
   try {
-    console.log('token::');
     const response = await axios.get(`${BASE_URL}${endpoint}`, {
       headers: token ? {Authorization: `${token}`} : {},
       params,
     });
-    console.log('response::', response);
     return response?.data;
   } catch (error) {
-    console.log('Get API error:', error);
     throw error;
   }
 };
@@ -65,7 +62,6 @@ export const post = async (endpoint, data = {}, token = '') => {
     });
     return response.data;
   } catch (error) {
-    console.log('Post API error:', error?.response?.data || error.message);
     throw error;
   }
 };
@@ -77,7 +73,8 @@ export const put = async (endpoint, data = {}, token = '') => {
     });
     return response.data;
   } catch (error) {
-    console.log('PUT Api error', error?.response?.data || error.message);
     throw error;
   }
 };
+
+

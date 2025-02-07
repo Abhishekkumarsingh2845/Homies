@@ -1,33 +1,47 @@
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
 import SecondaryHeader from '../../components/SecondaryHeader';
 import Complaint from '../../components/Complaint';
 import PrimaryBtn from '../../components/PrimaryBtn';
-import {Color} from '../../utlis/Color';
-import {ScreenDimensions} from '../../utlis/DimensionApi';
+import { Color } from '../../utlis/Color';
+import { ScreenDimensions } from '../../utlis/DimensionApi';
 import Header from '../../components/Header';
-import {Img} from '../../utlis/ImagesPath';
-import {FontText} from '../../utlis/CustomFont';
+import { Img } from '../../utlis/ImagesPath';
+import { FontText } from '../../utlis/CustomFont';
 import DisputesCmp from '../../components/DisputesCmp';
 import DisputesDetail from './DisputesDetail';
-import {get} from '../../utlis/Api';
-import {useSelector} from 'react-redux';
-import {useNavigation} from '@react-navigation/native';
+import { get } from '../../utlis/Api';
+import { useSelector } from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
+import DisputesFormFill from './DisputesFormFill';
 
 const ComplaintScr = () => {
   const navigation = useNavigation();
   const [selected, setselected] = useState('Complaint');
-  const [complaint, setComplaint] = useState({});
-  const token = useSelector(state => state.auth.token);
-  console.log('token received from redux in complaint screen', token);
+  const [complaint, setComplaint] = useState([]);
+  const [disputes, setDisputes] = useState([]);
+  const { token } = useSelector(state => state.auth.user);
 
   const getComplaint = async () => {
     try {
       const response = await get('getAllComplaints', {}, token);
-      console.log('response of the getCompliantapi', response);
       if (response.success) {
-        setComplaint(response?.data);
-        console.log('kdf', response?.data);
+        setComplaint(response.data[0]?.data);
+      }
+    } catch (error) {
+      console.log('Error:', error?.response?.data || error.message);
+    }
+  };
+
+
+  const getDisputes = async () => {
+    try {
+      const response = await get('getAllDisputes', { sendBy: 'User' }, token);
+      console.log("reespones----------111", response)
+      if (response.success) {
+        // setComplaint(response.data[0]?.data);
+        setDisputes(response.data[0]?.data)
+        // console.log('kdf', response?.data);
       }
     } catch (error) {
       console.log('Error:', error?.response?.data || error.message);
@@ -35,6 +49,7 @@ const ComplaintScr = () => {
   };
   useEffect(() => {
     getComplaint();
+    getDisputes()
   }, []);
   return (
     <View style={styles.container}>
@@ -44,17 +59,21 @@ const ComplaintScr = () => {
         complaintbtn={
           <View style={styles.complaintcontainer}>
             <TouchableOpacity onPress={() => setselected('Complaint')}>
-              <Text style={styles.complainttxt}>Complaint</Text>
+              <Text style={[styles.complaintDisputetxt , { color : selected == 'Complaint' ?  Color.primary :  Color.white}]}>Complaint</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => setselected('Disputes')}>
-              <Text style={styles.disputetxt}>Disputes</Text>
+              <Text style={[styles.complaintDisputetxt , { color : selected == 'Disputes' ?  Color.primary :  Color.white}]}>Disputes</Text>
             </TouchableOpacity>
           </View>
         }
       />
       {selected == 'Complaint' && (
         <View style={styles.subcontainer}>
-          <Complaint ComplaintNo={complaint.complaintTitle} />
+          {complaint &&
+            complaint?.map((item, index) => {
+              return <Complaint key={index} complaint_id={item.complaint_id} title={item.complaintTitle} date={item?.updatedAt} mediaUrl={item.propertyMedia[0]?.mediaUrl} _id={item._id} />
+            })
+          }
           {/* <Complaint /> */}
           {/* <Complaint /> */}
           <PrimaryBtn
@@ -69,11 +88,18 @@ const ComplaintScr = () => {
 
       {selected == 'Disputes' && (
         <View style={styles.subcontainer}>
-          <DisputesCmp status="Pending" statusColor="#FF1C1C" />
-          <DisputesCmp status="Pending" statusColor="#FF1C1C" />
-          <DisputesCmp status="Completed" statusColor="#027516" />
+          {
+            disputes.map((item, index) => {
+
+              return <DisputesCmp key={index} status="Pending" statusColor="#FF1C1C" dispute_id={item?.dispute_id} date={item?.updatedAt} _id={item._id}/>
+
+
+            })
+          }
+
           <PrimaryBtn
-            destination={DisputesDetail}
+          Onpress={() => navigation.navigate('DisputesFormFill')}
+            destination={'DisputesFormFill'}
             txt={'+ADD'}
             bgcolor={Color.primary}
             mgntop={ScreenDimensions.screenHeight * 0.15}
@@ -109,14 +135,14 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     paddingHorizontal: 40,
   },
-  complainttxt: {
+  complaintDisputetxt: {
     fontSize: 16,
     fontFamily: FontText.medium,
-    color: Color.primary,
+    // color: Color.primary,
   },
   disputetxt: {
     fontSize: 16,
     fontFamily: FontText.medium,
-    color: Color.white,
+    // color: Color.white,
   },
 });

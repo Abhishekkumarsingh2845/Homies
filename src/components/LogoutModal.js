@@ -6,7 +6,7 @@ import {Color} from '../utlis/Color';
 import {FontText} from '../utlis/CustomFont';
 import {post, put} from '../utlis/Api';
 import {useDispatch, useSelector} from 'react-redux';
-import {clearToken, setExist} from '../store/AuthSlice';
+import {clearToken, clearUser, setExist} from '../store/AuthSlice';
 import { useNavigation } from '@react-navigation/native';
 
 const LogoutModal = ({
@@ -16,17 +16,17 @@ const LogoutModal = ({
 }) => {
   const dispatch = useDispatch();
   const naviagtion=useNavigation();
-  const token = useSelector(state => state.auth.token);
-  console.log('token received from redux in logout', token);
+  const {token} = useSelector(state => state.auth.user);
 
   const logoutUser = async () => {
     try {
       const response = await post('logout', {}, token);
-      console.log('response of the post Logout Api->>>', response);
-
-      dispatch(setExist(false));
-     
-      console.log('token of the redux after the loout', token);
+      if(response.success){
+        setModalVisible(!modalVisible);
+        dispatch(clearUser({}))
+        naviagtion.navigate('AuthNavigator')
+      }
+      
     } catch (error) {
       console.log(
         'error in logout post Api',
@@ -38,7 +38,6 @@ const LogoutModal = ({
   const deleteuser = async () => {
     try {
       const response = await put('deleteUserAccount', {}, token);
-      console.log('response of the put delete Api', response);
     } catch (error) {
       console.log(
         'errro in the Delete Api->>>',
@@ -47,10 +46,10 @@ const LogoutModal = ({
     }
   };
 
-  useEffect(() => {
-    logoutUser();
-    deleteuser();
-  }, []);
+  // useEffect(() => {
+  //   logoutUser();
+  //   deleteuser();
+  // }, []);
   return (
     <Modal
       animationType="slide"
@@ -69,11 +68,10 @@ const LogoutModal = ({
               textColor={Color.white}
               borderColor="green"
               onPress={() => {
-                naviagtion.navigate("AuthNavigator");
-                deleteuser();
+                // naviagtion.navigate("AuthNavigator");
                 logoutUser();
-                dispatch(clearToken(token)); 
-                setModalVisible(!modalVisible);
+                // dispatch(clearToken(token)); 
+                // setModalVisible(!modalVisible);
               }}
             />
             <YesNoBtn

@@ -11,6 +11,7 @@ import {
   View,
   Button,
   Text,
+  LogBox,
 } from 'react-native';
 import MainNavigation from './src/navigations/MainNavigator';
 import {Color} from './src/utlis/Color';
@@ -25,7 +26,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 
 const App = () => {
   const [inviteLink, setInviteLink] = useState(null);
-
+  LogBox.ignoreAllLogs();
   useEffect(() => {
     appsFlyer.initSdk(
       {
@@ -37,7 +38,7 @@ const App = () => {
         timeToWaitForATTUserAuthorization: 10, // for iOS 14.5
       },
       result => {
-        console.log('AppsFlyer SDK initialized:', result);
+        // console.log('AppsFlyer SDK initialized:', result);
 
         // Set the OneLink template ID
         appsFlyer.setAppInviteOneLinkID(

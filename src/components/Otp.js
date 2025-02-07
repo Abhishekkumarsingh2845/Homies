@@ -36,8 +36,8 @@ import React, { useState, useRef } from 'react';
 import { StyleSheet, TextInput, View } from 'react-native';
 import { ScreenDimensions } from '../utlis/DimensionApi';
 
-const Otp = () => {
-  const [otp, setOtp] = useState(['', '', '', '']);
+const Otp = ({setOtp}) => {
+  const [otp, setOtp1] = useState(['', '', '', '']);
   const inputRefs = [useRef(), useRef(), useRef(), useRef()];
 
   const handleChangeText = (text, index) => {
@@ -45,8 +45,8 @@ const Otp = () => {
 
     let newOtp = [...otp];
     newOtp[index] = text;
-    setOtp(newOtp);
-
+    setOtp1(newOtp);
+    setOtp(newOtp)
     if (text && index < 3) {
       inputRefs[index + 1].current.focus(); // Move to next input
     }

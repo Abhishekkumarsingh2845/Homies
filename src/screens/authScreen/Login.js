@@ -12,53 +12,27 @@ import {setExist, setPhone} from '../../store/AuthSlice';
 import Toast from 'react-native-toast-message';
 
 const Login = () => {
-  const [phoneNo, setPhoneo] = useState();
+  const [phoneNo, setPhone] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  console.log("phoneNo" , phoneNo)
 
   const handleLogIn = async () => {
-    // if (!phoneNo) {
-    //   setError('Phone Number is Required');
-    //   console.log('Phone Number is Required');
-    //   Toast.show({
-    //     type: 'error',
-    //     text1: 'Validation Error',
-    //     text2: '10 digti Phone Number is Required',
-    //   });
-    //   return;
-    // }
-    // if (!/^\d{10}$/.test(phoneNo)) {
-    //   Toast.show({
-    //     type: 'error',
-    //     text1: 'Validation Error',
-    //     text2: 'Phone Number  is Required',
-    //   });
-    //   setError('Phone Number must be 10 digits');
-    //   console.log('Invalid Phone Number');
-    //   return;
-    // }
-
-
     setLoading(true);
     setError(null);
     try {
       const response = await post('validate', {
         phone: phoneNo,
       });
-      dispatch(setPhone(phoneNo));
-      console.log('Phone entered by the user', phoneNo);
-      console.log('Login Response', response);
+      // dispatch(setPhone(phoneNo));
       const isExistcheck = response?.data?.isExist;
-      console.log('cdjknfn', isExistcheck);
-      navigation.navigate('LoginSignup', {otpR: response.data.otp});
-      dispatch(setExist(isExistcheck));
-      setError('Login Failed');
-      d;
+      navigation.navigate('LoginSignup', {otpR: response.data.otp , isExist : isExistcheck , phoneNo : phoneNo});
+      // dispatch(setExist(isExistcheck));
+      // setError('Login Failed');
+    
     } catch (error) {
-      console.log('Error in Logging');
+      console.log('Error in Logging' , error);
     } finally {
       setLoading(false);
     }
@@ -75,8 +49,8 @@ const Login = () => {
       <PrimaryTxtInp
         plchldtxt={'Enter your phone number'}
         mrgtop={10}
-        val={phoneNo}
-        onChangetext={setPhoneo}
+        val={phoneNo} 
+        onChangeText={setPhone}
       />
       <PrimaryBtn
         txt={'Log In'}
@@ -98,12 +72,12 @@ const Login = () => {
         destination={'LoginSignup'}
         mgntop={ScreenDimensions.screenHeight * 0.03}
       />
-      <Account
+      {/* <Account
         txt1={"Don't have an account ?"}
         txt2={' Sign Up'}
         dest={'SignUp'}
         mgntop={ScreenDimensions.screenHeight * 0.009}
-      />
+      /> */}
       <Toast />
     </View>
   );

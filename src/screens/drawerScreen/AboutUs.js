@@ -17,7 +17,6 @@ const AboutUs = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const token = useSelector(state => state.auth.token);
-  console.log('token received from redux in aboutus', token);
   // const token =
   //   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzYwMGJmYWRlMTdlNWRiNzEzOTYyODUiLCJpYXQiOjE3MzQ1OTQ4NzF9.6MvhJVvtCCTdWiqANEFF7GBshBi3-19AV4INZNUgJTA'; // Replace with your valid token
 
@@ -25,7 +24,6 @@ const AboutUs = () => {
     try {
       setLoading(true);
       const response = await get('websiteAboutUsContent', {}, token);
-      console.log('response of the aboutus', response);
       if (response.success) {
         setData(response.data[0]);
       } else {

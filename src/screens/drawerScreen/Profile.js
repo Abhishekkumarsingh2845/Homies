@@ -18,8 +18,11 @@ import {Color} from '../../utlis/Color';
 import SecondaryHeader from '../../components/SecondaryHeader';
 import LogoutModal from '../../components/LogoutModal';
 import {useNavigation} from '@react-navigation/native';
+import { useSelector } from 'react-redux';
 const Profile = () => {
   const [modalVisible, setModalVisible] = useState(false);
+  const user = useSelector((state) => state.auth.user)
+  console.log("user ================= > " , user)
   const [modalMsg, setModalMsg] = useState('');
   const navigation = useNavigation();
   const toggleModal = message => {
@@ -87,7 +90,7 @@ const Profile = () => {
           </TouchableOpacity>
         </View>
         <TouchableOpacity
-          onPress={() => toggleModal('Are you Sure leave the Property')}>
+                    onPress={() => {}}>
           <Text
             style={{
               fontSize: 18,
@@ -99,7 +102,7 @@ const Profile = () => {
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => toggleModal('Are you Sure delete Your Account')}>
+          onPress={() => {}}>
           <Text
             style={{
               fontSize: 18,

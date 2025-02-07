@@ -10,8 +10,11 @@ import {Color} from '../../utlis/Color';
 import DotindictaorImg from '../../components/DotindictaorImg';
 import LocationSearch from './LocationSearch';
 import MapSelect from '../../components/Map';
+import { useSelector } from 'react-redux';
 
 const Home = ({navigation}) => {
+  const user = useSelector((state) => state.auth)
+  console.log("user++++++++" , user)
   const images = [Img.hstimgage, Img.hstimgage, Img.hstimgage];
   const hostelData = [
     {id: 1, mrntop: 0},

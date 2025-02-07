@@ -10,12 +10,12 @@ import {useNavigation} from '@react-navigation/native';
 import ComplaintTxtInpt from '../../components/ComplaintTxtInpt';
 import {FontText} from '../../utlis/CustomFont';
 import {post} from '../../utlis/Api';
+import { useSelector } from 'react-redux';
 
 const ComplaintForm = () => {
   const {width, height} = Dimensions.get('window');
   const navigation = useNavigation();
-  const token = useSelector(state => state.auth.token);
-  console.log('token received from redux in complaint screen', token);
+  const {token} = useSelector(state => state.auth.user);
   // const SendComplaint=async()=>
   // {
   //   try {
@@ -46,7 +46,6 @@ const ComplaintForm = () => {
         },
         token,
       );
-      console.log('Complaint sent successfully:', response);
       // Handle success (e.g., show success message, navigate to another screen)
     } catch (error) {
       console.error('Error sending complaint:', error);

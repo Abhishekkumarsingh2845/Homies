@@ -3,9 +3,11 @@ import {
   Image,
   ImageBackground,
   Platform,
+  Pressable,
   SafeAreaView,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
 } from 'react-native';
 import React from 'react';
@@ -32,7 +34,11 @@ const Intro = () => {
   return (
     <View style={styles.container}>
       <SafeAreaView />
-      <Text style={styles.skiptxt}>Skip</Text>
+      <TouchableOpacity style={styles.skiptxt} onPress={handleNext}>
+        <Text>
+        Skip
+        </Text>
+        </TouchableOpacity>
 
       <DotindictaorImg
         imageSource={require('../../assets/images/introimg1.png')}
@@ -75,6 +81,7 @@ const styles = StyleSheet.create({
   },
   skiptxt: {
     textAlign: 'right',
+    alignSelf : 'flex-end',
     fontWeight: '400',
     fontSize: 16,
     // lineHeight: 20,

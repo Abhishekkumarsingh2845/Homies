@@ -6,25 +6,26 @@ import {
   TouchableOpacity,
   SafeAreaView,
 } from 'react-native';
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import Toast from 'react-native-toast-message';
-import {Img} from '../../utlis/ImagesPath';
+import { Img } from '../../utlis/ImagesPath';
 import Otp from '../../components/Otp';
 import PrimaryBtn from '../../components/PrimaryBtn';
-import {Color} from '../../utlis/Color';
-import {useNavigation, useRoute} from '@react-navigation/native';
-import {useSelector} from 'react-redux';
+import { Color } from '../../utlis/Color';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux';
+import { setUser } from '../../store/AuthSlice';
+import { post } from '../../utlis/Api';
 
 const LoginSignup = () => {
   const navigation = useNavigation();
   const route = useRoute();
-  const {otpR} = route.params || '';
-  console.log('OTP received from the login screen:', otpR);
+  const { otpR, isExist  , phoneNo} = route.params || '';
 
   const phone = useSelector(state => state.auth.phone);
-  console.log('Phone stored in Redux:', phone);
+  const dispatch  = useDispatch()
   const [otp, setOtp] = useState('');
-  const isExistvr = useSelector(state => state.auth.isExist);
+  console.log("otp exist" , otp )
 
   useEffect(() => {
     if (otpR) {
@@ -37,11 +38,30 @@ const LoginSignup = () => {
     }
   }, [otpR]);
 
-  const handleVerfiyotp = () => {
-    if (otp === otpR && isExistvr) {
-      navigation.navigate('OtpVerify');
-    } else {
-      navigation.navigate('OtpVerify');
+  const handleVerfiyotp = async () => {
+    if(!isExist){
+      navigation.navigate('SignUp');
+    }
+    else if (otp?.join('') == otpR) {
+      try {
+        const response = await post('login', { phone: phoneNo });
+        if (response?.success) {
+            dispatch(setUser(response));
+            navigation.navigate('OtpVerify' , {isExist : isExist});
+        }
+
+      } catch (error) {
+        console.log('error in sign up submit --' ,error);
+      }
+
+    } 
+    else {
+      Toast.show({
+        type: 'error',
+        text1: 'Error',
+        text2: `Incorrect Otp`,
+        position: 'bottom',
+      });
     }
   };
 

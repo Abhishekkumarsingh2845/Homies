@@ -6,11 +6,12 @@ import Tick from 'react-native-vector-icons/EvilIcons';
 import {FontText} from '../../utlis/CustomFont';
 import {Color} from '../../utlis/Color';
 import PrimaryBtn from '../../components/PrimaryBtn';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import ComplaintTxtInpt from '../../components/ComplaintTxtInpt';
 import { ScreenDimensions } from '../../utlis/DimensionApi';
 const DisputesFormFill = () => {
   const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       <SecondaryHeader

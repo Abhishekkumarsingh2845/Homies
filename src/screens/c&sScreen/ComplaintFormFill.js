@@ -6,9 +6,12 @@ import Tick from 'react-native-vector-icons/EvilIcons';
 import {FontText} from '../../utlis/CustomFont';
 import {Color} from '../../utlis/Color';
 import PrimaryBtn from '../../components/PrimaryBtn';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 const ComplaintFormFill = () => {
   const navigation = useNavigation();
+  const {params} = useRoute()
+  const data = params.data
+
   // useEffect(() => {
   //   const timer = setTimeout(() => {
   //     navigation.navigate('Disputes');
@@ -24,11 +27,10 @@ const ComplaintFormFill = () => {
       />
       <View style={styles.subconatiner}>
         <Text style={styles.topictxt}>Topic</Text>
-        <Text style={styles.topictype}>Cleanliness</Text>
+        <Text style={styles.topictype}>{data.complaintTitle}</Text>  
         <Text style={styles.descriptiontxt}>Description</Text>
         <Text style={styles.detaildescription}>
-          Cleanliness: The common areas and bathrooms are not being cleaned
-          regularly, leading to an unhygienic env
+          {data?.complaintDescription}
         </Text>
         <Text
           style={{
@@ -40,9 +42,10 @@ const ComplaintFormFill = () => {
           Attachements
         </Text>
         <View style={styles.attachmentconatiner}>
-          <Image source={Img.attachmenticon} style={styles.imgstyle} />
-          <Image source={Img.attachmenticon} style={styles.imgstyle} />
-          <Image source={Img.attachmenticon} style={styles.imgstyle} />
+    
+          <Image source={{uri  :  data.propertyMedia[0]?.mediaUrl}} style={styles.imgstyle} />
+          <Image source={{uri  :  data.propertyMedia[0]?.mediaUrl}} style={styles.imgstyle} />
+          <Image source={{uri  :  data.propertyMedia[0]?.mediaUrl}} style={styles.imgstyle} />
         </View>
 
         <View style={styles.progresscontainer}>

@@ -3,16 +3,29 @@ import React from 'react';
 import {Img} from '../utlis/ImagesPath';
 import Dot from 'react-native-vector-icons/Entypo';
 import {FontText} from '../utlis/CustomFont';
+import moment from 'moment';
+import { useSelector } from 'react-redux';
+import { get } from '../utlis/Api';
+import { useNavigation } from '@react-navigation/native';
 
-const Complaint = ({ComplaintNo,title,datee}) => {
+const Complaint = ({complaint_id, title, date, mediaUrl , _id}) => {
+  const {token} = useSelector((state) => state.auth.user)
+  const Nav = useNavigation()
+  const getDetailOfComplaint = async () =>{
+
+        const response = await get('getOneComplaint', { complaintId : _id}, token);
+        if(response.success){
+          Nav.navigate('ComplaintFormFill' , {data : response?.data})
+        }
+  }
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={getDetailOfComplaint}>
       <View style={styles.cc}>
-        <Image source={Img.complainticon} style={styles.complainticonstyle} />
+        <Image source={{uri : mediaUrl}} style={styles.complainticonstyle} />
         <View style={styles.complaintdetail}>
-          <Text style={styles.complainttxt}>{ComplaintNo}</Text>
-          <Text style={styles.complaintno}>Title :{title}</Text>
-          <Text style={styles.complaintdate}>Date :{datee}</Text>
+          <Text style={styles.complainttxt}>{complaint_id}</Text>
+          <Text style={styles.complaintno}>Title : {title}</Text>
+          <Text style={styles.complaintdate}>Date : {moment(date).format('DD-MM-YYYY')}</Text>
         </View>
       </View>
 

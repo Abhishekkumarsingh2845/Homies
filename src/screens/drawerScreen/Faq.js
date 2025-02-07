@@ -31,7 +31,6 @@ const Faq = () => {
         {appType: 'Website'},
         token,
       );
-      console.log('FAQ Response ->>', response.data);
 
       if (response.success) {
         setData(response.data.length ? response.data : null); // Store full array or null
