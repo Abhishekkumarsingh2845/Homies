@@ -1,4 +1,10 @@
-import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import {
+  KeyboardAvoidingView,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import React, {useState} from 'react';
 import PrimaryTxtInp from '../../components/PrimaryTxtInp';
 import PrimaryBtn from '../../components/PrimaryBtn';
@@ -23,6 +29,14 @@ const SignUp = () => {
 
   console.log('email id in the redux', emaildredux);
   const handleSignUp = async () => {
+    if (!nameId.trim()) {
+      Toast.show({
+        type: 'error',
+        text1: 'Validation Error',
+        text2: 'Name is required',
+      });
+      return;
+    }
     try {
       const response = await post('login', {phone: phonee});
       console.log('succes in the Sign Up', response);
@@ -48,7 +62,7 @@ const SignUp = () => {
     dispatch(setName(text));
   };
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView style={styles.container}>
       <SafeAreaView />
       <Text style={styles.create}>Create your account</Text>
       <Text style={styles.getthe}>
@@ -70,6 +84,8 @@ const SignUp = () => {
           onChangeText={setPhone}
           plchldtxt={'Enter your phone number'}
           mrgtop={5}
+          maxlen={10}
+          keytype={'phone-pad'}
         />
       </View>
       <View style={styles.fullnm}>
@@ -101,7 +117,7 @@ const SignUp = () => {
         mgntop={10}
       />
       <Toast />
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 

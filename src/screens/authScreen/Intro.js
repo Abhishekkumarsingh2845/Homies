@@ -6,6 +6,7 @@ import {
   SafeAreaView,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
 } from 'react-native';
 import React from 'react';
@@ -32,7 +33,9 @@ const Intro = () => {
   return (
     <View style={styles.container}>
       <SafeAreaView />
-      <Text style={styles.skiptxt}>Skip</Text>
+      <TouchableOpacity onPress={()=>Navigation.navigate("Login")}>
+        <Text style={styles.skiptxt}>Skip</Text>
+      </TouchableOpacity>
 
       <DotindictaorImg
         imageSource={require('../../assets/images/introimg1.png')}

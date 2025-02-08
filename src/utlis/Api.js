@@ -60,6 +60,7 @@ export const get = async (endpoint, params = {}, token = '') => {
 
 export const post = async (endpoint, data = {}, token = '') => {
   try {
+    console.log("data::",data)
     const response = await axios.post(`${BASE_URL}${endpoint}`, data, {
       headers: token ? {Authorization: `${token}`} : {},
     });

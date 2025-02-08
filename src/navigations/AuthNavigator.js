@@ -13,6 +13,7 @@ import {useSelector} from 'react-redux';
 
 const AuthNavigator = () => {
   const Stack = createStackNavigator();
+  ;
   const isExist = useSelector(state => state.auth.isExist);
   console.log('cureent isExits->>', isExist);
   const token = useSelector(state => state.auth.token);
@@ -20,7 +21,7 @@ const AuthNavigator = () => {
   return (
     <Stack.Navigator
       screenOptions={{headerShown: false}}
-      initialRouteName={'Splash'}>
+      initialRouteName={token ? 'Login' : 'Splash'}>
       <Stack.Screen name="Splash" component={Splash} />
       <Stack.Screen name="Intro" component={Intro} />
       {!token ? (
@@ -32,9 +33,8 @@ const AuthNavigator = () => {
         </>
       ) : (
         <>
-         
-         <Stack.Screen name="SignUp" component={SignUp} />
-         <Stack.Screen name="LoginSignup" component={LoginSignup} />
+          <Stack.Screen name="SignUp" component={SignUp} />
+          <Stack.Screen name="LoginSignup" component={LoginSignup} />
           <Stack.Screen name="OtpVerify" component={OtpVerify} />
         </>
       )}
@@ -43,7 +43,6 @@ const AuthNavigator = () => {
 };
 
 export default AuthNavigator;
-
 
 // import {NavigationContainer} from '@react-navigation/native';
 // import {createStackNavigator} from '@react-navigation/stack';

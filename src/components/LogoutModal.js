@@ -7,7 +7,7 @@ import {FontText} from '../utlis/CustomFont';
 import {post, put} from '../utlis/Api';
 import {useDispatch, useSelector} from 'react-redux';
 import {clearToken, setExist} from '../store/AuthSlice';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 
 const LogoutModal = ({
   modalVisible,
@@ -15,7 +15,7 @@ const LogoutModal = ({
   msg = 'Are you Sure leave the Property',
 }) => {
   const dispatch = useDispatch();
-  const naviagtion=useNavigation();
+  const naviagtion = useNavigation();
   const token = useSelector(state => state.auth.token);
   console.log('token received from redux in logout', token);
 
@@ -25,7 +25,7 @@ const LogoutModal = ({
       console.log('response of the post Logout Api->>>', response);
 
       dispatch(setExist(false));
-     
+
       console.log('token of the redux after the loout', token);
     } catch (error) {
       console.log(
@@ -69,10 +69,10 @@ const LogoutModal = ({
               textColor={Color.white}
               borderColor="green"
               onPress={() => {
-                naviagtion.navigate("AuthNavigator");
+                // naviagtion.navigate("Login")
                 deleteuser();
                 logoutUser();
-                dispatch(clearToken(token)); 
+                dispatch(clearToken(token));
                 setModalVisible(!modalVisible);
               }}
             />
@@ -82,9 +82,7 @@ const LogoutModal = ({
               textColor={Color.btnclr}
               borderColor={Color.btnclr}
               borderWidth={1}
-              onPress={() => setModalVisible(!modalVisible)
-                
-              }
+              onPress={() => setModalVisible(!modalVisible)}
             />
           </View>
         </View>

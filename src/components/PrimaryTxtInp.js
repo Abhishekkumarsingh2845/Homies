@@ -3,7 +3,7 @@ import React from 'react';
 import {Color} from '../utlis/Color';
 import {FontText} from '../utlis/CustomFont';
 
-const PrimaryTxtInp = ({plchldtxt, mrgtop, val, onChangeText,maxlen}) => {
+const PrimaryTxtInp = ({plchldtxt, mrgtop, val, onChangeText,maxlen,keytype}) => {
   return (
     <View style={[styles.container, {marginTop: mrgtop}]}>
       <TextInput
@@ -12,7 +12,7 @@ const PrimaryTxtInp = ({plchldtxt, mrgtop, val, onChangeText,maxlen}) => {
         style={styles.txtipt}
         placeholder={plchldtxt}
         placeholderTextColor={Color.clr87}
-        keyboardType="phone-pad"
+        keyboardType={keytype}
         maxLength={maxlen}
       />
     </View>
