@@ -107,8 +107,8 @@ const App = () => {
          <PersistGate loading={null} persistor={persistor}>
       <View style={styles.container}>
         <StatusBar backgroundColor={'white'} barStyle={'dark-content'} />
-        <Toast/>
         <MainNavigation />
+        <Toast/>
       </View>
       </PersistGate>
     </Provider>

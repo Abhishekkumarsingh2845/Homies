@@ -72,6 +72,8 @@ const authSlice = createSlice({
         user_id : data?.user_id,
         phone :  data?.phone,
         profileImage : data?.profileImage,
+        name : data?.name,
+        email : data?.email,
         token : data?.jwtToken
       };
     },

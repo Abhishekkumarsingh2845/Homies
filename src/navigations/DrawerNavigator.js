@@ -22,13 +22,13 @@ import { Color } from '../utlis/Color';
 import DocumentVerify from '../screens/drawerScreen/DocumentVerify';
 import {useSelector} from 'react-redux';
 import BottomTab from './BottomTab';
+import HomeNavigator from './HomeNavigator';
 
 const Drawer = createDrawerNavigator();
 
 const CustomDrawerContent = props => {
   const navigation = useNavigation();
-  const emaildredux = useSelector(state => state.auth.email);
-  const nameredux = useSelector(state => state.auth.name);
+const user = useSelector(state => state.auth.user)
   return (
     <DrawerContentScrollView {...props}>
       {/* Image Section */}
@@ -40,8 +40,8 @@ const CustomDrawerContent = props => {
           style={styles.drawerImage}
         />
         <View>
-          <Text style={styles.imageText}>{nameredux}</Text>
-          <Text style={styles.emailText}>{emaildredux}</Text>
+          <Text style={styles.imageText}>{user?.name}</Text>
+          <Text style={styles.emailText}>{user?.email}</Text>
           <Text style={styles.viewprofileText}>View Profile</Text>
         </View>
       </TouchableOpacity>
@@ -59,6 +59,7 @@ const DrawerNavigator = () => {
         headerShown: false,
       }}>
         <Drawer.Screen name="BottomTab" component={BottomTab} />
+        {/* <Drawer.Screen name="HomeNavigator" component={HomeNavigator} /> */}
       <Drawer.Screen
         name="ReferEarn"
         component={ReferEarn}

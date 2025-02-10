@@ -25,24 +25,31 @@ const LoginSignup = () => {
   const phone = useSelector(state => state.auth.phone);
   const dispatch  = useDispatch()
   const [otp, setOtp] = useState('');
-  console.log("otp exist" , otp )
+  const [originalOtp , setOriginalOtp] = useState()
 
   useEffect(() => {
-    if (otpR) {
+    
+    setOriginalOtp(otpR)
+  }, [otpR]);
+
+  useEffect(() => {
+    if (originalOtp) {
       Toast.show({
         type: 'info',
         text1: 'Your OTP',
-        text2: `OTP: ${otpR}`,
+        text2: `OTP: ${originalOtp}`,
         position: 'bottom',
       });
     }
-  }, [otpR]);
+  }, [originalOtp]);
 
   const handleVerfiyotp = async () => {
     if(!isExist){
       navigation.navigate('SignUp');
     }
-    else if (otp?.join('') == otpR) {
+     if (otp?.join('') == originalOtp) {
+  console.log("if otp=====")
+
       try {
         const response = await post('login', { phone: phoneNo });
         if (response?.success) {
@@ -65,6 +72,18 @@ const LoginSignup = () => {
     }
   };
 
+  const resendOtp =async () =>{
+
+      const response = await post('validate', {
+            phone: phoneNo
+          });
+          let otp = response.data.otp
+          if(otp)
+            setOriginalOtp(otp)
+
+          
+  }
+
   return (
     <View style={styles.container}>
       <SafeAreaView />
@@ -80,7 +99,8 @@ const LoginSignup = () => {
       <Otp setOtp={setOtp} />
       <View style={styles.timer}>
         <Text>00 : 29</Text>
-        <Text>Resend Code</Text>
+
+        <Text onPress={resendOtp}>Resend Code</Text>
       </View>
       <PrimaryBtn
         Onpress={handleVerfiyotp}

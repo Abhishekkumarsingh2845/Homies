@@ -77,7 +77,7 @@ const ComplaintScr = () => {
           {/* <Complaint /> */}
           {/* <Complaint /> */}
           <PrimaryBtn
-            Onpress={() => navigation.navigate('ComplaintForm')}
+            Onpress={() => navigation.navigate('ComplaintForm' , {getComplaint})}
             destination={'ComplaintForm'}
             mgntop={ScreenDimensions.screenHeight * 0.15}
             txt={'+ADD'}
@@ -98,7 +98,8 @@ const ComplaintScr = () => {
           }
 
           <PrimaryBtn
-          Onpress={() => navigation.navigate('DisputesFormFill')}
+   
+    Onpress={() => navigation.navigate('DisputesFormFill' , { getDisputes})}
             destination={'DisputesFormFill'}
             txt={'+ADD'}
             bgcolor={Color.primary}

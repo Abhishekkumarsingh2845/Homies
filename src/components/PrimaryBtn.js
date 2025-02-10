@@ -1,4 +1,4 @@
-import {StyleSheet, Text, TouchableOpacity} from 'react-native';
+import {ActivityIndicator, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {Color} from '../utlis/Color';
 import {useNavigation} from '@react-navigation/native';
@@ -13,6 +13,7 @@ const PrimaryBtn = ({
   mgntop,
   mrgnbm,
   Onpress,
+  loading = false
 }) => {
   const navigation = useNavigation();
 
@@ -35,8 +36,15 @@ const PrimaryBtn = ({
         },
       ]}
       // onPress={handleNavigation}
-      onPress={Onpress}>
+      onPress={Onpress}
+      disabled={loading ? true : false}
+      >
+        {
+          loading ? 
+          <ActivityIndicator size={25} color={clr}/>
+          :
       <Text style={[styles.txt, {color: clr}]}>{txt}</Text>
+      }
     </TouchableOpacity>
   );
 };
