@@ -1,18 +1,17 @@
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
-import React, { useState } from 'react';
-import { Color } from '../../utlis/Color';
+import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import React, {useState} from 'react';
+import {Color} from '../../utlis/Color';
 import PrimaryBtn from '../../components/PrimaryBtn';
 import Account from '../../components/Account';
 import PrimaryTxtInp from '../../components/PrimaryTxtInp';
-import { ScreenDimensions } from '../../utlis/DimensionApi';
-import { post } from '../../utlis/Api';
-import { useNavigation } from '@react-navigation/native';
-import { useDispatch } from 'react-redux';
-import { setExist, setPhone } from '../../store/AuthSlice';
+import {ScreenDimensions} from '../../utlis/DimensionApi';
+import {post} from '../../utlis/Api';
+import {useNavigation} from '@react-navigation/native';
+import {useDispatch} from 'react-redux';
+import {setExist, setPhone} from '../../store/AuthSlice';
 import Toast from 'react-native-toast-message';
 import * as Yup from 'yup';
-import { Formik } from 'formik'
-
+import {Formik} from 'formik';
 
 const Login = () => {
   const [phoneNo, setPhone] = useState(null);
@@ -21,7 +20,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
-  const handleLogIn = async (values) => {
+  const handleLogIn = async values => {
     setLoading(true);
     setError(null);
 
@@ -31,10 +30,13 @@ const Login = () => {
       });
       // dispatch(setPhone(phoneNo));
       const isExistcheck = response?.data?.isExist;
-      navigation.navigate('LoginSignup', { otpR: response.data.otp, isExist: isExistcheck, phoneNo: values.phone });
+      navigation.navigate('LoginSignup', {
+        otpR: response.data.otp,
+        isExist: isExistcheck,
+        phoneNo: values.phone,
+      });
       // dispatch(setExist(isExistcheck));
       // setError('Login Failed');
-
     } catch (error) {
       console.log('Error in Logging', error);
     } finally {
@@ -45,11 +47,8 @@ const Login = () => {
   const validationSchema = Yup.object({
     phone: Yup.string()
       .required('Phone number is required')
-      .matches(
-        /^[0-9]{10}$/,
-        'Phone number must be exactly 10 digits'
-      ),
-  })
+      .matches(/^[0-9]{10}$/, 'Phone number must be exactly 10 digits'),
+  });
 
   return (
     <View style={styles.container}>
@@ -67,51 +66,50 @@ const Login = () => {
       /> */}
 
       <Formik
-        initialValues={{ phone: '', }}
+        initialValues={{phone: ''}}
         validationSchema={validationSchema}
         onSubmit={handleLogIn}
         validateOnChange={false}
-        validateOnBlur={false}
-      >
-        {
-          ({ values, errors, setFieldValue, handleSubmit }) => {
+        validateOnBlur={false}>
+        {({values, errors, setFieldValue, handleSubmit}) => {
+          return (
+            <>
+              <Text style={styles.phno}>Phone number</Text>
+              <PrimaryTxtInp
+                value={values.phone}
+                placeholder={'Enter your phone number'}
+                error={errors.phone}
+                setValue={setFieldValue}
+                name={'phone'}
+                label={'Phone number'}
+                mrgtop={10}
+              />
 
-
-            return (
-              <>
-                <Text style={styles.phno}>Phone number</Text>
-                <PrimaryTxtInp
-                  value={values.phone}
-                  placeholder={'Enter your phone number'}
-                  error={errors.phone}
-                  setValue={setFieldValue}
-                  name={'phone'}
-                  label={'Phone number'}
-                  mrgtop={10}
-                />
-
-
-
-                <PrimaryBtn
-                  txt={'Log In'}
-                  clr={Color.white}
-                  bgcolor={Color.primary}
-                  brdcolor={Color.primary}
-                  brdwdth={1.5}
-                  destination={'LoginSignup'}
-                  mgntop={ScreenDimensions.screenHeight * 0.4}
-                  Onpress={handleSubmit}
-                  loading={loading}
-
-                />
-
-
-
-              </>
-            )
-
-          }
-        }
+              <PrimaryBtn
+                txt={'Log In'}
+                clr={Color.white}
+                bgcolor={Color.primary}
+                brdcolor={Color.primary}
+                brdwdth={1.5}
+                destination={'LoginSignup'}
+                mgntop={ScreenDimensions.screenHeight * 0.4}
+                Onpress={handleSubmit}
+                loading={loading}
+              />
+              <PrimaryBtn
+                txt={'Continue as a Guest'}
+                // Onpress={() => navigation.navigate('LoginSignup')}
+                clr={Color.primary}
+                bgcolor={Color.white}
+                brdcolor={Color.primary}
+                brdwdth={1.5}
+                Onpress={handleSubmit}
+                // destination={'LoginSignup'}
+                mgntop={ScreenDimensions.screenHeight * 0.03}
+              />
+            </>
+          );
+        }}
       </Formik>
       {/* <PrimaryBtn
         txt={'Log In'}
@@ -123,17 +121,7 @@ const Login = () => {
         mgntop={ScreenDimensions.screenHeight * 0.4}
         Onpress={() => handleLogIn()}
       /> */}
-      <PrimaryBtn
-        txt={'Continue as a Guest'}
-        // Onpress={() => navigation.navigate('LoginSignup')}
-        clr={Color.primary}
-        bgcolor={Color.white}
-        brdcolor={Color.primary}
-        brdwdth={1.5}
-        Onpress={() => handleLogIn()}
-        // destination={'LoginSignup'}
-        mgntop={ScreenDimensions.screenHeight * 0.03}
-      />
+
       {/* <Account
         txt1={"Don't have an account ?"}
         txt2={' Sign Up'}
