@@ -53,12 +53,12 @@ const user = useSelector(state => state.auth.user)
 const DrawerNavigator = () => {
   return (
     <Drawer.Navigator
-      initialRouteName="BottomTab"
+      initialRouteName="ReferEarn"
       drawerContent={props => <CustomDrawerContent {...props} />}
       screenOptions={{
         headerShown: false,
       }}>
-        <Drawer.Screen name="BottomTab" component={BottomTab} />
+        {/* <Drawer.Screen name="BottomTab" component={BottomTab} /> */}
         {/* <Drawer.Screen name="HomeNavigator" component={HomeNavigator} /> */}
       <Drawer.Screen
         name="ReferEarn"

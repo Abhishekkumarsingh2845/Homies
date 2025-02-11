@@ -3,7 +3,7 @@ import React from 'react';
 import {Img} from '../utlis/ImagesPath';
 import Feather from 'react-native-vector-icons/Feather';
 import {Color} from '../utlis/Color';
-const PersonalDetailElement = ({title, subtitle, Icons, TickIcon}) => {
+const PersonalDetailElement = ({title, subtitle, Icons, TickIcon,editIcon}) => {
   return (
     <View style={styles.container}>
       <View style={styles.detailContainer}>
@@ -13,7 +13,8 @@ const PersonalDetailElement = ({title, subtitle, Icons, TickIcon}) => {
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
             <Text style={styles.title}>{title}</Text>
             <View style={{marginLeft: 10}}>
-              <Feather name="edit-2" color={'#5F6368'} />
+              {editIcon}
+              {/* <Feather name="edit-2" color={'#5F6368'} /> */}
             </View>
           </View>
 

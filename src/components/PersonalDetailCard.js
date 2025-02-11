@@ -6,6 +6,7 @@ import Phone from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Color} from '../utlis/Color';
 import {get, post} from '../utlis/Api';
 import {useSelector} from 'react-redux';
+import Feather from 'react-native-vector-icons/Feather';
 
 const PersonalDetailCard = () => {
   const [profile, setProfile] = useState({});
@@ -30,6 +31,7 @@ const PersonalDetailCard = () => {
   return (
     <View style={styles.container}>
       <PersonalDetailElement
+        editIcon={<Feather name="edit-2" color={'#5F6368'} />}
         Icons={<Image source={Img.profileicon} style={styles.profileIcon} />}
         title="Name"
         subtitle={user.name || 'No Name Avaiable'}
@@ -55,6 +57,7 @@ const PersonalDetailCard = () => {
         Icons={<Image source={Img.msgicon} style={styles.profileIcon} />}
       />
       <PersonalDetailElement
+         editIcon={<Feather name="edit-2" color={'#5F6368'} />}
         title="College name"
         subtitle="Hans Raj College"
         Icons={<Image source={Img.msgicon} style={styles.profileIcon} />}
