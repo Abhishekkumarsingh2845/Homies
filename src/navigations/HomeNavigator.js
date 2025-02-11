@@ -31,7 +31,7 @@ const HomeNavigator = () => {
       <Stack.Screen name="PaymentForm" component={PaymentForm} />
       <Stack.Screen name="HostelRentOut" component={HostelRentOut} />
       <Stack.Screen name="PaymentHomeForm" component={PaymentHomeForm} />
-      <Stack.Screen name="DrawerNavigator" component={DrawerNavigator} />
+      {/* <Stack.Screen name="DrawerNavigator" component={DrawerNavigator} /> */}
 
     </Stack.Navigator>
   );

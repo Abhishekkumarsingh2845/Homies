@@ -31,7 +31,7 @@ const FilterScreen = () => {
           <Price />
           <GenderSelector />
           <PrimaryBtn
-           Onpress={() => navigation.navigate('DrawerNavigator')}
+           Onpress={() => navigation.navigate('BottomTab')}
             txt={'Apply'}
             bgcolor={Color.btnclr}
             mgntop={20}

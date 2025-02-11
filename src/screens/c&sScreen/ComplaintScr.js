@@ -70,7 +70,7 @@ const ComplaintScr = () => {
       {selected == 'Complaint' && (
 
         <View style={styles.subcontainer}>
-    <ScrollView style={{flex : 1}}>
+    <ScrollView style={{flex : 1 }}>
 
           {complaint &&
             complaint?.map((item, index) => {
@@ -82,7 +82,7 @@ const ComplaintScr = () => {
           <PrimaryBtn
             Onpress={() => navigation.navigate('ComplaintForm' , {getComplaint})}
             destination={'ComplaintForm'}
-            mgntop={ScreenDimensions.screenHeight * 0.15}
+            mgntop={10}
             txt={'+ADD'}
             bgcolor={Color.primary}
           />
@@ -109,7 +109,7 @@ const ComplaintScr = () => {
             destination={'DisputesFormFill'}
             txt={'+ADD'}
             bgcolor={Color.primary}
-            mgntop={ScreenDimensions.screenHeight * 0.15}
+            mgntop={10}
           />
         </View>
       )}
