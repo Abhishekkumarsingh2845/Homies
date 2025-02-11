@@ -125,12 +125,13 @@ const Login = () => {
       /> */}
       <PrimaryBtn
         txt={'Continue as a Guest'}
-        Onpress={() => navigation.navigate('LoginSignup')}
+        // Onpress={() => navigation.navigate('LoginSignup')}
         clr={Color.primary}
         bgcolor={Color.white}
         brdcolor={Color.primary}
         brdwdth={1.5}
-        destination={'LoginSignup'}
+        Onpress={() => handleLogIn()}
+        // destination={'LoginSignup'}
         mgntop={ScreenDimensions.screenHeight * 0.03}
       />
       {/* <Account

@@ -80,9 +80,7 @@ const LogoutModal = ({
               textColor={Color.btnclr}
               borderColor={Color.btnclr}
               borderWidth={1}
-              onPress={() => setModalVisible(!modalVisible)
-                
-              }
+              onPress={() => setModalVisible(!modalVisible)}
             />
           </View>
         </View>

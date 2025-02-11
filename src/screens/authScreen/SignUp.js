@@ -1,5 +1,11 @@
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
-import React, { useState } from 'react';
+import {
+  KeyboardAvoidingView,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
+import React, {useState} from 'react';
 import PrimaryTxtInp from '../../components/PrimaryTxtInp';
 import PrimaryBtn from '../../components/PrimaryBtn';
 import { Color } from '../../utlis/Color';
@@ -117,7 +123,7 @@ const SignUp = () => {
       .notRequired(),  // Referral code is optional (not required)
   });
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView style={styles.container}>
       <SafeAreaView />
       <Text style={styles.create}>Create an account</Text>
       <Text style={styles.getthe}>
@@ -139,6 +145,8 @@ const SignUp = () => {
           onChangeText={setPhone}
           plchldtxt={'Enter your phone number'}
           mrgtop={5}
+          maxlen={10}
+          keytype={'phone-pad'}
         />
       </View>
       <View style={styles.fullnm}>
@@ -228,7 +236,7 @@ loading={loading}
         mgntop={10}
       />
       <Toast />
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 
