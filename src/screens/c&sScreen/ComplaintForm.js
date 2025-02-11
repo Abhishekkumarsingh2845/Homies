@@ -83,7 +83,8 @@ const ComplaintForm = () => {
           mediaType: "Image",
           mediaUrl: values?.photo
         }
-      ]
+      ],
+      landLordId : "67a5972a4130fd4a51c061b4"
     }
     try {
       const response = await post(
