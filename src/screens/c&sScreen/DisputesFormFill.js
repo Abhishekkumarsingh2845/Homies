@@ -80,7 +80,8 @@ const DisputesFormFill = () => {
       // "landLordId": "6773972194f1b2bc916447e6",
       landLordName: values.landLord,
       propertyName: values?.propertyName,
-      dispute_description: values?.description
+      dispute_description: values?.description,
+            landLordId : "67a5972a4130fd4a51c061b4"
     }
 
     try {
@@ -180,7 +181,7 @@ export default DisputesFormFill;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#F1F1F1',
   },
   subconatiner: {
     paddingHorizontal: 20,

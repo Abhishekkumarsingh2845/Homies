@@ -1,4 +1,4 @@
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
 import React, {useEffect} from 'react';
 import SecondaryHeader from '../../components/SecondaryHeader';
 import {Img} from '../../utlis/ImagesPath';
@@ -19,6 +19,7 @@ const ComplaintFormFill = () => {
   //   return () => clearTimeout(timer);
   // }, [navigation]);
   return (
+    <ScrollView>
     <View style={styles.container}>
       <SecondaryHeader
         gobackImage={Img.goback}
@@ -42,10 +43,14 @@ const ComplaintFormFill = () => {
           Attachements
         </Text>
         <View style={styles.attachmentconatiner}>
-    
+    {
+       data.propertyMedia.map((item , index) =>{
+       return <Image source={{uri  : item?.mediaUrl}} style={styles.imgstyle} />
+       })
+    }
+          {/* <Image source={{uri  :  data.propertyMedia[0]?.mediaUrl}} style={styles.imgstyle} />
           <Image source={{uri  :  data.propertyMedia[0]?.mediaUrl}} style={styles.imgstyle} />
-          <Image source={{uri  :  data.propertyMedia[0]?.mediaUrl}} style={styles.imgstyle} />
-          <Image source={{uri  :  data.propertyMedia[0]?.mediaUrl}} style={styles.imgstyle} />
+          <Image source={{uri  :  data.propertyMedia[0]?.mediaUrl}} style={styles.imgstyle} /> */}
         </View>
 
         <View style={styles.progresscontainer}>
@@ -78,6 +83,7 @@ const ComplaintFormFill = () => {
         </View>
       </View>
     </View>
+    </ScrollView>
   );
 };
 

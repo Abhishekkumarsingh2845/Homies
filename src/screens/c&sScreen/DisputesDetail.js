@@ -1,4 +1,4 @@
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
 import React, {useEffect} from 'react';
 import SecondaryHeader from '../../components/SecondaryHeader';
 import {Img} from '../../utlis/ImagesPath';
@@ -7,11 +7,13 @@ import {FontText} from '../../utlis/CustomFont';
 import {Color} from '../../utlis/Color';
 import PrimaryBtn from '../../components/PrimaryBtn';
 import {useNavigation, useRoute} from '@react-navigation/native';
+import AntDesign from 'react-native-vector-icons/AntDesign'
+
 const DisputesDetail = () => {
   const navigation = useNavigation();
       const {params} = useRoute()
       const data = params.data
-      console.log("data----------- dispa" , data)
+      console.log("data ---------------0000000000" , data)
   useEffect(() => {
     // const timer = setTimeout(() => {
     //   navigation.navigate('DisputesFormFill');
@@ -20,6 +22,8 @@ const DisputesDetail = () => {
   }, [navigation]);
 
   return (
+    <ScrollView>
+
     <View style={styles.container}>
       <SecondaryHeader
         gobackImage={Img.goback}
@@ -37,7 +41,13 @@ const DisputesDetail = () => {
         </Text>
 
         <View style={styles.progresscontainer}>
-          <Image source={Img.uncheckicon} style={styles.progressstyle} />
+          {
+            data?.dispute_status == 'Pending' ?
+            <AntDesign name={'clockcircle'} size={28} color={Color.primary}/>
+            :
+            <Image source={Img.uncheckicon} style={styles.progressstyle} /> 
+
+          }
           <View
             style={{
               flex: 1,
@@ -45,7 +55,14 @@ const DisputesDetail = () => {
               backgroundColor: '#000000',
               marginHorizontal: 5,
             }}></View>
-          <Image source={Img.tickicon} style={styles.progressstyle} />
+            {
+                data?.dispute_status !== 'Pending' ?
+                <AntDesign name={'checkcircle'} size={28} color={'#00943F'}/>
+                :
+                <Image source={Img.uncheckicon} style={styles.progressstyle} /> 
+            }
+
+          {/* <Image source={Img.tickicon} style={styles.progressstyle} /> */}
         </View>
         <View style={styles.statuscontainer}>
           <Text>Pending</Text>
@@ -53,6 +70,8 @@ const DisputesDetail = () => {
         </View>
       </View>
     </View>
+    </ScrollView>
+
   );
 };
 

@@ -160,10 +160,10 @@ const LoginSignup = () => {
   useEffect(() => {
     if (originalOtp) {
       Toast.show({
-        type: 'info',
+        type: 'success',
         text1: 'Your OTP',
         text2: `OTP: ${originalOtp}`,
-        position: 'bottom',
+        position: 'top',
       });
     }
   }, [originalOtp]);
@@ -212,7 +212,6 @@ const LoginSignup = () => {
   return (
     <View style={styles.container}>
       <SafeAreaView />
-      <Toast />
       <TouchableOpacity onPress={() => navigation.goBack()}>
         <Image source={Img.goback} style={styles.arrow} />
       </TouchableOpacity>
@@ -234,6 +233,8 @@ const LoginSignup = () => {
         clr={Color.white}
         mgntop={20}
       />
+      <Toast />
+
     </View>
   );
 };

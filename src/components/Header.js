@@ -158,7 +158,9 @@ const Header = ({
       <StatusBar backgroundColor={'#010101'} barStyle={'light-content'} />
       <View style={styles.logocontainer}>
         <View style={styles.leftcontinaer}>
-          <TouchableOpacity onPress={() => navigation.goBack()}>
+          {/* <TouchableOpacity onPress={() => navigation.goBack()}> */}
+          <TouchableOpacity  onPress={() => navigation.openDrawer()}>
+
             <Image
               source={Img1}
               style={[

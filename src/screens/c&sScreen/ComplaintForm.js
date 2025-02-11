@@ -13,6 +13,7 @@ import { post } from '../../utlis/Api';
 import { useSelector } from 'react-redux';
 import * as Yup from 'yup';
 import { Formik } from 'formik'
+import ComplaintGallery from '../../components/ComplaintGallery';
 
 
 const ComplaintForm = () => {
@@ -24,7 +25,7 @@ const ComplaintForm = () => {
   const initialValues = {
     topic: '',
     description: '',
-    photo: ''
+    photo: []
   }
 
   const complaintFields = [
@@ -66,24 +67,32 @@ const ComplaintForm = () => {
     description: Yup.string()
       .required('Description is required')
       .min(10, 'Description must be at least 10 characters long'),
-    photo: Yup.string()
-      .required('Photo is required')
-      .matches(/\.(jpeg|jpg|png)$/, 'Photo must be a valid image (jpeg, jpg, png)')
+
+      photo: Yup.array()
+      .of(
+        Yup.string()
+          .matches(/\.(jpeg|jpg|png)$/, 'Each photo must be a valid image (jpeg, jpg, png)')
+      )
+      .required('At least one photo is required')
+      .min(1, 'You must upload at least one photo')
+      .max(3, 'You can upload a maximum of three photos')
   });
 
 
   const SendComplaint = async (values) => {
     setLoading(true)
-
+    console.log("values-   - - - - - - - - - - " , values)
     let data = {
       complaintTitle: values?.topic,
       complaintDescription: values?.description,
-      propertyMedia: [
-        {
-          mediaType: "Image",
-          mediaUrl: values?.photo
-        }
-      ],
+      propertyMedia: values?.photo?.map((item) =>{
+       return   {
+            mediaType: "Image",
+            mediaUrl: item
+          }
+        
+      }) 
+,
       landLordId : "67a5972a4130fd4a51c061b4"
     }
     try {
@@ -123,7 +132,7 @@ const ComplaintForm = () => {
         >
           {
             ({ values, errors, setFieldValue, handleSubmit }) => {
-
+              console.log("values------------" , values)
 
               return (
                 <>
@@ -131,7 +140,7 @@ const ComplaintForm = () => {
                     complaintFields.map((item, index) => {
                       if (item.type == 'photo') {
                         return (
-                          <Opencamera
+                          <ComplaintGallery
                             value={values[item.name]}
                             error={errors[item.name]}
                             setValue={setFieldValue}

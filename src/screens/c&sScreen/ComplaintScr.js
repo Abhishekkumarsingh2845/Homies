@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import SecondaryHeader from '../../components/SecondaryHeader';
 import Complaint from '../../components/Complaint';
@@ -37,7 +37,6 @@ const ComplaintScr = () => {
   const getDisputes = async () => {
     try {
       const response = await get('getAllDisputes', { sendBy: 'User' }, token);
-      console.log("reespones----------111", response)
       if (response.success) {
         // setComplaint(response.data[0]?.data);
         setDisputes(response.data[0]?.data)
@@ -52,6 +51,7 @@ const ComplaintScr = () => {
     getDisputes()
   }, []);
   return (
+
     <View style={styles.container}>
       <Header
         hght={160}
@@ -68,14 +68,17 @@ const ComplaintScr = () => {
         }
       />
       {selected == 'Complaint' && (
+
         <View style={styles.subcontainer}>
+    <ScrollView style={{flex : 1}}>
+
           {complaint &&
             complaint?.map((item, index) => {
               return <Complaint key={index} complaint_id={item.complaint_id} title={item.complaintTitle} date={item?.updatedAt} mediaUrl={item.propertyMedia[0]?.mediaUrl} _id={item._id} />
             })
           }
-          {/* <Complaint /> */}
-          {/* <Complaint /> */}
+        </ScrollView>
+
           <PrimaryBtn
             Onpress={() => navigation.navigate('ComplaintForm' , {getComplaint})}
             destination={'ComplaintForm'}
@@ -88,14 +91,17 @@ const ComplaintScr = () => {
 
       {selected == 'Disputes' && (
         <View style={styles.subcontainer}>
+        <ScrollView style={{flex : 1}}>
+
           {
             disputes.map((item, index) => {
-
-              return <DisputesCmp key={index} status="Pending" statusColor="#FF1C1C" dispute_id={item?.dispute_id} date={item?.updatedAt} _id={item._id}/>
+              return <DisputesCmp key={index} status={item?.dispute_status} statusColor={item?.dispute_status == "Pending" ? "#FF1C1C" : '#027516'} dispute_id={item?.dispute_id} date={item?.updatedAt} _id={item._id}/>
 
 
             })
           }
+        </ScrollView>
+
 
           <PrimaryBtn
    
@@ -108,6 +114,8 @@ const ComplaintScr = () => {
         </View>
       )}
     </View>
+  
+
   );
 };
 
@@ -117,11 +125,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#484848',
+
   },
   subcontainer: {
-    // marginTop:10,
     flex: 1,
     paddingHorizontal: ScreenDimensions.screenWidth * 0.03,
+    paddingBottom : 12,
     borderRightWidth: 2,
     borderLeftWidth: 2,
     borderTopWidth: 2,

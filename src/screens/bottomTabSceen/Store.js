@@ -6,13 +6,15 @@ import {Img} from '../../utlis/ImagesPath';
 import StoreDetail from '../../components/StoreDetail';
 import { FontText } from '../../utlis/CustomFont';
 import { Color } from '../../utlis/Color';
+import { useNavigation } from '@react-navigation/native';
 
 const Store = () => {
   const storedata = [{id: 1}, {id: 2}, {id: 3}];
+  const navigation = useNavigation()
 
   return (
     <View style={styles.container}>
-      <SecondaryHeader gobackImage={Img.draw} notificationIcon={Img.bellicon} />
+      <SecondaryHeader gobackImage={Img.draw} notificationIcon={Img.bellicon}  onPress={() => navigation.openDrawer()}/>
       <View style={styles.subcontainer}>
       <Text style={styles.catergorytxt}>Category</Text>
         <View style={styles.catergorycontainer}>
