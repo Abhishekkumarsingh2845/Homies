@@ -55,7 +55,7 @@ const PropertyDetail = () => {
     }else{
       setShowGuestModal(false)
     }
-  },[token])
+  },[])
   return (
     <View style={styles.container}>
       <SafeAreaView />

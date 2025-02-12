@@ -17,7 +17,7 @@ const LogoutModal = ({
   setModalType ,
 }) => {
   const dispatch = useDispatch();
-  const naviagtion=useNavigation();
+  const navigation=useNavigation();
   const {token} = useSelector(state => state.auth.user);
 
   const logoutUser = async () => {
@@ -26,7 +26,17 @@ const LogoutModal = ({
       if(response.success){
         setModalVisible(!modalVisible);
         dispatch(clearUser({}))
-        naviagtion.navigate('AuthNavigator')
+        // naviagtion.navigate('AuthNavigator')
+
+        navigation.reset({
+          index: 0,
+          routes: [
+              {
+                  name: 'Login'
+              }
+          ]
+      })
+
       }
       
     } catch (error) {

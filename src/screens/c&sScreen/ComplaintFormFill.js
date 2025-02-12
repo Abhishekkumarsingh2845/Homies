@@ -1,15 +1,15 @@
-import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
-import React, {useEffect} from 'react';
+import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
+import React, { useEffect } from 'react';
 import SecondaryHeader from '../../components/SecondaryHeader';
-import {Img} from '../../utlis/ImagesPath';
+import { Img } from '../../utlis/ImagesPath';
 import Tick from 'react-native-vector-icons/EvilIcons';
-import {FontText} from '../../utlis/CustomFont';
-import {Color} from '../../utlis/Color';
+import { FontText } from '../../utlis/CustomFont';
+import { Color } from '../../utlis/Color';
 import PrimaryBtn from '../../components/PrimaryBtn';
-import {useNavigation, useRoute} from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 const ComplaintFormFill = () => {
   const navigation = useNavigation();
-  const {params} = useRoute()
+  const { params } = useRoute()
   const data = params.data
 
   // useEffect(() => {
@@ -20,69 +20,87 @@ const ComplaintFormFill = () => {
   // }, [navigation]);
   return (
     <ScrollView>
-    <View style={styles.container}>
-      <SecondaryHeader
-        gobackImage={Img.goback}
-        detailtxt={'Complaint Form'}
-        onPress={() => navigation.goBack()}
-      />
-      <View style={styles.subconatiner}>
-        <Text style={styles.topictxt}>Topic</Text>
-        <Text style={styles.topictype}>{data.complaintTitle}</Text>  
-        <Text style={styles.descriptiontxt}>Description</Text>
-        <Text style={styles.detaildescription}>
-          {data?.complaintDescription}
-        </Text>
-        <Text
-          style={{
-            marginTop: 10,
-            fontSize: 12,
-            fontFamily: FontText.medium,
-            color: Color.black,
-          }}>
-          Attachements
-        </Text>
-        <View style={styles.attachmentconatiner}>
-    {
-       data.propertyMedia.map((item , index) =>{
-       return <Image source={{uri  : item?.mediaUrl}} style={styles.imgstyle} />
-       })
-    }
-          {/* <Image source={{uri  :  data.propertyMedia[0]?.mediaUrl}} style={styles.imgstyle} />
+      <View style={styles.container}>
+        <SecondaryHeader
+          gobackImage={Img.goback}
+          detailtxt={'Complaint Form'}
+          onPress={() => navigation.goBack()}
+        />
+        <View style={styles.subconatiner}>
+          <Text style={styles.topictxt}>Topic</Text>
+          <Text style={styles.topictype}>{data.complaintTitle}</Text>
+          <Text style={styles.descriptiontxt}>Description</Text>
+          <Text style={styles.detaildescription}>
+            {data?.complaintDescription}
+          </Text>
+          <Text
+            style={{
+              marginTop: 10,
+              fontSize: 12,
+              fontFamily: FontText.medium,
+              color: Color.black,
+            }}>
+            Attachements
+          </Text>
+          <View style={styles.attachmentconatiner}>
+            {
+              data.propertyMedia.map((item, index) => {
+                return <Image source={{ uri: item?.mediaUrl }} style={styles.imgstyle} />
+              })
+            }
+            {/* <Image source={{uri  :  data.propertyMedia[0]?.mediaUrl}} style={styles.imgstyle} />
           <Image source={{uri  :  data.propertyMedia[0]?.mediaUrl}} style={styles.imgstyle} />
           <Image source={{uri  :  data.propertyMedia[0]?.mediaUrl}} style={styles.imgstyle} /> */}
-        </View>
+          </View>
 
-        <View style={styles.progresscontainer}>
-          <View style={{alignItems: 'center', marginTop: 10}}>
-            <Image source={Img.tickicon} style={styles.progressstyle} />
-            <Text>Accept</Text>
-          </View>
-          <View
-            style={{
-              flex: 1,
-              height: 1,
-              backgroundColor: '#000000',
-              marginHorizontal: 5,
-            }}></View>
-          <View style={{alignItems: 'center', marginTop: 10}}>
-            <Image source={Img.uncheckicon} style={styles.progressstyle} />
-            <Text>In Progress</Text>
-          </View>
-          <View
-            style={{
-              flex: 1,
-              height: 1,
-              backgroundColor: '#000000',
-              marginHorizontal: 5,
-            }}></View>
-          <View style={{alignItems: 'center', marginTop: 10}}>
-            <Image source={Img.uncheckicon} style={styles.progressstyle} />
-            <Text>Completed</Text>
+          <View style={styles.progresscontainer}>
+            <View style={{ alignItems: 'center', marginTop: 10 }}>
+              {
+                (data?.complaintStatus == 'Accept' || data?.complaintStatus == 'inProgress' || data?.complaintStatus == 'Completed') ?
+                  <Image source={Img.tickicon} style={styles.progressstyle} />
+                  :
+                  <Image source={Img.uncheckicon} style={styles.progressstyle} />
+
+              }
+              <Text>Accept</Text>
+            </View>
+            <View
+              style={{
+                flex: 1,
+                height: 1,
+                backgroundColor: '#000000',
+                marginHorizontal: 5,
+              }}></View>
+            <View style={{ alignItems: 'center', marginTop: 10 }}>
+              {
+                (data?.complaintStatus == 'inProgress' || data?.complaintStatus == 'Completed') ?
+                  <Image source={Img.tickicon} style={styles.progressstyle} />
+                  :
+                  <Image source={Img.uncheckicon} style={styles.progressstyle} />
+
+              }
+              <Text>In Progress</Text>
+            </View>
+            <View
+              style={{
+                flex: 1,
+                height: 1,
+                backgroundColor: '#000000',
+                marginHorizontal: 5,
+              }}></View>
+            <View style={{ alignItems: 'center', marginTop: 10 }}>
+              {
+                (data?.complaintStatus == 'Completed') ?
+                  <Image source={Img.tickicon} style={styles.progressstyle} />
+                  :
+                  <Image source={Img.uncheckicon} style={styles.progressstyle} />
+
+              }
+              <Text>Completed</Text>
+            </View>
           </View>
         </View>
       </View>
-    </View>
     </ScrollView>
   );
 };
