@@ -13,6 +13,8 @@ const LogoutModal = ({
   modalVisible,
   setModalVisible,
   msg = 'Are you Sure leave the Property',
+  modalType ,
+  setModalType ,
 }) => {
   const dispatch = useDispatch();
   const naviagtion=useNavigation();
@@ -33,17 +35,25 @@ const LogoutModal = ({
         error?.reponse?.data || error.message,
       );
     }
+    setModalType('')
   };
 
   const deleteuser = async () => {
     try {
       const response = await put('deleteUserAccount', {}, token);
+      if(response.success){
+        setModalVisible(!modalVisible);
+        dispatch(clearUser({}))
+        naviagtion.navigate('AuthNavigator')
+      }
     } catch (error) {
       console.log(
         'errro in the Delete Api->>>',
         error?.reponse?.data || error.message,
       );
     }
+    setModalType('')
+
   };
 
   // useEffect(() => {
@@ -68,8 +78,9 @@ const LogoutModal = ({
               textColor={Color.white}
               borderColor="green"
               onPress={() => {
+                modalType == 'logout' ?
+                logoutUser(): deleteuser()
                 // naviagtion.navigate("AuthNavigator");
-                logoutUser();
                 // dispatch(clearToken(token)); 
                 // setModalVisible(!modalVisible);
               }}

@@ -1,4 +1,5 @@
 import {
+  Dimensions,
   Image,
   ImageBackground,
   SafeAreaView,
@@ -8,27 +9,69 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useState} from 'react';
-import {Img} from '../../utlis/ImagesPath';
+import React, { useState } from 'react';
+import { Img } from '../../utlis/ImagesPath';
 import PersonalDetailCard from '../../components/PersonalDetailCard';
 import SeeAllDocument from '../../components/SeeAllDocument';
 import Logout from 'react-native-vector-icons/MaterialIcons';
-import {FontText} from '../../utlis/CustomFont';
-import {Color} from '../../utlis/Color';
+import { FontText } from '../../utlis/CustomFont';
+import { Color } from '../../utlis/Color';
 import SecondaryHeader from '../../components/SecondaryHeader';
 import LogoutModal from '../../components/LogoutModal';
-import {useNavigation} from '@react-navigation/native';
-import { useSelector } from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux';
+import { openGallery, uploadImageUrl } from '../../utlis/ImageHandler';
+import { post } from '../../utlis/Api';
+import { setUser } from '../../store/AuthSlice';
 const Profile = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const user = useSelector((state) => state.auth.user)
-  console.log("user ================= > " , user)
+  console.log("user ================= > ", user)
   const [modalMsg, setModalMsg] = useState('');
   const navigation = useNavigation();
-  const toggleModal = message => {
+  const [modalType, setModalType] = useState('')
+
+  const dispatch = useDispatch()
+  const toggleModal = (message, type) => {
     setModalMsg(message);
     setModalVisible(!modalVisible);
+    setModalType(type)
   };
+
+
+  const dimensions = {
+    screenWidth: Dimensions.get('screen').width,
+    screenHeight: Dimensions.get('screen').height
+
+  }
+
+  const galleryFunc = async () => {
+    let res = await openGallery()
+    console.log("res--------------", res.response[0].uri)
+    if (res.status) {
+      const data = {
+        uri: res.response[0].uri,
+        name: 'image.jpg',
+        type: 'image/jpeg',
+      }
+      let imageRes = await uploadImageUrl(data)
+      console.log("image data ======", imageRes)
+      if (imageRes.status) {
+        try {
+          const response = await post('updateProfile', {
+            profileImage : imageRes?.imageUrl
+          }, user.token);
+          console.log("value====== res 1111", response)
+          if (response?.success) {
+            dispatch(setUser(response));
+            // navigation.navigate('HomeNavigator');
+          }
+        } catch (error) {
+          console.log('error in update  submit', error);
+        }
+      }
+    }
+  }
   return (
     <View style={styles.container}>
       <SafeAreaView />
@@ -44,30 +87,40 @@ const Profile = () => {
           onPress={() => navigation.navigate('DrawerNavigator')}>
           <Image source={Img.goback} style={styles.gobackstyle} />
         </TouchableOpacity>
-        <View style={styles.circle}>
+        <View style={[styles.circle, {
+          width: dimensions.screenWidth * 0.5,
+          height: dimensions.screenWidth * 0.5, marginTop: dimensions.screenHeight * 0.1
+        }]}>
           <Image
-            source={Img.profilepicicon}
-            style={{width: 90, height: 90, borderRadius: 40}}
+            source={{uri : user?.profileImage}}
+            style={{ width: '90%', height: '90%', borderRadius: 100 , backgroundColor : 'black'}}
+            resizeMode='contain'
           />
-          <Image
-            source={Img.editicon}
-            style={{
-              width: 20,
-              height: 20,
-              resizeMode: 'contain',
-              borderRadius: 5,
-              position: 'absolute',
-              right: 10,
-              bottom: 0,
-            }}
-          />
+          <TouchableOpacity onPress={galleryFunc} style={{ position: 'absolute',
+                right: 30,
+                bottom: 5,}}>
+
+            <Image
+              source={Img.editicon}
+              style={{
+                width: 30,
+                height: 30,
+                resizeMode: 'contain',
+                borderRadius: 5,
+                // position: 'absolute',
+                // right: 25,
+                // bottom: 5,
+              }}
+            />
+          </TouchableOpacity>
+
         </View>
       </ImageBackground>
 
-      <Text style={styles.profileText}>Room No- 001</Text>
+      <Text style={[styles.profileText, { marginTop: dimensions.screenHeight * 0.11 }]}>Room No- 001</Text>
       <PersonalDetailCard />
       <SeeAllDocument />
-      <View style={{paddingHorizontal: 20}}>
+      <View style={{ paddingHorizontal: 20 }}>
         <View
           style={{
             flexDirection: 'row',
@@ -76,7 +129,7 @@ const Profile = () => {
           }}>
           <Logout name="logout" size={20} />
           <TouchableOpacity
-            onPress={() => toggleModal('Are you Sure Logout the Property')}>
+            onPress={() => toggleModal('Are you Sure Logout the Property', 'logout')}>
             <Text
               style={{
                 fontSize: 18,
@@ -90,7 +143,7 @@ const Profile = () => {
           </TouchableOpacity>
         </View>
         <TouchableOpacity
-                    onPress={() => {}}>
+          onPress={() => { }}>
           <Text
             style={{
               fontSize: 18,
@@ -102,7 +155,7 @@ const Profile = () => {
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => {}}>
+          onPress={() => toggleModal('Are you Sure delete Your Account', ' delete')}>
           <Text
             style={{
               fontSize: 18,
@@ -117,6 +170,8 @@ const Profile = () => {
           msg={modalMsg}
           modalVisible={modalVisible}
           setModalVisible={setModalVisible}
+          modalType={modalType}
+          setModalType={setModalType}
         />
       </View>
     </View>
@@ -137,21 +192,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   circle: {
-    position: 'absolute',
-    bottom: -50, // Moves the circle below the ImageBackground
+    // position: 'absolute',
+    // bottom: -50, // Moves the circle below the ImageBackground
     alignSelf: 'center', // Centers the circle horizontally
     justifyContent: 'center',
     alignItems: 'center',
-    width: 100, // Circle width
-    height: 100, // Circle height
-    borderRadius: 50, // Makes it a circle
+    // Circle height
+    // borderRadius: 75, // Makes it a circle
 
     // borderWidth: 4, // Optional border for the circle
     borderColor: '#fff', // Border color
   },
   profileText: {
     textAlign: 'center',
-    marginTop: 50, // Adds spacing below the circle
+    // marginTop:, // Adds spacing below the circle
     fontSize: 14,
     fontWeight: 'bold',
     color: Color.black,

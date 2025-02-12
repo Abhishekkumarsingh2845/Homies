@@ -58,7 +58,9 @@ const LoginSignup = () => {
     }
 
     if (!isExist) {
+    console.log("isExist====" , isExist)
       navigation.navigate('SignUp');
+      return
     }
     if (otp?.join('') == originalOtp) {
       console.log('if otp=====');

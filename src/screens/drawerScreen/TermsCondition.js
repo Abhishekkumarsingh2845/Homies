@@ -17,7 +17,7 @@ import axios from 'axios';
 import {useSelector} from 'react-redux';
 const TermsCondition = () => {
   const [data, setDate] = useState(null);
-  const token = useSelector(state => state.auth.token);
+  const {token} = useSelector(state => state.auth.user);
   const [loading, setLoading] = useState(true);
   // const token =
   //   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzYwMGJmYWRlMTdlNWRiNzEzOTYyODUiLCJpYXQiOjE3MzQ1OTQ4NzF9.6MvhJVvtCCTdWiqANEFF7GBshBi3-19AV4INZNUgJTA';

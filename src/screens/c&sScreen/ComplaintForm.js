@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import SecondaryHeader from '../../components/SecondaryHeader';
 import PrimaryBtn from '../../components/PrimaryBtn';
 import { Color } from '../../utlis/Color';
-import Opencamera from '../../components/Opencamera';
 import ComplaintFormFill from './ComplaintFormFill';
 import { Img } from '../../utlis/ImagesPath';
 import { useNavigation, useRoute } from '@react-navigation/native';
@@ -93,7 +92,7 @@ const ComplaintForm = () => {
         
       }) 
 ,
-      landLordId : "67a5972a4130fd4a51c061b4"
+      landLordId : "6773972194f1b2bc916447e6"
     }
     try {
       const response = await post(

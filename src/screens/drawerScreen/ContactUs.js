@@ -12,7 +12,7 @@ const ContactUs = () => {
   const navigation = useNavigation();
   const [loading, setLoading] = useState(true);
   const [data, setdata] = useState(null);
-  const token = useSelector(state => state.auth.token);
+  const {token} = useSelector(state => state.auth.user);
   const getContactus = async () => {
     try {
       const response = await get(

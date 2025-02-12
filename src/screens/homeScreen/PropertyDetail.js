@@ -7,7 +7,7 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {Color} from '../../utlis/Color';
 import PropertyInfoCard from '../../components/PropertyInfoCard';
 import SecondaryHeader from '../../components/SecondaryHeader';
@@ -27,10 +27,15 @@ import Wifi from 'react-native-vector-icons/FontAwesome5';
 import Pool from 'react-native-vector-icons/MaterialIcons';
 import CalendarModal from '../../components/Calendarcmp';
 import RequestSentBtnSht from '../../components/RequestSentBtnSht';
+import GuestModal from '../../components/GuestModal';
+import { useSelector } from 'react-redux';
 // import {Image} from 'react-native-svg';
 const PropertyDetail = () => {
   const navigation = useNavigation();
   const [isModalVisible, setModalVisible] = useState(false);
+  const [showGuestModal , setShowGuestModal] = useState(false)
+  const {token} = useSelector(state => state.auth.user)
+  
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
@@ -43,6 +48,14 @@ const PropertyDetail = () => {
     bottomSheetRef.current?.open(); // Call the open function
   };
 
+  useEffect(() =>{
+    console.log("tpken========" , token)
+    if(!token){
+      setShowGuestModal(true)
+    }else{
+      setShowGuestModal(false)
+    }
+  },[token])
   return (
     <View style={styles.container}>
       <SafeAreaView />
@@ -116,6 +129,7 @@ const PropertyDetail = () => {
           <View style={{marginVertical: 80}} />
         </View>
       </ScrollView>
+      <GuestModal modalVisible={showGuestModal} setModalVisible={setShowGuestModal}/>
     </View>
   );
 };

@@ -35,6 +35,7 @@ const PersonalDetailCard = () => {
         Icons={<Image source={Img.profileicon} style={styles.profileIcon} />}
         title="Name"
         subtitle={user.name || 'No Name Avaiable'}
+        field='name'
       />
       <PersonalDetailElement
         TickIcon={<Image source={Img.greentick} style={styles.greenTick} />}

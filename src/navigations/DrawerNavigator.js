@@ -72,7 +72,7 @@ const drawerItems = [
   return (
     <View style={{flex : 1}}>
       {/* Image Section */}
-      <TouchableOpacity
+  { user.token &&   <TouchableOpacity
         style={styles.imageContainer}
         onPress={() => navigation.navigate('Profile')}>
         <Image
@@ -84,7 +84,7 @@ const drawerItems = [
           <Text style={styles.emailText}>{user?.email}</Text>
           <Text style={styles.viewprofileText}>View Profile</Text>
         </View>
-      </TouchableOpacity>
+      </TouchableOpacity>}
 
       {/* <DrawerItemList {...props} /> */}
 

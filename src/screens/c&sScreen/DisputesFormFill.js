@@ -81,7 +81,7 @@ const DisputesFormFill = () => {
       landLordName: values.landLord,
       propertyName: values?.propertyName,
       dispute_description: values?.description,
-            landLordId : "67a5972a4130fd4a51c061b4"
+            landLordId : "6773972194f1b2bc916447e6"
     }
 
     try {

@@ -96,21 +96,22 @@ const Login = () => {
                 Onpress={handleSubmit}
                 loading={loading}
               />
-              <PrimaryBtn
+
+            </>
+          );
+        }}
+      </Formik>
+      <PrimaryBtn
                 txt={'Continue as a Guest'}
                 // Onpress={() => navigation.navigate('LoginSignup')}
                 clr={Color.primary}
                 bgcolor={Color.white}
                 brdcolor={Color.primary}
                 brdwdth={1.5}
-                Onpress={handleSubmit}
+                Onpress={() => {navigation.navigate('DrawerNavigator')}}
                 // destination={'LoginSignup'}
                 mgntop={ScreenDimensions.screenHeight * 0.03}
               />
-            </>
-          );
-        }}
-      </Formik>
       {/* <PrimaryBtn
         txt={'Log In'}
         clr={Color.white}

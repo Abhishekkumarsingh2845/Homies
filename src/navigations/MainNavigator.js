@@ -19,6 +19,10 @@ import PaymentNavigator from './PaymentNavigator';
 import ChatNavigator from '../screens/bottomTabSceen/ChatNavigator';
 import Notification from '../screens/homeScreen/Notification';
 import { useSelector } from 'react-redux';
+import Login from '../screens/authScreen/Login';
+import LoginSignup from '../screens/authScreen/LoginSignup';
+import SignUp from '../screens/authScreen/SignUp';
+import OtpVerify from '../screens/authScreen/OtpVerify';
 
 const MainNavigation = () => {
   const {token} = useSelector((state) => state.auth.user)
@@ -40,6 +44,14 @@ const MainNavigation = () => {
               name="ComplaintNavigator"
               component={ComplaintNavigator}
             />
+          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="LoginSignup" component={LoginSignup} />
+          <Stack.Screen name="SignUp" component={SignUp} />
+          <Stack.Screen name="OtpVerify" component={OtpVerify} />
+        
+
+
+
             <Stack.Screen name="DrawerNavigator" component={DrawerNavigator} />
             <Stack.Screen
               name="HomeTabNavigator"

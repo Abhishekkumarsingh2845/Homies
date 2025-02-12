@@ -21,7 +21,7 @@ const Faq = () => {
   const navigation = useNavigation();
   const [data, setData] = useState(null); // Keep it null initially
   const [loading, setLoading] = useState(true);
-  const token = useSelector(state => state.auth.token);
+  const {token} = useSelector(state => state.auth.user);
 
   const fetchFaq = async () => {
     try {

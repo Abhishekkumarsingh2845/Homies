@@ -71,9 +71,11 @@ import SearchBar from '../../components/SearchBar';
 import HostelInfoCard from '../../components/HostelInfoCard';
 import SortByModal from '../../components/SortBymodal';
 import SortByBtn from '../../components/SortByBtn';
+import GuestModal from '../../components/GuestModal';
 
 const SortbyScreen = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
+
 
   const openModal = () => setModalVisible(true);
   const closeModal = () => setModalVisible(false);

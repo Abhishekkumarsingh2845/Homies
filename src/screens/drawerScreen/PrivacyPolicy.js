@@ -16,7 +16,7 @@ import {useSelector} from 'react-redux';
 const PrivacyPolicy = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const token = useSelector(state => state.auth.token);
+  const {token} = useSelector(state => state.auth.user);
 
   // const token =
   //   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzYwMGJmYWRlMTdlNWRiNzEzOTYyODUiLCJpYXQiOjE3MzQ1OTQ4NzF9.6MvhJVvtCCTdWiqANEFF7GBshBi3-19AV4INZNUgJTA';
