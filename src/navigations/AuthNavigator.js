@@ -20,7 +20,7 @@ const AuthNavigator = () => {
   return (
     <Stack.Navigator
       screenOptions={{headerShown: false}}
-      initialRouteName={'Splash'}>
+      initialRouteName={'Login'}>
       {!token ? (
         <>
           <Stack.Screen name="Splash" component={Splash} />
@@ -32,6 +32,7 @@ const AuthNavigator = () => {
         </>
       ) : (
         <>
+        
           <Stack.Screen name="Splash" component={Splash} />
               <Stack.Screen name="Intro" component={Intro} />
           <Stack.Screen name="SignUp" component={SignUp} />

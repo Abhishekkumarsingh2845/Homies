@@ -35,10 +35,8 @@ const Intro = () => {
     <View style={styles.container}>
       <SafeAreaView />
       <TouchableOpacity style={styles.skiptxt} onPress={handleNext}>
-        <Text>
-        Skip
-        </Text>
-        </TouchableOpacity>
+        <Text>Skip</Text>
+      </TouchableOpacity>
 
       <DotindictaorImg
         imageSource={require('../../assets/images/introimg1.png')}
@@ -50,7 +48,7 @@ const Intro = () => {
       />
       <View style={{marginTop: ScreenDimensions.screenHeight * 0.01}} />
       <Text style={styles.letfind}>
-        Let’s Find Your <Text style={styles.sweettxt}> Sweet &</Text>
+        Let’s Find Your <Text style={styles.sweettxt}>Sweet &</Text>
       </Text>
       <Text style={styles.dream}>Dream Place</Text>
       <Text style={styles.getoptuty}>
@@ -81,7 +79,7 @@ const styles = StyleSheet.create({
   },
   skiptxt: {
     textAlign: 'right',
-    alignSelf : 'flex-end',
+    alignSelf: 'flex-end',
     fontWeight: '400',
     fontSize: 16,
     // lineHeight: 20,

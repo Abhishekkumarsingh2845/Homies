@@ -33,7 +33,7 @@ const MainNavigation = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName={token ? 'DrawerNavigator' : 'AuthNavigator'}
+        initialRouteName={token ?  'DrawerNavigator' : 'DrawerNavigator'}
         screenOptions={{headerShown: false}}>
         {!token ? (
           <>

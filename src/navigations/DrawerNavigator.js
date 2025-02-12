@@ -9,7 +9,7 @@ import {
 import PrivacyPolicy from '../screens/drawerScreen/PrivacyPolicy';
 import TermsCondition from '../screens/drawerScreen/TermsCondition';
 import AboutUs from '../screens/drawerScreen/AboutUs';
-import Faq from '../screens/drawerScreen/Faq';
+import FAQ from '../screens/drawerScreen/Faq';
 import Refferal from '../screens/drawerScreen/Refferal';
 import RateReview from '../screens/drawerScreen/RateReview';
 import ContactUs from '../screens/drawerScreen/ContactUs';
@@ -24,6 +24,7 @@ import DocumentVerify from '../screens/drawerScreen/DocumentVerify';
 import {useSelector} from 'react-redux';
 import BottomTab from './BottomTab';
 import HomeNavigator from './HomeNavigator';
+import Home from '../screens/homeScreen/Home';
 
 const Drawer = createDrawerNavigator();
 
@@ -57,8 +58,8 @@ const drawerItems = [
     screen : 'AboutUs'
   },
   {
-    label : 'Faq',
-    screen : 'Faq'
+    label : 'FAQ',
+    screen : 'FAQ'
   },
   {
     label : 'Help',
@@ -115,6 +116,8 @@ const DrawerNavigator = () => {
       }}>
         <Drawer.Screen name="BottomTab" component={BottomTab} />
         <Drawer.Screen name="HomeNavigator" component={HomeNavigator} />
+      <Drawer.Screen name="Home" component={Home} />
+
       <Drawer.Screen
         name="ReferEarn"
         component={ReferEarn}
@@ -333,9 +336,10 @@ const DrawerNavigator = () => {
           )
         }}
       />
+
       <Drawer.Screen
-        name="Faq"
-        component={Faq}
+        name="FAQ"
+        component={FAQ}
         options={{
           // drawerIcon: () => (
           //   <Image

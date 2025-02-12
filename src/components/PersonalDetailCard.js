@@ -34,7 +34,7 @@ const PersonalDetailCard = () => {
         editIcon={<Feather name="edit-2" color={'#5F6368'} />}
         Icons={<Image source={Img.profileicon} style={styles.profileIcon} />}
         title="Name"
-        subtitle={user.name || 'No Name Avaiable'}
+        subtitle={user.name || 'No Name Available'}
         field='name'
       />
       <PersonalDetailElement

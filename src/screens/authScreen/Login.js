@@ -76,7 +76,9 @@ const Login = () => {
             <>
               <Text style={styles.phno}>Phone number</Text>
               <PrimaryTxtInp
+              maxlen={10}
                 value={values.phone}
+                keyboardType={"numeric"}
                 placeholder={'Enter your phone number'}
                 error={errors.phone}
                 setValue={setFieldValue}
@@ -96,22 +98,23 @@ const Login = () => {
                 Onpress={handleSubmit}
                 loading={loading}
               />
-
             </>
           );
         }}
       </Formik>
       <PrimaryBtn
-                txt={'Continue as a Guest'}
-                // Onpress={() => navigation.navigate('LoginSignup')}
-                clr={Color.primary}
-                bgcolor={Color.white}
-                brdcolor={Color.primary}
-                brdwdth={1.5}
-                Onpress={() => {navigation.navigate('DrawerNavigator')}}
-                // destination={'LoginSignup'}
-                mgntop={ScreenDimensions.screenHeight * 0.03}
-              />
+        txt={'Continue as a Guest'}
+        // Onpress={() => navigation.navigate('LoginSignup')}
+        clr={Color.primary}
+        bgcolor={Color.white}
+        brdcolor={Color.primary}
+        brdwdth={1.5}
+        Onpress={() => {
+          navigation.navigate('DrawerNavigator');
+        }}
+        // destination={'LoginSignup'}
+        mgntop={ScreenDimensions.screenHeight * 0.03}
+      />
       {/* <PrimaryBtn
         txt={'Log In'}
         clr={Color.white}

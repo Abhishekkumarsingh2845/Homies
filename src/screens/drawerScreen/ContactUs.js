@@ -24,7 +24,7 @@ const ContactUs = () => {
         setdata(response?.data[0].description);
       }
     } catch (error) {
-      console.log('Error', error?.reponse?.data , error.message);
+      console.log('Error', error?.reponse?.data, error.message);
     }
   };
 
