@@ -124,6 +124,10 @@
 //     // backgroundColor: 'red',
 //   },
 // });
+
+
+
+
 import {
   Image,
   ImageBackground,

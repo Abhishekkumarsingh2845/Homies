@@ -15,6 +15,7 @@ import Aligntext from '../../components/Aligntext';
 import {get} from '../../utlis/Api';
 import axios from 'axios';
 import {useSelector} from 'react-redux';
+import RenderHTML from 'react-native-render-html';
 const TermsCondition = () => {
   const [data, setDate] = useState(null);
   const {token} = useSelector(state => state.auth.user);
@@ -59,9 +60,14 @@ const TermsCondition = () => {
             <Text>Loading..</Text>
           ) : (
             <View style={styles.section}>
-              <Text style={styles.text}>
+              <RenderHTML
+                source={{
+                  html: data?.description || '<p>No content available</p>',
+                }}
+              />
+              {/* <Text style={styles.text}>
                 {data?.description || 'no term and condition'}
-              </Text>
+              </Text> */}
             </View>
           )}
         </View>

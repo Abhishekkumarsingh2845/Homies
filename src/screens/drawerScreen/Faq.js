@@ -17,7 +17,7 @@ import {ScreenDimensions} from '../../utlis/DimensionApi';
 import {get} from '../../utlis/Api';
 import {useSelector} from 'react-redux';
 
-const Faq = () => {
+const FAQ = () => {
   const navigation = useNavigation();
   const [data, setData] = useState(null); // Keep it null initially
   const [loading, setLoading] = useState(true);
@@ -79,7 +79,7 @@ const Faq = () => {
   );
 };
 
-export default Faq;
+export default FAQ;
 
 const styles = StyleSheet.create({
   container: {

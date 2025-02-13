@@ -25,7 +25,7 @@ const LogoutModal = ({
       const response = await post('logout', {}, token);
       if(response.success){
         setModalVisible(!modalVisible);
-        dispatch(clearUser({}))
+        dispatch(clearUser())
         naviagtion.navigate('AuthNavigator')
       }
       
@@ -43,7 +43,9 @@ const LogoutModal = ({
       const response = await put('deleteUserAccount', {}, token);
       if(response.success){
         setModalVisible(!modalVisible);
-        dispatch(clearUser({}))
+        dispatch(clearUser())
+        const dd= useSelector(state=>state.auth.user);
+        console.log("->>>>>>>>>>>>>>jjjj",dd);
         naviagtion.navigate('AuthNavigator')
       }
     } catch (error) {

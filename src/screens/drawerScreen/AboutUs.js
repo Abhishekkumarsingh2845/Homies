@@ -13,6 +13,7 @@ import {FontText} from '../../utlis/CustomFont';
 import {Color} from '../../utlis/Color';
 import {get} from '../../utlis/Api';
 import {useSelector} from 'react-redux';
+import RenderHTML from 'react-native-render-html';
 const AboutUs = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -54,9 +55,16 @@ const AboutUs = () => {
           <Text style={styles.text}>Loading...</Text>
         ) : (
           <View style={styles.section}>
-            <Text style={styles.text}>
+            <RenderHTML
+              source={{
+                html: data?.description || '<p>No content available</p>',
+              }}
+            />
+            {/* <Text style={styles.text}>
               {data?.description || 'no about us '}
+              
             </Text>
+             */}
           </View>
         )}
       </ScrollView>

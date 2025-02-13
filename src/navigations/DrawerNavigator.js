@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {
   createDrawerNavigator,
   DrawerContentScrollView,
@@ -15,11 +15,11 @@ import RateReview from '../screens/drawerScreen/RateReview';
 import ContactUs from '../screens/drawerScreen/ContactUs';
 import Help from '../screens/drawerScreen/Help';
 import ReferEarn from '../screens/drawerScreen/ReferEarn';
-import { Img } from '../utlis/ImagesPath';
+import {Img} from '../utlis/ImagesPath';
 import Profile from '../screens/drawerScreen/Profile';
-import { useNavigation } from '@react-navigation/native';
-import { FontText } from '../utlis/CustomFont';
-import { Color } from '../utlis/Color';
+import {useNavigation} from '@react-navigation/native';
+import {FontText} from '../utlis/CustomFont';
+import {Color} from '../utlis/Color';
 import DocumentVerify from '../screens/drawerScreen/DocumentVerify';
 import {useSelector} from 'react-redux';
 import BottomTab from './BottomTab';
@@ -28,80 +28,80 @@ import Home from '../screens/homeScreen/Home';
 
 const Drawer = createDrawerNavigator();
 
-const CustomDrawerContent = ({navigation} ) => {
+const CustomDrawerContent = ({navigation}) => {
   // const navigation = useNavigation();
-const user = useSelector(state => state.auth.user)
-const drawerItems = [
-  {
-    label : 'Referral & Earn',
-    screen : 'ReferEarn'
-  },
-  {
-    label : 'Rate & Review',
-    screen : 'RateReview'
-  },
-  {
-    label : 'Contact Us',
-    screen : 'ContactUs'
-  },
-  {
-    label : 'Privacy Policy',
-    screen : 'PrivacyPolicy'
-  },
+  const user = useSelector(state => state.auth.user);
+  const drawerItems = [
+    {
+      label: 'Referral & Earn',
+      screen: 'ReferEarn',
+    },
+    {
+      label: 'Rate & Review',
+      screen: 'RateReview',
+    },
+    {
+      label: 'Contact Us',
+      screen: 'ContactUs',
+    },
+    {
+      label: 'Privacy Policy',
+      screen: 'PrivacyPolicy',
+    },
 
-  {
-    label : 'Terms & Conditions',
-    screen : 'TermsCondition'
-  },
-  {
-    label : 'About Us',
-    screen : 'AboutUs'
-  },
-  {
-    label : 'FAQ',
-    screen : 'FAQ'
-  },
-  {
-    label : 'Help',
-    screen : 'Help'
-  },
-  {
-    label : 'Document Verify',
-    screen : 'DocumentVerify'
-  }
-]
+    {
+      label: 'Terms & Conditions',
+      screen: 'TermsCondition',
+    },
+    {
+      label: 'About Us',
+      screen: 'AboutUs',
+    },
+    {
+      label: 'FAQ',
+      screen: 'FAQ',
+    },
+    {
+      label: 'Help',
+      screen: 'Help',
+    },
+    {
+      label: 'Document Verify',
+      screen: 'DocumentVerify',
+    },
+  ];
   return (
-    <View style={{flex : 1}}>
+    <View style={{flex: 1}}>
       {/* Image Section */}
-  { user.token &&   <TouchableOpacity
-        style={styles.imageContainer}
-        onPress={() => navigation.navigate('Profile')}>
-        <Image
-          source={Img.profilepicicon} // Replace with your image path
-          style={styles.drawerImage}
-        />
-        <View>
-          <Text style={styles.imageText}>{user?.name}</Text>
-          <Text style={styles.emailText}>{user?.email}</Text>
-          <Text style={styles.viewprofileText}>View Profile</Text>
-        </View>
-      </TouchableOpacity>}
+      {user.token && (
+        <TouchableOpacity
+          style={styles.imageContainer}
+          onPress={() => navigation.navigate('Profile')}>
+          <Image
+            source={Img.profilepicicon} // Replace with your image path
+            style={styles.drawerImage}
+          />
+          <View>
+            <Text style={styles.imageText}>{user?.name}</Text>
+            <Text style={styles.emailText}>{user?.email}</Text>
+            <Text style={styles.viewprofileText}>View Profile</Text>
+          </View>
+        </TouchableOpacity>
+      )}
 
       {/* <DrawerItemList {...props} /> */}
 
-      {
-        drawerItems?.map((item , index) =>{
-          return       <TouchableOpacity key={index} onPress={() => navigation.navigate(item.screen)}
-          style={styles.drawerItem}>
-          <Text style={styles.drawerLabel}>{item.label}</Text>
-          <Image
-            source={Img.lefticon}
-            style={styles.drawerItemImage}
-          />
-        </TouchableOpacity>
-        }) 
-      }
-          
+      {drawerItems?.map((item, index) => {
+        return (
+          <TouchableOpacity
+            key={index}
+            onPress={() => navigation.navigate(item.screen)}
+            style={styles.drawerItem}>
+            <Text style={styles.drawerLabel}>{item.label}</Text>
+            <Image source={Img.lefticon} style={styles.drawerItemImage} />
+          </TouchableOpacity>
+        );
+      })}
     </View>
   );
 };
@@ -114,8 +114,8 @@ const DrawerNavigator = () => {
       screenOptions={{
         headerShown: false,
       }}>
-        <Drawer.Screen name="BottomTab" component={BottomTab} />
-        <Drawer.Screen name="HomeNavigator" component={HomeNavigator} />
+      <Drawer.Screen name="BottomTab" component={BottomTab} />
+      <Drawer.Screen name="HomeNavigator" component={HomeNavigator} />
       <Drawer.Screen name="Home" component={Home} />
 
       <Drawer.Screen
@@ -142,7 +142,7 @@ const DrawerNavigator = () => {
                 }}
               />
             </View>
-          )
+          ),
         }}
       />
       <Drawer.Screen
@@ -169,9 +169,9 @@ const DrawerNavigator = () => {
                 }}
               />
             </View>
-          )
+          ),
         }}
-      /> 
+      />
       <Drawer.Screen
         name="ContactUs"
         component={ContactUs}
@@ -209,7 +209,7 @@ const DrawerNavigator = () => {
                 }}
               />
             </View>
-          )
+          ),
         }}
       />
       <Drawer.Screen
@@ -251,7 +251,7 @@ const DrawerNavigator = () => {
                 }}
               />
             </View>
-          )
+          ),
         }}
       />
       <Drawer.Screen
@@ -293,7 +293,7 @@ const DrawerNavigator = () => {
                 }}
               />
             </View>
-          )
+          ),
         }}
       />
       <Drawer.Screen
@@ -333,7 +333,7 @@ const DrawerNavigator = () => {
                 }}
               />
             </View>
-          )
+          ),
         }}
       />
 
@@ -374,7 +374,7 @@ const DrawerNavigator = () => {
                 }}
               />
             </View>
-          )
+          ),
         }}
       />
 
@@ -415,7 +415,7 @@ const DrawerNavigator = () => {
                 }}
               />
             </View>
-          )
+          ),
         }}
       />
       <Drawer.Screen
@@ -457,7 +457,7 @@ const DrawerNavigator = () => {
                 }}
               />
             </View>
-          )
+          ),
         }}
       />
     </Drawer.Navigator>
@@ -508,20 +508,19 @@ const styles = StyleSheet.create({
     color: Color.black,
   },
 
-  drawerItem : {
+  drawerItem: {
     borderBottomWidth: 1,
     justifyContent: 'center',
     paddingVertical: 8,
-    marginHorizontal : 15,
-    marginVertical : 10,
+    marginHorizontal: 15,
+    marginVertical: 10,
     borderColor: '#D9D9D9',
   },
-  drawerItemImage : {
+  drawerItemImage: {
     width: 12,
     height: 12,
     resizeMode: 'contain',
     position: 'absolute',
     right: 5,
-  }
-
+  },
 });

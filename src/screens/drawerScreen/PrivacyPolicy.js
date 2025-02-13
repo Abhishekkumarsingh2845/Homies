@@ -12,14 +12,12 @@ import {FontText} from '../../utlis/CustomFont';
 import {Color} from '../../utlis/Color';
 import {get} from '../../utlis/Api';
 import {useSelector} from 'react-redux';
+import RenderHTML from 'react-native-render-html';
 
 const PrivacyPolicy = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const {token} = useSelector(state => state.auth.user);
-
-  // const token =
-  //   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzYwMGJmYWRlMTdlNWRiNzEzOTYyODUiLCJpYXQiOjE3MzQ1OTQ4NzF9.6MvhJVvtCCTdWiqANEFF7GBshBi3-19AV4INZNUgJTA';
 
   const fetchPrivacyPolicy = async () => {
     setLoading(true);
@@ -51,9 +49,11 @@ const PrivacyPolicy = () => {
           <Text>Loading..</Text>
         ) : (
           <View style={styles.section}>
-            <Text style={styles.text}>
-              {data?.description || 'Description not provided'}
-            </Text>
+            <RenderHTML
+              source={{
+                html: data?.description || '<p>No content available</p>',
+              }}
+            />
           </View>
         )}
       </ScrollView>
@@ -82,3 +82,8 @@ const styles = StyleSheet.create({
     color: '#7D7D7D',
   },
 });
+{
+  /* <Text style={styles.text}>
+              {data?.description || 'Description not provided'}
+            </Text> */
+}
