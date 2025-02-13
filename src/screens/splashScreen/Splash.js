@@ -4,12 +4,12 @@ import {Img} from '../../utlis/ImagesPath';
 import {useNavigation} from '@react-navigation/native';
 
 const Splash = ({navigation}) => {
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      navigation.replace('Intro');
-    }, 3000);
-    return () => clearTimeout(timer);
-  }, [navigation]);
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     navigation.replace('Login');
+  //   }, 3000);
+  //   return () => clearTimeout(timer);
+  // }, [navigation]);
   return (
     <ImageBackground
       source={Img.splashscr}

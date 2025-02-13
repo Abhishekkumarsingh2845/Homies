@@ -24,6 +24,17 @@ import DocumentVerify from '../screens/drawerScreen/DocumentVerify';
 import {useSelector} from 'react-redux';
 import BottomTab from './BottomTab';
 import HomeNavigator from './HomeNavigator';
+import Home from '../screens/homeScreen/Home';
+import AllHome from '../screens/homeScreen/AllHome';
+import BookMark from '../screens/homeScreen/BookMark';
+import SortbyScreen from '../screens/homeScreen/SortbyScreen';
+import LocationSearch from '../screens/homeScreen/LocationSearch';
+import Notification from '../screens/homeScreen/Notification';
+import FilterScreen from '../screens/homeScreen/FilterScreen';
+import PropertyDetail from '../screens/homeScreen/PropertyDetail';
+import PaymentForm from '../screens/paymentScreen/PaymentForm';
+import HostelRentOut from '../screens/homeScreen/HostelRentOut';
+import PaymentHomeForm from '../screens/homeScreen/PaymentHomeForm';
 
 const Drawer = createDrawerNavigator();
 
@@ -456,6 +467,20 @@ const DrawerNavigator = () => {
           )
         }}
       />
+
+
+<Drawer.Screen name="Home" component={Home} />
+      <Drawer.Screen name="AllHome" component={AllHome} />
+      <Drawer.Screen name="BookMark" component={BookMark} />
+      <Drawer.Screen name="SortbyScreen" component={SortbyScreen} />
+      <Drawer.Screen name="LocationSearch" component={LocationSearch} />
+      {/* <Stack.Screen name="HostelRentOut" component={HostelRentOut} /> */}
+      <Drawer.Screen name="Notification" component={Notification} />
+      <Drawer.Screen name="FilterScreen" component={FilterScreen} />
+      <Drawer.Screen name="PropertyDetail" component={PropertyDetail} />
+      <Drawer.Screen name="PaymentForm" component={PaymentForm} />
+      <Drawer.Screen name="HostelRentOut" component={HostelRentOut} />
+      <Drawer.Screen name="PaymentHomeForm" component={PaymentHomeForm} />
     </Drawer.Navigator>
   );
 };

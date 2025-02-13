@@ -26,7 +26,7 @@ const LogoutModal = ({
       if(response.success){
         setModalVisible(!modalVisible);
         dispatch(clearUser({}))
-        // naviagtion.navigate('AuthNavigator')
+        // navigation.navigate('AuthNavigator') 
 
         navigation.reset({
           index: 0,
@@ -54,7 +54,15 @@ const LogoutModal = ({
       if(response.success){
         setModalVisible(!modalVisible);
         dispatch(clearUser({}))
-        naviagtion.navigate('AuthNavigator')
+        // naviagtion.navigate('AuthNavigator')
+        navigation.reset({
+          index: 0,
+          routes: [
+              {
+                  name: 'Login'
+              }
+          ]
+      })
       }
     } catch (error) {
       console.log(

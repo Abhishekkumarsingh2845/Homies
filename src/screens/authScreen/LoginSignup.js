@@ -68,8 +68,8 @@ const LoginSignup = () => {
       try {
         const response = await post('login', {phone: phoneNo});
         if (response?.success) {
-          dispatch(setUser(response));
-          navigation.navigate('OtpVerify', {isExist: isExist});
+          // dispatch(setUser(response));
+          navigation.navigate('OtpVerify', {isExist: isExist , response : response});
         }
       } catch (error) {
         console.log('error in sign up submit --', error);

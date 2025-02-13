@@ -23,6 +23,8 @@ import Login from '../screens/authScreen/Login';
 import LoginSignup from '../screens/authScreen/LoginSignup';
 import SignUp from '../screens/authScreen/SignUp';
 import OtpVerify from '../screens/authScreen/OtpVerify';
+import Splash from '../screens/splashScreen/Splash';
+import Intro from '../screens/authScreen/Intro';
 
 const MainNavigation = () => {
   const {token} = useSelector((state) => state.auth.user)
@@ -33,11 +35,11 @@ const MainNavigation = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName={token ? 'DrawerNavigator' : 'AuthNavigator'}
+        initialRouteName={token ? 'DrawerNavigator' : 'Login'}
         screenOptions={{headerShown: false}}>
         {!token ? (
           <>
-            <Stack.Screen name="AuthNavigator" component={AuthNavigator} />
+            {/* <Stack.Screen name="AuthNavigator" component={AuthNavigator} /> */}
             {/* <Stack.Screen name="HomeNavigator" component={HomeNavigator} /> */}
             {/* <Stack.Screen name="BottomTab" component={BottomTab} /> */}
             <Stack.Screen
@@ -48,6 +50,9 @@ const MainNavigation = () => {
           <Stack.Screen name="LoginSignup" component={LoginSignup} />
           <Stack.Screen name="SignUp" component={SignUp} />
           <Stack.Screen name="OtpVerify" component={OtpVerify} />
+
+          <Stack.Screen name="Splash" component={Splash} />
+          <Stack.Screen name="Intro" component={Intro} />
         
 
 
