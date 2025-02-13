@@ -21,6 +21,7 @@ import {Provider} from 'react-redux';
 import store, { persistor } from './src/store/Store';
 import Toast from 'react-native-toast-message';
 import { PersistGate } from 'redux-persist/integration/react';
+import Splash from './src/screens/splashScreen/Splash';
 
 
 
@@ -102,12 +103,23 @@ const App = () => {
     }
   };
 
+
+  const [showSplash, setShowSplash] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowSplash(false);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, []);
   return (
     <Provider store={store}>
          <PersistGate loading={null} persistor={persistor}>
       <View style={styles.container}>
         <StatusBar backgroundColor={'white'} barStyle={'dark-content'} />
-        <MainNavigation />
+        {/* <Splash/> */}
+        {showSplash ? <Splash /> : <MainNavigation />}
+        
         <Toast/>
       </View>
       </PersistGate>

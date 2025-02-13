@@ -17,7 +17,7 @@ const LogoutModal = ({
   setModalType ,
 }) => {
   const dispatch = useDispatch();
-  const naviagtion=useNavigation();
+  const navigation=useNavigation();
   const {token} = useSelector(state => state.auth.user);
 
   const logoutUser = async () => {
@@ -25,8 +25,18 @@ const LogoutModal = ({
       const response = await post('logout', {}, token);
       if(response.success){
         setModalVisible(!modalVisible);
-        dispatch(clearUser())
-        naviagtion.navigate('AuthNavigator')
+        dispatch(clearUser({}))
+        // navigation.navigate('AuthNavigator') 
+
+        navigation.reset({
+          index: 0,
+          routes: [
+              {
+                  name: 'Login'
+              }
+          ]
+      })
+
       }
       
     } catch (error) {
@@ -43,10 +53,16 @@ const LogoutModal = ({
       const response = await put('deleteUserAccount', {}, token);
       if(response.success){
         setModalVisible(!modalVisible);
-        dispatch(clearUser())
-        const dd= useSelector(state=>state.auth.user);
-        console.log("->>>>>>>>>>>>>>jjjj",dd);
-        naviagtion.navigate('AuthNavigator')
+        dispatch(clearUser({}))
+        // naviagtion.navigate('AuthNavigator')
+        navigation.reset({
+          index: 0,
+          routes: [
+              {
+                  name: 'Login'
+              }
+          ]
+      })
       }
     } catch (error) {
       console.log(
