@@ -1,27 +1,25 @@
-import { Platform, StyleSheet, Text, TextInput, View } from 'react-native';
+import {Platform, StyleSheet, Text, TextInput, View} from 'react-native';
 import React from 'react';
-import { Color } from '../utlis/Color';
-import { FontText } from '../utlis/CustomFont';
+import {Color} from '../utlis/Color';
+import {FontText} from '../utlis/CustomFont';
 
-const PrimaryTxtInp = ({ value,
+const PrimaryTxtInp = ({
+  value,
   placeholder,
   error,
   setValue,
   name,
   label,
   mrgtop,
-  maxlen, 
-  keyboardType}) => {
-
-
-  const onChange = (value) => {
+  maxlen,
+  keyboardType,
+}) => {
+  const onChange = value => {
     setValue(name, value);
-
-
-  }
+  };
   return (
     <>
-      <View style={[styles.container, { marginTop: mrgtop }]}>
+      <View style={[styles.container, {marginTop: mrgtop}]}>
         <TextInput
           value={value}
           onChangeText={onChange}
@@ -31,11 +29,8 @@ const PrimaryTxtInp = ({ value,
           keyboardType={keyboardType}
           maxLength={maxlen}
         />
-
       </View>
-      {
-        error && <Text style={styles.errorText} >{error}</Text>
-      }
+      {error && <Text style={styles.errorText}>{error}</Text>}
     </>
   );
 };
@@ -58,8 +53,8 @@ const styles = StyleSheet.create({
     color: Color.clr87,
   },
   errorText: {
-    color: "red",
+    color: 'red',
     fontSize: 11,
-    textTransform: 'uppercase'
+    // textTransform: 'uppercase'
   },
 });

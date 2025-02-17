@@ -28,34 +28,70 @@ import Pool from 'react-native-vector-icons/MaterialIcons';
 import CalendarModal from '../../components/Calendarcmp';
 import RequestSentBtnSht from '../../components/RequestSentBtnSht';
 import GuestModal from '../../components/GuestModal';
-import { useSelector } from 'react-redux';
+import {useSelector} from 'react-redux';
+import {post} from '../../utlis/Api';
 // import {Image} from 'react-native-svg';
 const PropertyDetail = () => {
   const navigation = useNavigation();
   const [isModalVisible, setModalVisible] = useState(false);
-  const [showGuestModal , setShowGuestModal] = useState(false)
-  const {token} = useSelector(state => state.auth.user)
-  
+  const [showGuestModal, setShowGuestModal] = useState(false);
+  const {token} = useSelector(state => state.auth.user);
+
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
 
-  const bottomSheetRef = useRef(null); // Create a reference for the bottom sheet
+  const bottomSheetRef = useRef(null);
 
-  // Function to open the bottom sheet
-  const handleRequestSent = () => {
-    console.log('Button Pressed!');
-    bottomSheetRef.current?.open(); // Call the open function
+
+  const handleVistRequest = async () => {
+    const data = {
+      propertyId: '6773a32551be0fa4b0c3d95f',
+      visitDate: '2025-01-15T10:30:00.000Z',
+      visitTime: '2025-01-15T11:00:00.000Z',
+      landLordId: '6773972194f1b2bc916447e6',
+    };
+    try {
+      const response = await post('visitRequest', data);
+      console.log('response of the visitRequest API ', response);
+    } catch (error) {
+      console.log(
+        'error in visitRequest API',
+        error.message || error?.response?.data,
+      );
+    }
   };
 
-  useEffect(() =>{
-    console.log("tpken========" , token)
-    if(!token){
-      setShowGuestModal(true)
-    }else{
-      setShowGuestModal(false)
+  const handleVistBtn = () => {
+    handleVistRequest();
+    handlePayNow();
+    setModalVisible(!isModalVisible);
+  };
+  const handlePayNow = async () => {
+    const data = {
+      propertyId: '67ab1c2a395fe63ce5fa9521',
+      userId: '67a238e4e86cb4cef27227aa',
+      landLordId: '67a6e680f466c174a36625ea',
+    };
+    try {
+      const response = await post('payNow', data);
+      console.log('response of the payNow API ', response);
+    } catch (error) {
+      console.log(
+        'error in payNow API',
+        error.message || error?.response?.data,
+      );
     }
-  },[])
+  };
+
+  useEffect(() => {
+    console.log('tpken========', token);
+    if (!token) {
+      setShowGuestModal(true);
+    } else {
+      setShowGuestModal(false);
+    }
+  }, []);
   return (
     <View style={styles.container}>
       <SafeAreaView />
@@ -110,7 +146,7 @@ const PropertyDetail = () => {
           <PermonthRent />
           <VisitRequestbtn
             // OnPaynowprs={handleRequestSent}
-            Onprs={toggleModal}
+            Onprs={() => handleVistBtn()}
           />
           {/* <SignUpModal /> */}
           <CalendarModal
@@ -125,11 +161,14 @@ const PropertyDetail = () => {
             isVisible={isModalVisible}
           />
           <RequestSentBtnSht ref={bottomSheetRef} />
-          
+
           <View style={{marginVertical: 80}} />
         </View>
       </ScrollView>
-      <GuestModal modalVisible={showGuestModal} setModalVisible={setShowGuestModal}/>
+      <GuestModal
+        modalVisible={showGuestModal}
+        setModalVisible={setShowGuestModal}
+      />
     </View>
   );
 };

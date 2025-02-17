@@ -8,15 +8,13 @@ const YesNoBtn = ({
   borderColor,
   borderWidth,
   onPress,
+  loading,
 }) => {
   return (
     <TouchableOpacity
-      style={[
-        styles.container,
-        {backgroundColor, borderColor, borderWidth},
-      ]}
+      style={[styles.container, {backgroundColor, borderColor, borderWidth}]}
       onPress={onPress}
-    >
+      disabled={loading ? true : false}>
       <Text style={[styles.txt, {color: textColor}]}>{text}</Text>
     </TouchableOpacity>
   );

@@ -42,7 +42,7 @@ const SignUp = () => {
       const response = await post('login', data);
       if (response?.success) {
         dispatch(setUser(response));
-        navigation.navigate('HomeNavigator');
+        navigation.navigate('DrawerNavigator');
       }
     } catch (error) {
       console.log('error in sign up submit', error);

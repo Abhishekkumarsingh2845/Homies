@@ -7,62 +7,66 @@ import {FontText} from '../utlis/CustomFont';
 import {post, put} from '../utlis/Api';
 import {useDispatch, useSelector} from 'react-redux';
 import {clearToken, clearUser, setExist} from '../store/AuthSlice';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 
 const LogoutModal = ({
   modalVisible,
   setModalVisible,
   msg = 'Are you Sure leave the Property',
-  modalType ,
-  setModalType ,
+  modalType,
+  setModalType,
 }) => {
   const dispatch = useDispatch();
-  const navigation=useNavigation();
+  const navigation = useNavigation();
+  const [loading, setLoading] = useState(false);
   const {token} = useSelector(state => state.auth.user);
 
   const logoutUser = async () => {
+    setLoading(true);
     try {
       const response = await post('logout', {}, token);
-      if(response.success){
+      if (response.success) {
         setModalVisible(!modalVisible);
-        dispatch(clearUser({}))
-        // navigation.navigate('AuthNavigator') 
+        dispatch(clearUser({}));
+        // navigation.navigate('AuthNavigator')
 
         navigation.reset({
           index: 0,
           routes: [
-              {
-                  name: 'Login'
-              }
-          ]
-      })
-
+            {
+              name: 'Login',
+            },
+          ],
+        });
       }
-      
-    } catch (error) {
+    } 
+    catch (error) {
       console.log(
         'error in logout post Api',
         error?.reponse?.data || error.message,
       );
     }
-    setModalType('')
+    finally {
+      setLoading(false);
+    }
+    setModalType('');
   };
 
   const deleteuser = async () => {
     try {
       const response = await put('deleteUserAccount', {}, token);
-      if(response.success){
+      if (response.success) {
         setModalVisible(!modalVisible);
-        dispatch(clearUser({}))
+        dispatch(clearUser({}));
         // naviagtion.navigate('AuthNavigator')
         navigation.reset({
           index: 0,
           routes: [
-              {
-                  name: 'Login'
-              }
-          ]
-      })
+            {
+              name: 'Login',
+            },
+          ],
+        });
       }
     } catch (error) {
       console.log(
@@ -70,8 +74,7 @@ const LogoutModal = ({
         error?.reponse?.data || error.message,
       );
     }
-    setModalType('')
-
+    setModalType('');
   };
 
   // useEffect(() => {
@@ -91,15 +94,15 @@ const LogoutModal = ({
           <Text style={styles.modalText}>{msg}</Text>
           <View style={styles.btncontainer}>
             <YesNoBtn
+              loading={loading}
               text="Yes"
               backgroundColor={Color.btnclr}
               textColor={Color.white}
               borderColor="green"
               onPress={() => {
-                modalType == 'logout' ?
-                logoutUser(): deleteuser()
+                modalType == 'logout' ? logoutUser() : deleteuser();
                 // naviagtion.navigate("AuthNavigator");
-                // dispatch(clearToken(token)); 
+                // dispatch(clearToken(token));
                 // setModalVisible(!modalVisible);
               }}
             />

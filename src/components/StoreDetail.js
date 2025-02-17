@@ -5,22 +5,25 @@ import Location from 'react-native-vector-icons/Entypo';
 import Phone from 'react-native-vector-icons/Feather';
 import {FontText} from '../utlis/CustomFont';
 import {Color} from '../utlis/Color';
-const StoreDetail = () => {
+const StoreDetail = ({strdetail}) => {
   return (
     <View style={styles.container}>
       <Image source={Img.storeimgicon} style={styles.imgstyle} />
       <View style={styles.detailcontainer}>
-        <Text style={styles.namextx}> Fresh Express </Text>
+        {/* <Text style={styles.namextx}> Fresh Express </Text> */}
+        <Text style={styles.namextx}>{strdetail?.name} </Text>
         <View style={styles.addressdetail}>
           <Location name="location-pin" size={16} color={'#FF9457'} />
-          <Text style={styles.addresstxt}>
+          {/* <Text style={styles.addresstxt}>
             kazi Deiry, Taiger PassChttagong
-          </Text>
+          </Text> */}
+          <Text style={styles.addresstxt}>{strdetail?.address}</Text>
         </View>
 
         <View style={styles.phonedetail}>
           <Phone name="phone-call" size={15} color={'#FF9457'} />
-          <Text style={styles.phonetxt}>+91-8765894326</Text>
+          {/* <Text style={styles.phonetxt}>+91-8765894326</Text> */}
+          <Text style={styles.phonetxt}>{strdetail?.phone}</Text>
         </View>
       </View>
     </View>

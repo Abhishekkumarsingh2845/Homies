@@ -60,7 +60,7 @@ const Intro = () => {
         destination={'Login'}
         clr={Color.white}
         bgcolor={Color.primary}
-        mgntop={ScreenDimensions.screenHeight * 0.07}
+        mgntop={ScreenDimensions.screenHeight * 0.12}
         Onpress={() => handleNext()}
       />
       <View style={{marginBottom: 50}}></View>

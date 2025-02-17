@@ -57,16 +57,15 @@ import {
   View,
 } from 'react-native';
 import React from 'react';
-import { Img } from '../utlis/ImagesPath';
-import { Color } from '../utlis/Color';
-import { FontText } from '../utlis/CustomFont';
+import {Img} from '../utlis/ImagesPath';
+import {Color} from '../utlis/Color';
+import {FontText} from '../utlis/CustomFont';
 
-const SortByBtn = ({ mrntop, onPress }) => {
-
-
-  
+const SortByBtn = ({mrntop, onPress}) => {
   return (
-    <TouchableOpacity style={[styles.container, { marginTop: mrntop }]} onPress={onPress}>
+    <TouchableOpacity
+      style={[styles.container, {marginTop: mrntop}]}
+      onPress={onPress}>
       <Text style={styles.sortByText}>Sort By</Text>
       <Image source={Img.sortbyicon} style={styles.sortByStyle} />
     </TouchableOpacity>
@@ -86,7 +85,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: Platform.OS === 'android' ? 18 : 15,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
+    shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.2,
     shadowRadius: 4,
     elevation: 10,

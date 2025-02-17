@@ -18,6 +18,7 @@ const CalendarModal = ({isVisible, toggleModal, Submitbtn}) => {
             <Calendar
               onDayPress={day => {
                 setSelected(day.dateString);
+                console.log('Selected Date:', day.dateString);
                 // toggleModal(); // Close the modal after selecting a date
               }}
               markedDates={{

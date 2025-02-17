@@ -127,7 +127,6 @@
 
 
 
-
 import {
   Image,
   ImageBackground,

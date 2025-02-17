@@ -1,4 +1,5 @@
 import {
+  FlatList,
   RefreshControl,
   SafeAreaView,
   ScrollView,
@@ -58,20 +59,27 @@ const FAQ = () => {
       />
 
       <View style={styles.subcontainer}>
-        {data
-          ? data.map((item, index) => (
-              <Faquestion
-                key={item.id}
-                question={item.question}
-                answer={item.answer}
-              />
-            ))
-          : null}
+        <FlatList
+          showsHorizontalScrollIndicator={false}
+          showsVerticalScrollIndicator={false}
+          data={data}
+          keyExtractor={(item, index) =>
+            item?.id ? item.id.toString() : index.toString()
+          }
+          renderItem={({item}) => (
+            <Faquestion question={item.question} answer={item.answer} />
+          )}
+          ListEmptyComponent={<Text>No FAQs available</Text>}
+          // ListFooterComponent={
+
+          // }
+        />
 
         <PrimaryBtn
+        marVer={30}
           bgcolor={Color.btnclr}
           txt={'Raise a Query'}
-          mgntop={ScreenDimensions.screenHeight * 0.23}
+          // mgntop={ScreenDimensions.screenHeight * 0.12} // Adjust margin
           destination={'Help'}
         />
       </View>
@@ -88,5 +96,9 @@ const styles = StyleSheet.create({
   },
   subcontainer: {
     paddingHorizontal: 20,
+
+
+    // backgroundColor : 'red',
+    flex: 1,
   },
 });

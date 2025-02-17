@@ -63,13 +63,6 @@
 //   },
 // });
 
-
-
-
-
-
-
-
 import {
   Image,
   Platform,
@@ -78,30 +71,37 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {Img} from '../utlis/ImagesPath';
-import { useNavigation } from '@react-navigation/native';
-import { FontText } from '../utlis/CustomFont';
-import { Color } from '../utlis/Color';
+import {useNavigation} from '@react-navigation/native';
+import {FontText} from '../utlis/CustomFont';
+import {Color} from '../utlis/Color';
 import SortByModal from './SortBymodal';
 
-const SearchBar = ({ placeholderText = 'Find Property', containerBgColor = '#EFEFEF',destination}) => {
-   const navigation = useNavigation();
-   const [modalVisible, setModalVisible] = useState(false);
-   
-     const openModal = () => setModalVisible(true);
-     const closeModal = () => setModalVisible(false);
-   
-  
-    const handleNavigation = () => {
-      if (destination) {
-        navigation.navigate(destination);
-      }
-    };
-  
+const SearchBar = ({
+  placeholderText = 'Find Property',
+  containerBgColor = '#EFEFEF',
+  destination,
+}) => {
+  const navigation = useNavigation();
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const openModal = () => setModalVisible(true);
+  const closeModal = () => setModalVisible(false);
+
+  const handleNavigation = () => {
+    if (destination) {
+      navigation.navigate(destination);
+    }
+  };
+
+  const handleSearchNavigation = () => {
+    navigation.navigate("FilterScreen");
+  };
   return (
     <TouchableOpacity
-      style={[styles.container, {backgroundColor: containerBgColor}]}   onPress={handleNavigation} >
+      style={[styles.container, {backgroundColor: containerBgColor}]}
+      onPress={handleNavigation}>
       <TouchableOpacity>
         <Image source={Img.srch} style={styles.searchicon} />
       </TouchableOpacity>
@@ -112,13 +112,13 @@ const SearchBar = ({ placeholderText = 'Find Property', containerBgColor = '#EFE
         onFocus={handleNavigation}
       />
 
-      <TouchableOpacity  onPress={openModal}>
+      <TouchableOpacity onPress={()=>handleSearchNavigation()}>
         <Image source={Img.sttng} style={styles.setting} />
       </TouchableOpacity>
       <SortByModal
-          closemodal={closeModal}
-          openthemodal={modalVisible} // Pass the modal visibility
-        />
+        closemodal={closeModal}
+        openthemodal={modalVisible} // Pass the modal visibility
+      />
     </TouchableOpacity>
   );
 };
@@ -130,9 +130,9 @@ const styles = StyleSheet.create({
     flex: 1,
     marginLeft: 10,
     fontSize: 16,
-    fontFamily:FontText.light,
-    color:Color.clr73,
-    lineHeight:18,
+    fontFamily: FontText.light,
+    color: Color.clr73,
+    lineHeight: 18,
     fontWeight: '400',
     lineHeight: 18,
   },

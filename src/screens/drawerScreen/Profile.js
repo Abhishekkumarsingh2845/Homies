@@ -9,59 +9,65 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, { useState } from 'react';
-import { Img } from '../../utlis/ImagesPath';
+import React, {useState} from 'react';
+import {Img} from '../../utlis/ImagesPath';
 import PersonalDetailCard from '../../components/PersonalDetailCard';
 import SeeAllDocument from '../../components/SeeAllDocument';
 import Logout from 'react-native-vector-icons/MaterialIcons';
-import { FontText } from '../../utlis/CustomFont';
-import { Color } from '../../utlis/Color';
+import {FontText} from '../../utlis/CustomFont';
+import {Color} from '../../utlis/Color';
 import SecondaryHeader from '../../components/SecondaryHeader';
 import LogoutModal from '../../components/LogoutModal';
-import { useNavigation } from '@react-navigation/native';
-import { useDispatch, useSelector } from 'react-redux';
-import { openGallery, uploadImageUrl } from '../../utlis/ImageHandler';
-import { post } from '../../utlis/Api';
-import { setUser } from '../../store/AuthSlice';
+import {useNavigation} from '@react-navigation/native';
+import {useDispatch, useSelector} from 'react-redux';
+import {
+  openCamera,
+  openGallery,
+  uploadImageUrl,
+} from '../../utlis/ImageHandler';
+import {post} from '../../utlis/Api';
+import {setUser} from '../../store/AuthSlice';
 const Profile = () => {
   const [modalVisible, setModalVisible] = useState(false);
-  const user = useSelector((state) => state.auth.user)
-  console.log("user ================= > ", user)
+  const user = useSelector(state => state.auth.user);
+  console.log('user ================= > ', user);
   const [modalMsg, setModalMsg] = useState('');
   const navigation = useNavigation();
-  const [modalType, setModalType] = useState('')
+  const [modalType, setModalType] = useState('');
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const toggleModal = (message, type) => {
     setModalMsg(message);
     setModalVisible(!modalVisible);
-    setModalType(type)
+    setModalType(type);
   };
-
 
   const dimensions = {
     screenWidth: Dimensions.get('screen').width,
-    screenHeight: Dimensions.get('screen').height
-
-  }
+    screenHeight: Dimensions.get('screen').height,
+  };
 
   const galleryFunc = async () => {
-    let res = await openGallery()
-    console.log("res--------------", res.response[0].uri)
+    let res = await openCamera();
+    console.log('res--------------', res.response[0].uri);
     if (res.status) {
       const data = {
         uri: res.response[0].uri,
         name: 'image.jpg',
         type: 'image/jpeg',
-      }
-      let imageRes = await uploadImageUrl(data)
-      console.log("image data ======", imageRes)
+      };
+      let imageRes = await uploadImageUrl(data);
+      console.log('image data ======', imageRes);
       if (imageRes.status) {
         try {
-          const response = await post('updateProfile', {
-            profileImage : imageRes?.imageUrl
-          }, user.token);
-          console.log("value====== res 1111", response)
+          const response = await post(
+            'updateProfile',
+            {
+              profileImage: imageRes?.imageUrl,
+            },
+            user.token,
+          );
+          console.log('value====== res 1111', response);
           if (response?.success) {
             dispatch(setUser(response));
             // navigation.navigate('HomeNavigator');
@@ -71,7 +77,7 @@ const Profile = () => {
         }
       }
     }
-  }
+  };
   return (
     <View style={styles.container}>
       <SafeAreaView />
@@ -87,19 +93,28 @@ const Profile = () => {
           onPress={() => navigation.navigate('DrawerNavigator')}>
           <Image source={Img.goback} style={styles.gobackstyle} />
         </TouchableOpacity>
-        <View style={[styles.circle, {
-          width: dimensions.screenWidth * 0.5,
-          height: dimensions.screenWidth * 0.5, marginTop: dimensions.screenHeight * 0.1
-        }]}>
+        <View
+          style={[
+            styles.circle,
+            {
+              width: dimensions.screenWidth * 0.5,
+              height: dimensions.screenWidth * 0.5,
+              marginTop: dimensions.screenHeight * 0.1,
+            },
+          ]}>
           <Image
-            source={{uri : user?.profileImage}}
-            style={{ width: '90%', height: '90%', borderRadius: 100 , backgroundColor : 'black'}}
-            resizeMode='contain'
+            source={{uri: user?.profileImage}}
+            style={{
+              width: '90%',
+              height: '90%',
+              borderRadius: 100,
+              backgroundColor: 'black',
+            }}
+            resizeMode="contain"
           />
-          <TouchableOpacity onPress={galleryFunc} style={{ position: 'absolute',
-                right: 30,
-                bottom: 5,}}>
-
+          <TouchableOpacity
+            onPress={galleryFunc}
+            style={{position: 'absolute', right: 30, bottom: 5}}>
             <Image
               source={Img.editicon}
               style={{
@@ -113,14 +128,19 @@ const Profile = () => {
               }}
             />
           </TouchableOpacity>
-
         </View>
       </ImageBackground>
 
-      <Text style={[styles.profileText, { marginTop: dimensions.screenHeight * 0.11 }]}>Room No- 001</Text>
+      <Text
+        style={[
+          styles.profileText,
+          {marginTop: dimensions.screenHeight * 0.11},
+        ]}>
+        Room No- 001
+      </Text>
       <PersonalDetailCard />
       <SeeAllDocument />
-      <View style={{ paddingHorizontal: 20 }}>
+      <View style={{paddingHorizontal: 20}}>
         <View
           style={{
             flexDirection: 'row',
@@ -129,7 +149,9 @@ const Profile = () => {
           }}>
           <Logout name="logout" size={20} />
           <TouchableOpacity
-            onPress={() => toggleModal('Are you Sure Logout the Property', 'logout')}>
+            onPress={() =>
+              toggleModal('Are you Sure Logout the Property', 'logout')
+            }>
             <Text
               style={{
                 fontSize: 18,
@@ -142,8 +164,7 @@ const Profile = () => {
             </Text>
           </TouchableOpacity>
         </View>
-        <TouchableOpacity
-          onPress={() => { }}>
+        <TouchableOpacity onPress={() => {}}>
           <Text
             style={{
               fontSize: 18,
@@ -155,7 +176,9 @@ const Profile = () => {
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => toggleModal('Are you Sure delete Your Account', ' delete')}>
+          onPress={() =>
+            toggleModal('Are you Sure delete Your Account', ' delete')
+          }>
           <Text
             style={{
               fontSize: 18,

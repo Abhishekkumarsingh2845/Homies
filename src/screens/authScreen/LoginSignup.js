@@ -1,4 +1,3 @@
-
 import {
   Image,
   StyleSheet,
@@ -55,25 +54,34 @@ const LoginSignup = () => {
         position: 'bottom',
       });
       return; // Stop further execution
-    }
-
-    if (!isExist) {
-    console.log("isExist====" , isExist)
-      navigation.navigate('SignUp');
-      return
-    }
-    if (otp?.join('') == originalOtp) {
+    } else if (!isExist) {
+      if (otp?.join('') !== originalOtp) {
+        Toast.show({
+          type: 'error',
+          text1: 'Error',
+          text2: `Incorrect Otp`,
+          position: 'bottom',
+        });
+      } else {
+        console.log('isExist====', isExist);
+        navigation.navigate('SignUp');
+        return;
+      }
+    } else if (otp?.join('') == originalOtp) {
       console.log('if otp=====');
 
       try {
         const response = await post('login', {phone: phoneNo});
         if (response?.success) {
           // dispatch(setUser(response));
-          navigation.navigate('OtpVerify', {isExist: isExist , response : response});
+          navigation.navigate('OtpVerify', {
+            isExist: isExist,
+            response: response,
+          });
         }
       } catch (error) {
         console.log('error in sign up submit --', error);
-      } 
+      }
     } else {
       Toast.show({
         type: 'error',
@@ -117,7 +125,6 @@ const LoginSignup = () => {
         mgntop={20}
       />
       <Toast />
-
     </View>
   );
 };

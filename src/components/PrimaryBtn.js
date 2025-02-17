@@ -13,6 +13,7 @@ const PrimaryBtn = ({
   mgntop,
   mrgnbm,
   Onpress,
+  marVer,
   loading = false
 }) => {
   const navigation = useNavigation();
@@ -33,6 +34,7 @@ const PrimaryBtn = ({
           borderWidth: brdwdth, // Dynamically set border width
           marginTop: mgntop,
           marginBottom: mrgnbm,
+          marginVertical:marVer
         },
       ]}
       // onPress={handleNavigation}

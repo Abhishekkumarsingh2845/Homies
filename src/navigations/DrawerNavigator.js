@@ -283,6 +283,7 @@ const DrawerNavigator = () => {
           // drawerLabel: () => (
           //   <Text style={styles.drawerLabel}>Terms & Conditions</Text>
           // ),
+          
           drawerLabel: () => (
             <View
               style={{
@@ -472,7 +473,6 @@ const DrawerNavigator = () => {
       />
 
 
-<Drawer.Screen name="Home" component={Home} />
       <Drawer.Screen name="AllHome" component={AllHome} />
       <Drawer.Screen name="BookMark" component={BookMark} />
       <Drawer.Screen name="SortbyScreen" component={SortbyScreen} />

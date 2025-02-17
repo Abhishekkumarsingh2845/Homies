@@ -6,7 +6,7 @@ import RoomAvailability from './RoomAvailability';
 import {FontText} from '../utlis/CustomFont';
 import {useNavigation} from '@react-navigation/native';
 
-const AllHostelDetail = ({mrntop}) => {
+const AllHostelDetail = ({hostel, style}) => {
   const navigation = useNavigation();
   const ratingstartdata = [
     {
@@ -32,7 +32,7 @@ const AllHostelDetail = ({mrntop}) => {
   ];
   return (
     <TouchableOpacity
-      style={[styles.container, {marginTop: mrntop}]}
+      style={[styles.container, {style}]}
       onPress={() => navigation.navigate('SortbyScreen')}>
       <Image source={Img.allhostelicon} style={styles.allhosteliconStyle} />
       <View
@@ -41,9 +41,8 @@ const AllHostelDetail = ({mrntop}) => {
           paddingVertical: 5,
           paddingHorizontal: 5,
         }}>
-          
-        <Text style={styles.person}>Girls-001 </Text>
-        <Text style={styles.addresStyle}>Ram Nagar , NT 0872, Katraj</Text>
+        <Text style={styles.person}>{hostel.availableFor}</Text>
+        <Text style={styles.addresStyle}>{hostel.address}</Text>
         <Text style={styles.rentStyle}>Rent - 5K/Month</Text>
         {/* <Image
           source={Img.ratingstaricon}
@@ -64,10 +63,10 @@ const AllHostelDetail = ({mrntop}) => {
             </View>
           ))}
         </View>
-        <RoomAvailability text={'No More Room Available'} />
+        {/* <RoomAvailability text={'No More Room Available'} /> */}
       </View>
       <View style={styles.right}>
-        <Image source={Img.verifiedicon} style={styles.verifiedIconStyle} />
+        {/* <Image source={Img.verifiedicon} style={styles.verifiedIconStyle} /> */}
         <Image
           source={Img.hrt}
           tintColor={'black'}
@@ -95,6 +94,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2, // Shadow transparency (iOS)
     shadowRadius: 4,
     paddingVertical: 8,
+    marginTop: 10,
   },
   allhosteliconStyle: {
     width: 120,
@@ -102,7 +102,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
 
     // resizeMode:"contain",
-    borderRadius: 15,
   },
   right: {
     flexDirection: 'row',
@@ -114,13 +113,12 @@ const styles = StyleSheet.create({
     width: 20,
     height: 20,
     // backgroundColor:"red",
-
   },
   hrtIconStyle: {
     width: 20,
     height: 20,
     // marginRight: 25,
-    marginLeft:10,
+    marginLeft: 10,
     // backgroundColor:"red",
   },
   addresStyle: {

@@ -7,6 +7,7 @@ import LogoutModal from '../../components/LogoutModal';
 import {useNavigation} from '@react-navigation/native';
 import {get} from '../../utlis/Api';
 import {useSelector} from 'react-redux';
+import RenderHTML from 'react-native-render-html';
 
 const ContactUs = () => {
   const navigation = useNavigation();
@@ -39,8 +40,22 @@ const ContactUs = () => {
         detailtxt={'Contact Us'}
         onPress={() => navigation.openDrawer()}
       />
+
       <View style={styles.subcontainer}>
-        <Text>{data || 'no contact us data found'}</Text>
+        <RenderHTML
+          source={{
+            html: data?.description || '<p>No content available</p>',
+          }}
+        />
+
+        {/* <Text>{data || 'no contact us data found'}</Text> */}
+
+
+        <RenderHTML
+          source={{
+            html: data?.description || '<p>No content available</p>',
+          }}
+        />
       </View>
     </View>
   );
@@ -57,6 +72,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
 });
+
+
+
 
 {
   /* <ContactDetail

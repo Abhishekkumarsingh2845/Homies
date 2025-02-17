@@ -6,21 +6,35 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Img} from '../utlis/ImagesPath';
 import {Color} from '../utlis/Color';
 import RoomAvailability from './RoomAvailability';
 import {useNavigation} from '@react-navigation/native';
 import {FontText} from '../utlis/CustomFont';
 
-const HstDetail = ({mrntop, showRoomAvailability}) => {
+const HstDetail = ({hostel, style, onLikePress}) => {
   const navigation = useNavigation();
+  const [liked, setLiked] = useState(false);
+
+  useEffect(() => {
+    setLiked(hostel.likedBy?.length > 0);
+  }, [hostel.likedBy]);
+
+  const handleLikePress = () => {
+    setLiked(!liked);
+    onLikePress();
+  };
+
   return (
     <TouchableOpacity
-      style={[styles.container, {marginTop: mrntop}]}
+      style={[styles.container, {marginTop:10}]}
       onPress={() => navigation.navigate('SortbyScreen')}>
-      <ImageBackground source={Img.hstdetail} style={styles.img}>
-        {showRoomAvailability && (
+      <ImageBackground
+        source={{uri: hostel?.property_images[0]}}
+        style={styles.img}>
+        {/* <ImageBackground source={Img.hstdetail} style={styles.img}> */}
+        {true && (
           <RoomAvailability
             text={'No More Room Available'}
             backgroundColor={Color.noroomclr}
@@ -30,18 +44,30 @@ const HstDetail = ({mrntop, showRoomAvailability}) => {
       </ImageBackground>
       <View style={styles.detailcontainer}>
         <View style={styles.left}>
-          <Text style={styles.person}>Girls-001</Text>
+          {!!hostel?.availableFor && (
+            <Text style={styles.person}>{hostel?.availableFor}</Text>
+          )}
           <View style={styles.addresscontainer}>
             <Image source={Img.locationdetail} style={styles.locationicon} />
-            <Text style={styles.address}>Ram Nagar , NT 0872, Katraj</Text>
+            <Text style={styles.address}>{hostel?.address ?? ''}</Text>
           </View>
         </View>
         <View style={styles.right}>
-          <Image source={Img.verifiedicon} style={styles.verifiedIconStyle} />
+          {!!hostel?.status && (
+            <Image source={Img.verifiedicon} style={styles.verifiedIconStyle} />
+          )}
+          {/* 
           <TouchableOpacity onPress={() => navigation.navigate('BookMark')}>
             <Image
               source={Img.hrt}
               tintColor={'black'}
+              style={styles.hrtIconStyle}
+            />
+          </TouchableOpacity> */}
+          <TouchableOpacity onPress={handleLikePress}>
+            <Image
+              source={Img.hrt}
+              tintColor={liked ? 'red' : 'black'}
               style={styles.hrtIconStyle}
             />
           </TouchableOpacity>
@@ -59,7 +85,7 @@ const HstDetail = ({mrntop, showRoomAvailability}) => {
             source={Img.ratingstaricon}
             style={styles.ratingstariconcontainer}
           />
-          <Text style={styles.ratingstaramounttxt}>4.1</Text>
+          <Text style={styles.ratingstaramounttxt}>{hostel?.rating}</Text>
         </View>
       </View>
     </TouchableOpacity>
@@ -83,7 +109,7 @@ const styles = StyleSheet.create({
   },
   img: {
     width: '100%',
-    // resizeMode:"contain"
+    resizeMode: 'stretch',
     justifyContent: 'flex-end',
     alignItems: 'flex-end',
     height: 120,

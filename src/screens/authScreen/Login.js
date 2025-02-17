@@ -47,7 +47,8 @@ const Login = () => {
   const validationSchema = Yup.object({
     phone: Yup.string()
       .required('Phone number is required')
-      .matches(/^[0-9]{10}$/, 'Phone number must be exactly 10 digits'),
+      .matches(/^[0-9]{10}$/, 'Phone number must be exactly 10 digits')
+      .notOneOf(['0000000000'], 'Invalid Phone Number'),
   });
 
   return (
@@ -76,9 +77,9 @@ const Login = () => {
             <>
               <Text style={styles.phno}>Phone number</Text>
               <PrimaryTxtInp
-              maxlen={10}
+                maxlen={10}
                 value={values.phone}
-                keyboardType={"numeric"}
+                keyboardType={'numeric'}
                 placeholder={'Enter your phone number'}
                 error={errors.phone}
                 setValue={setFieldValue}
