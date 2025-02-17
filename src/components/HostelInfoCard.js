@@ -10,12 +10,12 @@ import { useNavigation } from '@react-navigation/native';
 import DotIndicatorImg from './DotindictaorImg';
 import { useSelector } from 'react-redux';
 
-const HostelInfoCard = () => {
+const HostelInfoCard = ({item}) => {
   const StarArray = new Array(5).fill(0);
   const navigation=useNavigation();
   const {token} = useSelector(state => state.auth.user)
   return (
-    <TouchableOpacity style={styles.container} onPress={()=>navigation.navigate("PropertyDetail")} >
+  <TouchableOpacity style={styles.container} onPress={()=>navigation.navigate("PropertyDetail" , {detail : item})} >
       <ImageBackground source={Img.hstdetail} style={styles.hostelimg}>
         <InterestTracker />
         <LikeShare />

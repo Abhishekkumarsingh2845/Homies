@@ -59,7 +59,7 @@ const SortbyScreen = ({navigation}) => {
     setloading(true);
     try {
       const response = await get('getNearProperties', params);
-      console.log("response of the getNearProperties Api for sortby filter",response.data);
+      console.log("response of the getNearProperties Api for sortby filter=======",response.data[0]?.data);
       sethostelData(response?.data[0]?.data);
     } catch (error) {
       console.log(
@@ -77,7 +77,7 @@ const SortbyScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
       <SafeAreaView />
-      <Header Img1={Img.goback} />
+      <Header Img1={Img.goback} nav={() => {navigation.navigate('Home')}} />
       <ScrollView contentContainerStyle={styles.subcontainer}>
         <SearchBar
           destination={() => {}}
@@ -85,10 +85,10 @@ const SortbyScreen = ({navigation}) => {
           containerBgColor="white"
         />
         <FlatList
-          data={HostelInfoCardData}
+          data={hostetData}
           showsVerticalScrollIndicator={false}
-          keyExtractor={item => item.id}
-          renderItem={({item}) => <HostelInfoCard />}
+          keyExtractor={item => item._id}
+          renderItem={({item}) => <HostelInfoCard item={item}/>}
         />
         <SortByModal
           closemodal={closeModal}

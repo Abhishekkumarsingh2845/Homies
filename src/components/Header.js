@@ -152,7 +152,8 @@ const Header = ({
   heartIcon,
   bellIcon,
   hght=100,
-  complaintbtn
+  complaintbtn,
+  nav= null
 }) => {
   const navigation = useNavigation();
 
@@ -162,7 +163,7 @@ const Header = ({
       <View style={styles.logocontainer}>
         <View style={styles.leftcontinaer}>
           {/* <TouchableOpacity onPress={() => navigation.goBack()}> */}
-          <TouchableOpacity  onPress={() => navigation.openDrawer()}>
+          <TouchableOpacity  onPress={() => {nav ? nav() : navigation.openDrawer()}}>
 
             <Image
               source={Img1}
