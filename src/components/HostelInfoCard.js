@@ -1,4 +1,11 @@
-import {Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  Image,
+  ImageBackground,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React from 'react';
 import {Color} from '../utlis/Color';
 import {Img} from '../utlis/ImagesPath';
@@ -6,49 +13,61 @@ import Icon from 'react-native-vector-icons/Octicons';
 import InterestTracker from './InterestTracker';
 import LikeShare from './LikeShare';
 import {FontText} from '../utlis/CustomFont';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import DotIndicatorImg from './DotindictaorImg';
-import { useSelector } from 'react-redux';
+import {useSelector} from 'react-redux';
 
-const HostelInfoCard = () => {
-  const StarArray = new Array(5).fill(0);
-  const navigation=useNavigation();
-  const {token} = useSelector(state => state.auth.user)
+const HostelInfoCard = ({hostel}) => {
+  const rating = Number(hostel?.rating) || 0;
+
+  const StarArray = Array.from({length: rating}, (_, index) => index < rating);
+  const ll = StarArray.length;
+
+  const navigation = useNavigation();
+  const {token} = useSelector(state => state.auth.user);
+
+  console.log('->>>>>>>>rating ', hostel?.rating);
+  console.log('->>>>>>>>admin ', hostel?.adminApproval);
   return (
-    <TouchableOpacity style={styles.container} onPress={()=>navigation.navigate("PropertyDetail")} >
-      <ImageBackground source={Img.hstdetail} style={styles.hostelimg}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={() =>
+        navigation.navigate('PropertyDetail', {propertyID: hostel?._id})
+      }>
+      <ImageBackground
+        source={{uri: hostel?.property_images[0]}}
+        style={styles.hostelimg}>
         <InterestTracker />
         <LikeShare />
         <View style={styles.dotContainer}>
-    {/* Example of 3 dots with the first one styled differently */}
-    {[...Array(3)].map((_, index) => (
-      <View 
-        key={index} 
-        style={[styles.dot, index === 0 && styles.activeDot]} // Apply `activeDot` only to the first dot
-      />
-    ))}
-  </View>
+          {[...Array(3)].map((_, index) => (
+            <View
+              key={index}
+              style={[styles.dot, index === 0 && styles.activeDot]}
+            />
+          ))}
+        </View>
       </ImageBackground>
       <View style={styles.PgDetail}>
         <View>
-          <Text style={styles.description}>PG for Anyone in Sector 52</Text>
-          <Text style={styles.location}>
-            Block E, Near Sector 52 Metro Station
-          </Text>
-          <View style={styles.homeverifycontainer}>
-            <Icon name="verified" color="#027516" size={16} />
-            <Text style={styles.homeverify}>Homies Verified</Text>
-            <View style={{marginVertical:15}}></View>
-          </View>
+          <Text style={styles.description}>{hostel?.property_name}</Text>
+          <Text style={styles.location}>{hostel?.address}</Text>
+          {hostel?.adminApproval === 'Accept' && (
+            <View style={styles.homeverifycontainer}>
+              <Icon name="verified" color="#027516" size={16} />
+              <Text style={styles.homeverify}>Homies Verified</Text>
+              <View style={{marginVertical: 15}}></View>
+            </View>
+          )}
         </View>
         <View>
           <Text style={styles.price}>Starting from </Text>
           <Text style={styles.amount}>₹6,500</Text>
           <View style={{flexDirection: 'row', marginTop: 5}}>
-            {StarArray.map((_, index) => (
+            {StarArray.map((filled, index) => (
               <Image
                 key={index}
-                source={Img.ratingstaricon}
+                source={filled ? Img.ratingstarfilled : Img.ratingstaricon}
                 style={styles.ratingstarstyle}
               />
             ))}
@@ -83,8 +102,8 @@ const styles = StyleSheet.create({
     height: 170,
     marginVertical: 10,
     borderRadius: 15,
-    overflow:"hidden",
-    borderRadius:10,
+    overflow: 'hidden',
+    borderRadius: 10,
   },
   PgDetail: {
     width: '100%',
@@ -145,7 +164,7 @@ const styles = StyleSheet.create({
     bottom: 10, // Adjust the vertical position
     left: '50%', // Center horizontally
     flexDirection: 'row', // Align dots horizontally
-    transform: [{ translateX: -30 }], // Adjust this based on total dot width
+    transform: [{translateX: -30}], // Adjust this based on total dot width
   },
   dot: {
     width: 8, // Dot size

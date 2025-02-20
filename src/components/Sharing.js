@@ -3,11 +3,14 @@ import React, {useState} from 'react';
 import {FontText} from '../utlis/CustomFont';
 import {Color} from '../utlis/Color';
 
-const Sharing = () => {
+const Sharing = ({share}) => {
   const [selectedSharing, setSelectedSharing] = useState('Double Sharing'); // Track the selected sharing type
   const handleSharingSelection = sharingType => {
     setSelectedSharing(sharingType); // Update selected sharing type
   };
+
+  // console.log('->>>>pp', share?.sharing[0].sharingType);
+
   return (
     <View style={styles.container}>
       <View style={styles.bedsharingcontainer}>
@@ -19,7 +22,7 @@ const Sharing = () => {
               styles.sharingtxtstyle,
               selectedSharing == 'Double Sharing' && styles.selectedtxt,
             ]}>
-            Double Sharing
+            {share?.sharing?.[0]?.sharingType || 'No Data Available'}
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -30,7 +33,7 @@ const Sharing = () => {
               styles.sharingtxtstyle,
               selectedSharing == 'Three Sharing' && styles.selectedtxt,
             ]}>
-            Three Sharing
+            {share?.sharing?.[1]?.sharingType || 'No Data Available'}
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -51,11 +54,16 @@ const Sharing = () => {
           <View style={styles.rentcontainer}>
             <View style={styles.rentpercontainer}>
               <Text style={styles.rentperperson}>Rent per Person</Text>
-              <Text style={styles.amounttxt}>₹8,500</Text>
+              <Text style={styles.amounttxt}>
+                {share?.sharing?.[0]?.rentPerPerson?.withAC ||
+                  'No Data Available'}
+              </Text>
             </View>
             <View>
               <Text style={styles.deposittxt}>Deposit</Text>
-              <Text style={styles.amounttxt}>₹8,500</Text>
+              <Text style={styles.amounttxt}>
+                {share?.sharing?.[0]?.deposit || 'No Data Available'}
+              </Text>
             </View>
           </View>
 
@@ -66,7 +74,10 @@ const Sharing = () => {
               </View>
               <View style={{marginLeft: 10}}>
                 <Text style={styles.withxtxt}>With AC</Text>
-                <Text style={styles.amounttxt}>₹9,500</Text>
+                <Text style={styles.amounttxt}>
+                  {share?.sharing?.[0]?.rentPerPerson?.withAC ||
+                    'No Data Available'}
+                </Text>
               </View>
             </View>
             <View style={{flexDirection: 'row'}}>
@@ -74,8 +85,11 @@ const Sharing = () => {
                 <View style={styles.innercircle}></View>
               </View>
               <View style={{marginLeft: 10}}>
-                <Text style={styles.withxtxt}>With AC</Text>
-                <Text style={styles.amounttxt}>₹9,500</Text>
+                <Text style={styles.withxtxt}>Without AC</Text>
+                <Text style={styles.amounttxt}>
+                  {share?.sharing?.[0]?.rentPerPerson?.withoutAC ||
+                    'No Data Available'}
+                </Text>
               </View>
             </View>
           </View>
@@ -84,11 +98,11 @@ const Sharing = () => {
           <View style={styles.timecontainer}>
             <View>
               <Text style={styles.lockintxt}>Lock in Period</Text>
-              <Text>11 Months</Text>
+              <Text>{share?.lock_in_period || 'No Data Available'}</Text>
             </View>
             <View>
               <Text style={styles.noofroomtxt}>Numbers of Room</Text>
-              <Text>30 Rooms</Text>
+              <Text>{share?.rooms_in_hostel || 'No Data Available'}</Text>
             </View>
           </View>
           <View style={{marginVertical: 10}} />
@@ -100,11 +114,16 @@ const Sharing = () => {
           <View style={styles.rentcontainer}>
             <View style={styles.rentpercontainer}>
               <Text style={styles.rentperperson}>Rent per Person</Text>
-              <Text style={styles.amounttxt}>₹8,500</Text>
+              <Text style={styles.amounttxt}>
+                {share?.sharing?.[1]?.rentPerPerson?.withAC ||
+                  'No Data Available'}
+              </Text>
             </View>
             <View>
               <Text style={styles.deposittxt}>Deposit</Text>
-              <Text style={styles.amounttxt}>₹8,500</Text>
+              <Text style={styles.amounttxt}>
+                {share?.sharing?.[1]?.deposit || 'No Data Available'}
+              </Text>
             </View>
           </View>
 
@@ -115,7 +134,10 @@ const Sharing = () => {
               </View>
               <View style={{marginLeft: 10}}>
                 <Text style={styles.withxtxt}>With AC</Text>
-                <Text style={styles.amounttxt}>₹9,500</Text>
+                <Text style={styles.amounttxt}>
+                  {share?.sharing?.[1]?.rentPerPerson?.withAC ||
+                    'No Data Available'}
+                </Text>
               </View>
             </View>
             <View style={{flexDirection: 'row'}}>
@@ -123,8 +145,11 @@ const Sharing = () => {
                 <View style={styles.innercircle}></View>
               </View>
               <View style={{marginLeft: 10}}>
-                <Text style={styles.withxtxt}>With AC</Text>
-                <Text style={styles.amounttxt}>₹9,500</Text>
+                <Text style={styles.withxtxt}>Without AC</Text>
+                <Text style={styles.amounttxt}>
+                  {share?.sharing?.[0]?.rentPerPerson?.withoutAC ||
+                    'No Data Available'}
+                </Text>
               </View>
             </View>
           </View>
@@ -133,11 +158,11 @@ const Sharing = () => {
           <View style={styles.timecontainer}>
             <View>
               <Text style={styles.lockintxt}>Lock in Period</Text>
-              <Text>11 Months</Text>
+              <Text>{share?.lock_in_period || 'No Data Available'}</Text>
             </View>
             <View>
               <Text style={styles.noofroomtxt}>Numbers of Room</Text>
-              <Text>30 Rooms</Text>
+              <Text>{share?.rooms_in_hostel || 'No Data Available'}</Text>
             </View>
           </View>
           <View style={{marginVertical: 10}} />
@@ -148,11 +173,16 @@ const Sharing = () => {
           <View style={styles.rentcontainer}>
             <View style={styles.rentpercontainer}>
               <Text style={styles.rentperperson}>Rent per Person</Text>
-              <Text style={styles.amounttxt}>₹8,500</Text>
+              <Text style={styles.amounttxt}>
+                {share?.sharing?.[2]?.rentPerPerson?.withAC ||
+                  'No Data Available'}
+              </Text>
             </View>
             <View>
               <Text style={styles.deposittxt}>Deposit</Text>
-              <Text style={styles.amounttxt}>₹8,500</Text>
+              <Text style={styles.amounttxt}>
+                ₹ {share?.sharing?.[2]?.deposit || 'No Data Available'}
+              </Text>
             </View>
           </View>
 
@@ -163,7 +193,11 @@ const Sharing = () => {
               </View>
               <View style={{marginLeft: 10}}>
                 <Text style={styles.withxtxt}>With AC</Text>
-                <Text style={styles.amounttxt}>₹9,500</Text>
+                <Text style={styles.amounttxt}>
+                  ₹
+                  {share?.sharing?.[2]?.rentPerPerson?.withAC ||
+                    'No Data Available'}
+                </Text>
               </View>
             </View>
             <View style={{flexDirection: 'row'}}>
@@ -172,7 +206,11 @@ const Sharing = () => {
               </View>
               <View style={{marginLeft: 10}}>
                 <Text style={styles.withxtxt}>With AC</Text>
-                <Text style={styles.amounttxt}>₹9,500</Text>
+                <Text style={styles.amounttxt}>
+                  ₹
+                  {share?.sharing?.[0]?.rentPerPerson?.withoutAC ||
+                    'No Data Available'}
+                </Text>
               </View>
             </View>
           </View>
@@ -181,11 +219,11 @@ const Sharing = () => {
           <View style={styles.timecontainer}>
             <View>
               <Text style={styles.lockintxt}>Lock in Period</Text>
-              <Text>11 Months</Text>
+              <Text>{share?.lock_in_period || 'No Data Available'}</Text>
             </View>
             <View>
               <Text style={styles.noofroomtxt}>Numbers of Room</Text>
-              <Text>30 Rooms</Text>
+              <Text>{share?.rooms_in_hostel || 'No Data Available'}</Text>
             </View>
           </View>
           <View style={{marginVertical: 10}} />
@@ -263,7 +301,7 @@ const styles = StyleSheet.create({
   },
   rentperperson: {
     fontSize: 12,
-    color:"black",
+    color: 'black',
     fontFamily: FontText.light,
   },
   deposittxt: {

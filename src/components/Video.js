@@ -4,13 +4,15 @@ import {Img} from '../utlis/ImagesPath';
 import {FontText} from '../utlis/CustomFont';
 import {Color} from '../utlis/Color';
 import {ScreenDimensions} from '../utlis/DimensionApi';
-
-const Video = () => {
+import Video from 'react-native-video';
+const VideoPlayer = ({videoplay}) => {
   const videoarray = new Array(3).fill(null);
+  console.log('system video', videoplay?.property_videos);
   return (
     <View style={styles.container}>
       <Text style={styles.amenttxt}>Virtual Videos</Text>
       <TouchableOpacity
+        // eslint-disable-next-line react-native/no-inline-styles
         style={{
           flexDirection: 'row',
           justifyContent: 'flex-start',
@@ -18,9 +20,10 @@ const Video = () => {
           marginLeft: 5,
         }}>
         {videoarray.map((_, index) => (
-          <Image
+          <Video
             key={index}
-            source={Img.newvideoicon}
+            source={{uri: videoplay?.property_videos?.[0]}}
+            // eslint-disable-next-line react-native/no-inline-styles
             style={{
               width: ScreenDimensions.screenWidth * 0.26,
               height: ScreenDimensions.screenHeight * 0.1,
@@ -34,7 +37,7 @@ const Video = () => {
   );
 };
 
-export default Video;
+export default VideoPlayer;
 
 const styles = StyleSheet.create({
   container: {

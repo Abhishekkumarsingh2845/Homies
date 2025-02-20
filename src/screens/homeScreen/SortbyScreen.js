@@ -1,5 +1,7 @@
 import {
+  ActivityIndicator,
   FlatList,
+  RefreshControl,
   SafeAreaView,
   ScrollView,
   StyleSheet,
@@ -16,23 +18,26 @@ import SortByModal from '../../components/SortBymodal';
 import SortByBtn from '../../components/SortByBtn';
 import GuestModal from '../../components/GuestModal';
 import {get} from '../../utlis/Api';
+import {Color} from '../../utlis/Color';
 
 const SortbyScreen = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [sortBy, setSortBy] = useState('');
   const [loading, setloading] = useState();
   const [hostetData, sethostelData] = useState([]);
+  console.log('hostelData in the sortbyscreen', hostetData);
+
   const openModal = () => setModalVisible(true);
   const closeModal = () => setModalVisible(false);
 
-  const HostelInfoCardData = [
-    {
-      id: 1,
-    },
-    {
-      id: 2,
-    },
-  ];
+  // const HostelInfoCardData = [
+  //   {
+  //     id: 1,
+  //   },
+  //   {
+  //     id: 2,
+  //   },
+  // ];
 
   // const handleSortByFilter = async () => {
   //   const params = {
@@ -54,12 +59,15 @@ const SortbyScreen = ({navigation}) => {
     const params = {
       long: '77.376945',
       lat: '28.628454',
-      sortType:sortBy,
+      sortType: sortBy,
     };
     setloading(true);
     try {
       const response = await get('getNearProperties', params);
-      console.log("response of the getNearProperties Api for sortby filter",response.data);
+      console.log(
+        'response of the getNearProperties Api for sortby filter',
+        response.data,
+      );
       sethostelData(response?.data[0]?.data);
     } catch (error) {
       console.log(
@@ -78,18 +86,37 @@ const SortbyScreen = ({navigation}) => {
     <View style={styles.container}>
       <SafeAreaView />
       <Header Img1={Img.goback} />
-      <ScrollView contentContainerStyle={styles.subcontainer}>
+      <ScrollView
+        contentContainerStyle={styles.subcontainer}
+        refreshControl={
+          <RefreshControl onRefresh={getHstdetail} refreshing={loading} />
+        }>
         <SearchBar
           destination={() => {}}
           placeholderText="Hostel Near Me"
           containerBgColor="white"
         />
-        <FlatList
-          data={HostelInfoCardData}
-          showsVerticalScrollIndicator={false}
-          keyExtractor={item => item.id}
-          renderItem={({item}) => <HostelInfoCard />}
-        />
+
+        {loading ? (
+          <>
+            <View style={styles.loaderContainer}>
+              <ActivityIndicator size="large" color={Color.primary} />
+            </View>
+          </>
+        ) : (
+          <>
+            <FlatList
+              data={hostetData}
+              showsVerticalScrollIndicator={false}
+              keyExtractor={item => item.id}
+              renderItem={({item}) => <HostelInfoCard hostel={item} />}
+              refreshControl={
+                <RefreshControl refreshing={loading} onRefresh={getHstdetail} />
+              }
+            />
+          </>
+        )}
+
         <SortByModal
           closemodal={closeModal}
           openthemodal={modalVisible}
