@@ -7,7 +7,7 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import Header from '../../components/Header';
 import SearchBar from '../../components/SearchBar';
 import HstDetail from '../../components/HostelDetail';
@@ -23,15 +23,19 @@ import {get, post} from '../../utlis/Api';
 const Home = ({navigation}) => {
   const [loading, setloading] = useState();
   const [hostetData, sethostelData] = useState([]);
+  console.log("hostel data" , hostetData.length)
+  
 
-  const getHstdetail = async () => {
+  const getHstdetail = async (filterData={}) => {
     const params = {
       long: '77.376945',
       lat: '28.628454',
+      ...filterData
     };
     setloading(true);
     try {
       const response = await get('getNearProperties', params);
+      console.log( " response of getNearProperties" , response.data[0].data.length)
       sethostelData(response?.data[0]?.data);
     } catch (error) {
       console.log(
@@ -42,6 +46,12 @@ const Home = ({navigation}) => {
       setloading(false);
     }
   };
+
+  const handleFilter = useCallback((filterData) => {
+    console.log("filterData" , filterData);
+    getHstdetail(filterData)
+  }, []);
+
   const toggleLike = async propertyId => {
     try {
       const response = await post('likeProperty', {
@@ -74,7 +84,7 @@ const Home = ({navigation}) => {
         bellIcon={Img.noitificationicon}
       />
       <View style={styles.subcontainer}>
-        <SearchBar destination={LocationSearch} />
+        <SearchBar destination={LocationSearch} handleFilter={handleFilter}/>
 
         <ScrollView
           contentContainerStyle={{

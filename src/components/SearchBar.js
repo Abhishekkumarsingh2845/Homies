@@ -82,6 +82,7 @@ const SearchBar = ({
   placeholderText = 'Find Property',
   containerBgColor = '#EFEFEF',
   destination,
+  handleFilter = null
 }) => {
   const navigation = useNavigation();
   const [modalVisible, setModalVisible] = useState(false);
@@ -96,7 +97,13 @@ const SearchBar = ({
   };
 
   const handleSearchNavigation = () => {
-    navigation.navigate("FilterScreen");
+    if(handleFilter){
+      navigation.navigate("FilterScreen" , {handleFilter : handleFilter});
+    }
+    else{
+      navigation.navigate("FilterScreen");
+
+    }
   };
   return (
     <TouchableOpacity

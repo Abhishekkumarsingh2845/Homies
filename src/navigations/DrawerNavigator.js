@@ -127,8 +127,27 @@ const DrawerNavigator = () => {
       <Drawer.Screen name="BottomTab" component={BottomTab} />
       <Drawer.Screen name="HomeNavigator" component={HomeNavigator} />
       <Drawer.Screen name="Home" component={Home} />
+      <Drawer.Screen name="ReferEarn" component={ReferEarn} />
+      <Drawer.Screen name="RateReview" component={RateReview} />
+      <Drawer.Screen name="ContactUs" component={ContactUs} />
+      <Drawer.Screen name="PrivacyPolicy" component={PrivacyPolicy} />
+      <Drawer.Screen name="TermsCondition" component={TermsCondition} />
+      <Drawer.Screen name="AboutUs" component={AboutUs} />
+      <Drawer.Screen name="FAQ" component={FAQ} />
+      <Drawer.Screen name="Help" component={Help} />
+      <Drawer.Screen name="DocumentVerify" component={DocumentVerify} />
 
-      <Drawer.Screen
+      
+
+
+
+      
+
+
+
+
+
+      {/* <Drawer.Screen
         name="ReferEarn"
         component={ReferEarn}
         options={{
@@ -154,8 +173,8 @@ const DrawerNavigator = () => {
             </View>
           ),
         }}
-      />
-      <Drawer.Screen
+      /> */}
+      {/* <Drawer.Screen
         name="RateReview"
         component={RateReview}
         options={{
@@ -181,8 +200,8 @@ const DrawerNavigator = () => {
             </View>
           ),
         }}
-      />
-      <Drawer.Screen
+      /> */}
+      {/* <Drawer.Screen
         name="ContactUs"
         component={ContactUs}
         options={{
@@ -221,8 +240,8 @@ const DrawerNavigator = () => {
             </View>
           ),
         }}
-      />
-      <Drawer.Screen
+      /> */}
+      {/* <Drawer.Screen
         name="PrivacyPolicy"
         component={PrivacyPolicy}
         options={{
@@ -263,8 +282,8 @@ const DrawerNavigator = () => {
             </View>
           ),
         }}
-      />
-      <Drawer.Screen
+      /> */}
+      {/* <Drawer.Screen
         name="TermsCondition"
         component={TermsCondition}
         options={{
@@ -306,8 +325,8 @@ const DrawerNavigator = () => {
             </View>
           ),
         }}
-      />
-      <Drawer.Screen
+      /> */}
+      {/* <Drawer.Screen
         name="AboutUs"
         component={AboutUs}
         options={{
@@ -346,9 +365,9 @@ const DrawerNavigator = () => {
             </View>
           ),
         }}
-      />
+      /> */}
 
-      <Drawer.Screen
+      {/* <Drawer.Screen
         name="FAQ"
         component={FAQ}
         options={{
@@ -387,9 +406,9 @@ const DrawerNavigator = () => {
             </View>
           ),
         }}
-      />
+      /> */}
 
-      <Drawer.Screen
+      {/* <Drawer.Screen
         name="Help"
         component={Help}
         options={{
@@ -428,8 +447,8 @@ const DrawerNavigator = () => {
             </View>
           ),
         }}
-      />
-      <Drawer.Screen
+      /> */}
+      {/* <Drawer.Screen
         name="DocumentVerify"
         component={DocumentVerify}
         options={{
@@ -470,7 +489,7 @@ const DrawerNavigator = () => {
             </View>
           ),
         }}
-      />
+      /> */}
 
 
       <Drawer.Screen name="AllHome" component={AllHome} />

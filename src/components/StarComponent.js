@@ -6,12 +6,12 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {FontText} from '../utlis/CustomFont';
 import {Img} from '../utlis/ImagesPath';
 import {Color} from '../utlis/Color';
 
-const StarComponent = () => {
+const StarComponent = ({setFilterData}) => {
   const [selectedId, setSelectedId] = useState(null); // State to track the selected item
 
   const data = [
@@ -21,6 +21,15 @@ const StarComponent = () => {
     {id: 4, rate: 4.0},
     {id: 5, rate: 5.0},
   ];
+
+  useEffect(() =>{
+    if(selectedId){
+      setFilterData(prev => ({
+        ...prev,
+        rating : data.find(item => item.id === selectedId)?.rate
+      }))
+    }
+  },[selectedId])
 
   return (
     <View style={styles.container}>

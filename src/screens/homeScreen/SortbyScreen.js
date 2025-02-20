@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import Header from '../../components/Header';
 import {Img} from '../../utlis/ImagesPath';
 import SearchBar from '../../components/SearchBar';
@@ -50,16 +50,17 @@ const SortbyScreen = ({navigation}) => {
   //   }
   // };
 
-  const getHstdetail = async () => {
+  const getHstdetail = async (filterData={}) => {
     const params = {
       long: '77.376945',
       lat: '28.628454',
       sortType:sortBy,
+      ...filterData
     };
     setloading(true);
     try {
       const response = await get('getNearProperties', params);
-      console.log("response of the getNearProperties Api for sortby filter=======",response.data[0]?.data);
+      console.log("response of the getNearProperties =======",response.data[0]?.data.length);
       sethostelData(response?.data[0]?.data);
     } catch (error) {
       console.log(
@@ -71,6 +72,11 @@ const SortbyScreen = ({navigation}) => {
     }
   };
   console.log('sortByenum coming in the  sortbyscreen', sortBy);
+
+    const handleFilter = useCallback((filterData) => {
+      console.log("filterData" , filterData);
+      getHstdetail(filterData)
+    }, []);
   useEffect(() => {
     getHstdetail();
   }, []);
@@ -83,7 +89,9 @@ const SortbyScreen = ({navigation}) => {
           destination={() => {}}
           placeholderText="Hostel Near Me"
           containerBgColor="white"
+          handleFilter={handleFilter}
         />
+
         <FlatList
           data={hostetData}
           showsVerticalScrollIndicator={false}
