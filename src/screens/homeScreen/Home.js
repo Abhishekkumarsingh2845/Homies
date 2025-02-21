@@ -2,6 +2,8 @@ import {
   ActivityIndicator,
   FlatList,
   Image,
+  PermissionsAndroid,
+  Platform,
   RefreshControl,
   ScrollView,
   StyleSheet,
@@ -19,20 +21,34 @@ import DotindictaorImg from '../../components/DotindictaorImg';
 import LocationSearch from './LocationSearch';
 import MapSelect from '../../components/Map';
 import {get, post} from '../../utlis/Api';
+import Geolocation from 'react-native-geolocation-service';
+import {useDispatch, useSelector} from 'react-redux';
+import {setLocation, setLocationStore} from '../../store/LocationSlice';
 
 const Home = ({navigation}) => {
   const [loading, setloading] = useState();
   const [hostetData, sethostelData] = useState([]);
-  console.log("hostel data" , hostetData.length)
-  
+  const dispatch = useDispatch();
+  const {latitude, longitude} = useSelector(state => state.location);
+  console.log('Redux Location:', latitude, longitude);
 
   const getHstdetail = async (filterData={}) => {
+    console.log('getHstdetail');
+
     const params = {
       long: '77.376945',
       lat: '28.628454',
       ...filterData
     };
+
+
+
+    // const params = {
+    //   long: longitude.toString(),
+    //   lat: latitude.toString(),
+    // };
     setloading(true);
+
     try {
       const response = await get('getNearProperties', params);
       console.log( " response of getNearProperties" , response.data[0].data.length)
@@ -59,7 +75,6 @@ const Home = ({navigation}) => {
         likedBy: '677d21015dcde6948d900c6c',
       });
 
-      // Check if likedBy array is empty → Unliked, otherwise → Liked
       sethostelData(prevData =>
         prevData.map(item =>
           item._id === propertyId
@@ -71,8 +86,38 @@ const Home = ({navigation}) => {
       console.log('Error liking/unliking property:', error.message);
     }
   };
+
+  const requestLocationPermission = async () => {
+    if (Platform.OS === 'android') {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+      );
+      return granted === PermissionsAndroid.RESULTS.GRANTED;
+    }
+    return true;
+  };
+
+  const getLocation = async () => {
+    const hasPermission = await requestLocationPermission();
+    if (!hasPermission) return;
+
+    Geolocation.getCurrentPosition(
+      position => {
+        const {latitude, longitude} = position.coords;
+        dispatch(setLocationStore({latitude: latitude, longitude: longitude}));
+
+        // console.log('system positon', latitude, longitude);
+      },
+      error => {
+        console.log('Error getting location:', error.message);
+      },
+      {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
+    );
+  };
+
   useEffect(() => {
     getHstdetail();
+    getLocation();
   }, []);
 
   return (
@@ -112,6 +157,7 @@ const Home = ({navigation}) => {
             <>
               <FlatList
                 data={hostetData}
+                contentContainerStyle={styles.flatlistcontainer}
                 keyExtractor={item => item._id.toString()}
                 renderItem={({item}) => (
                   <HstDetail
@@ -152,20 +198,19 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   loaderContainer: {
-    // Style for the loader container
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 50, // Adjust as needed
+    marginTop: 50,
   },
   wrapper: {
     height: 200,
   },
   image: {
-    width: 350, // Adjust width for horizontal scroll
-    height: 150, // Adjust height for horizontal scroll
+    width: 350,
+    height: 150,
     resizeMode: 'cover',
-    marginRight: 10, // Add spacing between images
+    marginRight: 10,
     borderRadius: 10,
   },
   inactiveDot: {
@@ -204,17 +249,7 @@ const styles = StyleSheet.create({
     height: 8,
     borderRadius: 5,
   },
+  flatlistcontainer: {
+    marginBottom: 100,
+  },
 });
-{
-  /* <FlatList
-contentContainerStyle={{paddingBottom: 120, paddingTop: 20}}
-showsVerticalScrollIndicator={false}
-data={hostetData}
-keyExtractor={item =>
-  item._id ? item._id.toString() : Math.random().toString()
-}
-renderItem={({item}) => (
-  <HstDetail hostel={item} style={{marginTop: 10}} />
-)}
-/> */
-}

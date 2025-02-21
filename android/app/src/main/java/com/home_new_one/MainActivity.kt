@@ -24,7 +24,7 @@ class MainActivity : ReactActivity() {
     /**
      * Handles new intents (e.g., for deep linking or other purposes)
      */
-    override fun onNewIntent(intent: Intent?) {
+    override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
         setIntent(intent) // This ensures the new intent is available to the app
     }

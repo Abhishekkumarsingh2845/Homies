@@ -11,8 +11,9 @@ import { useNavigation } from '@react-navigation/native';
 const Complaint = ({complaint_id, title, date, mediaUrl , _id}) => {
   const {token} = useSelector((state) => state.auth.user)
   const Nav = useNavigation()
-  const getDetailOfComplaint = async () =>{
 
+
+  const getDetailOfComplaint = async () =>{
         const response = await get('getOneComplaint', { complaintId : _id}, token);
         if(response.success){
           Nav.navigate('ComplaintFormFill' , {data : response?.data})

@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import {Color} from '../utlis/Color';
 import SecondaryHeader from './SecondaryHeader';
 import {Img} from '../utlis/ImagesPath';
@@ -19,15 +19,19 @@ import {FontText} from '../utlis/CustomFont';
 import {useNavigation} from '@react-navigation/native';
 import {Screen} from 'react-native-screens';
 import {ScreenDimensions} from '../utlis/DimensionApi';
-const PropertyInfoCard = () => {
+const PropertyInfoCard = ({hostel}) => {
   const navigation = useNavigation();
+console.log("->>>>>vve",hostel?.property_images?.[0]);
   return (
     <TouchableOpacity
       style={styles.container}
       onPress={() => navigation.navigate('PaymentHomeForm')}>
       <View style={styles.imgcontainer}>
         <View style={styles.largehosteimgstyle}>
-          <Image source={Img.hstdetail} style={styles.hstdetailstyle} />
+          <Image
+            source={{uri:hostel?.property_images?.[0]}}
+            style={styles.hstdetailstyle}
+          />
         </View>
 
         <View style={styles.subimagecontainer}>
@@ -46,12 +50,13 @@ const PropertyInfoCard = () => {
       </View>
       <View style={styles.idcontainer}>
         <View style={styles.id}>
-          <Text style={styles.idtxt}>ID : Boy 001</Text>
-          <Text style={styles.hostelnametxt}>
-            Asteria Hostel | Noida Sector 52
-          </Text>
+          <Text style={styles.idtxt}>ID : {hostel?.property_id}</Text>
+          <Text style={styles.hostelnametxt}>{hostel?.address}</Text>
         </View>
-        <Image source={Img.hostellogoicon} style={styles.hostellogoiconstyle} />
+        <Image
+          source={{uri: hostel?.property_logo}}
+          style={styles.hostellogoiconstyle}
+        />
       </View>
       <View>
         <Text style={styles.wardendetailtxt}>Warden manager details</Text>
@@ -62,11 +67,15 @@ const PropertyInfoCard = () => {
               size={18}
               Color={Color.clr87}
             />
-            <Text style={styles.namedetailtxt}>Rohit Kumar</Text>
+            <Text style={styles.namedetailtxt}>
+              {hostel?.warden_details?.warden_name}
+            </Text>
           </View>
           <View style={styles.phonedetailcontainer}>
             <PhoneIcon name="phone-outline" size={18} color={'#0094FD'} />
-            <Text style={styles.phoneno}>+917654238976</Text>
+            <Text style={styles.phoneno}>
+              +91 {hostel?.warden_details?.warden_phone}
+            </Text>
           </View>
         </View>
         <View style={styles.nearbyplacescontainer}>
@@ -83,16 +92,18 @@ const PropertyInfoCard = () => {
           <View style={styles.overviewdetailcontainer}>
             <View style={styles.propertytransporaty}>
               <Text style={styles.propertytypetxt}>Property Type</Text>
-              <Text style={styles.properttnametxt}>Boys Hostel</Text>
+              <Text style={styles.properttnametxt}>{hostel?.availableFor}</Text>
             </View>
             <View>
               <Text style={styles.hosteltxt}>Hostel Transportation</Text>
-              <Text style={styles.hostelcab}>Hostel Cab</Text>
+              <Text style={styles.hostelcab}>
+                {hostel?.hostel_transpotation}
+              </Text>
             </View>
           </View>
           <View style={styles.foodfacilitycontainer}>
             <Text style={styles.foodfaciltytxt}>Food facility</Text>
-            <Text style={styles.vegnonvegtxt}>Available veg/Non veg </Text>
+            <Text style={styles.vegnonvegtxt}>{hostel?.food_menu}</Text>
           </View>
         </View>
       </View>

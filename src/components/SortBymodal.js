@@ -1,4 +1,3 @@
-
 import React, {useState} from 'react';
 import {Modal, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {Color} from '../utlis/Color';
@@ -51,7 +50,6 @@ const SortByModal = ({closemodal, openthemodal, sortBy, setSortBy}) => {
                 onPress={() => handleOptionSelect(option)} // Select the option
               >
                 {sortBy === option.value && <View style={styles.innerCircle} />}
-        
               </TouchableOpacity>
             </View>
           ))}
@@ -119,7 +117,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   selectedOptionText: {
-    color: '#000000', // Change text color to black when selected (you can change this color)
+    color: '#000000',
   },
 });
 

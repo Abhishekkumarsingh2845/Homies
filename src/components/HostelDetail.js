@@ -57,6 +57,8 @@ const HstDetail = ({hostel, style, onLikePress}) => {
           {!!hostel?.status && (
             <Image source={Img.verifiedicon} style={styles.verifiedIconStyle} />
           )}
+
+
           {/* 
           <TouchableOpacity onPress={() => navigation.navigate('BookMark')}>
             <Image
@@ -65,6 +67,8 @@ const HstDetail = ({hostel, style, onLikePress}) => {
               style={styles.hrtIconStyle}
             />
           </TouchableOpacity> */}
+
+          
           <TouchableOpacity onPress={handleLikePress}>
             <Image
               source={Img.hrt}

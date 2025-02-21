@@ -1,5 +1,7 @@
 import {
+  ActivityIndicator,
   FlatList,
+  RefreshControl,
   SafeAreaView,
   ScrollView,
   StyleSheet,
@@ -16,23 +18,26 @@ import SortByModal from '../../components/SortBymodal';
 import SortByBtn from '../../components/SortByBtn';
 import GuestModal from '../../components/GuestModal';
 import {get} from '../../utlis/Api';
+import {Color} from '../../utlis/Color';
 
 const SortbyScreen = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [sortBy, setSortBy] = useState('');
   const [loading, setloading] = useState();
   const [hostetData, sethostelData] = useState([]);
+  console.log('hostelData in the sortbyscreen', hostetData);
+
   const openModal = () => setModalVisible(true);
   const closeModal = () => setModalVisible(false);
 
-  const HostelInfoCardData = [
-    {
-      id: 1,
-    },
-    {
-      id: 2,
-    },
-  ];
+  // const HostelInfoCardData = [
+  //   {
+  //     id: 1,
+  //   },
+  //   {
+  //     id: 2,
+  //   },
+  // ];
 
   // const handleSortByFilter = async () => {
   //   const params = {
@@ -83,8 +88,14 @@ const SortbyScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
       <SafeAreaView />
-      <Header Img1={Img.goback} nav={() => {navigation.navigate('Home')}} />
-      <ScrollView contentContainerStyle={styles.subcontainer}>
+      {/* <Header Img1={Img.goback} nav={() => {navigation.navigate('Home')}} />
+      <ScrollView contentContainerStyle={styles.subcontainer}> */}
+      <Header Img1={Img.goback} />
+      <ScrollView
+        contentContainerStyle={styles.subcontainer}
+        refreshControl={
+          <RefreshControl onRefresh={getHstdetail} refreshing={loading} />
+        }>
         <SearchBar
           destination={() => {}}
           placeholderText="Hostel Near Me"
@@ -92,12 +103,26 @@ const SortbyScreen = ({navigation}) => {
           handleFilter={handleFilter}
         />
 
-        <FlatList
-          data={hostetData}
-          showsVerticalScrollIndicator={false}
-          keyExtractor={item => item._id}
-          renderItem={({item}) => <HostelInfoCard item={item}/>}
-        />
+        {loading ? (
+          <>
+            <View style={styles.loaderContainer}>
+              <ActivityIndicator size="large" color={Color.primary} />
+            </View>
+          </>
+        ) : (
+          <>
+            <FlatList
+              data={hostetData}
+              showsVerticalScrollIndicator={false}
+              keyExtractor={item => item.id}
+              renderItem={({item}) => <HostelInfoCard hostel={item} />}
+              refreshControl={
+                <RefreshControl refreshing={loading} onRefresh={getHstdetail} />
+              }
+            />
+          </>
+        )}
+
         <SortByModal
           closemodal={closeModal}
           openthemodal={modalVisible}
