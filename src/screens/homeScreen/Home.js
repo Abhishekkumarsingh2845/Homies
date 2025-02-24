@@ -9,7 +9,7 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import Header from '../../components/Header';
 import SearchBar from '../../components/SearchBar';
 import HstDetail from '../../components/HostelDetail';
@@ -32,12 +32,13 @@ const Home = ({navigation}) => {
   const {latitude, longitude} = useSelector(state => state.location);
   console.log('Redux Location:', latitude, longitude);
 
-  const getHstdetail = async () => {
+  const getHstdetail = async (filterData={}) => {
     console.log('getHstdetail');
 
     const params = {
       long: '77.376945',
       lat: '28.628454',
+      ...filterData
     };
 
     // const params = {
@@ -48,6 +49,7 @@ const Home = ({navigation}) => {
 
     try {
       const response = await get('getNearProperties', params);
+      console.log( " response of getNearProperties" , response.data[0].data.length)
       sethostelData(response?.data[0]?.data);
     } catch (error) {
       console.log(
@@ -58,6 +60,11 @@ const Home = ({navigation}) => {
       setloading(false);
     }
   };
+
+  const handleFilter = useCallback((filterData) => {
+    console.log("filterData" , filterData);
+    getHstdetail(filterData)
+  }, []);
 
   const toggleLike = async propertyId => {
     try {
@@ -120,7 +127,7 @@ const Home = ({navigation}) => {
         bellIcon={Img.noitificationicon}
       />
       <View style={styles.subcontainer}>
-        <SearchBar destination={LocationSearch} />
+        <SearchBar destination={LocationSearch} handleFilter={handleFilter}/>
 
         <ScrollView
           contentContainerStyle={{

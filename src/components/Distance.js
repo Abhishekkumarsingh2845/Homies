@@ -1,9 +1,18 @@
 import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Slider from '@react-native-community/slider';
 import {FontText} from '../utlis/CustomFont';
 
-const Distance = () => {
+const Distance = ({setFilterData}) => {
+  const [value , setValue] = useState(null)
+  useEffect(() =>{
+    if(value){
+      setFilterData(prev => ({
+        ...prev , 
+        distance : value
+      }))
+    }
+  },[value])
   return (
     <View style={styles.container}>
       <Text style={styles.titletxt}>Distance</Text>
@@ -17,13 +26,18 @@ const Distance = () => {
         <Slider
           style={{width: 250, height: 30}}
           minimumValue={0}
-          maximumValue={1}
+          maximumValue={50}
           thumbTintColor="#FFB83A"
           minimumTrackTintColor="#FFB83A"
           maximumTrackTintColor="#FFB83A"
+          onSlidingComplete = {(data) => {
+            setValue(data)
+        }}
+        step={1}
+        value={value}
         />
 
-        <Text>50km</Text>
+        <Text>{value} km</Text>
       </View>
     </View>
   );

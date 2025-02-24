@@ -14,6 +14,7 @@ import {useNavigation} from '@react-navigation/native';
 import {FontText} from '../utlis/CustomFont';
 
 const HstDetail = ({hostel, style, onLikePress}) => {
+  
   const navigation = useNavigation();
   const [liked, setLiked] = useState(false);
 

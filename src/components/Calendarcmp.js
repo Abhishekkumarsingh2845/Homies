@@ -1,28 +1,54 @@
-import React, {useState} from 'react';
-import {View, Modal, TouchableOpacity, Text, StyleSheet} from 'react-native';
-import {Calendar, LocaleConfig} from 'react-native-calendars';
-import {Color} from '../utlis/Color';
+import React, { useState } from 'react';
+import { View, Modal, TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { Calendar, LocaleConfig } from 'react-native-calendars';
+import { Color } from '../utlis/Color';
+import DatePicker from 'react-native-date-picker'
 
-const CalendarModal = ({isVisible, toggleModal, Submitbtn}) => {
-  const [selected, setSelected] = useState('');
+const CalendarModal = ({ isVisible, toggleModal, handleVistRequest }) => {
+  const [date, setDate] = useState('');
+  const [open, setOpen] = useState(false)
+  const [time, setTime] = useState(new Date())
+
+  const onSubmit = () => {
+    const newDate = new Date(date)
+    handleVistRequest(newDate.toISOString() , time)
+  }
+
+  const getFormattedTime = () => {
+    let hours = time.getHours();
+    let minutes = time.getMinutes();
+
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+
+    hours = hours % 12;
+    hours = hours ? hours : 12;
+
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+
+    return {
+      formattedTime: `${hours}:${minutes}`,
+      AMPM: ampm
+    };
+  }
+
 
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={()=> {console.log("jbcejvfuev")}}>
       <Modal
         visible={isVisible}
         animationType="slide"
         transparent={true}
         onRequestClose={toggleModal}>
-        <View style={styles.modalContainer}>
+        <TouchableOpacity style={styles.modalContainer} onPress={toggleModal} activeOpacity={1}>
           <View style={styles.calendarContainer}>
             <Calendar
               onDayPress={day => {
-                setSelected(day.dateString);
-                console.log('Selected Date:', day.dateString);
+                setDate(day.dateString);
+                console.log('Selected Date:', day);
                 // toggleModal(); // Close the modal after selecting a date
               }}
               markedDates={{
-                [selected]: {
+                [date]: {
                   selected: true,
                   disableTouchEvent: true,
                   selectedDotColor: 'orange',
@@ -33,7 +59,7 @@ const CalendarModal = ({isVisible, toggleModal, Submitbtn}) => {
               <Text style={styles.closeButtonText}>Close</Text>
             </TouchableOpacity> */}
           </View>
-        </View>
+        </TouchableOpacity>
         <View
           style={{
             position: 'absolute',
@@ -48,27 +74,45 @@ const CalendarModal = ({isVisible, toggleModal, Submitbtn}) => {
             paddingHorizontal: 15,
             alignItems: 'center',
           }}>
-          <Text style={{fontSize: 16, color: 'black'}}>Time</Text>
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
-            <Text style={{fontSize: 16, color: 'black', marginRight: 5}}>
-              02:00
+          <Text style={{ fontSize: 16, color: 'black' }}>Time</Text>
+          <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center' }} onPress={() => { setOpen(true) }}>
+            <Text style={{ fontSize: 16, color: 'black', marginRight: 5 }}>
+              {getFormattedTime().formattedTime}
             </Text>
-            <TouchableOpacity
+            <View
               style={{
                 backgroundColor: '#FFB83A',
                 padding: 10,
                 borderRadius: 10,
               }}>
-              <Text style={{fontSize: 16, color: '#FFFFFF'}}>AM</Text>
-            </TouchableOpacity>
-          </View>
+              <Text style={{ fontSize: 16, color: '#FFFFFF' }}>
+                {getFormattedTime().AMPM}
+              </Text>
+            </View>
+          </TouchableOpacity>
         </View>
-        {Submitbtn}
-        {/* <TouchableOpacity style={styles.closeButton} onPress={toggleModal}>
+
+        <TouchableOpacity
+          style={styles.closeButton}
+          onPress={onSubmit}>
           <Text style={styles.closeButtonText}>Submit</Text>
-        </TouchableOpacity> */}
+        </TouchableOpacity>
       </Modal>
-    </View>
+
+      <DatePicker
+        modal
+        mode='time'
+        open={open}
+        date={time}
+        onConfirm={(date) => {
+          setOpen(false)
+          setTime(date)
+        }}
+        onCancel={() => {
+          setOpen(false)
+        }}
+      />
+    </TouchableOpacity>
   );
 };
 
@@ -102,7 +146,7 @@ const styles = StyleSheet.create({
     padding: 20,
     elevation: 5, // Shadow for Android
     shadowColor: '#000',
-    shadowOffset: {width: 0, height: 2},
+    shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.25,
     shadowRadius: 4, // Shadow for iOS
     // marginVertical:10,

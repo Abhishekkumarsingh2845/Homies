@@ -1,14 +1,28 @@
 import {StyleSheet, Text, TextInput, View} from 'react-native';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { FontText } from '../utlis/CustomFont';
 
-const Price = () => {
+const Price = ({setFilterData}) => {
+  const [minMax , setMinMax] = useState({
+    min : null,
+    max : null
+  })
+
+  // useEffect(() =>{
+  //   setFilterData(prev => ({
+  //     ...prev,
+  //     minPrice : minMax.min,
+  //     maxPrice : minMax.max
+  //   }))
+  // } , [minMax])
+
   return (
     <View style={styles.container}>
       <Text style={styles.pricetxt}>Price, $</Text>
       <View style={styles.maxmincontainer}>
-        <TextInput placeholder="Min" placeholderTextColor={"#9AA6AC"} style={styles.minplacehldcontainer} />
-        <TextInput placeholder="Max" placeholderTextColor={"#9AA6AC"} style={styles.maxplacehldcontainer} />
+        <TextInput placeholder="Min" placeholderTextColor={"#9AA6AC"} style={styles.minplacehldcontainer}  keyboardType='number-pad' value={minMax.min} onChangeText={(text) => {setMinMax(prev => ({...prev , min : text}))}}/>
+        <TextInput placeholder="Max" placeholderTextColor={"#9AA6AC"} style={styles.maxplacehldcontainer}  keyboardType='number-pad' value={minMax.max} 
+        onChangeText={(text) => {setMinMax(prev => ({...prev , max : text}))}}/>
       </View>
     </View>
   );

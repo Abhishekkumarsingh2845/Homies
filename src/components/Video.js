@@ -1,38 +1,47 @@
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import React from 'react';
-import {Img} from '../utlis/ImagesPath';
-import {FontText} from '../utlis/CustomFont';
-import {Color} from '../utlis/Color';
-import {ScreenDimensions} from '../utlis/DimensionApi';
+import { Img } from '../utlis/ImagesPath';
+import { FontText } from '../utlis/CustomFont';
+import { Color } from '../utlis/Color';
+import { ScreenDimensions } from '../utlis/DimensionApi';
 import Video from 'react-native-video';
-const VideoPlayer = ({videoplay}) => {
+const VideoPlayer = ({ videoplay }) => {
   const videoarray = new Array(3).fill(null);
   console.log('system video', videoplay?.property_videos);
   return (
     <View style={styles.container}>
       <Text style={styles.amenttxt}>Virtual Videos</Text>
-      <TouchableOpacity
-        // eslint-disable-next-line react-native/no-inline-styles
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'flex-start',
-          marginTop: 5,
-          marginLeft: 5,
-        }}>
+
+      <View style={{
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+      }}>
+
         {videoarray.map((_, index) => (
-          <Video
-            key={index}
-            source={{uri: videoplay?.property_videos?.[0]}}
+          <TouchableOpacity
             // eslint-disable-next-line react-native/no-inline-styles
             style={{
-              width: ScreenDimensions.screenWidth * 0.26,
-              height: ScreenDimensions.screenHeight * 0.1,
-              borderRadius: 10,
-              marginLeft: 10,
-            }}
-          />
+
+              marginTop: 5,
+              marginLeft: 5,
+            }}>
+            <Video
+              key={index}
+              source={{ uri: 'https://www.w3schools.com/html/mov_bbb.mp4' }}
+              // eslint-disable-next-line react-native/no-inline-styles
+              style={{
+                width: ScreenDimensions.screenWidth * 0.26,
+                height: ScreenDimensions.screenHeight * 0.1,
+                borderRadius: 10,
+                marginLeft: 10,
+              }}
+            />
+          </TouchableOpacity>
         ))}
-      </TouchableOpacity>
+      </View>
+
+
+
     </View>
   );
 };

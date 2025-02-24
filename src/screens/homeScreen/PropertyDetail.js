@@ -21,7 +21,7 @@ import PermonthRent from '../../components/PermonthRent';
 import VisitRequestbtn from '../../components/VisitRequestbtn';
 import SignUpModal from '../../components/SignUpModal';
 import {Img} from '../../utlis/ImagesPath';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import {FontText} from '../../utlis/CustomFont';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Wifi from 'react-native-vector-icons/FontAwesome5';
@@ -30,11 +30,13 @@ import CalendarModal from '../../components/Calendarcmp';
 import RequestSentBtnSht from '../../components/RequestSentBtnSht';
 import GuestModal from '../../components/GuestModal';
 import {useSelector} from 'react-redux';
-import {get, post} from '../../utlis/Api';
+import {get ,post} from '../../utlis/Api';
 import VideoPlayer from '../../components/Video';
-// import {Image} from 'react-native-svg'
 
-const PropertyDetail = ({route}) => {
+// import {Image} from 'react-native-svg';
+const PropertyDetail = () => {
+  const route = useRoute()
+  const detail = route.params?.detail
   const navigation = useNavigation();
 
   const propertyID = route?.params?.propertyID ?? null;
@@ -54,13 +56,17 @@ const PropertyDetail = ({route}) => {
   };
 
   const bottomSheetRef = useRef(null);
-  const handleVistRequest = async () => {
+
+
+  const handleVistRequest = async (date , time) => {
+    toggleModal()
     const data = {
-      propertyId: '6773a32551be0fa4b0c3d95f',
-      visitDate: '2025-01-15T10:30:00.000Z',
-      visitTime: '2025-01-15T11:00:00.000Z',
-      landLordId: '6773972194f1b2bc916447e6',
+      propertyId: detail?._id,
+      visitDate: date,
+      visitTime: time,
+      // landLordId: '6773972194f1b2bc916447e6',
     };
+
     try {
       const response = await post('visitRequest', data);
       console.log('response of the visitRequest API ', response);
@@ -113,8 +119,8 @@ const PropertyDetail = ({route}) => {
   };
 
   const handleVistBtn = () => {
-    handleVistRequest();
-    handlePayNow();
+    // handleVistRequest();
+    // handlePayNow();
     setModalVisible(!isModalVisible);
   };
   const handlePayNow = async () => {
@@ -207,15 +213,9 @@ const PropertyDetail = ({route}) => {
           />
 
           <CalendarModal
-            Submitbtn={
-              <TouchableOpacity
-                style={styles.closeButton}
-                onPress={toggleModal}>
-                <Text style={styles.closeButtonText}>Submit</Text>
-              </TouchableOpacity>
-            }
             toggleModal={toggleModal}
             isVisible={isModalVisible}
+            handleVistRequest={handleVistRequest}
           />
           <RequestSentBtnSht ref={bottomSheetRef} />
 

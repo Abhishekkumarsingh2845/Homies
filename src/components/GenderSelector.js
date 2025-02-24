@@ -99,13 +99,25 @@ import {FontText} from '../utlis/CustomFont';
 import Uncheck from 'react-native-vector-icons/MaterialCommunityIcons';
 import Check from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const GenderSelector = () => {
-  const [checkedItems, setCheckedItems] = useState([false, false, false]);
+const GenderSelector = ({setFilterData}) => {
+  const [selectedItem, setSelectedItem] = useState(null);
+  console.log("selectedItem ===================" , selectedItem)
 
   const toggleCheckbox = (index) => {
-    const updatedCheckedItems = [...checkedItems];
-    updatedCheckedItems[index] = !updatedCheckedItems[index];
-    setCheckedItems(updatedCheckedItems);
+    console.log("index" , index , ' selectedItem' , selectedItem)
+    if(index == selectedItem){
+      setSelectedItem(null)
+      setFilterData(prev => ({
+        ...prev , 
+        gender : ''
+      }))
+      return
+    }
+    setSelectedItem(index);
+    setFilterData(prev => ({
+      ...prev , 
+      gender : index == 0 ? 'Boys' : index == 1 ? "Girls" : "Co-living"
+    }))
   };
 
   return (
@@ -117,7 +129,7 @@ const GenderSelector = () => {
         <TouchableOpacity
           style={styles.checkbox}
           onPress={() => toggleCheckbox(0)}>
-          {checkedItems[0] ? (
+          {selectedItem == 0 ? (
             <Check name="checkbox-outline" size={20} color={'#FFB83A'} />
           ) : (
             <View style={styles.uncheckbox}></View>
@@ -131,7 +143,7 @@ const GenderSelector = () => {
         <TouchableOpacity
           style={styles.checkbox}
           onPress={() => toggleCheckbox(1)}>
-          {checkedItems[1] ? (
+          {selectedItem == 1 ? (
             <Check name="checkbox-outline" size={20} color={'#FFB83A'} />
           ) : (
             <View style={styles.uncheckbox}></View>
@@ -145,7 +157,7 @@ const GenderSelector = () => {
         <TouchableOpacity
           style={styles.checkbox}
           onPress={() => toggleCheckbox(2)}>
-          {checkedItems[2] ? (
+          {selectedItem == 2 ? (
             <Check name="checkbox-outline" size={20} color={'#FFB83A'} />
           ) : (
             <View style={styles.uncheckbox}></View>

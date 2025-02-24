@@ -1,10 +1,30 @@
 import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Slider from '@react-native-community/slider';
 import {Color} from '../utlis/Color';
 import {FontText} from '../utlis/CustomFont';
 
-const Seater = () => {
+const Seater = ({setFilterData}) => {
+  const [value , setValue] = useState(0)
+
+  useEffect(() =>{
+    const data = {
+      1 : 'One Sharing',
+      2 : 'Double Sharing',
+      3 : 'Three Sharing',
+      4 :  "Four Sharing",
+      5 : 'Five Sharing'
+    }
+    if(value){
+      setFilterData(prev => ({
+        ...prev,
+        minSharing : data[value]
+      }))
+      // filterFunc({
+      //   minSharing : data[value]
+      // })
+    }
+  },[value])
   return (
     <View style={styles.container}>
       <Text style={styles.titletxt}>Seater</Text>
@@ -18,13 +38,18 @@ const Seater = () => {
         <Slider
           style={{width: 280, height: 40}}
           minimumValue={0}
-          maximumValue={1}
+          maximumValue={5}
           thumbTintColor="#FFB83A"
           minimumTrackTintColor="#FFB83A"
           maximumTrackTintColor="#FFB83A"
+          onSlidingComplete = {(data) => {
+              setValue(data)
+          }}
+          step={1}
+          value={value}
         />
 
-        <Text>5</Text>
+        <Text>{value}</Text>
       </View>
     </View>
   );

@@ -1,5 +1,5 @@
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import SecondaryHeader from '../../components/SecondaryHeader';
 import {Img} from '../../utlis/ImagesPath';
 import StarComponent from '../../components/StarComponent';
@@ -11,27 +11,33 @@ import GenderSelector from '../../components/GenderSelector';
 import PrimaryBtn from '../../components/PrimaryBtn';
 import {Color} from '../../utlis/Color';
 import BottomTab from '../../navigations/BottomTab';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 
 const FilterScreen = () => {
   const navigation = useNavigation();
+  const [filterData , setFilterData] = useState({})
+  const {params} = useRoute()
+  console.log("filterData============== > > > > > > >" , params)
+
+  const filterFunc = () =>{
+    params.handleFilter(filterData)
+  }
   return (
     <View style={styles.container}>
       <SecondaryHeader
         gobackImage={Img.goback}
         detailtxt={'Search'}
-        goback={() => navigation.goBack()}
-      />
+        onPress={() =>{ navigation.goBack()}}/>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.subcontainer}>
-          <StarComponent />
-          <Seater />
-          <Amentity />
-          <Distance />
-          <Price />
-          <GenderSelector />
+          <StarComponent setFilterData={setFilterData}/>
+          <Seater setFilterData={setFilterData}/>
+          <Amentity setFilterData={setFilterData}/>
+          <Distance setFilterData={setFilterData}/>
+          <Price  setFilterData={setFilterData}/>
+          <GenderSelector setFilterData={setFilterData}/>
           <PrimaryBtn
-           Onpress={() => navigation.navigate('BottomTab')}
+           Onpress={filterFunc}
             txt={'Apply'}
             bgcolor={Color.btnclr}
             mgntop={20}
