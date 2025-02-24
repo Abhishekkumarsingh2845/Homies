@@ -7,6 +7,7 @@ import DatePicker from 'react-native-date-picker'
 const CalendarModal = ({ isVisible, toggleModal, handleVistRequest }) => {
   const [date, setDate] = useState('');
   const [open, setOpen] = useState(false)
+  console.log("open" , open);
   const [time, setTime] = useState(new Date())
 
   const onSubmit = () => {
@@ -98,11 +99,10 @@ const CalendarModal = ({ isVisible, toggleModal, handleVistRequest }) => {
           <Text style={styles.closeButtonText}>Submit</Text>
         </TouchableOpacity>
       </Modal>
-
       <DatePicker
         modal
         mode='time'
-        open={open}
+        open={true}
         date={time}
         onConfirm={(date) => {
           setOpen(false)
@@ -112,6 +112,7 @@ const CalendarModal = ({ isVisible, toggleModal, handleVistRequest }) => {
           setOpen(false)
         }}
       />
+
     </TouchableOpacity>
   );
 };
