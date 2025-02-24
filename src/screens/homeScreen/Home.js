@@ -40,8 +40,6 @@ const Home = ({navigation}) => {
       lat: '28.628454',
     };
 
-
-
     // const params = {
     //   long: longitude.toString(),
     //   lat: latitude.toString(),
@@ -67,7 +65,7 @@ const Home = ({navigation}) => {
         propertyId,
         likedBy: '677d21015dcde6948d900c6c',
       });
-
+      getHstdetail()
       sethostelData(prevData =>
         prevData.map(item =>
           item._id === propertyId

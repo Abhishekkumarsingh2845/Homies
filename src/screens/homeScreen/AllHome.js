@@ -18,6 +18,7 @@ const AllHome = ({navigation}) => {
   //   }, 4000);
   //   return () => clearTimeout(timer);
   // }, [navigation]);
+  
   const alldetaildata = [
     {
       id: 1,

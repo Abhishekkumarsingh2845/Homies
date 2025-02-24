@@ -38,7 +38,10 @@ const PropertyDetail = ({route}) => {
   const navigation = useNavigation();
 
   const propertyID = route?.params?.propertyID ?? null;
-  console.log("->>>>>property",propertyID);
+  console.log(
+    '->>>>>property id coming in the property detail from the sortby screen',
+    propertyID,
+  );
   const [isModalVisible, setModalVisible] = useState(false);
   const [showGuestModal, setShowGuestModal] = useState(false);
   const {token} = useSelector(state => state.auth.user);
@@ -51,7 +54,6 @@ const PropertyDetail = ({route}) => {
   };
 
   const bottomSheetRef = useRef(null);
-
   const handleVistRequest = async () => {
     const data = {
       propertyId: '6773a32551be0fa4b0c3d95f',
@@ -94,7 +96,7 @@ const PropertyDetail = ({route}) => {
   };
   const getOneProperty = async () => {
     const params = {
-      propertyId: '67977ce4293939962863b9e9',
+      propertyId: propertyID,
       // propertyId :propertyID,
     };
     try {
@@ -113,7 +115,6 @@ const PropertyDetail = ({route}) => {
   const handleVistBtn = () => {
     handleVistRequest();
     handlePayNow();
-
     setModalVisible(!isModalVisible);
   };
   const handlePayNow = async () => {
@@ -200,7 +201,10 @@ const PropertyDetail = ({route}) => {
           <Text style={styles.neaerbytxt}>Near by Property</Text>
           <NearLocationProperty nearproperty={property} />
           <PermonthRent />
-          <VisitRequestbtn Onprs={() => handleVistBtn()} />
+          <VisitRequestbtn
+            OnPressRequestbtn={() => handlePayNow()}
+            Onprs={() => handleVistBtn()}
+          />
 
           <CalendarModal
             Submitbtn={

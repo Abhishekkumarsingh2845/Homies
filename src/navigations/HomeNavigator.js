@@ -18,13 +18,12 @@ const HomeNavigator = () => {
   const Stack = createStackNavigator();
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
-
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="AllHome" component={AllHome} />
       <Stack.Screen name="BookMark" component={BookMark} />
       <Stack.Screen name="SortbyScreen" component={SortbyScreen} />
       <Stack.Screen name="LocationSearch" component={LocationSearch} />
-      
+
       {/* <Stack.Screen name="HostelRentOut" component={HostelRentOut} /> */}
       <Stack.Screen name="Notification" component={Notification} />
       <Stack.Screen name="FilterScreen" component={FilterScreen} />
@@ -33,7 +32,6 @@ const HomeNavigator = () => {
       <Stack.Screen name="HostelRentOut" component={HostelRentOut} />
       <Stack.Screen name="PaymentHomeForm" component={PaymentHomeForm} />
       <Stack.Screen name="DrawerNavigator" component={DrawerNavigator} />
-
     </Stack.Navigator>
   );
 };

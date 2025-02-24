@@ -30,30 +30,7 @@ const SortbyScreen = ({navigation}) => {
   const openModal = () => setModalVisible(true);
   const closeModal = () => setModalVisible(false);
 
-  // const HostelInfoCardData = [
-  //   {
-  //     id: 1,
-  //   },
-  //   {
-  //     id: 2,
-  //   },
-  // ];
-
-  // const handleSortByFilter = async () => {
-  //   const params = {
-  //     propertyId: '6773a32551be0fa4b0c3d95f',
-  //     filter: 'Top-Rated',
-  //   };
-  //   try {
-  //     const response = await get('getReviewByFilter', params);
-  //     console.log('response of the getReviewByFilter API ', response);
-  //   } catch (error) {
-  //     console.log(
-  //       'Error in getReviewByFilter',
-  //       error?.message || error?.response?.data,
-  //     );
-  //   }
-  // };
+ 
 
   const getHstdetail = async () => {
     const params = {

@@ -173,8 +173,6 @@
 //   },
 // });
 
-
-
 import {
   StyleSheet,
   Text,
@@ -189,7 +187,7 @@ import {FontText} from '../utlis/CustomFont';
 import {ScreenDimensions} from '../utlis/DimensionApi';
 import {Img} from '../utlis/ImagesPath';
 
-const VisitRequestbtn = ({Onprs}) => {
+const VisitRequestbtn = ({Onprs, vistreq,OnPressRequestbtn}) => {
   const [modalVisible, setModalVisible] = useState(false); // State to control modal visibility
 
   const handleOpenModal = () => {
@@ -206,10 +204,12 @@ const VisitRequestbtn = ({Onprs}) => {
         <Text style={styles.txtstyle}>Visit Request</Text>
       </TouchableOpacity>
 
-  
       <TouchableOpacity
         style={styles.paynowbtncontainer}
-        onPress={handleOpenModal}>
+        onPress={OnPressRequestbtn}
+        //in his commmand  from which request succesful is open
+        // onPress={handleOpenModal}
+      >
         <Text style={styles.paynowtxtstyle}>Pay Now</Text>
       </TouchableOpacity>
 
@@ -220,20 +220,20 @@ const VisitRequestbtn = ({Onprs}) => {
         visible={modalVisible}
         onRequestClose={handleCloseModal} // Handle back button press on Android
       >
-          <TouchableWithoutFeedback onPress={handleCloseModal}>
-        <View style={styles.modalOverlay}>
-          <View style={styles.modalContent}>
-            <Image
-              source={Img.greentick}
-              style={{width: 60, height: 60, resizeMode: 'contain'}}
-            />
-            <Text style={styles.modalTitle}>Request sent Successful</Text>
+        <TouchableWithoutFeedback onPress={handleCloseModal}>
+          <View style={styles.modalOverlay}>
+            <View style={styles.modalContent}>
+              <Image
+                source={Img.greentick}
+                style={{width: 60, height: 60, resizeMode: 'contain'}}
+              />
+              <Text style={styles.modalTitle}>Request sent Successful</Text>
 
-            {/* <TouchableOpacity style={styles.confirmButton} onPress={handleCloseModal}>
+              {/* <TouchableOpacity style={styles.confirmButton} onPress={handleCloseModal}>
               <Text style={styles.confirmButtonText}>Confirm Payment</Text>
             </TouchableOpacity> */}
+            </View>
           </View>
-        </View>
         </TouchableWithoutFeedback>
       </Modal>
     </View>

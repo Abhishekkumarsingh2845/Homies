@@ -37,7 +37,7 @@ const HostelInfoCard = ({hostel}) => {
       <ImageBackground
         source={{uri: hostel?.property_images[0]}}
         style={styles.hostelimg}>
-        <InterestTracker />
+        {/* <InterestTracker /> */}
         <LikeShare />
         <View style={styles.dotContainer}>
           {[...Array(3)].map((_, index) => (
@@ -51,7 +51,7 @@ const HostelInfoCard = ({hostel}) => {
       <View style={styles.PgDetail}>
         <View>
           <Text style={styles.description}>{hostel?.property_name}</Text>
-          <Text style={styles.location}>{hostel?.address}</Text>
+          <Text style={styles.location}>{hostel?.property_id}</Text>
           {hostel?.adminApproval === 'Accept' && (
             <View style={styles.homeverifycontainer}>
               <Icon name="verified" color="#027516" size={16} />

@@ -34,13 +34,13 @@ const HstDetail = ({hostel, style, onLikePress}) => {
         source={{uri: hostel?.property_images[0]}}
         style={styles.img}>
         {/* <ImageBackground source={Img.hstdetail} style={styles.img}> */}
-        {true && (
+        {/* {true && (
           <RoomAvailability
             text={'No More Room Available'}
             backgroundColor={Color.noroomclr}
             textColor={Color.white}
           />
-        )}
+        )} */}
       </ImageBackground>
       <View style={styles.detailcontainer}>
         <View style={styles.left}>
