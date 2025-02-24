@@ -28,7 +28,6 @@ const LogoutModal = ({
       if (response.success) {
         setModalVisible(!modalVisible);
         dispatch(clearUser({}));
-        // navigation.navigate('AuthNavigator')
 
         navigation.reset({
           index: 0,
@@ -58,7 +57,6 @@ const LogoutModal = ({
       if (response.success) {
         setModalVisible(!modalVisible);
         dispatch(clearUser({}));
-        // naviagtion.navigate('AuthNavigator')
         navigation.reset({
           index: 0,
           routes: [
@@ -101,7 +99,6 @@ const LogoutModal = ({
               borderColor="green"
               onPress={() => {
                 modalType == 'logout' ? logoutUser() : deleteuser();
-                // naviagtion.navigate("AuthNavigator");
                 // dispatch(clearToken(token));
                 // setModalVisible(!modalVisible);
               }}

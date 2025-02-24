@@ -38,9 +38,6 @@ const MainNavigation = () => {
         screenOptions={{headerShown: false}}>
         {!token ? (
           <>
-            {/* <Stack.Screen name="AuthNavigator" component={AuthNavigator} /> */}
-            {/* <Stack.Screen name="HomeNavigator" component={HomeNavigator} /> */}
-            {/* <Stack.Screen name="BottomTab" component={BottomTab} /> */}
             <Stack.Screen
               name="ComplaintNavigator"
               component={ComplaintNavigator}
