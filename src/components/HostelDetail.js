@@ -14,7 +14,6 @@ import {useNavigation} from '@react-navigation/native';
 import {FontText} from '../utlis/CustomFont';
 
 const HstDetail = ({hostel, style, onLikePress}) => {
-  
   const navigation = useNavigation();
   const [liked, setLiked] = useState(false);
 
@@ -26,10 +25,10 @@ const HstDetail = ({hostel, style, onLikePress}) => {
     setLiked(!liked);
     onLikePress();
   };
-
+  console.log('response->>>', hostel.isLiked);
   return (
     <TouchableOpacity
-      style={[styles.container, {marginTop:10}]}
+      style={[styles.container, {marginTop: 10}]}
       onPress={() => navigation.navigate('SortbyScreen')}>
       <ImageBackground
         source={{uri: hostel?.property_images[0]}}
@@ -58,7 +57,6 @@ const HstDetail = ({hostel, style, onLikePress}) => {
             <Image source={Img.verifiedicon} style={styles.verifiedIconStyle} />
           )}
 
-
           {/* 
           <TouchableOpacity onPress={() => navigation.navigate('BookMark')}>
             <Image
@@ -68,11 +66,10 @@ const HstDetail = ({hostel, style, onLikePress}) => {
             />
           </TouchableOpacity> */}
 
-          
           <TouchableOpacity onPress={handleLikePress}>
             <Image
               source={Img.hrt}
-              tintColor={liked ? 'red' : 'black'}
+              tintColor={hostel.isLiked ? 'red' : 'black'}
               style={styles.hrtIconStyle}
             />
           </TouchableOpacity>

@@ -28,6 +28,8 @@ const HostelInfoCard = ({hostel}) => {
 
   console.log('->>>>>>>>rating ', hostel?.rating);
   console.log('->>>>>>>>admin ', hostel?.adminApproval);
+  console.log('->>>>>>>>hostel liked in sortby section', hostel?.isLiked);
+
   return (
     <TouchableOpacity
       style={styles.container}
@@ -38,7 +40,7 @@ const HostelInfoCard = ({hostel}) => {
         source={{uri: hostel?.property_images[0]}}
         style={styles.hostelimg}>
         {/* <InterestTracker /> */}
-        <LikeShare />
+        <LikeShare hostel={hostel?.isLiked ? 'red' : 'white'} />
         <View style={styles.dotContainer}>
           {[...Array(3)].map((_, index) => (
             <View
@@ -51,7 +53,7 @@ const HostelInfoCard = ({hostel}) => {
       <View style={styles.PgDetail}>
         <View>
           <Text style={styles.description}>{hostel?.property_name}</Text>
-          <Text style={styles.location}>{hostel?.property_id}</Text>
+          <Text style={styles.location}>{hostel?.address}</Text>
           {hostel?.adminApproval === 'Accept' && (
             <View style={styles.homeverifycontainer}>
               <Icon name="verified" color="#027516" size={16} />

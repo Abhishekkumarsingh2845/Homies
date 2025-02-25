@@ -19,9 +19,11 @@ import {FontText} from '../utlis/CustomFont';
 import {useNavigation} from '@react-navigation/native';
 import {Screen} from 'react-native-screens';
 import {ScreenDimensions} from '../utlis/DimensionApi';
-const PropertyInfoCard = ({hostel}) => {
+const PropertyInfoCard = ({data}) => {
+  const hostel = data.property
   const navigation = useNavigation();
-console.log("->>>>>vve",hostel?.property_images?.[0]);
+
+console.log("->>>>>vve",hostel);
   return (
     <TouchableOpacity
       style={styles.container}

@@ -11,6 +11,7 @@ import {Img} from '../../utlis/ImagesPath';
 import {useNavigation} from '@react-navigation/native';
 import PermonthRent from '../../components/PermonthRent';
 import PaymentSucces from './PaymentSucces';
+import BottomTab from '../../navigations/BottomTab';
 
 const PaymentForm = () => {
   const navigation = useNavigation();
@@ -50,8 +51,9 @@ const PaymentForm = () => {
         <PaymentMethod labelText={'Cash'} />
         {/* <PermonthRent rent='Total Payment' /> */}
         <PrimaryBtn
-          onPress={() => navigation.navigate('PaymentSucces')}
+          onPress={() => navigation.navigate('BottomTab')}
           // destination={PaymentSucces}
+          destination={BottomTab}
           txt={'Pay Now'}
           bgcolor={'#257500'}
           mgntop={10}

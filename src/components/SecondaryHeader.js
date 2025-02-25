@@ -17,7 +17,9 @@ const SecondaryHeader = ({
   gobackImage,
   onPress,
   notificationIcon,
-  share
+  share,
+  tintColor,
+  
 }) => {
   const navigation=useNavigation();
   return (
@@ -33,7 +35,7 @@ const SecondaryHeader = ({
           <Image source={share} style={styles.imgcontainer} />
         </TouchableOpacity>
         <TouchableOpacity style={{position: 'absolute', right: 10}} onPress={()=>navigation.navigate("Notification")}>
-          <Image source={notificationIcon} style={styles.imgcontainer} />
+          <Image source={notificationIcon} style={[styles.imgcontainer,{tintColor}]}  />
         </TouchableOpacity>
       </TouchableOpacity>
 
@@ -73,7 +75,6 @@ const styles = StyleSheet.create({
     width: 23,
     height: 23,
     resizeMode:"contain",
-    // position: 'absolute',
-    // right: 10,
+   
   },
 });

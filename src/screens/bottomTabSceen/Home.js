@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Header from '../../components/Header';
 import SecondaryHeader from '../../components/SecondaryHeader';
 import {useNavigation} from '@react-navigation/native';
@@ -17,16 +17,36 @@ import BillBoard from '../../components/BillBoard';
 import DotindictaorImg from '../../components/DotindictaorImg';
 import {FontText} from '../../utlis/CustomFont';
 import {Color} from '../../utlis/Color';
+import {get} from '../../utlis/Api';
 
 const Home = () => {
-  // const Drawer = createDrawerNavigator();
+  const [data, setData] = useState(null);
   const navigation = useNavigation();
+
+  const PropertywithFood = async () => {
+    const params = {
+      propertyId: '67b452c3d39ae7dadd6a474d',
+    };
+    try {
+      const response = await get('./propertyWithFood', params);
+      setData(response.data[0]);
+      console.log('response of the property withFood=>>>', response.data[0]);
+    } catch (error) {
+      console.log('error in the propertyWithFood', error.message);
+    }
+  };
+  console.log("->>>",data?.theme?.colorValue);
+  useEffect(() => {
+    PropertywithFood();
+  }, []);
+  // console.log("Property withFood->>>>>",data.foodDetails);
   return (
     <View style={styles.container}>
       <SafeAreaView />
       <SecondaryHeader
         gobackImage={Img.draw}
         notificationIcon={Img.bellicon}
+
         onPress={() => navigation.openDrawer()}
       />
       <View style={styles.subcontainer}>
@@ -38,7 +58,7 @@ const Home = () => {
         <View style={{paddingHorizontal: 10}}>
           {/* <Image source={Img.hstdetail} style={{width:300,resizeMode:"stretch",backgroundColor:"red",height:200,}}/> */}
         </View>
-        <FoodServices />
+        {!!data&&<FoodServices bgcolor={data?.theme?.colorValue} fooddetail={data} />}
         <Text style={styles.billboardtxt}>Bill Board</Text>
         <BillBoard />
         <BillBoard />
@@ -60,7 +80,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: FontText.medium,
     color: Color.black,
-    marginTop:10,
+    marginTop: 10,
   },
   foodservicetxt: {
     fontSize: 16,

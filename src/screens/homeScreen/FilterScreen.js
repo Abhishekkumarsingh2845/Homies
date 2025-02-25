@@ -17,9 +17,9 @@ const FilterScreen = () => {
   const navigation = useNavigation();
   const [filterData , setFilterData] = useState({})
   const {params} = useRoute()
-  console.log("filterData============== > > > > > > >" , params)
-
+  
   const filterFunc = () =>{
+    console.log("filterData============== > > > > > > >" , filterData)
     params.handleFilter(filterData)
   }
   return (

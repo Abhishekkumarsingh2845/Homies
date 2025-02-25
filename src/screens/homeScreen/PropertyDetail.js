@@ -30,15 +30,15 @@ import CalendarModal from '../../components/Calendarcmp';
 import RequestSentBtnSht from '../../components/RequestSentBtnSht';
 import GuestModal from '../../components/GuestModal';
 import {useSelector} from 'react-redux';
-import {get ,post} from '../../utlis/Api';
+import {get, post} from '../../utlis/Api';
 import VideoPlayer from '../../components/Video';
 
 // import {Image} from 'react-native-svg';
 const PropertyDetail = () => {
-  const route = useRoute()
-  const detail = route.params?.detail
+  const route = useRoute();
+  const detail = route.params?.detail;
   const navigation = useNavigation();
-
+  console.log('amenities', property?.availableAmenities);
   const propertyID = route?.params?.propertyID ?? null;
   console.log(
     '->>>>>property id coming in the property detail from the sortby screen',
@@ -57,9 +57,8 @@ const PropertyDetail = () => {
 
   const bottomSheetRef = useRef(null);
 
-
-  const handleVistRequest = async (date , time) => {
-    toggleModal()
+  const handleVistRequest = async (date, time) => {
+    toggleModal();
     const data = {
       propertyId: detail?._id,
       visitDate: date,
@@ -100,15 +99,17 @@ const PropertyDetail = () => {
       setloading(false);
     }
   };
+  console.log('isliked property', property?.isLiked);
   const getOneProperty = async () => {
     const params = {
       propertyId: propertyID,
+      userId: '67600bfade17e5db71396285',
       // propertyId :propertyID,
     };
     try {
       const response = await get('viewOneProperty', params);
       setPropertyData(response.data);
-      console.log('response of the viewOneProperty API ', response.data);
+      console.log('response of the viewOneProperty API', response);
       // console.log("response of the sharing",response.);
     } catch (error) {
       console.log(
@@ -159,22 +160,26 @@ const PropertyDetail = () => {
         detailtxt={'Property Details'}
         onPress={() => navigation.goBack()}
         notificationIcon={Img.hrt}
+        tintColor={property?.isLiked ? 'red' : 'white'}
         share={Img.shareicon}
       />
       <ScrollView>
         <View style={styles.subcontainer}>
-          <PropertyInfoCard hostel={property} />
+          <PropertyInfoCard data={property} />
           <Text style={styles.amenttxt}>Amenities</Text>
           <View style={styles.amenitycontainer}>
             <Amenity
               iconName="Wifi"
-              txt={property?.availableAmenities?.[0]}
+              txt={
+                property?.property?.availableAmenities?.[0] ||
+                'no data available'
+              }
               iconType={FontAwesome5}
               icon={<Wifi name="wifi" size={16} color={'black'} />}
             />
 
             <Amenity
-              txt={property?.availableAmenities?.[1]}
+              txt={property?.property?.availableAmenities?.[1]}
               mrgnleft={5}
               icon={
                 <Image
@@ -184,7 +189,7 @@ const PropertyDetail = () => {
               }
             />
             <Amenity
-              txt={property?.availableAmenities?.[2]}
+              txt={property?.property?.availableAmenities?.[2]}
               mrgnleft={5}
               icon={
                 <Image
@@ -200,7 +205,7 @@ const PropertyDetail = () => {
             />
           </View>
 
-          <Sharing share={property} />
+          <Sharing share={property?.property} />
 
           <VideoPlayer videoplay={property} />
 

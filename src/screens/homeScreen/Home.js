@@ -32,25 +32,27 @@ const Home = ({navigation}) => {
   const {latitude, longitude} = useSelector(state => state.location);
   console.log('Redux Location:', latitude, longitude);
 
-  const getHstdetail = async (filterData={}) => {
+  const getHstdetail = async (filterData = {}) => {
     console.log('getHstdetail');
 
     const params = {
-      long: '77.376945',
-      lat: '28.628454',
-      ...filterData
+      long: '77.3769',
+      lat: '28.6285',
+      ...filterData,
     };
 
     // const params = {
     //   long: longitude.toString(),
     //   lat: latitude.toString(),
     // };
+
     setloading(true);
 
     try {
       const response = await get('getNearProperties', params);
-      console.log( " response of getNearProperties" , response.data[0].data.length)
+      console.log(' response of getNearProperties', response.data[0].data);
       sethostelData(response?.data[0]?.data);
+      // console.log("->>>>ctv>",response?.data[0]?.data.isLiked);
     } catch (error) {
       console.log(
         'error in  the getNearProperty',
@@ -61,9 +63,9 @@ const Home = ({navigation}) => {
     }
   };
 
-  const handleFilter = useCallback((filterData) => {
-    console.log("filterData" , filterData);
-    getHstdetail(filterData)
+  const handleFilter = useCallback(filterData => {
+    console.log('filterData', filterData);
+    getHstdetail(filterData);
   }, []);
 
   const toggleLike = async propertyId => {
@@ -72,7 +74,7 @@ const Home = ({navigation}) => {
         propertyId,
         likedBy: '677d21015dcde6948d900c6c',
       });
-      getHstdetail()
+      getHstdetail();
       sethostelData(prevData =>
         prevData.map(item =>
           item._id === propertyId
@@ -127,7 +129,7 @@ const Home = ({navigation}) => {
         bellIcon={Img.noitificationicon}
       />
       <View style={styles.subcontainer}>
-        <SearchBar destination={LocationSearch} handleFilter={handleFilter}/>
+        <SearchBar destination={LocationSearch} handleFilter={handleFilter} />
 
         <ScrollView
           contentContainerStyle={{

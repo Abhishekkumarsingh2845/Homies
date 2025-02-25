@@ -12,7 +12,8 @@ const CalendarModal = ({ isVisible, toggleModal, handleVistRequest }) => {
 
   const onSubmit = () => {
     const newDate = new Date(date)
-    handleVistRequest(newDate.toISOString() , time)
+    console.log("new dqate------------------------" , newDate);
+    handleVistRequest(newDate?.toISOString() , time)
   }
 
   const getFormattedTime = () => {
@@ -102,7 +103,7 @@ const CalendarModal = ({ isVisible, toggleModal, handleVistRequest }) => {
       <DatePicker
         modal
         mode='time'
-        open={true}
+        open={open}
         date={time}
         onConfirm={(date) => {
           setOpen(false)

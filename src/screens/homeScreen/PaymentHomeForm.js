@@ -46,7 +46,7 @@ const PaymentHomeForm = () => {
         <PaymentMethod labelText={'Cash'} />
         <PermonthRent rent="Total Payment" />
         <PrimaryBtn
-          Onpress={() => navigation.navigate('FilterScreen')}
+          Onpress={() => navigation.navigate('BottomTab')}
           txt={'Pay Now'}
           bgcolor={Color.btnclr}
           mgntop={5}

@@ -88,13 +88,16 @@
 //     borderRadius: 5,
 //   },
 // });
+
+
+
 import React, {useState} from 'react';
 import {Image, ScrollView, StyleSheet, View} from 'react-native';
 
 const DotIndicatorImg = ({
   imageSource,
   count = 3,
-  width = 300,
+  width = 370,
   height = 150,
   activeDotColor = '#007BFF', // Dynamic active dot color with default
 }) => {
