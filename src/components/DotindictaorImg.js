@@ -91,7 +91,7 @@
 
 
 
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Image, ScrollView, StyleSheet, View} from 'react-native';
 
 const DotIndicatorImg = ({
@@ -102,9 +102,16 @@ const DotIndicatorImg = ({
   activeDotColor = '#007BFF', // Dynamic active dot color with default
 }) => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [images , setImages] = useState([])
 
   // Dynamically generate an array of images
-  const images = Array(count).fill(imageSource);
+  
+  console.log("images------------------------" , images);
+  useEffect(() =>{
+    if(imageSource){
+      setImages(Array(count).fill(imageSource))
+    }
+  },[imageSource])
 
   // Function to handle scroll position and update active index
   const handleScroll = event => {

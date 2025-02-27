@@ -42,16 +42,13 @@ const MainNavigation = () => {
               name="ComplaintNavigator"
               component={ComplaintNavigator}
             />
-          <Stack.Screen name="Login" component={Login} />
-          <Stack.Screen name="LoginSignup" component={LoginSignup} />
-          <Stack.Screen name="SignUp" component={SignUp} />
-          <Stack.Screen name="OtpVerify" component={OtpVerify} />
+            <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen name="LoginSignup" component={LoginSignup} />
+            <Stack.Screen name="SignUp" component={SignUp} />
+            <Stack.Screen name="OtpVerify" component={OtpVerify} />
 
-          <Stack.Screen name="Splash" component={Splash} />
-          <Stack.Screen name="Intro" component={Intro} />
-        
-
-
+            <Stack.Screen name="Splash" component={Splash} />
+            <Stack.Screen name="Intro" component={Intro} />
 
             <Stack.Screen name="DrawerNavigator" component={DrawerNavigator} />
             <Stack.Screen

@@ -26,10 +26,13 @@ const HstDetail = ({hostel, style, onLikePress}) => {
     onLikePress();
   };
   console.log('response->>>', hostel.isLiked);
+  console.log('->>>>>>frghjshjs>', hostel?.sharing[0]?.details[1]?.amount);
   return (
     <TouchableOpacity
       style={[styles.container, {marginTop: 10}]}
-      onPress={() => navigation.navigate('SortbyScreen')}>
+      onPress={() =>
+        navigation.navigate('PropertyDetail', {propertyID: hostel?._id})
+      }>
       <ImageBackground
         source={{uri: hostel?.property_images[0]}}
         style={styles.img}>
@@ -49,7 +52,7 @@ const HstDetail = ({hostel, style, onLikePress}) => {
           )}
           <View style={styles.addresscontainer}>
             <Image source={Img.locationdetail} style={styles.locationicon} />
-            <Text style={styles.address}>{hostel?.address ?? ''}</Text>
+            <Text style={styles.address}>{hostel?.property_id ?? ''}</Text>
           </View>
         </View>
         <View style={styles.right}>
@@ -79,7 +82,8 @@ const HstDetail = ({hostel, style, onLikePress}) => {
       <View style={styles.rentratingcontainer}>
         <View style={styles.rentcontainer}>
           <Text style={styles.rentamounttxt}>
-            ₹ Rent - 5K/<Text style={styles.month}>Month</Text>
+            {hostel?.sharing[0]?.details[0]?.amount || 'no data'} /
+            <Text style={styles.month}>Month</Text>
           </Text>
         </View>
         <View style={styles.ratingstarcontainer}>

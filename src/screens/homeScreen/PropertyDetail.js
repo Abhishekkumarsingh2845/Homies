@@ -7,6 +7,7 @@ import {
   Image,
   TouchableOpacity,
   FlatList,
+  Button,
 } from 'react-native';
 import React, {useEffect, useRef, useState} from 'react';
 import {Color} from '../../utlis/Color';
@@ -210,7 +211,9 @@ const PropertyDetail = () => {
           <VideoPlayer videoplay={property} />
 
           <Text style={styles.neaerbytxt}>Near by Property</Text>
+
           <NearLocationProperty nearproperty={property} />
+          
           <PermonthRent />
           <VisitRequestbtn
             OnPressRequestbtn={() => handlePayNow()}
@@ -222,6 +225,7 @@ const PropertyDetail = () => {
             isVisible={isModalVisible}
             handleVistRequest={handleVistRequest}
           />
+
           <RequestSentBtnSht ref={bottomSheetRef} />
 
           <View style={{marginVertical: 80}} />

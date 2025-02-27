@@ -9,7 +9,11 @@ const Sharing = ({share}) => {
     setSelectedSharing(sharingType); // Update selected sharing type
   };
 
-  // console.log('->>>>pp', share?.sharing[0].sharingType);
+  console.log('->>>>pp', share?.sharing[0].sharingType);
+  console.log(
+    '->>>>>>ffffffff',
+    share?.sharing?.[0]?.details?.[0].depositAmount,
+  );
 
   return (
     <View style={styles.container}>
@@ -44,7 +48,7 @@ const Sharing = ({share}) => {
               styles.sharingtxtstyle,
               selectedSharing == 'Five Sharing' && styles.selectedtxt,
             ]}>
-            Five Sharing
+            {share?.sharing?.[2]?.sharingType || 'No Data Available'}
           </Text>
         </TouchableOpacity>
       </View>
@@ -55,14 +59,15 @@ const Sharing = ({share}) => {
             <View style={styles.rentpercontainer}>
               <Text style={styles.rentperperson}>Rent per Person</Text>
               <Text style={styles.amounttxt}>
-                {share?.sharing?.[0]?.rentPerPerson?.withAC ||
+                {share?.sharing?.[0]?.details?.[0].amount ||
                   'No Data Available'}
               </Text>
             </View>
             <View>
               <Text style={styles.deposittxt}>Deposit</Text>
               <Text style={styles.amounttxt}>
-                {share?.sharing?.[0]?.deposit || 'No Data Available'}
+                {share?.sharing?.[0]?.details?.[0].depositAmount ||
+                  'No Data Available'}
               </Text>
             </View>
           </View>
@@ -75,7 +80,7 @@ const Sharing = ({share}) => {
               <View style={{marginLeft: 10}}>
                 <Text style={styles.withxtxt}>With AC</Text>
                 <Text style={styles.amounttxt}>
-                  {share?.sharing?.[0]?.rentPerPerson?.withAC ||
+                  {share?.sharing?.[0]?.details?.[3].amount ||
                     'No Data Available'}
                 </Text>
               </View>
@@ -87,7 +92,7 @@ const Sharing = ({share}) => {
               <View style={{marginLeft: 10}}>
                 <Text style={styles.withxtxt}>Without AC</Text>
                 <Text style={styles.amounttxt}>
-                  {share?.sharing?.[0]?.rentPerPerson?.withoutAC ||
+                  {share?.sharing?.[0]?.details?.[2].amount ||
                     'No Data Available'}
                 </Text>
               </View>
@@ -115,14 +120,15 @@ const Sharing = ({share}) => {
             <View style={styles.rentpercontainer}>
               <Text style={styles.rentperperson}>Rent per Person</Text>
               <Text style={styles.amounttxt}>
-                {share?.sharing?.[1]?.rentPerPerson?.withAC ||
+                {share?.sharing?.[1]?.details?.[0].amount ||
                   'No Data Available'}
               </Text>
             </View>
             <View>
               <Text style={styles.deposittxt}>Deposit</Text>
               <Text style={styles.amounttxt}>
-                {share?.sharing?.[1]?.deposit || 'No Data Available'}
+                {share?.sharing?.[1]?.details?.[0].depositAmount ||
+                  'No Data Available'}
               </Text>
             </View>
           </View>
@@ -135,7 +141,7 @@ const Sharing = ({share}) => {
               <View style={{marginLeft: 10}}>
                 <Text style={styles.withxtxt}>With AC</Text>
                 <Text style={styles.amounttxt}>
-                  {share?.sharing?.[1]?.rentPerPerson?.withAC ||
+                  {share?.sharing?.[1]?.details?.[2].amount ||
                     'No Data Available'}
                 </Text>
               </View>
@@ -147,7 +153,7 @@ const Sharing = ({share}) => {
               <View style={{marginLeft: 10}}>
                 <Text style={styles.withxtxt}>Without AC</Text>
                 <Text style={styles.amounttxt}>
-                  {share?.sharing?.[0]?.rentPerPerson?.withoutAC ||
+                  {share?.sharing?.[0]?.details?.[2].amount ||
                     'No Data Available'}
                 </Text>
               </View>
@@ -174,14 +180,17 @@ const Sharing = ({share}) => {
             <View style={styles.rentpercontainer}>
               <Text style={styles.rentperperson}>Rent per Person</Text>
               <Text style={styles.amounttxt}>
-                {share?.sharing?.[2]?.rentPerPerson?.withAC ||
+                ₹
+                {share?.sharing?.[2]?.details?.[0].amount ||
                   'No Data Available'}
               </Text>
             </View>
             <View>
               <Text style={styles.deposittxt}>Deposit</Text>
               <Text style={styles.amounttxt}>
-                ₹ {share?.sharing?.[2]?.deposit || 'No Data Available'}
+                ₹
+                {share?.sharing?.[2]?.details?.[0].depositAmount ||
+                  'No Data Available'}
               </Text>
             </View>
           </View>
@@ -195,7 +204,7 @@ const Sharing = ({share}) => {
                 <Text style={styles.withxtxt}>With AC</Text>
                 <Text style={styles.amounttxt}>
                   ₹
-                  {share?.sharing?.[2]?.rentPerPerson?.withAC ||
+                  {share?.sharing?.[2]?.details?.[2].amount ||
                     'No Data Available'}
                 </Text>
               </View>
@@ -208,7 +217,7 @@ const Sharing = ({share}) => {
                 <Text style={styles.withxtxt}>With AC</Text>
                 <Text style={styles.amounttxt}>
                   ₹
-                  {share?.sharing?.[0]?.rentPerPerson?.withoutAC ||
+                  {share?.sharing?.[0]?.details?.[2].amount ||
                     'No Data Available'}
                 </Text>
               </View>

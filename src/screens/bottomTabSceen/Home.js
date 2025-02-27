@@ -21,11 +21,13 @@ import {get} from '../../utlis/Api';
 
 const Home = () => {
   const [data, setData] = useState(null);
+  const [banner, setBanner] = useState(null);
+  console.log("----------------------------------------------------------------" , banner?.data[0]?.image_url);
   const navigation = useNavigation();
 
   const PropertywithFood = async () => {
     const params = {
-      propertyId: '67b452c3d39ae7dadd6a474d',
+      propertyId: '67bff9b538a34df307bf2b97',
     };
     try {
       const response = await get('./propertyWithFood', params);
@@ -35,9 +37,22 @@ const Home = () => {
       console.log('error in the propertyWithFood', error.message);
     }
   };
-  console.log("->>>",data?.theme?.colorValue);
+  const GetBanner = async () => {
+    try {
+      const response = await get('./getBannersForProperties');
+      console.log('response of the getBannersForProperties', response.data);
+      console.log('banner detail', response?.data[0]?.data[0]?.image_url);
+      setBanner(response.data[0]);
+    } catch (error) {
+      console.log('error in the getBannersForProperties', error.message);
+    }
+  };
+
+  // console.log("->>>",data?.theme?.colorValue);
+
   useEffect(() => {
     PropertywithFood();
+    GetBanner();
   }, []);
   // console.log("Property withFood->>>>>",data.foodDetails);
   return (
@@ -46,19 +61,25 @@ const Home = () => {
       <SecondaryHeader
         gobackImage={Img.draw}
         notificationIcon={Img.bellicon}
-
         onPress={() => navigation.openDrawer()}
       />
       <View style={styles.subcontainer}>
         <Text style={styles.bannertxt}>Banner</Text>
         <DotindictaorImg imageSource={Img.hstdetail} activeDotColor="#FF9457" />
+        {/* <DotindictaorImg
+          imageSource={ banner?.data[0]?.image_url}
+          activeDotColor="#FF9457"
+        /> */}
+
         <TouchableOpacity>
           <Text style={styles.foodservicetxt}>Food Services</Text>
         </TouchableOpacity>
         <View style={{paddingHorizontal: 10}}>
           {/* <Image source={Img.hstdetail} style={{width:300,resizeMode:"stretch",backgroundColor:"red",height:200,}}/> */}
         </View>
-        {!!data&&<FoodServices bgcolor={data?.theme?.colorValue} fooddetail={data} />}
+        {!!data && (
+          <FoodServices bgcolor={data?.theme?.colorValue} fooddetail={data} />
+        )}
         <Text style={styles.billboardtxt}>Bill Board</Text>
         <BillBoard />
         <BillBoard />

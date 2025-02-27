@@ -24,6 +24,7 @@ import {get, post} from '../../utlis/Api';
 import Geolocation from 'react-native-geolocation-service';
 import {useDispatch, useSelector} from 'react-redux';
 import {setLocation, setLocationStore} from '../../store/LocationSlice';
+import { useNavigation } from '@react-navigation/native';
 
 const Home = ({navigation}) => {
   const [loading, setloading] = useState();
@@ -31,7 +32,7 @@ const Home = ({navigation}) => {
   const dispatch = useDispatch();
   const {latitude, longitude} = useSelector(state => state.location);
   console.log('Redux Location:', latitude, longitude);
-
+  const Navigation=useNavigation();
   const getHstdetail = async (filterData = {}) => {
     console.log('getHstdetail');
 
@@ -145,7 +146,7 @@ const Home = ({navigation}) => {
             imageSource={Img.hstimgage}
             activeDotColor={Color.primary}
           />
-          <NearbySeeAll />
+          <NearbySeeAll OnPress={()=>Navigation.navigate("SortbyScreen")} />
 
           {loading ? (
             <>

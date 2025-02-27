@@ -10,18 +10,49 @@ import {useNavigation} from '@react-navigation/native';
 import {get} from '../../utlis/Api';
 
 const Store = () => {
+  const navigation = useNavigation();
   const [loading, setloading] = useState(false);
   const [storeData, setstoreData] = useState([]);
 
-  const getStoreDetail = async () => {
+  const categories = [
+    {
+      id: '1',
+      type: 'vegetable',
+      img: Img.vegetableicon,
+      topTxt: 'Vegetable',
+      bottomTxt: '&Fruits',
+    },
+    {
+      id: '2',
+      type: 'staples',
+      img: Img.groceryicon,
+      topTxt: 'Grocery',
+      bottomTxt: '&Staples',
+    },
+    {
+      id: '3',
+      type: 'beauty',
+      img: Img.beautyicon,
+      topTxt: 'Beauty',
+      bottomTxt: '&Personal',
+    },
+    {
+      id: '4',
+      type: 'household',
+      img: Img.householdicon,
+      topTxt: 'HouseHold',
+      bottomTxt: '&Essentials',
+    },
+  ];
+  const getStoreDetail = async groceryType => {
     const params = {
-      long: '77.3812',
-      lat: '28.621',
-      groceryType: 'vegetable',
+      long: '77.3649',
+      lat: '28.6280',
+      groceryType: groceryType,
     };
     try {
       const response = await get('getNearStores', params);
-      console.log('->>>', response?.data[0]?.data);
+      console.log('->>>liehcbfhw', response.data);
       setstoreData(response?.data[0]?.data);
     } catch (error) {
       console.log(
@@ -30,11 +61,11 @@ const Store = () => {
       );
     }
   };
-  useEffect(() => {
-    getStoreDetail();
-  }, []);
-  const storedata = [{id: 1}, {id: 2}, {id: 3}];
-  const navigation = useNavigation();
+
+  const handleStore = groceryType => {
+    getStoreDetail(groceryType);
+    console.log('->>', groceryType);
+  };
 
   return (
     <View style={styles.container}>
@@ -46,25 +77,19 @@ const Store = () => {
       <View style={styles.subcontainer}>
         <Text style={styles.catergorytxt}>Category</Text>
         <View style={styles.catergorycontainer}>
-          <CatergoryComponenet
-            Imgsource={Img.vegetableicon}
-            toptxt={'Vegetable'}
-            bottomtxt={'&Fruits'}
-          />
-          <CatergoryComponenet
-            Imgsource={Img.groceryicon}
-            toptxt={'Grocery'}
-            bottomtxt={'&Staples'}
-          />
-          <CatergoryComponenet
-            Imgsource={Img.beautyicon}
-            toptxt={'Beauty'}
-            bottomtxt={'&Personal'}
-          />
-          <CatergoryComponenet
-            Imgsource={Img.householdicon}
-            toptxt={'HouseHold'}
-            bottomtxt={'&Essentials'}
+          <FlatList
+            data={categories}
+            keyExtractor={item => item.id}
+            horizontal
+            ItemSeparatorComponent={() => <View style={{width: 40}} />}
+            renderItem={({item}) => (
+              <CatergoryComponenet
+                OnPress={() => handleStore(item.type)}
+                Imgsource={item.img}
+                toptxt={item.topTxt}
+                bottomtxt={item.bottomTxt}
+              />
+            )}
           />
         </View>
         <Text style={styles.headerText}>Store Address</Text>

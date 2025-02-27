@@ -26,13 +26,13 @@ const BottomTab = () => {
   const Tab = createBottomTabNavigator();
   return (
     <Tab.Navigator
-    initialRouteName='Home'
+      initialRouteName="Home"
       screenOptions={{
         headerShown: false,
         tabBarActiveTintColor: '#FFB83A', // Color when tab is selected
         tabBarInactiveTintColor: '#AFAEAE',
       }}>
-             {/* <Stack.Screen name="Home" component={Home} /> */}
+      {/* <Stack.Screen name="Home" component={Home} /> */}
       <Tab.Screen
         name="Home"
         component={Home}

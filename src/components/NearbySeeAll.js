@@ -3,11 +3,11 @@ import React from 'react';
 import {Color} from '../utlis/Color';
 import { FontText } from '../utlis/CustomFont';
 
-const NearbySeeAll = () => {
+const NearbySeeAll = ({OnPress}) => {
   return (
     <View style={styles.container}>
       <Text style={styles.nearby}>Nearby your location</Text>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={OnPress}>
         <Text style={styles.seeall}>See all</Text>
       </TouchableOpacity>
     </View>

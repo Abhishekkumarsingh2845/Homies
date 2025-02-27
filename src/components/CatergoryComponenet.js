@@ -5,16 +5,16 @@ import {FontText} from '../utlis/CustomFont';
 import {Color} from '../utlis/Color';
 import {useNavigation} from '@react-navigation/native';
 
-const CatergoryComponenet = ({Imgsource, toptxt, bottomtxt}) => {
+const CatergoryComponenet = ({Imgsource, toptxt, bottomtxt,OnPress}) => {
   const navigation = useNavigation();
   const [textcolor, settextcolor] = useState(Color.clr87);
 
-  const handlepress = () => {
-    settextcolor('#FF9457');
-    // navigation.navigate('DrawerNavigator');
-  };
+  // const handlepress = () => {
+  //   settextcolor('#FF9457');
+    
+  // };
   return (
-    <TouchableOpacity style={styles.container} onPress={handlepress}>
+    <TouchableOpacity style={styles.container} onPress={OnPress}>
       <Image source={Imgsource} style={styles.imgstyle} />
       <View style={{marginTop: 5}} />
       <Text style={[styles.txtstyle, {color: textcolor}]}>{toptxt}</Text>

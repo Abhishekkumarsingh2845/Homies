@@ -17,7 +17,20 @@ const StoreDetail = ({strdetail}) => {
           {/* <Text style={styles.addresstxt}>
             kazi Deiry, Taiger PassChttagong
           </Text> */}
-          <Text style={styles.addresstxt}>{strdetail?.address}</Text>
+          {/* <Text style={styles.addresstxt}>{strdetail?.address}</Text> */}
+          <Text style={styles.addresstxt}>
+            {(() => {
+              try {
+                return (
+                  JSON.parse(strdetail?.address)?.value?.description ||
+                  'No Address'
+                );
+              } catch (error) {
+                console.log('Error parsing address:', error.message);
+                return 'Invalid Address';
+              }
+            })()}
+          </Text>
         </View>
 
         <View style={styles.phonedetail}>

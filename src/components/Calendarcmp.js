@@ -1,20 +1,23 @@
-import React, { useState } from 'react';
-import { View, Modal, TouchableOpacity, Text, StyleSheet } from 'react-native';
-import { Calendar, LocaleConfig } from 'react-native-calendars';
-import { Color } from '../utlis/Color';
-import DatePicker from 'react-native-date-picker'
+import React, {useState} from 'react';
+import {View, Modal, TouchableOpacity, Text, StyleSheet} from 'react-native';
+import {Calendar, LocaleConfig} from 'react-native-calendars';
+import {Color} from '../utlis/Color';
+import DatePicker from 'react-native-date-picker';
+import {useNavigation} from '@react-navigation/native';
 
-const CalendarModal = ({ isVisible, toggleModal, handleVistRequest }) => {
+const CalendarModal = ({isVisible, toggleModal, handleVistRequest}) => {
+  const Navigation = useNavigation();
   const [date, setDate] = useState('');
-  const [open, setOpen] = useState(false)
-  console.log("open" , open);
-  const [time, setTime] = useState(new Date())
+  const [open, setOpen] = useState(false);
+  console.log('open', open);
+  const [time, setTime] = useState(new Date());
 
   const onSubmit = () => {
-    const newDate = new Date(date)
-    console.log("new dqate------------------------" , newDate);
-    handleVistRequest(newDate?.toISOString() , time)
-  }
+    const newDate = new Date(date);
+    console.log('new dqate------------------------', newDate);
+    Navigation.navigate('Home');
+    handleVistRequest(newDate?.toISOString(), time);
+  };
 
   const getFormattedTime = () => {
     let hours = time.getHours();
@@ -29,19 +32,25 @@ const CalendarModal = ({ isVisible, toggleModal, handleVistRequest }) => {
 
     return {
       formattedTime: `${hours}:${minutes}`,
-      AMPM: ampm
+      AMPM: ampm,
     };
-  }
-
+  };
 
   return (
-    <TouchableOpacity style={styles.container} onPress={()=> {console.log("jbcejvfuev")}}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={() => {
+        console.log('jbcejvfuev');
+      }}>
       <Modal
         visible={isVisible}
         animationType="slide"
         transparent={true}
         onRequestClose={toggleModal}>
-        <TouchableOpacity style={styles.modalContainer} onPress={toggleModal} activeOpacity={1}>
+        <TouchableOpacity
+          style={styles.modalContainer}
+          onPress={toggleModal}
+          activeOpacity={1}>
           <View style={styles.calendarContainer}>
             <Calendar
               onDayPress={day => {
@@ -76,9 +85,13 @@ const CalendarModal = ({ isVisible, toggleModal, handleVistRequest }) => {
             paddingHorizontal: 15,
             alignItems: 'center',
           }}>
-          <Text style={{ fontSize: 16, color: 'black' }}>Time</Text>
-          <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center' }} onPress={() => { setOpen(true) }}>
-            <Text style={{ fontSize: 16, color: 'black', marginRight: 5 }}>
+          <Text style={{fontSize: 16, color: 'black'}}>Time</Text>
+          <TouchableOpacity
+            style={{flexDirection: 'row', alignItems: 'center'}}
+            onPress={() => {
+              setOpen(true);
+            }}>
+            <Text style={{fontSize: 16, color: 'black', marginRight: 5}}>
               {getFormattedTime().formattedTime}
             </Text>
             <View
@@ -87,33 +100,30 @@ const CalendarModal = ({ isVisible, toggleModal, handleVistRequest }) => {
                 padding: 10,
                 borderRadius: 10,
               }}>
-              <Text style={{ fontSize: 16, color: '#FFFFFF' }}>
+              <Text style={{fontSize: 16, color: '#FFFFFF'}}>
                 {getFormattedTime().AMPM}
               </Text>
             </View>
           </TouchableOpacity>
         </View>
 
-        <TouchableOpacity
-          style={styles.closeButton}
-          onPress={onSubmit}>
+        <TouchableOpacity style={styles.closeButton} onPress={onSubmit}>
           <Text style={styles.closeButtonText}>Submit</Text>
         </TouchableOpacity>
       </Modal>
       <DatePicker
         modal
-        mode='time'
+        mode="time"
         open={open}
         date={time}
-        onConfirm={(date) => {
-          setOpen(false)
-          setTime(date)
+        onConfirm={date => {
+          setOpen(false);
+          setTime(date);
         }}
         onCancel={() => {
-          setOpen(false)
+          setOpen(false);
         }}
       />
-
     </TouchableOpacity>
   );
 };
@@ -148,7 +158,7 @@ const styles = StyleSheet.create({
     padding: 20,
     elevation: 5, // Shadow for Android
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
+    shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.25,
     shadowRadius: 4, // Shadow for iOS
     // marginVertical:10,

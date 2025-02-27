@@ -20,10 +20,10 @@ import {useNavigation} from '@react-navigation/native';
 import {Screen} from 'react-native-screens';
 import {ScreenDimensions} from '../utlis/DimensionApi';
 const PropertyInfoCard = ({data}) => {
-  const hostel = data.property
+  const hostel = data.property;
   const navigation = useNavigation();
 
-console.log("->>>>>vve",hostel);
+  console.log('->>>>>vve', hostel);
   return (
     <TouchableOpacity
       style={styles.container}
@@ -31,18 +31,18 @@ console.log("->>>>>vve",hostel);
       <View style={styles.imgcontainer}>
         <View style={styles.largehosteimgstyle}>
           <Image
-            source={{uri:hostel?.property_images?.[0]}}
+            source={{uri: hostel?.property_images?.[0]}}
             style={styles.hstdetailstyle}
           />
         </View>
 
         <View style={styles.subimagecontainer}>
           <Image
-            source={Img.morehostelicon}
+            source={{uri: hostel?.property_images?.[1]}}
             style={styles.morehosteliconstyle}
           />
           <ImageBackground
-            source={Img.morehostelicon}
+            source={{uri: hostel?.property_images?.[1]}}
             style={styles.mmorehostelicon}>
             <Text style={{alignSelf: 'center', fontSize: 20, color: 'white'}}>
               +5
@@ -70,13 +70,13 @@ console.log("->>>>>vve",hostel);
               Color={Color.clr87}
             />
             <Text style={styles.namedetailtxt}>
-              {hostel?.warden_details?.warden_name}
+              {hostel?.warden_details?.name}
             </Text>
           </View>
           <View style={styles.phonedetailcontainer}>
             <PhoneIcon name="phone-outline" size={18} color={'#0094FD'} />
             <Text style={styles.phoneno}>
-              +91 {hostel?.warden_details?.warden_phone}
+              +91 {hostel?.warden_details?.phone}
             </Text>
           </View>
         </View>
@@ -119,9 +119,9 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: Color.white,
     elevation: 5,
-    shadowColor: '#000', // Shadow color (iOS)
-    shadowOffset: {width: 0, height: 2}, // Shadow position (iOS)
-    shadowOpacity: 0.2, // Shadow transparency (iOS)
+    shadowColor: '#000',
+    shadowOffset: {width: 0, height: 2},
+    shadowOpacity: 0.2,
     shadowRadius: 4,
     paddingHorizontal: 20,
     paddingVertical: 20,
@@ -165,8 +165,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   hostellogoiconstyle: {
-    width: 70,
-    height: 50,
+    marginTop: 10,
+    width: 40,
+    height: 40,
     resizeMode: 'contain',
     // backgroundColor:"red"
   },
