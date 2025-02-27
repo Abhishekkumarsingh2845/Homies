@@ -26,10 +26,6 @@ const HostelInfoCard = ({hostel}) => {
   const navigation = useNavigation();
   const {token} = useSelector(state => state.auth.user);
 
-  console.log('->>>>>>>>rating ', hostel?.rating);
-  console.log('->>>>>>>>admin ', hostel?.adminApproval);
-  console.log('->>>>>>>>hostel liked in sortby section', hostel?.isLiked);
-
   return (
     <TouchableOpacity
       style={styles.container}
@@ -40,7 +36,7 @@ const HostelInfoCard = ({hostel}) => {
         source={{uri: hostel?.property_images[0]}}
         style={styles.hostelimg}>
         {/* <InterestTracker /> */}
-        <LikeShare hostel={hostel?.isLiked ? 'red' : 'white'} />
+        <LikeShare color={hostel.isLiked ? 'red' : 'black'} propertyId= {hostel?._id}/>
         <View style={styles.dotContainer}>
           {[...Array(3)].map((_, index) => (
             <View

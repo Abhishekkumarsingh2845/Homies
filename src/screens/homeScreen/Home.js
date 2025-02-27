@@ -25,14 +25,20 @@ import Geolocation from 'react-native-geolocation-service';
 import {useDispatch, useSelector} from 'react-redux';
 import {setLocation, setLocationStore} from '../../store/LocationSlice';
 import { useNavigation } from '@react-navigation/native';
+import { getNearPropertiesFunc, setLikeUnlike } from '../../store/PropertiesSlice';
 
 const Home = ({navigation}) => {
-  const [loading, setloading] = useState();
-  const [hostetData, sethostelData] = useState([]);
+  // const [loading, setloading] = useState();
+  // const [hostetData, sethostelData] = useState([]);
+  const {data : hostetData , loading } = useSelector((state) => state.getPropertiesSlice)
+
   const dispatch = useDispatch();
   const {latitude, longitude} = useSelector(state => state.location);
   console.log('Redux Location:', latitude, longitude);
   const Navigation=useNavigation();
+  const user = useSelector((state) => state.auth.user)
+  console.log("user of home -- - - - -" , loading)
+
   const getHstdetail = async (filterData = {}) => {
     console.log('getHstdetail');
 
@@ -42,25 +48,17 @@ const Home = ({navigation}) => {
       ...filterData,
     };
 
-    // const params = {
-    //   long: longitude.toString(),
-    //   lat: latitude.toString(),
-    // };
-
-    setloading(true);
-
     try {
-      const response = await get('getNearProperties', params);
-      console.log(' response of getNearProperties', response.data[0].data);
-      sethostelData(response?.data[0]?.data);
-      // console.log("->>>>ctv>",response?.data[0]?.data.isLiked);
+       dispatch(getNearPropertiesFunc(params))
+      // const response = await get('getNearProperties', params);
+      // sethostelData(response?.data[0]?.data);
     } catch (error) {
       console.log(
         'error in  the getNearProperty',
         error?.response?.data || error.message,
       );
     } finally {
-      setloading(false);
+      // setloading(false);
     }
   };
 
@@ -73,16 +71,9 @@ const Home = ({navigation}) => {
     try {
       const response = await post('likeProperty', {
         propertyId,
-        likedBy: '677d21015dcde6948d900c6c',
+        likedBy: user?._id,
       });
-      getHstdetail();
-      sethostelData(prevData =>
-        prevData.map(item =>
-          item._id === propertyId
-            ? {...item, likedBy: response.data.likedBy || []}
-            : item,
-        ),
-      );
+      dispatch(setLikeUnlike({propertyId : propertyId , isLiked : response?.data?.isLiked}))
     } catch (error) {
       console.log('Error liking/unliking property:', error.message);
     }
@@ -117,7 +108,9 @@ const Home = ({navigation}) => {
   };
 
   useEffect(() => {
-    getHstdetail();
+    if(!hostetData){
+      getHstdetail();
+    }
     getLocation();
   }, []);
 
