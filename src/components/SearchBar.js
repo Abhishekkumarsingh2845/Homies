@@ -82,7 +82,8 @@ const SearchBar = ({
   placeholderText = 'Find Property',
   containerBgColor = '#EFEFEF',
   destination,
-  handleFilter = null
+  handleFilter = null,
+  onChangeText
 }) => {
   const navigation = useNavigation();
   const [modalVisible, setModalVisible] = useState(false);
@@ -117,6 +118,7 @@ const SearchBar = ({
         placeholder={placeholderText} // Dynamic placeholder
         placeholderTextColor={'#737373'}
         onFocus={handleNavigation}
+        onChangeText={onChangeText}
       />
 
       <TouchableOpacity onPress={()=>handleSearchNavigation()}>

@@ -36,7 +36,10 @@ const HostelInfoCard = ({hostel}) => {
         source={{uri: hostel?.property_images[0]}}
         style={styles.hostelimg}>
         {/* <InterestTracker /> */}
-        <LikeShare color={hostel.isLiked ? 'red' : 'black'} propertyId= {hostel?._id}/>
+        <LikeShare
+          color={hostel.isLiked ? 'red' : 'black'}
+          propertyId={hostel?._id}
+        />
         <View style={styles.dotContainer}>
           {[...Array(3)].map((_, index) => (
             <View
@@ -60,7 +63,9 @@ const HostelInfoCard = ({hostel}) => {
         </View>
         <View>
           <Text style={styles.price}>Starting from </Text>
-          <Text style={styles.amount}>₹6,500</Text>
+          <Text style={styles.amount}>
+            {hostel?.sharing[1]?.details[2]?.amount || 'no amount'}
+          </Text>
           <View style={{flexDirection: 'row', marginTop: 5}}>
             {StarArray.map((filled, index) => (
               <Image
@@ -131,6 +136,7 @@ const styles = StyleSheet.create({
   location: {
     fontSize: 12,
     fontFamily: FontText.medium,
+
     color: Color.clr87,
     lineHeight: 14,
     marginTop: 5,

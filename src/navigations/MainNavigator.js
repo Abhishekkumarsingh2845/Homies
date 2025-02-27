@@ -1,13 +1,10 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-
 import AuthNavigator from './AuthNavigator';
 import HomeNavigator from './HomeNavigator';
-
 import ComplaintNavigator from './ComplaintNavigator';
 import DrawerNavigator from './DrawerNavigator';
-
 import BottomTab from './BottomTab';
 import HomeTabNavigator from './HomeTabNavigator';
 import Profile from '../screens/drawerScreen/Profile';
@@ -78,6 +75,7 @@ const MainNavigation = () => {
             <Stack.Screen
               name="HomeTabNavigator"
               component={HomeTabNavigator}
+
             />
             <Stack.Screen name="ChatNavigator" component={ChatNavigator} />
             <Stack.Screen name="Profile" component={Profile} />

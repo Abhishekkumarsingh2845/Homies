@@ -1,5 +1,5 @@
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import SecondaryHeader from '../../components/SecondaryHeader';
 import {Img} from '../../utlis/ImagesPath';
 import StarComponent from '../../components/StarComponent';
@@ -15,29 +15,34 @@ import {useNavigation, useRoute} from '@react-navigation/native';
 
 const FilterScreen = () => {
   const navigation = useNavigation();
-  const [filterData , setFilterData] = useState({})
-  const {params} = useRoute()
+  const [filterData, setFilterData] = useState({});
+  const {params} = useRoute();
+
+  const filterFunc = () => {
+    console.log('filterData============== > > > > > > >', filterData);
+    params.handleFilter(filterData);
+  };
+
   
-  const filterFunc = () =>{
-    console.log("filterData============== > > > > > > >" , filterData)
-    params.handleFilter(filterData)
-  }
   return (
     <View style={styles.container}>
       <SecondaryHeader
         gobackImage={Img.goback}
         detailtxt={'Search'}
-        onPress={() =>{ navigation.goBack()}}/>
+        onPress={() => {
+          navigation.goBack();
+        }}
+      />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.subcontainer}>
-          <StarComponent setFilterData={setFilterData}/>
-          <Seater setFilterData={setFilterData}/>
-          <Amentity setFilterData={setFilterData}/>
-          <Distance setFilterData={setFilterData}/>
-          <Price  setFilterData={setFilterData}/>
-          <GenderSelector setFilterData={setFilterData}/>
+          <StarComponent setFilterData={setFilterData} />
+          <Seater setFilterData={setFilterData} />
+          <Amentity setFilterData={setFilterData} />
+          <Distance setFilterData={setFilterData} />
+          <Price setFilterData={setFilterData} />
+          <GenderSelector setFilterData={setFilterData} />
           <PrimaryBtn
-           Onpress={filterFunc}
+            Onpress={filterFunc}
             txt={'Apply'}
             bgcolor={Color.btnclr}
             mgntop={20}

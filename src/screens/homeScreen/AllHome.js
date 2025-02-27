@@ -57,6 +57,7 @@ const AllHome = ({navigation}) => {
         <SearchBar />
         <ScrollView showsVerticalScrollIndicator={false}>
         <NearbySeeAll />
+        
         {/* <Icon name="rocket" size={30} color="#900" /> */}
         <Image
           source={require('../../assets/images/map.png')}

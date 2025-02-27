@@ -1,3 +1,4 @@
+import React, {useCallback, useEffect, useState} from 'react';
 import {
   ActivityIndicator,
   FlatList,
@@ -6,81 +7,59 @@ import {
   ScrollView,
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useCallback, useEffect, useState} from 'react';
+
+import {useDispatch, useSelector} from 'react-redux';
 import Header from '../../components/Header';
 import {Img} from '../../utlis/ImagesPath';
 import SearchBar from '../../components/SearchBar';
 import HostelInfoCard from '../../components/HostelInfoCard';
 import SortByModal from '../../components/SortBymodal';
 import SortByBtn from '../../components/SortByBtn';
-import GuestModal from '../../components/GuestModal';
-import {get} from '../../utlis/Api';
 import {Color} from '../../utlis/Color';
-import { useDispatch, useSelector } from 'react-redux';
-import { getNearPropertiesFunc } from '../../store/PropertiesSlice';
+import {getNearPropertiesFunc} from '../../store/PropertiesSlice';
 
 const SortbyScreen = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [sortBy, setSortBy] = useState('');
-  const dispatch = useDispatch()
-    const {data : hostetData , loading  } = useSelector((state) => state.getPropertiesSlice)
-  
+  const dispatch = useDispatch();
+  const {data: hostetData, loading} = useSelector(
+    state => state.getPropertiesSlice,
+  );
 
   const openModal = () => setModalVisible(true);
   const closeModal = () => setModalVisible(false);
 
-  const getHstdetail = async (filterData = {}) => {
-    const params = {
-      long: '77.376945',
-      lat: '28.628454',
-      sortType: sortBy,
-      ...filterData,
-    };
-    // setloading(true);
-    // try {
-    //   const response = await get('getNearProperties', params);
-    //   console.log(
-    //     'response of the getNearProperties but in the sortbyscreen =======',
-    //     response.data[0]?.data,
-    //   );
-    //   // sethostelData(response?.data[0]?.data);
-    // } catch (error) {
-    //   console.log(
-    //     'error in  the getNearProperty',
-    //     error?.response?.data || error.message,
-    //   );
-    // } finally {
-    //   setloading(false);
-    // }
+  const getHstdetail = useCallback(
+    async (filterData = {}) => {
+      const params = {
+        long: '77.376945',
+        lat: '28.628454',
+        sortType: sortBy, // Include sortBy in API call
+        ...filterData,
+      };
 
-        try {
-           dispatch(getNearPropertiesFunc(params))
-          // const response = await get('getNearProperties', params);
-          // sethostelData(response?.data[0]?.data);
-        } catch (error) {
-          console.log(
-            'error in  the getNearProperty',
-            error?.response?.data || error.message,
-          );
-        } finally {
-          // setloading(false);
-        }
-  };
+      try {
+        dispatch(getNearPropertiesFunc(params));
+      } catch (error) {
+        console.log(
+          'error in the getNearProperty',
+          error?.response?.data || error.message,
+        );
+      }
+    },
+    [dispatch, sortBy],
+  );
 
-  const handleFilter = useCallback(filterData => {
-    console.log('filterData', filterData);
-    getHstdetail(filterData);
-  }, []);
+  useEffect(() => {
+    getHstdetail();
+  }, [sortBy]);
 
   return (
     <View style={styles.container}>
       <SafeAreaView />
-      {/* <Header Img1={Img.goback} nav={() => {navigation.navigate('Home')}} />
-      <ScrollView contentContainerStyle={styles.subcontainer}> */}
-      <Header Img1={Img.goback}  nav={() => {navigation.navigate('Home')}}/>
+      <Header Img1={Img.goback} nav={() => navigation.navigate('Home')} />
       <ScrollView
         contentContainerStyle={styles.subcontainer}
         refreshControl={
@@ -90,27 +69,23 @@ const SortbyScreen = ({navigation}) => {
           destination={() => {}}
           placeholderText="Hostel Near Me"
           containerBgColor="white"
-          handleFilter={handleFilter}
+          handleFilter={getHstdetail}
         />
 
         {loading ? (
-          <>
-            <View style={styles.loaderContainer}>
-              <ActivityIndicator size="large" color={Color.primary} />
-            </View>
-          </>
+          <View style={styles.loaderContainer}>
+            <ActivityIndicator size="large" color={Color.primary} />
+          </View>
         ) : (
-          <>
-            <FlatList
-              data={hostetData}
-              showsVerticalScrollIndicator={false}
-              keyExtractor={item => item.id}
-              renderItem={({item}) => <HostelInfoCard hostel={item} />}
-              refreshControl={
-                <RefreshControl refreshing={loading} onRefresh={getHstdetail} />
-              }
-            />
-          </>
+          <FlatList
+            data={hostetData}
+            showsVerticalScrollIndicator={false}
+            keyExtractor={item => item.id}
+            renderItem={({item}) => <HostelInfoCard hostel={item} />}
+            refreshControl={
+              <RefreshControl refreshing={loading} onRefresh={getHstdetail} />
+            }
+          />
         )}
 
         <SortByModal
@@ -121,7 +96,7 @@ const SortbyScreen = ({navigation}) => {
         />
 
         <SortByBtn mrntop={15} onPress={openModal} />
-        <View style={{marginVertical: 20}}></View>
+        <View style={{marginVertical: 20}} />
       </ScrollView>
     </View>
   );

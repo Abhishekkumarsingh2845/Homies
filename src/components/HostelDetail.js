@@ -15,6 +15,7 @@ import {FontText} from '../utlis/CustomFont';
 
 const HstDetail = ({hostel, style, onLikePress}) => {
   const navigation = useNavigation();
+  console.log('->>>>>nn', hostel?.property_images);
   // const [liked, setLiked] = useState(false);
 
   useEffect(() => {
@@ -46,11 +47,13 @@ const HstDetail = ({hostel, style, onLikePress}) => {
       <View style={styles.detailcontainer}>
         <View style={styles.left}>
           {!!hostel?.availableFor && (
-            <Text style={styles.person}>{hostel?.availableFor}</Text>
+            <Text style={styles.person}>
+              {hostel?.property_name} || {hostel?.availableFor}
+            </Text>
           )}
           <View style={styles.addresscontainer}>
             <Image source={Img.locationdetail} style={styles.locationicon} />
-            <Text style={styles.address}>{hostel?.property_id ?? ''}</Text>
+            <Text style={styles.address}>{hostel?.address ?? ''}</Text>
           </View>
         </View>
         <View style={styles.right}>
@@ -113,12 +116,12 @@ const styles = StyleSheet.create({
   },
   img: {
     width: '100%',
-    resizeMode: 'stretch',
     justifyContent: 'flex-end',
     alignItems: 'flex-end',
     height: 120,
     marginVertical: 10,
     borderRadius: 10,
+    // backgroundColor:"red",
 
     overflow: 'hidden',
   },
