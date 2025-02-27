@@ -19,13 +19,15 @@ import SortByBtn from '../../components/SortByBtn';
 import GuestModal from '../../components/GuestModal';
 import {get} from '../../utlis/Api';
 import {Color} from '../../utlis/Color';
+import { useDispatch, useSelector } from 'react-redux';
+import { getNearPropertiesFunc } from '../../store/PropertiesSlice';
 
 const SortbyScreen = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [sortBy, setSortBy] = useState('');
-  const [loading, setloading] = useState();
-  const [hostetData, sethostelData] = useState([]);
-  console.log('hostelData in the sortbyscreen', hostetData);
+  const dispatch = useDispatch()
+    const {data : hostetData , loading  } = useSelector((state) => state.getPropertiesSlice)
+  
 
   const openModal = () => setModalVisible(true);
   const closeModal = () => setModalVisible(false);
@@ -37,38 +39,48 @@ const SortbyScreen = ({navigation}) => {
       sortType: sortBy,
       ...filterData,
     };
-    setloading(true);
-    try {
-      const response = await get('getNearProperties', params);
-      console.log(
-        'response of the getNearProperties but in the sortbyscreen =======',
-        response.data[0]?.data,
-      );
-      sethostelData(response?.data[0]?.data);
-    } catch (error) {
-      console.log(
-        'error in  the getNearProperty',
-        error?.response?.data || error.message,
-      );
-    } finally {
-      setloading(false);
-    }
+    // setloading(true);
+    // try {
+    //   const response = await get('getNearProperties', params);
+    //   console.log(
+    //     'response of the getNearProperties but in the sortbyscreen =======',
+    //     response.data[0]?.data,
+    //   );
+    //   // sethostelData(response?.data[0]?.data);
+    // } catch (error) {
+    //   console.log(
+    //     'error in  the getNearProperty',
+    //     error?.response?.data || error.message,
+    //   );
+    // } finally {
+    //   setloading(false);
+    // }
+
+        try {
+           dispatch(getNearPropertiesFunc(params))
+          // const response = await get('getNearProperties', params);
+          // sethostelData(response?.data[0]?.data);
+        } catch (error) {
+          console.log(
+            'error in  the getNearProperty',
+            error?.response?.data || error.message,
+          );
+        } finally {
+          // setloading(false);
+        }
   };
-  console.log('sortByenum coming in the  sortbyscreen', sortBy);
 
   const handleFilter = useCallback(filterData => {
     console.log('filterData', filterData);
     getHstdetail(filterData);
   }, []);
-  useEffect(() => {
-    getHstdetail();
-  }, []);
+
   return (
     <View style={styles.container}>
       <SafeAreaView />
       {/* <Header Img1={Img.goback} nav={() => {navigation.navigate('Home')}} />
       <ScrollView contentContainerStyle={styles.subcontainer}> */}
-      <Header Img1={Img.goback} />
+      <Header Img1={Img.goback}  nav={() => {navigation.navigate('Home')}}/>
       <ScrollView
         contentContainerStyle={styles.subcontainer}
         refreshControl={

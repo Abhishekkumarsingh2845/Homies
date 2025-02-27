@@ -15,17 +15,16 @@ import {FontText} from '../utlis/CustomFont';
 
 const HstDetail = ({hostel, style, onLikePress}) => {
   const navigation = useNavigation();
-  const [liked, setLiked] = useState(false);
+  // const [liked, setLiked] = useState(false);
 
   useEffect(() => {
-    setLiked(hostel.likedBy?.length > 0);
+    // setLiked(hostel.likedBy?.length > 0);
   }, [hostel.likedBy]);
 
   const handleLikePress = () => {
-    setLiked(!liked);
+    // setLiked(!liked);
     onLikePress();
   };
-  console.log('response->>>', hostel.isLiked);
   return (
     <TouchableOpacity
       style={[styles.container, {marginTop: 10}]}
@@ -66,7 +65,7 @@ const HstDetail = ({hostel, style, onLikePress}) => {
             />
           </TouchableOpacity> */}
 
-          <TouchableOpacity onPress={handleLikePress}>
+          <TouchableOpacity onPress={() => handleLikePress(hostel._id)}>
             <Image
               source={Img.hrt}
               tintColor={hostel.isLiked ? 'red' : 'black'}

@@ -45,7 +45,7 @@ import store from '../store/Store';
 
 const BASE_URL = 'http://15.206.16.230:8084/api/v1/user/';
 
-const api = axios.create({
+export const api = axios.create({
   baseURL: BASE_URL,
   headers: {
     'Content-Type': 'application/json',
