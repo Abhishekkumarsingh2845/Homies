@@ -46,7 +46,7 @@ const PropertyDetail = () => {
   );
   const [isModalVisible, setModalVisible] = useState(false);
   const [showGuestModal, setShowGuestModal] = useState(false);
-  const {token} = useSelector(state => state.auth.user);
+  const {token , _id} = useSelector(state => state.auth.user);
   const [property, setPropertyData] = useState({});
   const [amenities, setAmenities] = useState([]);
   const [loading, setloading] = useState();
@@ -103,13 +103,14 @@ const PropertyDetail = () => {
   const getOneProperty = async () => {
     const params = {
       propertyId: propertyID,
-      userId: '67600bfade17e5db71396285',
+      userId: _id,
       // propertyId :propertyID,
     };
+    console.log("=======================" , params)
     try {
       const response = await get('viewOneProperty', params);
       setPropertyData(response.data);
-      console.log('response of the viewOneProperty API', response);
+      console.log('response of the viewOneProperty API', JSON.stringify(response.data.property.sharing));
       // console.log("response of the sharing",response.);
     } catch (error) {
       console.log(
