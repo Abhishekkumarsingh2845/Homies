@@ -23,11 +23,11 @@ const PropertyInfoCard = ({data}) => {
   const hostel = data.property;
   const navigation = useNavigation();
 
-  console.log('->>>>>vve', hostel);
   return (
     <TouchableOpacity
       style={styles.container}
-      onPress={() => navigation.navigate('PaymentHomeForm')}>
+      onPress={() => navigation.navigate('PaymentHomeForm')}
+      >
       <View style={styles.imgcontainer}>
         <View style={styles.largehosteimgstyle}>
           <Image

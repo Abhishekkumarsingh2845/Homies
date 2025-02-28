@@ -6,13 +6,14 @@ import {
   Modal,
   Image,
   TouchableWithoutFeedback,
+  ActivityIndicator,
 } from 'react-native';
 import React, {useState} from 'react';
 import {FontText} from '../utlis/CustomFont';
 import {ScreenDimensions} from '../utlis/DimensionApi';
 import {Img} from '../utlis/ImagesPath';
 
-const VisitRequestbtn = ({Onprs, vistreq,OnPressRequestbtn}) => {
+const VisitRequestbtn = ({Onprs, vistreq,OnPressRequestbtn , loading}) => {
   const [modalVisible, setModalVisible] = useState(false); // State to control modal visibility
 
   const handleOpenModal = () => {
@@ -32,10 +33,16 @@ const VisitRequestbtn = ({Onprs, vistreq,OnPressRequestbtn}) => {
       <TouchableOpacity
         style={styles.paynowbtncontainer}
         onPress={OnPressRequestbtn}
+        disabled={loading ? true : false}
         //in his commmand  from which request succesful is open
         // onPress={handleOpenModal}
       >
+        {
+          loading ?
+          <ActivityIndicator size={20} color={'#FFB83A'} style={{fontWeight : 'bold'}}/>
+          :
         <Text style={styles.paynowtxtstyle}>Pay Now</Text>
+        }
       </TouchableOpacity>
 
       {/* Modal */}
@@ -71,9 +78,11 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     marginTop: 10,
+    justifyContent : 'space-evenly'
   },
   visitbtncontainer: {
-    paddingHorizontal: ScreenDimensions.screenWidth * 0.08,
+    // paddingHorizontal: ScreenDimensions.screenWidth * 0.08,
+    width : '45%',
     height: 50,
     alignItems: 'center',
     justifyContent: 'center',
@@ -91,7 +100,8 @@ const styles = StyleSheet.create({
     color: '#FFB83A',
   },
   paynowbtncontainer: {
-    paddingHorizontal: ScreenDimensions.screenWidth * 0.14,
+    // paddingHorizontal: ScreenDimensions.screenWidth * 0.14,
+    width:'45%',
     height: 50,
     alignItems: 'center',
     justifyContent: 'center',

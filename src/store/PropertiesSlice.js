@@ -36,7 +36,6 @@ const getPropertiesSlice = createSlice({
             state.loading = true
         })
         builder.addCase(getNearPropertiesFunc.fulfilled, (state, action) => {
-            console.log("action--resolved" , action.payload)
             state.loading = false
             state.data = action?.payload?.response
 
