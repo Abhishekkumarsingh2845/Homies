@@ -153,7 +153,8 @@ const Header = ({
   bellIcon,
   hght=100,
   complaintbtn,
-  nav= null
+  nav= null,
+  OnPressBookmark
 }) => {
   const navigation = useNavigation();
 
@@ -191,7 +192,7 @@ const Header = ({
           </TouchableOpacity>
 
           {/* Dynamic heart icon */}
-          <TouchableOpacity>
+          <TouchableOpacity onPress={OnPressBookmark}>
             <Image
               source={heartIcon }  // Default to Img.hrt if no prop is provided
               style={styles.heart}

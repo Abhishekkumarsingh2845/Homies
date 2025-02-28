@@ -96,8 +96,6 @@
 //   },
 // });
 
-
-
 import React, {useEffect, useState} from 'react';
 import {
   StyleSheet,
@@ -167,10 +165,9 @@ const LocationSearch = () => {
         renderItem={({item}) => (
           <TouchableOpacity
             style={styles.card}
-            // onPress={() =>
-            //   navigation.navigate('PropertyDetail', {propertyId: item._id})
-            // }
-          >
+            onPress={() =>
+              navigation.navigate('PropertyDetail', {propertyID: item._id})
+            }>
             <View style={styles.details}>
               <Text style={styles.name}>{item.property_name}</Text>
             </View>

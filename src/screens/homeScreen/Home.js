@@ -24,20 +24,26 @@ import {get, post} from '../../utlis/Api';
 import Geolocation from 'react-native-geolocation-service';
 import {useDispatch, useSelector} from 'react-redux';
 import {setLocation, setLocationStore} from '../../store/LocationSlice';
-import { useNavigation } from '@react-navigation/native';
-import { getNearPropertiesFunc, setLikeUnlike } from '../../store/PropertiesSlice';
+import {useNavigation} from '@react-navigation/native';
+import {
+  getNearPropertiesFunc,
+  setLikeUnlike,
+} from '../../store/PropertiesSlice';
 
 const Home = ({navigation}) => {
   // const [loading, setloading] = useState();
   // const [hostetData, sethostelData] = useState([]);
-  const {data : hostetData , loading } = useSelector((state) => state.getPropertiesSlice)
+  const nav = useNavigation();
+  const {data: hostetData, loading} = useSelector(
+    state => state.getPropertiesSlice,
+  );
 
   const dispatch = useDispatch();
   const {latitude, longitude} = useSelector(state => state.location);
   console.log('Redux Location:', latitude, longitude);
-  const Navigation=useNavigation();
-  const user = useSelector((state) => state.auth.user)
-  console.log("user of home -- - - - -" , loading)
+  const Navigation = useNavigation();
+  const user = useSelector(state => state.auth.user);
+  console.log('user of home -- - - - -', loading);
 
   const getHstdetail = async (filterData = {}) => {
     console.log('getHstdetail');
@@ -49,7 +55,7 @@ const Home = ({navigation}) => {
     };
 
     try {
-       dispatch(getNearPropertiesFunc(params))
+      dispatch(getNearPropertiesFunc(params));
       // const response = await get('getNearProperties', params);
       // sethostelData(response?.data[0]?.data);
     } catch (error) {
@@ -73,7 +79,12 @@ const Home = ({navigation}) => {
         propertyId,
         likedBy: user?._id,
       });
-      dispatch(setLikeUnlike({propertyId : propertyId , isLiked : response?.data?.isLiked}))
+      dispatch(
+        setLikeUnlike({
+          propertyId: propertyId,
+          isLiked: response?.data?.isLiked,
+        }),
+      );
     } catch (error) {
       console.log('Error liking/unliking property:', error.message);
     }
@@ -108,7 +119,7 @@ const Home = ({navigation}) => {
   };
 
   useEffect(() => {
-    if(!hostetData){
+    if (!hostetData) {
       getHstdetail();
     }
     getLocation();
@@ -120,6 +131,7 @@ const Home = ({navigation}) => {
         Img1={Img.draw}
         locationIcon={Img.lcn}
         heartIcon={Img.hrt}
+        OnPressBookmark={() => nav.navigate('BookMark')}
         bellIcon={Img.noitificationicon}
       />
       <View style={styles.subcontainer}>
@@ -139,7 +151,7 @@ const Home = ({navigation}) => {
             imageSource={Img.hstimgage}
             activeDotColor={Color.primary}
           />
-          <NearbySeeAll OnPress={()=>Navigation.navigate("SortbyScreen")} />
+          <NearbySeeAll OnPress={() => Navigation.navigate('SortbyScreen')} />
 
           {loading ? (
             <>

@@ -22,7 +22,10 @@ import {get} from '../../utlis/Api';
 const Home = () => {
   const [data, setData] = useState(null);
   const [banner, setBanner] = useState(null);
-  console.log("----------------------------------------------------------------" , banner?.data[0]?.image_url);
+  console.log(
+    '----------------------------------------------------------------',
+    banner?.data[0]?.image_url,
+  );
   const navigation = useNavigation();
 
   const PropertywithFood = async () => {
@@ -37,17 +40,18 @@ const Home = () => {
       console.log('error in the propertyWithFood', error.message);
     }
   };
+
   const GetBanner = async () => {
     try {
       const response = await get('./getBannersForProperties');
       console.log('response of the getBannersForProperties', response.data);
-      console.log('banner detail', response?.data[0]?.data[0]?.image_url);
+      console.log('banner detail', response?.data[0]);
       setBanner(response.data[0]);
     } catch (error) {
       console.log('error in the getBannersForProperties', error.message);
     }
   };
-
+  console.log('kk', banner?.data?.[0].image_url);
   // console.log("->>>",data?.theme?.colorValue);
 
   useEffect(() => {
@@ -65,7 +69,14 @@ const Home = () => {
       />
       <View style={styles.subcontainer}>
         <Text style={styles.bannertxt}>Banner</Text>
-        <DotindictaorImg imageSource={Img.hstdetail} activeDotColor="#FF9457" />
+        <Image
+          source={{
+            uri: banner?.data?.[0].image_url,
+          }}
+          style={{width: 40, height: 40, resizeMode: 'contain'}}
+        />
+
+        {/* <DotindictaorImg imageSource={Img.hstdetail} activeDotColor="#FF9457" /> */}
         {/* <DotindictaorImg
           imageSource={ banner?.data[0]?.image_url}
           activeDotColor="#FF9457"

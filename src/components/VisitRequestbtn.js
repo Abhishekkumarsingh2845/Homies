@@ -39,7 +39,7 @@ const VisitRequestbtn = ({Onprs, vistreq,OnPressRequestbtn}) => {
       </TouchableOpacity>
 
       {/* Modal */}
-      <Modal
+      {/* <Modal
         animationType="slide"
         transparent={true}
         visible={modalVisible}
@@ -54,13 +54,11 @@ const VisitRequestbtn = ({Onprs, vistreq,OnPressRequestbtn}) => {
               />
               <Text style={styles.modalTitle}>Request sent Successful</Text>
 
-              {/* <TouchableOpacity style={styles.confirmButton} onPress={handleCloseModal}>
-              <Text style={styles.confirmButtonText}>Confirm Payment</Text>
-            </TouchableOpacity> */}
             </View>
           </View>
         </TouchableWithoutFeedback>
-      </Modal>
+      </Modal> */}
+
     </View>
   );
 };

@@ -18,12 +18,10 @@ import {Color} from './src/utlis/Color';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import appsFlyer from 'react-native-appsflyer';
 import {Provider} from 'react-redux';
-import store, { persistor } from './src/store/Store';
+import store, {persistor} from './src/store/Store';
 import Toast from 'react-native-toast-message';
-import { PersistGate } from 'redux-persist/integration/react';
+import {PersistGate} from 'redux-persist/integration/react';
 import Splash from './src/screens/splashScreen/Splash';
-
-
 
 const App = () => {
   const [inviteLink, setInviteLink] = useState(null);
@@ -103,7 +101,6 @@ const App = () => {
     }
   };
 
-
   const [showSplash, setShowSplash] = useState(true);
 
   useEffect(() => {
@@ -114,14 +111,14 @@ const App = () => {
   }, []);
   return (
     <Provider store={store}>
-         <PersistGate loading={null} persistor={persistor}>
-      <View style={styles.container}>
-        <StatusBar backgroundColor={'white'} barStyle={'dark-content'} />
-        {/* <Splash/> */}
-        {showSplash ? <Splash /> : <MainNavigation />}
-        
-        <Toast/>
-      </View>
+      <PersistGate loading={null} persistor={persistor}>
+        <View style={styles.container}>
+          <StatusBar backgroundColor={'white'} barStyle={'dark-content'} />
+
+          {showSplash ? <Splash /> : <MainNavigation />}
+
+          <Toast />
+        </View>
       </PersistGate>
     </Provider>
   );

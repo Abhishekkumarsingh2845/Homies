@@ -5,20 +5,31 @@ import {FontText} from '../utlis/CustomFont';
 import {Color} from '../utlis/Color';
 
 const NearLocationProperty = ({property, nearproperty}) => {
+  console.log(
+    '->>>->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>neaby',
+    nearproperty?.property?.sharing?.[0]?.details?.[0]?.amount,
+  );
   return (
     <TouchableOpacity style={styles.container}>
       <Image
         source={
           nearproperty?.property_images?.[0]
-            ? {uri: nearproperty.property_images[0]}
+            ? {uri: nearproperty?.property?.property_images[0]}
             : Img.allhostelicon
         }
         style={{width: 100, height: 80, borderRadius: 10}}
       />
       <View style={styles.txtcontainer}>
-        <Text style={styles.hosteltxt}>{nearproperty?.property_name}</Text>
-        <Text style={styles.addresstxt}>{nearproperty?.address}</Text>
-        <Text style={styles.rentcontainer}>Rent - 5K/Month</Text>
+        <Text style={styles.hosteltxt}>
+          {nearproperty?.property?.property_name}
+        </Text>
+        <Text style={styles.addresstxt}>
+          {nearproperty?.property?.address || 'no data'}
+        </Text>
+        <Text style={styles.rentcontainer}>
+          {nearproperty?.property?.sharing?.[0]?.details?.[0]?.amount ||
+            'no data'}
+        </Text>
       </View>
     </TouchableOpacity>
   );

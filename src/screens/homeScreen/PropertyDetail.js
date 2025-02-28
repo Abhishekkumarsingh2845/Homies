@@ -47,7 +47,7 @@ const PropertyDetail = () => {
   );
   const [isModalVisible, setModalVisible] = useState(false);
   const [showGuestModal, setShowGuestModal] = useState(false);
-  const {token , _id} = useSelector(state => state.auth.user);
+  const {token, _id} = useSelector(state => state.auth.user);
   const [property, setPropertyData] = useState({});
   const [amenities, setAmenities] = useState([]);
   const [loading, setloading] = useState();
@@ -107,11 +107,14 @@ const PropertyDetail = () => {
       userId: _id,
       // propertyId :propertyID,
     };
-    console.log("=======================" , params)
+    console.log('=======================', params);
     try {
       const response = await get('viewOneProperty', params);
       setPropertyData(response.data);
-      console.log('response of the viewOneProperty API', JSON.stringify(response.data.property.sharing));
+      console.log(
+        'response of the viewOneProperty API',
+        JSON.stringify(response.data.property.sharing),
+      );
       // console.log("response of the sharing",response.);
     } catch (error) {
       console.log(
@@ -208,14 +211,12 @@ const PropertyDetail = () => {
           </View>
 
           <Sharing share={property?.property} />
-
           <VideoPlayer videoplay={property} />
-
           <Text style={styles.neaerbytxt}>Near by Property</Text>
-
           <NearLocationProperty nearproperty={property} />
-          
-          <PermonthRent />
+
+          <PermonthRent permonthRent={property} />
+
           <VisitRequestbtn
             OnPressRequestbtn={() => handlePayNow()}
             Onprs={() => handleVistBtn()}

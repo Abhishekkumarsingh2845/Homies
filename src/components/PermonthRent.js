@@ -1,18 +1,22 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {Color} from '../utlis/Color';
-import { FontText } from '../utlis/CustomFont';
+import {FontText} from '../utlis/CustomFont';
 
 const PermonthRent = ({
   rent = 'Rent',
-  amount = '₹6,500',
+  // amount = '₹6,500',
+  PermonthRent,
   period = 'Per Months',
 }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.rentText}>{rent}</Text>
       <View style={styles.amountContainer}>
-        <Text style={styles.amountText}>{amount}</Text>
+        <Text style={styles.amountText}>
+          {PermonthRent?.property?.sharing?.[0]?.details?.[0]?.amount ||
+            'no data'}
+        </Text>
         <Text style={styles.perMonthText}>{period}</Text>
       </View>
     </View>
@@ -28,7 +32,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 20,
     marginHorizontal: 10,
-
   },
   rentText: {
     fontSize: 14,
@@ -48,7 +51,6 @@ const styles = StyleSheet.create({
   perMonthText: {
     fontSize: 14,
     color: '#000000',
-    fontFamily:FontText.light,
-
+    fontFamily: FontText.light,
   },
 });

@@ -1,21 +1,24 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {View, Modal, TouchableOpacity, Text, StyleSheet} from 'react-native';
 import {Calendar, LocaleConfig} from 'react-native-calendars';
 import {Color} from '../utlis/Color';
 import DatePicker from 'react-native-date-picker';
 import {useNavigation} from '@react-navigation/native';
+import BottomSheet from '@gorhom/bottom-sheet';
 
 const CalendarModal = ({isVisible, toggleModal, handleVistRequest}) => {
   const Navigation = useNavigation();
   const [date, setDate] = useState('');
   const [open, setOpen] = useState(false);
+  const bottomSheetRef = useRef(null);
   console.log('open', open);
   const [time, setTime] = useState(new Date());
 
   const onSubmit = () => {
     const newDate = new Date(date);
     console.log('new dqate------------------------', newDate);
-    Navigation.navigate('Home');
+    // Navigation.navigate('Home');
+    bottomSheetRef.current?.expand();
     handleVistRequest(newDate?.toISOString(), time);
   };
 
@@ -66,9 +69,6 @@ const CalendarModal = ({isVisible, toggleModal, handleVistRequest}) => {
                 },
               }}
             />
-            {/* <TouchableOpacity style={styles.closeButton} onPress={toggleModal}>
-              <Text style={styles.closeButtonText}>Close</Text>
-            </TouchableOpacity> */}
           </View>
         </TouchableOpacity>
         <View
@@ -111,6 +111,16 @@ const CalendarModal = ({isVisible, toggleModal, handleVistRequest}) => {
           <Text style={styles.closeButtonText}>Submit</Text>
         </TouchableOpacity>
       </Modal>
+      {/* <BottomSheet ref={bottomSheetRef} index={1} snapPoints={['25%', '50%']}>
+        <View style={styles.bottomSheetContainer}>
+          <Text style={styles.sheetTitle}>Visit Request Submitted</Text>
+          <Text style={styles.sheetText}>Date: {date}</Text>
+          <Text style={styles.sheetText}>
+            Time: {getFormattedTime().formattedTime} {getFormattedTime().AMPM}
+          </Text>
+        </View>
+      </BottomSheet> */}
+
       <DatePicker
         modal
         mode="time"
@@ -184,6 +194,19 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 16,
   },
+  secondModalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0,0,0,0.5)',
+  },
+  bottomSheetContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  sheetTitle: {fontSize: 20, fontWeight: 'bold', marginBottom: 10},
+  sheetText: {fontSize: 16, marginVertical: 5},
 });
 
 export default CalendarModal;
