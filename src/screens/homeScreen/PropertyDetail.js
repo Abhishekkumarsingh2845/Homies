@@ -30,42 +30,94 @@ import Pool from 'react-native-vector-icons/MaterialIcons';
 import CalendarModal from '../../components/Calendarcmp';
 import RequestSentBtnSht from '../../components/RequestSentBtnSht';
 import GuestModal from '../../components/GuestModal';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {get, post} from '../../utlis/Api';
 import VideoPlayer from '../../components/Video';
+import {setLandlordId, setPropertyId} from '../../store/Propert&LandlordId';
 
 // import {Image} from 'react-native-svg';
 const PropertyDetail = () => {
+  const dispatch = useDispatch();
   const route = useRoute();
   const detail = route.params?.detail;
   const navigation = useNavigation();
-  console.log('amenities', property?.availableAmenities);
   const propertyID = route?.params?.propertyID ?? null;
-  console.log(
-    '->>>>>property id coming in the property detail from the sortby screen',
-    propertyID,
-  );
   const [isModalVisible, setModalVisible] = useState(false);
   const [showGuestModal, setShowGuestModal] = useState(false);
   const {token, _id} = useSelector(state => state.auth.user);
   const [property, setPropertyData] = useState({});
-  const [amenities, setAmenities] = useState([]);
   const [loading, setloading] = useState();
   const [hostetData, sethostelData] = useState([]);
+  const [selectedSharing, setSelectedSharing] = useState({});
+  const [selectedPlan, setSelectedPlan] = useState({});
+  const [rentAmount, setRentAmount] = useState({
+    amount: '',
+    planDuration: '',
+  });
+  const isEmpty = obj => JSON.stringify(obj) === '{}';
+  console.log('property id coming from the Home screen:', propertyID);
+  const getAmountFunc = () => {
+    let amount = selectedSharing?.details?.find(
+      item =>
+        item.roomType == selectedPlan?.AC_NonAc &&
+        item?.periodType == selectedPlan?.duration,
+    )?.amount;
+    setRentAmount({
+      amount: amount,
+      planDuration: selectedPlan?.duration,
+    });
+  };
+
+  useEffect(() => {
+    if (!isEmpty(selectedPlan)) {
+      getAmountFunc();
+    } else {
+      setRentAmount({});
+    }
+  }, [selectedPlan]);
+
+  useEffect(() => {
+    if (property?.property?.sharing[0]) {
+      setSelectedSharing(property?.property?.sharing[0]);
+    }
+  }, [property?.property?.sharing]);
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
 
   const bottomSheetRef = useRef(null);
 
+  const getHstdetail = async () => {
+    const params = {
+      long: '77.376945',
+      lat: '28.628454',
+    };
+
+    try {
+      const response = await get('getNearProperties', params);
+      sethostelData(response?.data[0]?.data);
+    } catch (error) {
+      console.log(
+        'error in  the getNearProperty',
+        error?.response?.data || error.message,
+      );
+    }
+  };
+
   const handleVistRequest = async (date, time) => {
+    console.log(
+      'landlord id taking from the View one property Api',
+      property?.property?.landLordId,
+    );
     toggleModal();
     const data = {
-      propertyId: detail?._id,
+      propertyId: propertyID,
       visitDate: date,
       visitTime: time,
-      // landLordId: '6773972194f1b2bc916447e6',
+      landLordId: property?.property?.landLordId,
     };
+    dispatch(setPropertyId(data.propertyId));
+    dispatch(setLandlordId(data.landLordId));
 
     try {
       const response = await post('visitRequest', data);
@@ -77,43 +129,22 @@ const PropertyDetail = () => {
       );
     }
   };
-
-  const getHstdetail = async () => {
-    const params = {
-      long: '77.376945',
-      lat: '28.628454',
-    };
-    setloading(true);
-    try {
-      const response = await get('getNearProperties', params);
-      console.log(
-        'response of the getNearProperties API in the nearProperties',
-        response,
-      );
-      sethostelData(response?.data[0]?.data);
-    } catch (error) {
-      console.log(
-        'error in  the getNearProperty',
-        error?.response?.data || error.message,
-      );
-    } finally {
-      setloading(false);
-    }
-  };
-  console.log('isliked property', property?.isLiked);
   const getOneProperty = async () => {
     const params = {
       propertyId: propertyID,
       userId: _id,
       // propertyId :propertyID,
     };
-    console.log('=======================', params);
     try {
       const response = await get('viewOneProperty', params);
       setPropertyData(response.data);
       console.log(
         'response of the viewOneProperty API',
-        JSON.stringify(response.data.property.sharing),
+        JSON.stringify(response.data),
+      );
+      console.log(
+        '-landlordid->>>>>>>>>>>>>>>>>>>>>>>>>>>>',
+        property?.property?.landLordId,
       );
       // console.log("response of the sharing",response.);
     } catch (error) {
@@ -125,38 +156,49 @@ const PropertyDetail = () => {
   };
 
   const handleVistBtn = () => {
-    // handleVistRequest();
-    // handlePayNow();
     setModalVisible(!isModalVisible);
   };
   const handlePayNow = async () => {
+    setloading(true);
     const data = {
-      propertyId: '67ab1c2a395fe63ce5fa9521',
-      userId: '67a238e4e86cb4cef27227aa',
-      landLordId: '67a6e680f466c174a36625ea',
+      propertyId: propertyID,
+      userId: _id,
+      landLordId: property?.property?.landLordId,
+      selectedRoomDetailID: selectedSharing?.details?.find(
+        item =>
+          item?.periodType == selectedPlan?.duration &&
+          item?.roomType == selectedPlan?.AC_NonAc,
+      )?._id,
+      sharingTypeId: selectedSharing?._id,
     };
     try {
       const response = await post('payNow', data);
-      console.log('response of the payNow API ', response);
+      console.log('response of the payNow API====', response);
+      if (response.success) {
+        navigation.navigate('BottomTab');
+      }
     } catch (error) {
       console.log(
         'error in payNow API',
         error.message || error?.response?.data,
       );
+    } finally {
+      setloading(false);
     }
+    navigation.navigate('PaymentDone');
   };
 
   useEffect(() => {
     getOneProperty();
     getHstdetail();
-    console.log('tpken========', token);
     if (!token) {
       setShowGuestModal(true);
     } else {
       setShowGuestModal(false);
     }
   }, []);
-
+  const propertyId = useSelector(state => state.property.propertyId);
+  console.log('Property ID from Redux:', propertyId);
   return (
     <View style={styles.container}>
       <SafeAreaView />
@@ -210,16 +252,23 @@ const PropertyDetail = () => {
             />
           </View>
 
-          <Sharing share={property?.property} />
+          <Sharing
+            selectedSharing={selectedSharing}
+            setSelectedSharing={setSelectedSharing}
+            share={property?.property}
+            setSelectedPlan={setSelectedPlan}
+            getAmountFunc={getAmountFunc}
+          />
+
           <VideoPlayer videoplay={property} />
           <Text style={styles.neaerbytxt}>Near by Property</Text>
           <NearLocationProperty nearproperty={property} />
-
-          <PermonthRent permonthRent={property} />
+          {!isEmpty(rentAmount) && <PermonthRent rentAmount={rentAmount} />}
 
           <VisitRequestbtn
             OnPressRequestbtn={() => handlePayNow()}
             Onprs={() => handleVistBtn()}
+            loading={loading}
           />
 
           <CalendarModal

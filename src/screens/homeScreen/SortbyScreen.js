@@ -30,28 +30,49 @@ const SortbyScreen = ({navigation}) => {
 
   const openModal = () => setModalVisible(true);
   const closeModal = () => setModalVisible(false);
+  //in his function i have used simple api call
+  // const getHstdetail = useCallback(
+  //   async (filterData = {}) => {
+  //     const params = {
+  //       long: '77.376945',
+  //       lat: '28.628454',
+  //       sortType: sortBy, // Include sortBy in API call
+  //       ...filterData,
+  //     };
 
+  //     try {
+  //       dispatch(getNearPropertiesFunc(params));
+  //     } catch (error) {
+  //       console.log(
+  //         'error in the getNearProperty',
+  //         error?.response?.data || error.message,
+  //       );
+  //     }
+  //   },
+  //   [dispatch, sortBy],
+  // );
+
+  //in his function i have used thunk to make  api call
   const getHstdetail = useCallback(
     async (filterData = {}) => {
+      console.log('getHstdetail in the sortby');
       const params = {
         long: '77.376945',
         lat: '28.628454',
-        sortType: sortBy, // Include sortBy in API call
+        sortType: sortBy,
         ...filterData,
       };
-
       try {
         dispatch(getNearPropertiesFunc(params));
       } catch (error) {
         console.log(
-          'error in the getNearProperty',
-          error?.response?.data || error.message,
+          'error in the getNearPropertiesFunc',
+          error.message || error?.response?.data,
         );
       }
     },
     [dispatch, sortBy],
   );
-
   useEffect(() => {
     getHstdetail();
   }, [sortBy]);

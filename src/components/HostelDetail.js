@@ -15,7 +15,7 @@ import {FontText} from '../utlis/CustomFont';
 
 const HstDetail = ({hostel, style, onLikePress}) => {
   const navigation = useNavigation();
-  console.log('->>>>>nn', hostel?.property_images);
+  // console.log('->>>>>nn', hostel?.property_images);
   // const [liked, setLiked] = useState(false);
 
   useEffect(() => {

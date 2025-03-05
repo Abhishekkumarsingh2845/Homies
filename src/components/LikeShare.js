@@ -10,12 +10,10 @@ import { post } from '../utlis/Api';
 
 const LikeShare = ({color , propertyId}) => {
   const {_id} = useSelector(state => state.auth.user)
-  console.log("clr" , color)
   const naviagtion = useNavigation();
   const dispatch = useDispatch()
 
     const toggleLike = async () => {
-      console.log("clikced")
       try {
         const response = await post('likeProperty', {
           propertyId,

@@ -28,6 +28,12 @@ import {
 import {post} from '../../utlis/Api';
 import {setUser} from '../../store/AuthSlice';
 const Profile = () => {
+  const propertyId = useSelector(state => state.property.propertyId);
+  const landLordId = useSelector(state => state.property.landLordId);
+
+  console.log('Property ID from Redux:', propertyId);
+  console.log('Landlord ID from Redux:', landLordId);
+
   const [modalVisible, setModalVisible] = useState(false);
   const user = useSelector(state => state.auth.user);
   console.log('user ================= > ', user);
@@ -78,14 +84,30 @@ const Profile = () => {
       }
     }
   };
+
+  const leaveProperty = async () => {
+    const params = {
+      propertyId: propertyId,
+      landLordId: landLordId,
+      reason: 'I am leaving this property',
+    };
+    try {
+      const response = await post('leaveRequest', params);
+      console.log('response of  the  leave property', response.data);
+    } catch (error) {
+      console.log('erorr of the leave', error.message);
+    }
+  };
   return (
     <View style={styles.container}>
       <SafeAreaView />
+
       {/* <SecondaryHeader
         detailtxt={'My Profile'}
         gobackImage={Img.goback}
         onPress={() => navigation.goBack('DrawerNavigator')}
       /> */}
+
       <ImageBackground source={Img.headerbg} style={styles.imageBackground}>
         <StatusBar backgroundColor={'#010101'} barStyle={'light-content'} />
         <TouchableOpacity
@@ -122,9 +144,6 @@ const Profile = () => {
                 height: 30,
                 resizeMode: 'contain',
                 borderRadius: 5,
-                // position: 'absolute',
-                // right: 25,
-                // bottom: 5,
               }}
             />
           </TouchableOpacity>
@@ -164,7 +183,7 @@ const Profile = () => {
             </Text>
           </TouchableOpacity>
         </View>
-        <TouchableOpacity onPress={() => {}}>
+        <TouchableOpacity onPress={leaveProperty}>
           <Text
             style={{
               fontSize: 18,

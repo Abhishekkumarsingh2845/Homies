@@ -38,14 +38,12 @@ const LogoutModal = ({
           ],
         });
       }
-    } 
-    catch (error) {
+    } catch (error) {
       console.log(
         'error in logout post Api',
         error?.reponse?.data || error.message,
       );
-    }
-    finally {
+    } finally {
       setLoading(false);
     }
     setModalType('');

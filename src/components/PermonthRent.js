@@ -3,21 +3,17 @@ import React from 'react';
 import {Color} from '../utlis/Color';
 import {FontText} from '../utlis/CustomFont';
 
-const PermonthRent = ({
-  rent = 'Rent',
-  // amount = '₹6,500',
-  PermonthRent,
-  period = 'Per Months',
-}) => {
+const PermonthRent = ({rentAmount}) => {
+  const rentType = {
+    Monthly : "Month",
+    Yearly : 'Year'
+  }
   return (
     <View style={styles.container}>
-      <Text style={styles.rentText}>{rent}</Text>
+      <Text style={styles.rentText}>Rent</Text>
       <View style={styles.amountContainer}>
-        <Text style={styles.amountText}>
-          {PermonthRent?.property?.sharing?.[0]?.details?.[0]?.amount ||
-            'no data'}
-        </Text>
-        <Text style={styles.perMonthText}>{period}</Text>
+        <Text style={styles.amountText}>₹ {rentAmount?.amount || 0}</Text>
+        <Text style={styles.perMonthText}>Per {rentType[rentAmount?.planDuration]}</Text>
       </View>
     </View>
   );

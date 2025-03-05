@@ -73,7 +73,7 @@ const Home = () => {
           source={{
             uri: banner?.data?.[0].image_url,
           }}
-          style={{width: 40, height: 40, resizeMode: 'contain'}}
+          style={{width: '100%', height: 120, resizeMode: 'stretch'}}
         />
 
         {/* <DotindictaorImg imageSource={Img.hstdetail} activeDotColor="#FF9457" /> */}

@@ -63,6 +63,8 @@ export const openCamera = async () => {
 export const uploadImageUrl = async data => {
   const formData = new FormData();
   formData.append('file', data);
+  console.log('image api form data ====', formData);
+
   try {
     let response = await axios.post(
       'http://15.206.16.230:8084/api/v1/user/uploadImg',
@@ -77,9 +79,10 @@ export const uploadImageUrl = async data => {
     return {
       status: true,
       message: response.data.message,
-      imageUrl: response.data.data,
+      imageUrl: response.data.data[0],
     };
   } catch (error) {
+    console.log('image upload error: ' + error);
     return {
       status: false,
       response: error,

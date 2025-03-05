@@ -61,6 +61,7 @@ const Img = {
   notificationladyicon:require("../assets/images/notificationImg.png"),
   phoneiconcontact:require("../assets/images/honeicon.png"),
   msgicon:require("../assets/images/messageicon.png"),
+  paydone:require("../assets/images/paysucess.png")
 };
 
 export {Img};

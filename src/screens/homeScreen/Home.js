@@ -56,8 +56,7 @@ const Home = ({navigation}) => {
 
     try {
       dispatch(getNearPropertiesFunc(params));
-      // const response = await get('getNearProperties', params);
-      // sethostelData(response?.data[0]?.data);
+      
     } catch (error) {
       console.log(
         'error in  the getNearProperty',
@@ -109,7 +108,7 @@ const Home = ({navigation}) => {
         const {latitude, longitude} = position.coords;
         dispatch(setLocationStore({latitude: latitude, longitude: longitude}));
 
-        // console.log('system positon', latitude, longitude);
+        console.log('system positon', latitude, longitude);
       },
       error => {
         console.log('Error getting location:', error.message);
