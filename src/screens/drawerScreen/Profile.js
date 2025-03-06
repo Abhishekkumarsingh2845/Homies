@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Img} from '../../utlis/ImagesPath';
 import PersonalDetailCard from '../../components/PersonalDetailCard';
 import SeeAllDocument from '../../components/SeeAllDocument';
@@ -27,6 +27,7 @@ import {
 } from '../../utlis/ImageHandler';
 import {post} from '../../utlis/Api';
 import {setUser} from '../../store/AuthSlice';
+import { getMyProperty } from '../../store/MyPropertySlice';
 const Profile = () => {
   const propertyId = useSelector(state => state.property.propertyId);
   const landLordId = useSelector(state => state.property.landLordId);
@@ -40,6 +41,7 @@ const Profile = () => {
   const [modalMsg, setModalMsg] = useState('');
   const navigation = useNavigation();
   const [modalType, setModalType] = useState('');
+    const {data : myProperty} = useSelector(state => state.MyProperty)
 
   const dispatch = useDispatch();
   const toggleModal = (message, type) => {
@@ -98,6 +100,13 @@ const Profile = () => {
       console.log('erorr of the leave', error.message);
     }
   };
+
+  useEffect(() =>{
+    if(!myProperty?.landLordId){
+      dispatch(getMyProperty())
+    }
+
+  },[])
   return (
     <View style={styles.container}>
       <SafeAreaView />
@@ -183,7 +192,9 @@ const Profile = () => {
             </Text>
           </TouchableOpacity>
         </View>
-        <TouchableOpacity onPress={leaveProperty}>
+        <TouchableOpacity  onPress={() =>
+            toggleModal('Are you Sure Leave Your Property', 'leave')
+          }>
           <Text
             style={{
               fontSize: 18,

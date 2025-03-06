@@ -29,6 +29,7 @@ import {
   getNearPropertiesFunc,
   setLikeUnlike,
 } from '../../store/PropertiesSlice';
+import { getMyProperty } from '../../store/MyPropertySlice';
 
 const Home = ({navigation}) => {
   // const [loading, setloading] = useState();
@@ -117,11 +118,16 @@ const Home = ({navigation}) => {
     );
   };
 
+  const getMyPropertyFunc = async () =>{
+    dispatch(getMyProperty())
+  }
+
   useEffect(() => {
     if (!hostetData) {
       getHstdetail();
     }
     getLocation();
+    getMyPropertyFunc()
   }, []);
 
   return (

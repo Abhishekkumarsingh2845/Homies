@@ -8,6 +8,8 @@ import {post, put} from '../utlis/Api';
 import {useDispatch, useSelector} from 'react-redux';
 import {clearToken, clearUser, setExist} from '../store/AuthSlice';
 import {useNavigation} from '@react-navigation/native';
+import { clearMyProperty } from '../store/MyPropertySlice';
+import Toast from 'react-native-toast-message';
 
 const LogoutModal = ({
   modalVisible,
@@ -20,6 +22,8 @@ const LogoutModal = ({
   const navigation = useNavigation();
   const [loading, setLoading] = useState(false);
   const {token} = useSelector(state => state.auth.user);
+  const {data : myProperty} = useSelector(state => state.MyProperty)
+  console.log("logout modal" , modalType)
 
   const logoutUser = async () => {
     setLoading(true);
@@ -50,6 +54,7 @@ const LogoutModal = ({
   };
 
   const deleteuser = async () => {
+    console.log("delete user---------" , modalType)
     try {
       const response = await put('deleteUserAccount', {}, token);
       if (response.success) {
@@ -72,6 +77,37 @@ const LogoutModal = ({
     }
     setModalType('');
   };
+
+    const leaveProperty = async () => {
+      const params = {
+        propertyId: myProperty?._id,
+        landLordId: myProperty?.landLordId,
+        // reason: 'I am leaving this property',
+      };
+      console.log('body leave property', params);
+
+      try {
+        const response = await post('leaveRequest', params);
+        console.log('response of  the  leave property', response);
+        if(response.success){
+        setModalVisible(false);
+        }
+        if(!response.success){
+          console.log('response of  the  leave property false', response);
+                Toast.show({
+                  type: 'error',
+                  text1: 'Property Joined',
+                  text2: response?.message,
+                  position: 'bottom',
+                });
+        }
+      } catch (error) {
+        setModalVisible(false);
+        console.log('erorr of the leave', error.message);
+      }
+    setModalType('');
+
+    };
 
   // useEffect(() => {
   //   logoutUser();
@@ -96,7 +132,7 @@ const LogoutModal = ({
               textColor={Color.white}
               borderColor="green"
               onPress={() => {
-                modalType == 'logout' ? logoutUser() : deleteuser();
+                modalType == 'logout' ? logoutUser() :  modalType == 'leave' ? leaveProperty() :  deleteuser();
                 // dispatch(clearToken(token));
                 // setModalVisible(!modalVisible);
               }}
@@ -112,6 +148,8 @@ const LogoutModal = ({
           </View>
         </View>
       </View>
+            <Toast />
+      
     </Modal>
   );
 };

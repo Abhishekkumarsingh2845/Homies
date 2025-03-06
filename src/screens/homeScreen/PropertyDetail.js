@@ -34,6 +34,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {get, post} from '../../utlis/Api';
 import VideoPlayer from '../../components/Video';
 import {setLandlordId, setPropertyId} from '../../store/Propert&LandlordId';
+import { getMyProperty } from '../../store/MyPropertySlice';
 
 // import {Image} from 'react-native-svg';
 const PropertyDetail = () => {
@@ -46,6 +47,7 @@ const PropertyDetail = () => {
   const [showGuestModal, setShowGuestModal] = useState(false);
   const {token, _id} = useSelector(state => state.auth.user);
   const [property, setPropertyData] = useState({});
+  console.log("property = ======================" , property?.property?.property_videos)
   const [loading, setloading] = useState();
   const [hostetData, sethostelData] = useState([]);
   const [selectedSharing, setSelectedSharing] = useState({});
@@ -260,7 +262,10 @@ const PropertyDetail = () => {
             getAmountFunc={getAmountFunc}
           />
 
-          <VideoPlayer videoplay={property} />
+              {
+                 property?.property?.property_videos && <VideoPlayer videoplay={property?.property?.property_videos} />
+              }
+          
           <Text style={styles.neaerbytxt}>Near by Property</Text>
           <NearLocationProperty nearproperty={property} />
           {!isEmpty(rentAmount) && <PermonthRent rentAmount={rentAmount} />}
