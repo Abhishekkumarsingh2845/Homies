@@ -129,7 +129,6 @@ const LocationSearch = () => {
       const response = await get('./getNearProperties', params);
       if (response.success) {
         setProperties(response.data[0].data);
-        console.log('->>>>>>>>ppp', properties?.[0]._id);
       }
     } catch (error) {
       console.log('Error fetching properties:', error.message);

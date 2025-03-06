@@ -40,6 +40,7 @@ const SignUp = () => {
     }
     try {
       const response = await post('login', data);
+      console.log("login data ----------" , response)
       if (response?.success) {
         dispatch(setUser(response));
         navigation.navigate('DrawerNavigator');

@@ -28,7 +28,7 @@ const Amentity = ({setFilterData}) => {
     }))
   },[checkedItems])
 
-  const amenities =  ["Wi-fi", "Parking", "AC", "Non-AC", "Gym", "Pool"]
+  const amenities =  ["Wi-fi", "Parking", "AC", "Gym", "Pool"]
 
   return (
     <View style={styles.container}>

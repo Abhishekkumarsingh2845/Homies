@@ -38,6 +38,7 @@ import { getMyProperty } from '../../store/MyPropertySlice';
 
 // import {Image} from 'react-native-svg';
 const PropertyDetail = () => {
+  const propertyId = useSelector(state => state.property.propertyId);
   const dispatch = useDispatch();
   const route = useRoute();
   const detail = route.params?.detail;
@@ -47,7 +48,6 @@ const PropertyDetail = () => {
   const [showGuestModal, setShowGuestModal] = useState(false);
   const {token, _id} = useSelector(state => state.auth.user);
   const [property, setPropertyData] = useState({});
-  console.log("property = ======================" , property?.property?.property_videos)
   const [loading, setloading] = useState();
   const [hostetData, sethostelData] = useState([]);
   const [selectedSharing, setSelectedSharing] = useState({});
@@ -56,8 +56,11 @@ const PropertyDetail = () => {
     amount: '',
     planDuration: '',
   });
+  const bottomSheetRef = useRef(null);
+
+
   const isEmpty = obj => JSON.stringify(obj) === '{}';
-  console.log('property id coming from the Home screen:', propertyID);
+
   const getAmountFunc = () => {
     let amount = selectedSharing?.details?.find(
       item =>
@@ -83,11 +86,11 @@ const PropertyDetail = () => {
       setSelectedSharing(property?.property?.sharing[0]);
     }
   }, [property?.property?.sharing]);
+
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
 
-  const bottomSheetRef = useRef(null);
 
   const getHstdetail = async () => {
     const params = {
@@ -131,6 +134,7 @@ const PropertyDetail = () => {
       );
     }
   };
+
   const getOneProperty = async () => {
     const params = {
       propertyId: propertyID,
@@ -158,6 +162,9 @@ const PropertyDetail = () => {
   };
 
   const handleVistBtn = () => {
+    console.log("bottomSheetRef======" , bottomSheetRef)
+    // bottomSheetRef.current?.open()
+    // return
     setModalVisible(!isModalVisible);
   };
   const handlePayNow = async () => {
@@ -173,6 +180,7 @@ const PropertyDetail = () => {
       )?._id,
       sharingTypeId: selectedSharing?._id,
     };
+    console.log("data --------------------------payload" , data)
     try {
       const response = await post('payNow', data);
       console.log('response of the payNow API====', response);
@@ -198,9 +206,9 @@ const PropertyDetail = () => {
     } else {
       setShowGuestModal(false);
     }
+    bottomSheetRef.current?.open();
   }, []);
-  const propertyId = useSelector(state => state.property.propertyId);
-  console.log('Property ID from Redux:', propertyId);
+
   return (
     <View style={styles.container}>
       <SafeAreaView />

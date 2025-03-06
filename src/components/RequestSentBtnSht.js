@@ -65,18 +65,22 @@ const RequestSentBtnSht = forwardRef((props, ref) => {
   const bottomSheetRef = useRef(null);
 
   // Allow external access to open the sheet
-  useImperativeHandle(ref, () => ({
-    open: () => {
-      bottomSheetRef.current?.snapToIndex(0); // Open the bottom sheet
-    },
-  }));
+  // useImperativeHandle(ref, () => ({
+  //   open: () => {
+  //     bottomSheetRef.current?.snapToIndex(0); // Open the bottom sheet
+  //   },
+  //   close: () => {
+  //     bottomSheetRef.current?.close(); // Close the Bottom Sheet
+  //   },
+  // }));
 
   return (
     <GestureHandlerRootView style={styles.container}>
       <BottomSheet
         ref={bottomSheetRef}
         snapPoints={['30%']}
-        enablePanDownToClose={true}>
+        enablePanDownToClose={true}   
+>
         <BottomSheetView style={styles.contentContainer}>
           <Text style={{fontSize: 16, color: 'black'}}>
             Request sent successfully!
