@@ -44,6 +44,7 @@ const BookMark = () => {
         <FlatList
           data={bookmark}
           showsVerticalScrollIndicator={false}
+          contentContainerStyle={{paddingBottom:150}}
           keyExtractor={item =>
             item._id ? item._id.toString() : Math.random().toString()
           }

@@ -9,7 +9,7 @@ import {
 import React, {useEffect, useState} from 'react';
 import Header from '../../components/Header';
 import SecondaryHeader from '../../components/SecondaryHeader';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import {Img} from '../../utlis/ImagesPath';
 import Setting from 'react-native-vector-icons/Octicons';
 import FoodServices from '../../components/FoodServices';
@@ -19,7 +19,10 @@ import {FontText} from '../../utlis/CustomFont';
 import {Color} from '../../utlis/Color';
 import {get} from '../../utlis/Api';
 
-const Home = () => {
+const Home = ({route}) => {
+  // const route = useRoute();
+  const {propertid} = route.params || 'no data';
+  console.log('route.params', route?.params);
   const [data, setData] = useState(null);
   const [banner, setBanner] = useState(null);
   console.log(
@@ -30,7 +33,7 @@ const Home = () => {
 
   const PropertywithFood = async () => {
     const params = {
-      propertyId: '67bff9b538a34df307bf2b97',
+      propertyId: propertid,
     };
     try {
       const response = await get('./propertyWithFood', params);
@@ -51,6 +54,7 @@ const Home = () => {
       console.log('error in the getBannersForProperties', error.message);
     }
   };
+
   console.log('kk', banner?.data?.[0].image_url);
   // console.log("->>>",data?.theme?.colorValue);
 

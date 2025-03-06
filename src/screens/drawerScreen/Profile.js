@@ -54,7 +54,7 @@ const Profile = () => {
   };
 
   const galleryFunc = async () => {
-    let res = await openCamera();
+    let res = await openGallery();
     console.log('res--------------', res.response[0].uri);
     if (res.status) {
       const data = {
@@ -155,7 +155,7 @@ const Profile = () => {
           styles.profileText,
           {marginTop: dimensions.screenHeight * 0.11},
         ]}>
-        Room No- 001
+        {/* Room No- 001 */}
       </Text>
       <PersonalDetailCard />
       <SeeAllDocument />

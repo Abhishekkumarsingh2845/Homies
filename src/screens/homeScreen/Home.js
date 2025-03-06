@@ -56,7 +56,6 @@ const Home = ({navigation}) => {
 
     try {
       dispatch(getNearPropertiesFunc(params));
-      
     } catch (error) {
       console.log(
         'error in  the getNearProperty',

@@ -8,11 +8,15 @@ import PrimaryBtn from '../../components/PrimaryBtn';
 import HostelRentOut from '../homeScreen/HostelRentOut';
 import PaymenttxtInpt from '../../components/PaymenttxtInpt';
 import {Img} from '../../utlis/ImagesPath';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import PermonthRent from '../../components/PermonthRent';
 
 const PaymentHomeForm = () => {
   const navigation = useNavigation();
+  const route = useRoute();
+  const {propertid} = route.params;
+  const datapp=propertid;
+  console.log('propertid coming fro the property details', propertid);
   return (
     <View style={styles.container}>
       <SecondaryHeader
@@ -46,7 +50,12 @@ const PaymentHomeForm = () => {
         <PaymentMethod labelText={'Cash'} />
         <PermonthRent rent="Total Payment" />
         <PrimaryBtn
-          Onpress={() => navigation.navigate('BottomTab')}
+          Onpress={() =>
+            navigation.navigate('BottomTab', {
+              screen: 'Home',
+              params: {id: datapp}
+            })
+          }
           txt={'Pay Now'}
           bgcolor={Color.btnclr}
           mgntop={5}

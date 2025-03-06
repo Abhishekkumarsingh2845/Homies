@@ -6,7 +6,7 @@ import {useNavigation} from '@react-navigation/native';
 
 const FoodServices = ({fooddetail, data, bgcolor = 'white'}) => {
   const navigation = useNavigation();
-
+  console.log('food', fooddetail);
   console.log('food detail', fooddetail);
   return (
     <TouchableOpacity

@@ -202,6 +202,7 @@ const PropertyDetail = () => {
   return (
     <View style={styles.container}>
       <SafeAreaView />
+
       <SecondaryHeader
         gobackImage={Img.goback}
         detailtxt={'Property Details'}
@@ -279,7 +280,7 @@ const PropertyDetail = () => {
 
           <RequestSentBtnSht ref={bottomSheetRef} />
 
-          <View style={{marginVertical: 80}} />
+          <View style={{marginVertical: 20}} />
         </View>
       </ScrollView>
       <GuestModal

@@ -57,6 +57,16 @@ const Sharing = ({
     ).amount;
     return amount;
   };
+  const formatNumber = num => {
+    if (!num) return 'No Data Available';
+    const absNum = Math.abs(num);
+    if (absNum >= 1.0e12) return (num / 1.0e12).toFixed(1) + 'T'; // Trillions
+    if (absNum >= 1.0e9) return (num / 1.0e9).toFixed(1) + 'B'; // Billions
+    if (absNum >= 1.0e6) return (num / 1.0e6).toFixed(1) + 'M'; // Millions
+    if (absNum >= 1.0e3) return (num / 1.0e3).toFixed(1) + 'K'; // Thousands
+    return num.toString(); // Return as is if less than 1K
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.bedsharingcontainer}>
@@ -131,13 +141,14 @@ const Sharing = ({
           <View style={styles.rentpercontainer}>
             <Text style={styles.rentperperson}>Rent per Person</Text>
             <Text style={styles.amounttxt}>
-              {share?.sharing?.[0].details?.[0].amount || 'No Data Available'}
+              {formatNumber(share?.sharing?.[0].details?.[0].amount) ||
+                'no data'}
             </Text>
           </View>
           <View>
             <Text style={styles.deposittxt}>Deposit</Text>
             <Text style={styles.amounttxt}>
-              {share?.sharing?.[0]?.details?.[0].depositAmount ||
+              {formatNumber(share?.sharing?.[0]?.details?.[0].depositAmount) ||
                 'No Data Available'}
             </Text>
           </View>
@@ -171,7 +182,6 @@ const Sharing = ({
           </View> */}
 
         <View style={styles.SelectType}>
-          {/* Column 1: Yearly */}
           <View style={styles.column}>
             <Text style={styles.heading}>Yearly</Text>
             {options
@@ -192,14 +202,14 @@ const Sharing = ({
                   <View style={{}}>
                     <Text style={styles.text}>{item.label}</Text>
                     <Text style={styles.text}>
-                      ₹{getAcNOnAcAmount(item.type, item.category)}
+                      ₹
+                      {formatNumber(getAcNOnAcAmount(item.type, item.category))}
                     </Text>
                   </View>
                 </TouchableOpacity>
               ))}
           </View>
 
-          {/* Column 2: Monthly */}
           <View style={styles.column}>
             <Text style={styles.heading}>Monthly</Text>
             {options
@@ -210,7 +220,6 @@ const Sharing = ({
                   style={styles.option}
                   onPress={() => {
                     setSelected(item.id);
-                    // getAmountFunc()
                   }}>
                   <View style={styles.radio}>
                     {selected === item.id && (
@@ -220,7 +229,8 @@ const Sharing = ({
                   <View style={{}}>
                     <Text style={styles.text}>{item.label}</Text>
                     <Text style={styles.text}>
-                      ₹{getAcNOnAcAmount(item.type, item.category)}
+                      ₹
+                      {formatNumber(getAcNOnAcAmount(item.type, item.category))}
                     </Text>
                   </View>
                 </TouchableOpacity>
@@ -232,7 +242,7 @@ const Sharing = ({
         <View style={styles.timecontainer}>
           <View>
             <Text style={styles.lockintxt}>Lock in Period</Text>
-            <Text>{share?.lock_in_period || 'No Data Available'}</Text>
+            <Text>{share?.lock_in_period || 'No Data Available'} Month</Text>
           </View>
           <View>
             <Text style={styles.noofroomtxt}>Numbers of Room</Text>

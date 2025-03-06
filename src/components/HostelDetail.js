@@ -12,6 +12,7 @@ import {Color} from '../utlis/Color';
 import RoomAvailability from './RoomAvailability';
 import {useNavigation} from '@react-navigation/native';
 import {FontText} from '../utlis/CustomFont';
+import formatNumber from '../utlis/FormatNumber';
 
 const HstDetail = ({hostel, style, onLikePress}) => {
   const navigation = useNavigation();
@@ -83,8 +84,8 @@ const HstDetail = ({hostel, style, onLikePress}) => {
       <View style={styles.rentratingcontainer}>
         <View style={styles.rentcontainer}>
           <Text style={styles.rentamounttxt}>
-            {hostel?.sharing[0]?.details[0]?.amount || 'no data'} /
-            <Text style={styles.month}>Month</Text>
+            {formatNumber(hostel?.sharing[0]?.details[0]?.amount) || 'no data'}{' '}
+            /<Text style={styles.month}>Month</Text>
           </Text>
         </View>
         <View style={styles.ratingstarcontainer}>

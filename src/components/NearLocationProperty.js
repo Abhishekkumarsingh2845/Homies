@@ -27,6 +27,7 @@ const NearLocationProperty = ({property, nearproperty}) => {
           {nearproperty?.property?.address || 'no data'}
         </Text>
         <Text style={styles.rentcontainer}>
+          ₹
           {nearproperty?.property?.sharing?.[0]?.details?.[0]?.amount ||
             'no data'}
         </Text>
