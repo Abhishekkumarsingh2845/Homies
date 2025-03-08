@@ -4,7 +4,7 @@ import axios from 'axios';
 export const openGallery = async () => {
   try {
     const res = await launchImageLibrary({
-      mediaType: 'photo',
+      mediaType: 'mixed',
     });
     return {
       status: true,

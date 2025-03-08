@@ -64,7 +64,7 @@ const LoginSignup = () => {
         });
       } else {
         console.log('isExist====', isExist);
-        navigation.navigate('SignUp');
+        navigation.navigate('SignUp' , {phoneNo : phoneNo});
         return;
       }
     } else if (otp?.join('') == originalOtp) {

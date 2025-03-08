@@ -163,10 +163,11 @@ const PropertyDetail = () => {
 
   const handleVistBtn = () => {
     console.log("bottomSheetRef======" , bottomSheetRef)
-    // bottomSheetRef.current?.open()
-    // return
+    bottomSheetRef.current?.open()
+    return
     setModalVisible(!isModalVisible);
   };
+
   const handlePayNow = async () => {
     setloading(true);
     const data = {

@@ -12,6 +12,7 @@ import {Color} from '../utlis/Color';
 import RoomAvailability from './RoomAvailability';
 import {useNavigation} from '@react-navigation/native';
 import {FontText} from '../utlis/CustomFont';
+import AntDesign from 'react-native-vector-icons/AntDesign'
 
 const HstDetail = ({hostel, style, onLikePress}) => {
   const navigation = useNavigation();
@@ -71,11 +72,7 @@ const HstDetail = ({hostel, style, onLikePress}) => {
           </TouchableOpacity> */}
 
           <TouchableOpacity onPress={() => handleLikePress(hostel._id)}>
-            <Image
-              source={Img.hrt}
-              tintColor={hostel.isLiked ? 'red' : 'black'}
-              style={styles.hrtIconStyle}
-            />
+            <AntDesign size={25} name={hostel.isLiked ? 'heart' : 'hearto'} color={hostel.isLiked ? 'red' : 'black'}/>
           </TouchableOpacity>
         </View>
       </View>

@@ -25,6 +25,7 @@ const ComplaintScr = () => {
   const getComplaint = async () => {
     try {
       const response = await get('getAllComplaints', {}, token);
+      console.log("getAllComplaints data  ==============", JSON.stringify(response?.data[0]?.data))
       if (response.success) {
         setComplaint(response.data[0]?.data);
       }
@@ -59,10 +60,10 @@ const ComplaintScr = () => {
         complaintbtn={
           <View style={styles.complaintcontainer}>
             <TouchableOpacity onPress={() => setselected('Complaint')}>
-              <Text style={[styles.complaintDisputetxt , { color : selected == 'Complaint' ?  Color.primary :  Color.white}]}>Complaint</Text>
+              <Text style={[styles.complaintDisputetxt, { color: selected == 'Complaint' ? Color.primary : Color.white }]}>Complaint</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => setselected('Disputes')}>
-              <Text style={[styles.complaintDisputetxt , { color : selected == 'Disputes' ?  Color.primary :  Color.white}]}>Disputes</Text>
+              <Text style={[styles.complaintDisputetxt, { color: selected == 'Disputes' ? Color.primary : Color.white }]}>Disputes</Text>
             </TouchableOpacity>
           </View>
         }
@@ -70,17 +71,17 @@ const ComplaintScr = () => {
       {selected == 'Complaint' && (
 
         <View style={styles.subcontainer}>
-    <ScrollView style={{flex : 1 }}>
+          <ScrollView style={{ flex: 1 }}>
 
-          {complaint &&
-            complaint?.map((item, index) => {
-              return <Complaint key={index} complaint_id={item.complaint_id} title={item.complaintTitle} date={item?.updatedAt} mediaUrl={item.propertyMedia[0]?.mediaUrl} _id={item._id} />
-            })
-          }
-        </ScrollView>
+            {complaint &&
+              complaint?.map((item, index) => {
+                return <Complaint key={index} complaint_id={item.complaint_id} title={item.complaintTitle} date={item?.updatedAt} media={item.propertyMedia[0]} _id={item._id} />
+              })
+            }
+          </ScrollView>
 
           <PrimaryBtn
-            Onpress={() => navigation.navigate('ComplaintForm' , {getComplaint})}
+            Onpress={() => navigation.navigate('ComplaintForm', { getComplaint })}
             destination={'ComplaintForm'}
             mgntop={10}
             txt={'+ADD'}
@@ -91,21 +92,21 @@ const ComplaintScr = () => {
 
       {selected == 'Disputes' && (
         <View style={styles.subcontainer}>
-        <ScrollView style={{flex : 1}}>
+          <ScrollView style={{ flex: 1 }}>
 
-          {
-            disputes.map((item, index) => {
-              return <DisputesCmp key={index} status={item?.dispute_status} statusColor={item?.dispute_status == "Pending" ? "#FF1C1C" : '#027516'} dispute_id={item?.dispute_id} date={item?.updatedAt} _id={item._id}/>
+            {
+              disputes.map((item, index) => {
+                return <DisputesCmp key={index} status={item?.dispute_status} statusColor={item?.dispute_status == "Pending" ? "#FF1C1C" : '#027516'} dispute_id={item?.dispute_id} date={item?.updatedAt} _id={item._id} />
 
 
-            })
-          }
-        </ScrollView>
+              })
+            }
+          </ScrollView>
 
 
           <PrimaryBtn
-   
-    Onpress={() => navigation.navigate('DisputesFormFill' , { getDisputes})}
+
+            Onpress={() => navigation.navigate('DisputesFormFill', { getDisputes })}
             destination={'DisputesFormFill'}
             txt={'+ADD'}
             bgcolor={Color.primary}
@@ -114,7 +115,7 @@ const ComplaintScr = () => {
         </View>
       )}
     </View>
-  
+
 
   );
 };
@@ -130,7 +131,7 @@ const styles = StyleSheet.create({
   subcontainer: {
     flex: 1,
     paddingHorizontal: ScreenDimensions.screenWidth * 0.03,
-    paddingBottom : 12,
+    paddingBottom: 12,
     borderRightWidth: 2,
     borderLeftWidth: 2,
     borderTopWidth: 2,

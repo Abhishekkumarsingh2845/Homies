@@ -10,6 +10,7 @@ import React from 'react';
 import Cloud from 'react-native-vector-icons/AntDesign';
 import {FontText} from '../utlis/CustomFont';
 import {openGallery, uploadImageUrl} from '../utlis/ImageHandler';
+import Video from 'react-native-video';
 
 const ComplaintGallery = ({
   operationtxt,
@@ -27,18 +28,18 @@ const ComplaintGallery = ({
 
   const galleryFunc = async () => {
     let res = await openGallery();
-    console.log('res--------------', res.response[0].uri);
+    console.log('res--------------', res.response[0]);
     // return
     if (res.status) {
       const data = {
-        uri: res.response[0].uri,
-        name: 'image.jpg',
-        type: 'image/jpeg',
+        uri: res.response[0]?.uri,
+        name: res.response[0]?.fileName,
+        type: res.response[0]?.type,
       };
       let imageRes = await uploadImageUrl(data);
       console.log('image data ======', imageRes);
       if (imageRes.status) {
-        setValue(name, [...value, imageRes.imageUrl]);
+        setValue(name, [...value, {url : imageRes.imageUrl  , type : res.response[0]?.type}]);
       }
     }
   };
@@ -59,14 +60,31 @@ const ComplaintGallery = ({
             alignItems: 'center',
           }}>
           {value?.map((item, index) => {
+            if(item.type?.includes('image')){
+
+            
             return (
               <Image
                 key={index}
-                source={{uri: item}}
+                source={{uri: item.url}}
                 resizeMode="contain"
                 style={{width: '30%', height: '90%'}}
               />
-            );
+            )
+          }else{
+            return (
+              <Video
+              paused={true}
+              key={index}
+              source={{ uri: item.url }}
+              style={{
+              width: '30%', height: '90%',
+                borderRadius: 10,
+                marginLeft: 10,
+              }}
+            />
+            )
+          }
           })}
           {/* <Image source= {{uri : value}} resizeMode='contain' style={{width :fixheight * 1.2 , height  :"100%"}}/> */}
         </View>

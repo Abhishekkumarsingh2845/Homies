@@ -7,8 +7,9 @@ import moment from 'moment';
 import { useSelector } from 'react-redux';
 import { get } from '../utlis/Api';
 import { useNavigation } from '@react-navigation/native';
+import Video from 'react-native-video';
 
-const Complaint = ({complaint_id, title, date, mediaUrl , _id}) => {
+const Complaint = ({complaint_id, title, date, media , _id}) => {
   const {token} = useSelector((state) => state.auth.user)
   const Nav = useNavigation()
 
@@ -22,7 +23,17 @@ const Complaint = ({complaint_id, title, date, mediaUrl , _id}) => {
   return (
     <TouchableOpacity style={styles.container} onPress={getDetailOfComplaint}>
       <View style={styles.cc}>
-        <Image source={{uri : mediaUrl}} style={styles.complainticonstyle} />
+        {
+          media?.mediaType == 'Image' ?
+        <Image source={{uri : media?.mediaUrl}} style={styles.complainticonstyle} /> 
+        :
+        <Video
+        paused={true}
+        source={{ uri:  media?.mediaUrl}}
+        style={styles.complainticonstyle}
+      />
+
+        }
         <View style={styles.complaintdetail}>
           <Text style={styles.complainttxt}>{complaint_id}</Text>
           <Text style={styles.complaintno}>Title : {title}</Text>

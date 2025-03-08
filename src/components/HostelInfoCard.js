@@ -37,7 +37,7 @@ const HostelInfoCard = ({hostel}) => {
         style={styles.hostelimg}>
         {/* <InterestTracker /> */}
         <LikeShare
-          color={hostel.isLiked ? 'red' : 'black'}
+          isLiked={hostel.isLiked}
           propertyId={hostel?._id}
         />
         <View style={styles.dotContainer}>

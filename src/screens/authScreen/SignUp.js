@@ -22,6 +22,8 @@ import { Formik } from 'formik'
 const SignUp = () => {
   const navigation = useNavigation();
   const route = useRoute();
+  const { phoneNo} = route.params || '';
+
   const [phonee, setPhone] = useState('');
   const [emailid, setEmailId] = useState(null);
   const [nameId, setNameId] = useState('');
@@ -64,7 +66,7 @@ const SignUp = () => {
   const initialValues = {
     name: '',
     email: '',
-    phone: '',
+    phone: phoneNo || '',
     refCode: ''
   }
 

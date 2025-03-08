@@ -7,10 +7,12 @@ import { FontText } from '../../utlis/CustomFont';
 import { Color } from '../../utlis/Color';
 import PrimaryBtn from '../../components/PrimaryBtn';
 import { useNavigation, useRoute } from '@react-navigation/native';
+import Video from 'react-native-video';
 const ComplaintFormFill = () => {
   const navigation = useNavigation();
   const { params } = useRoute()
   const data = params.data
+  console.log("new data---------------------" , data)
 
   // useEffect(() => {
   //   const timer = setTimeout(() => {
@@ -45,7 +47,17 @@ const ComplaintFormFill = () => {
           <View style={styles.attachmentconatiner}>
             {
               data.propertyMedia.map((item, index) => {
-                return <Image source={{ uri: item?.mediaUrl }} style={styles.imgstyle} />
+                console.log("sachin ---------------" , item)
+                if(item?.mediaType =='Image'){
+                  return <Image source={{ uri: item?.mediaUrl }} style={styles.imgstyle} />
+                }
+                else{
+                 return  <Video
+                  paused={true}
+                  source={{ uri:  item?.mediaUrl}}
+                  style={styles.imgstyle}
+                />
+                }
               })
             }
             {/* <Image source={{uri  :  data.propertyMedia[0]?.mediaUrl}} style={styles.imgstyle} />

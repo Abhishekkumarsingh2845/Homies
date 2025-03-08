@@ -67,16 +67,21 @@ const ComplaintForm = () => {
       .required('Description is required')
       .min(10, 'Description must be at least 10 characters long'),
 
-    photo: Yup.array()
+      photo: Yup.array()
       .of(
-        Yup.string().matches(
-          /\.(jpeg|jpg|png)$/,
-          'Each photo must be a valid image (jpeg, jpg, png)',
-        ),
+        Yup.object().shape({
+          type: Yup.string()
+            .oneOf(['video/mp4', 'image/jpeg', 'image/png', 'image/jpg'], 'Invalid file type')
+            .required('Type is required'),
+          url: Yup.string()
+            .url('Invalid URL format')
+            .matches(/\.(jpeg|jpg|png|mp4)$/, 'URL must be a valid image or video file')
+            .required('URL is required'),
+        })
       )
-      .required('At least one photo is required')
-      .min(1, 'You must upload at least one photo')
-      .max(3, 'You can upload a maximum of three photos'),
+      .required('At least one photo/video is required')
+      .min(1, 'You must upload at least one photo/video')
+      .max(3, 'You can upload a maximum of three photos/videos'),
   });
 
 
@@ -96,18 +101,21 @@ const ComplaintForm = () => {
 
 
   const SendComplaint = async values => {
+    console.log("SendComplaint-----------------------" , values)
+    // return
     setLoading(true);
     let data = {
       complaintTitle: values?.topic,
       complaintDescription: values?.description,
       propertyMedia: values?.photo?.map(item => {
         return {
-          mediaType: 'Image',
-          mediaUrl: item,
+          mediaType: item?.type?.includes('image')  ? 'Image' : 'Video',
+          mediaUrl: item?.url,
         };
       }),
       landLordId: myProperty?.landLordId,
     };
+
     try {
       const response = await post('addComplaint', data, token);
       if (response) {

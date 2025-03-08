@@ -1,6 +1,6 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
-import Heart from 'react-native-vector-icons/EvilIcons';
+import Heart from 'react-native-vector-icons/AntDesign';
 import Share from 'react-native-vector-icons/AntDesign';
 import {Color} from '../utlis/Color';
 import {useNavigation} from '@react-navigation/native';
@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setLikeUnlike } from '../store/PropertiesSlice';
 import { post } from '../utlis/Api';
 
-const LikeShare = ({color , propertyId}) => {
+const LikeShare = ({isLiked , propertyId}) => {
   const {_id} = useSelector(state => state.auth.user)
   const naviagtion = useNavigation();
   const dispatch = useDispatch()
@@ -29,7 +29,7 @@ const LikeShare = ({color , propertyId}) => {
       <TouchableOpacity
         style={styles.whitecontainer}
         onPress={toggleLike}>
-        <Heart name="heart" size={25} color={color} />
+        <Heart name={isLiked ? 'heart' : 'hearto'} size={25} color={isLiked ? 'red' : 'black'} />
       </TouchableOpacity>
       <View style={styles.whitecontainer}>
         <Share name="sharealt" size={18} />
