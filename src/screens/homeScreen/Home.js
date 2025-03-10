@@ -29,14 +29,16 @@ import {
   getNearPropertiesFunc,
   setLikeUnlike,
 } from '../../store/PropertiesSlice';
+import {getMyProperty} from '../../store/MyPropertySlice';
 
 const Home = ({navigation}) => {
-  // const [loading, setloading] = useState();
-  // const [hostetData, sethostelData] = useState([]);
   const nav = useNavigation();
   const {data: hostetData, loading} = useSelector(
     state => state.getPropertiesSlice,
   );
+  const properties = useSelector(state => state?.getPropertiesSlice?.data);
+
+  console.log('->>>>>> Redux Data:', properties); // Log Redux data in component
 
   const dispatch = useDispatch();
   const {latitude, longitude} = useSelector(state => state.location);
@@ -116,11 +118,16 @@ const Home = ({navigation}) => {
     );
   };
 
+  const getMyPropertyFunc = async () => {
+    dispatch(getMyProperty());
+  };
+
   useEffect(() => {
     if (!hostetData) {
       getHstdetail();
     }
     getLocation();
+    getMyPropertyFunc();
   }, []);
 
   return (

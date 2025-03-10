@@ -4,7 +4,7 @@ import {Img} from '../utlis/ImagesPath';
 import {FontText} from '../utlis/CustomFont';
 import {Color} from '../utlis/Color';
 
-const NearLocationProperty = ({property, nearproperty}) => {
+const NearLocationProperty = ({property, nearproperty,}) => {
   console.log(
     '->>>->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>neaby',
     nearproperty?.property?.sharing?.[0]?.details?.[0]?.amount,
@@ -27,7 +27,6 @@ const NearLocationProperty = ({property, nearproperty}) => {
           {nearproperty?.property?.address || 'no data'}
         </Text>
         <Text style={styles.rentcontainer}>
-          ₹
           {nearproperty?.property?.sharing?.[0]?.details?.[0]?.amount ||
             'no data'}
         </Text>

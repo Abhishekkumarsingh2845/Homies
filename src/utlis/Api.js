@@ -87,8 +87,12 @@ export const post = async (endpoint, data = {}) => {
   try {
     console.log('data::', data);
     const response = await api.post(endpoint, data);
+    console.log('response--- post', data);
+
     return response?.data;
   } catch (error) {
+    console.log('error--- post', error);
+
     throw error;
   }
 };

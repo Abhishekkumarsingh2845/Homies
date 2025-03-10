@@ -11,7 +11,6 @@ import {get} from '../../utlis/Api';
 const BookMark = () => {
   const [loading, setloading] = useState(false);
   const [bookmark, setbookmark] = useState([]);
-
   const navigation = useNavigation();
 
   const getBookmark = async () => {
@@ -44,7 +43,7 @@ const BookMark = () => {
         <FlatList
           data={bookmark}
           showsVerticalScrollIndicator={false}
-          contentContainerStyle={{paddingBottom:150}}
+          contentContainerStyle={{paddingBottom: 150}}
           keyExtractor={item =>
             item._id ? item._id.toString() : Math.random().toString()
           }

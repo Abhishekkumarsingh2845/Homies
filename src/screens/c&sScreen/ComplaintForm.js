@@ -19,6 +19,7 @@ const ComplaintForm = () => {
   const navigation = useNavigation();
   const [landlord, setLandLord] = useState([]);
   const {token} = useSelector(state => state.auth.user);
+  const {data : myProperty} = useSelector(state => state.MyProperty)
   const {params} = useRoute();
 
   const initialValues = {
@@ -96,7 +97,6 @@ const ComplaintForm = () => {
 
   const SendComplaint = async values => {
     setLoading(true);
-    console.log('values-   - - - - - - - - - - ', values);
     let data = {
       complaintTitle: values?.topic,
       complaintDescription: values?.description,
@@ -106,7 +106,7 @@ const ComplaintForm = () => {
           mediaUrl: item,
         };
       }),
-      landLordId: landlord,
+      landLordId: myProperty?.landLordId,
     };
     try {
       const response = await post('addComplaint', data, token);
@@ -123,9 +123,9 @@ const ComplaintForm = () => {
 
   
 
-  useEffect(() => {
-    getLandlord();
-  }, []);
+  // useEffect(() => {
+  //   getLandlord();
+  // }, []);
 
   return (
     <View style={styles.container}>

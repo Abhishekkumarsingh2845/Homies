@@ -23,7 +23,8 @@ const Home = ({route}) => {
   // const route = useRoute();
   const {propertid} = route.params || 'no data';
   console.log('route.params', route?.params);
-  const [data, setData] = useState(null);
+  const propertyidtaking=route.params ;
+  const [data, setData] = useState({});
   const [banner, setBanner] = useState(null);
   console.log(
     '----------------------------------------------------------------',
@@ -33,12 +34,13 @@ const Home = ({route}) => {
 
   const PropertywithFood = async () => {
     const params = {
-      propertyId: propertid,
+      propertyId: propertyidtaking,
     };
+    console.log("consoling the params of the propertyId",propertid);
     try {
-      const response = await get('./propertyWithFood', params);
-      setData(response.data[0]);
-      console.log('response of the property withFood=>>>', response.data[0]);
+      const response = await get('propertyWithFood', params);
+      setData(response?.data[0]);
+      console.log('response of the property withFood=>>>', response?.data[0]);
     } catch (error) {
       console.log('error in the propertyWithFood', error.message);
     }
@@ -46,7 +48,7 @@ const Home = ({route}) => {
 
   const GetBanner = async () => {
     try {
-      const response = await get('./getBannersForProperties');
+      const response = await get('getBannersForProperties');
       console.log('response of the getBannersForProperties', response.data);
       console.log('banner detail', response?.data[0]);
       setBanner(response.data[0]);

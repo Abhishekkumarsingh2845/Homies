@@ -17,21 +17,21 @@ const FoodServices = ({fooddetail, data, bgcolor = 'white'}) => {
         })
       }>
       <Text style={styles.daytxt}>
-        {fooddetail?.foodDetails[0]?.week || 'no data'}
+        {fooddetail?.foodDetails?.[0]?.week || 'no data'}
       </Text>
       <View style={styles.breakfastcontainer}>
         <Text style={styles.breakfasttxt}>
-          {fooddetail?.foodDetails[0]?.title || 'no data'}
+          {fooddetail?.foodDetails?.[0]?.title || 'no data'}
         </Text>
         <Text style={styles.foodtxt}>
-          {fooddetail?.foodDetails[0]?.foodItems[0] || 'no data'}
+          {fooddetail?.foodDetails?.[0]?.foodItems[0] || 'no data'}
         </Text>
       </View>
       <View style={styles.dinnercontainer}>
         <Text style={styles.timingtxt}>Timing</Text>
         <Text style={styles.fixedtimetxt}>
-          {fooddetail?.foodDetails[0]?.startTime ?? ''}-{' '}
-          {fooddetail?.foodDetails[0]?.endTime ?? ''}
+          {fooddetail?.foodDetails?.[0]?.startTime ?? ''}-{' '}
+          {fooddetail?.foodDetails?.[0]?.endTime ?? ''}
         </Text>
       </View>
     </TouchableOpacity>
