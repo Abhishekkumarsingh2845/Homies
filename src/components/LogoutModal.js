@@ -30,8 +30,10 @@ const LogoutModal = ({
   const navigation = useNavigation();
   const [loading, setLoading] = useState(false);
   const {token} = useSelector(state => state.auth.user);
-  const {data: myProperty} = useSelector(state => state.MyProperty);
-  console.log('logout modal', modalType);
+  // const {data: myProperty} = useSelector(state => state.MyProperty);
+  // console.log('logout modal', modalType);
+  const {data : myProperty} = useSelector(state => state.MyProperty)
+  console.log("logout modal" , myProperty)
 
   const logoutUser = async () => {
     setLoading(true);

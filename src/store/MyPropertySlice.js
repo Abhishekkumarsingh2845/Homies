@@ -33,7 +33,6 @@ const MyPropertySlice = createSlice({
 
   extraReducers(builder) {
     builder.addCase(getMyProperty.fulfilled, (state, action) => {
-      console.log("frnfjrbnjf" , action?.payload?.response)
       state.data = action?.payload?.response ;
     });
   },

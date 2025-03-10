@@ -36,16 +36,12 @@ const Home = ({navigation}) => {
   const {data: hostetData, loading} = useSelector(
     state => state.getPropertiesSlice,
   );
-  const properties = useSelector(state => state?.getPropertiesSlice?.data);
-
-  console.log('->>>>>> Redux Data:', properties); // Log Redux data in component
+  // console.log("hostetData------------------------------" , hostetData.length , hostetData)
 
   const dispatch = useDispatch();
   const {latitude, longitude} = useSelector(state => state.location);
-  console.log('Redux Location:', latitude, longitude);
   const Navigation = useNavigation();
   const user = useSelector(state => state.auth.user);
-  console.log('user of home -- - - - -', loading);
 
   const getHstdetail = async (filterData = {}) => {
     console.log('getHstdetail');
@@ -55,6 +51,7 @@ const Home = ({navigation}) => {
       lat: '28.6285',
       ...filterData,
     };
+    console.log("params=====================111111" , params)
 
     try {
       dispatch(getNearPropertiesFunc(params));
