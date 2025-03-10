@@ -1,39 +1,41 @@
-import {  StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import React, { useState } from 'react';
-import { FontText } from '../utlis/CustomFont';
-import { Color } from '../utlis/Color';
-import { ScreenDimensions } from '../utlis/DimensionApi';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import React, {useState} from 'react';
+import {FontText} from '../utlis/CustomFont';
+import {Color} from '../utlis/Color';
+import {ScreenDimensions} from '../utlis/DimensionApi';
 import Video from 'react-native-video';
 import AppModal from './AppModal';
-const VideoPlayer = ({ videoplay }) => {
-  const [visible, setVisible] = useState(false)
-  const [selectedVideo, setSelecetdVideo] = useState('')
 
-  const handleVideoSelect = (item) => {
-    setVisible(!visible)
-    setSelecetdVideo(item)
-  }
+const VideoPlayer = ({videoplay}) => {
+  const [visible, setVisible] = useState(false);
+  const [selectedVideo, setSelecetdVideo] = useState('');
+  const handleVideoSelect = item => {
+    setVisible(!visible);
+    setSelecetdVideo(item);
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.amenttxt}>Virtual Videos</Text>
 
-      <View style={{
-        flexDirection: 'row',
-        justifyContent: 'flex-start',
-      }}>
-
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'flex-start',
+        }}>
         {videoplay.map((item, index) => (
           <TouchableOpacity
-            onPress={() => { handleVideoSelect(item) }}
+            onPress={() => {
+              handleVideoSelect(item);
+            }}
             key={index}
-            // eslint-disable-next-line react-native/no-inline-styles
             style={{
               marginTop: 5,
               marginLeft: 5,
             }}>
             <Video
               key={index}
-              source={{ uri: item }}
+              source={{uri: item}}
               style={{
                 width: ScreenDimensions.screenWidth * 0.26,
                 height: ScreenDimensions.screenHeight * 0.1,
@@ -46,20 +48,18 @@ const VideoPlayer = ({ videoplay }) => {
       </View>
 
       <AppModal visible={visible}>
-        <View style={{alignItems :'center' }}>
-          {/* Close Button */}
-          <TouchableOpacity onPress={() => {
-            setVisible(false)
-            setSelecetdVideo('')
-          }} style={styles.closeButton}>
+        <View style={{alignItems: 'center'}}>
+          <TouchableOpacity
+            onPress={() => {
+              setVisible(false);
+              setSelecetdVideo('');
+            }}
+            style={styles.closeButton}>
             <Text style={styles.closeText}>✖</Text>
-
           </TouchableOpacity>
           <View style={styles.modalContainer}>
-
             <Video
-              source={{ uri: selectedVideo }}
-
+              source={{uri: selectedVideo}}
               controls={true}
               hidePrevious={true}
               hideNext={true}
@@ -73,7 +73,6 @@ const VideoPlayer = ({ videoplay }) => {
           </View>
         </View>
       </AppModal>
-
     </View>
   );
 };
@@ -94,25 +93,25 @@ const styles = StyleSheet.create({
   },
 
   modalContainer: {
-    width: "90%",
-    backgroundColor: "white",
+    width: '90%',
+    backgroundColor: 'white',
     padding: 20,
     borderRadius: 10,
-    alignItems: "center",
+    alignItems: 'center',
   },
 
   closeText: {
     fontSize: 20,
-    color: "#333",
+    color: '#333',
   },
 
   closeButton: {
-    backgroundColor : 'white',
-    borderRadius : 20,
-    alignItems : 'center',
-    justifyContent : 'center',
-    width  : 40,
-    height : 40,
-    margin : 10
+    backgroundColor: 'white',
+    borderRadius: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 40,
+    height: 40,
+    margin: 10,
   },
 });

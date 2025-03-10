@@ -130,33 +130,3 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
-
-// import React from 'react';
-// import {View, StyleSheet} from 'react-native';
-// import Video from 'react-native-video';
-
-// const VideoPlayer = () => {
-//   return (
-//     <View style={styles.container}>
-//       <Video
-//         source={require('./src/assets/videos/splash.mp4')}
-//         style={styles.video}
-//         resizeMode="contain"
-//       />
-//     </View>
-//   );
-// };
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//   },
-//   video: {
-//     width: '100%',
-//     height: 300,
-//   },
-// });
-
-// export default VideoPlayer;

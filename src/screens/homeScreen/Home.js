@@ -29,7 +29,7 @@ import {
   getNearPropertiesFunc,
   setLikeUnlike,
 } from '../../store/PropertiesSlice';
-import { getMyProperty } from '../../store/MyPropertySlice';
+import {getMyProperty} from '../../store/MyPropertySlice';
 
 const Home = ({navigation}) => {
   const nav = useNavigation();
@@ -55,7 +55,6 @@ const Home = ({navigation}) => {
 
     try {
       dispatch(getNearPropertiesFunc(params));
-      
     } catch (error) {
       console.log(
         'error in  the getNearProperty',
@@ -116,16 +115,16 @@ const Home = ({navigation}) => {
     );
   };
 
-  const getMyPropertyFunc = async () =>{
-    dispatch(getMyProperty())
-  }
+  const getMyPropertyFunc = async () => {
+    dispatch(getMyProperty());
+  };
 
   useEffect(() => {
     if (!hostetData) {
       getHstdetail();
     }
     getLocation();
-    getMyPropertyFunc()
+    getMyPropertyFunc();
   }, []);
 
   return (

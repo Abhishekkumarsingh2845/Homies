@@ -14,6 +14,10 @@ import PaymentSucces from './PaymentSucces';
 import BottomTab from '../../navigations/BottomTab';
 
 const PaymentForm = () => {
+  const route = useRoute();
+  const {propertid} = route.params;
+  console.log('propertid coming fro the property details', propertid);
+
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
@@ -38,7 +42,7 @@ const PaymentForm = () => {
           <PaymenttxtInpt placeholder="Card holder name" />
           <View style={styles.expirydatecontainer}>
             <View>
-              <Text style={styles.dueamounttxt}>Expiry Date</Text>
+              {/* <Text style={styles.dueamounttxt}>Expiry Date</Text> */}
 
               <PaymenttxtInpt width="100%" placeholder="MM/YY" />
             </View>
@@ -51,7 +55,9 @@ const PaymentForm = () => {
         <PaymentMethod labelText={'Cash'} />
         {/* <PermonthRent rent='Total Payment' /> */}
         <PrimaryBtn
-          onPress={() => navigation.navigate('BottomTab')}
+          onPress={() =>
+            navigation.navigate('BottomTab', {propertid: propertid})
+          }
           // destination={PaymentSucces}
           destination={BottomTab}
           txt={'Pay Now'}

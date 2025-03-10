@@ -27,7 +27,7 @@ import {
 } from '../../utlis/ImageHandler';
 import {post} from '../../utlis/Api';
 import {setUser} from '../../store/AuthSlice';
-import { getMyProperty } from '../../store/MyPropertySlice';
+import {getMyProperty} from '../../store/MyPropertySlice';
 const Profile = () => {
   const propertyId = useSelector(state => state.property.propertyId);
   const landLordId = useSelector(state => state.property.landLordId);
@@ -41,10 +41,13 @@ const Profile = () => {
   const [modalMsg, setModalMsg] = useState('');
   const navigation = useNavigation();
   const [modalType, setModalType] = useState('');
-    const {data : myProperty} = useSelector(state => state.MyProperty)
+  const {data: myProperty} = useSelector(state => state.MyProperty);
 
   const dispatch = useDispatch();
+
+  //his is higher order function in the term of the function type
   const toggleModal = (message, type) => {
+    console.log("console");
     setModalMsg(message);
     setModalVisible(!modalVisible);
     setModalType(type);
@@ -101,21 +104,16 @@ const Profile = () => {
     }
   };
 
-  useEffect(() =>{
-    if(!myProperty?.landLordId){
-      dispatch(getMyProperty())
+  useEffect(() => {
+    if (!myProperty?.landLordId) {
+      dispatch(getMyProperty());
     }
-
-  },[])
+  }, []);
   return (
     <View style={styles.container}>
       <SafeAreaView />
 
-      {/* <SecondaryHeader
-        detailtxt={'My Profile'}
-        gobackImage={Img.goback}
-        onPress={() => navigation.goBack('DrawerNavigator')}
-      /> */}
+ 
 
       <ImageBackground source={Img.headerbg} style={styles.imageBackground}>
         <StatusBar backgroundColor={'#010101'} barStyle={'light-content'} />
@@ -164,7 +162,7 @@ const Profile = () => {
           styles.profileText,
           {marginTop: dimensions.screenHeight * 0.11},
         ]}>
-        Room No- 001
+        {/* Room No- 001 */}
       </Text>
       <PersonalDetailCard />
       <SeeAllDocument />
@@ -192,7 +190,8 @@ const Profile = () => {
             </Text>
           </TouchableOpacity>
         </View>
-        <TouchableOpacity  onPress={() =>
+        <TouchableOpacity
+          onPress={() =>
             toggleModal('Are you Sure Leave Your Property', 'leave')
           }>
           <Text

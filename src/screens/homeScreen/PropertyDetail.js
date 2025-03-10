@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   FlatList,
   Button,
+  Alert,
 } from 'react-native';
 import React, {useEffect, useRef, useState} from 'react';
 import {Color} from '../../utlis/Color';
@@ -34,11 +35,11 @@ import {useDispatch, useSelector} from 'react-redux';
 import {get, post} from '../../utlis/Api';
 import VideoPlayer from '../../components/Video';
 import {setLandlordId, setPropertyId} from '../../store/Propert&LandlordId';
-import { getMyProperty } from '../../store/MyPropertySlice';
+import {getMyProperty} from '../../store/MyPropertySlice';
+import Toast from 'react-native-toast-message';
 
 // import {Image} from 'react-native-svg';
 const PropertyDetail = () => {
-  const propertyId = useSelector(state => state.property.propertyId);
   const dispatch = useDispatch();
   const route = useRoute();
   const detail = route.params?.detail;
@@ -48,19 +49,23 @@ const PropertyDetail = () => {
   const [showGuestModal, setShowGuestModal] = useState(false);
   const {token, _id} = useSelector(state => state.auth.user);
   const [property, setPropertyData] = useState({});
+
+  console.log(
+    'property = ======================',
+    property?.property?.property_videos,
+  );
+  const [selected, setSelected] = useState(null);
   const [loading, setloading] = useState();
   const [hostetData, sethostelData] = useState([]);
+  const [nearpropertyN, setNearPropertyN] = useState([]);
   const [selectedSharing, setSelectedSharing] = useState({});
   const [selectedPlan, setSelectedPlan] = useState({});
   const [rentAmount, setRentAmount] = useState({
     amount: '',
     planDuration: '',
   });
-  const bottomSheetRef = useRef(null);
-
-
   const isEmpty = obj => JSON.stringify(obj) === '{}';
-
+  console.log('property id coming from the Home screen:', propertyID);
   const getAmountFunc = () => {
     let amount = selectedSharing?.details?.find(
       item =>
@@ -86,11 +91,11 @@ const PropertyDetail = () => {
       setSelectedSharing(property?.property?.sharing[0]);
     }
   }, [property?.property?.sharing]);
-
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
 
+  const bottomSheetRef = useRef(null);
 
   const getHstdetail = async () => {
     const params = {
@@ -101,6 +106,11 @@ const PropertyDetail = () => {
     try {
       const response = await get('getNearProperties', params);
       sethostelData(response?.data[0]?.data);
+      setNearPropertyN(response?.data?.[2]);
+      console.log(
+        'checking the data of the getnearproperty ->>',
+        response?.data[1]?.data,
+      );
     } catch (error) {
       console.log(
         'error in  the getNearProperty',
@@ -134,7 +144,6 @@ const PropertyDetail = () => {
       );
     }
   };
-
   const getOneProperty = async () => {
     const params = {
       propertyId: propertyID,
@@ -169,7 +178,16 @@ const PropertyDetail = () => {
   };
 
   const handlePayNow = async () => {
+    if (!selected) {
+      Toast.show({
+        type: 'error',
+        text1: 'Selection Required',
+        text2: 'Please select an option before proceeding.',
+      });
+      return;
+    }
     setloading(true);
+
     const data = {
       propertyId: propertyID,
       userId: _id,
@@ -181,7 +199,6 @@ const PropertyDetail = () => {
       )?._id,
       sharingTypeId: selectedSharing?._id,
     };
-    console.log("data --------------------------payload" , data)
     try {
       const response = await post('payNow', data);
       console.log('response of the payNow API====', response);
@@ -207,12 +224,14 @@ const PropertyDetail = () => {
     } else {
       setShowGuestModal(false);
     }
-    bottomSheetRef.current?.open();
   }, []);
 
+  const propertyId = useSelector(state => state.property.propertyId);
+  console.log('Property ID from Redux:', propertyId);
   return (
     <View style={styles.container}>
       <SafeAreaView />
+
       <SecondaryHeader
         gobackImage={Img.goback}
         detailtxt={'Property Details'}
@@ -264,6 +283,8 @@ const PropertyDetail = () => {
           </View>
 
           <Sharing
+            x={selected}
+            y={setSelected}
             selectedSharing={selectedSharing}
             setSelectedSharing={setSelectedSharing}
             share={property?.property}
@@ -271,10 +292,10 @@ const PropertyDetail = () => {
             getAmountFunc={getAmountFunc}
           />
 
-              {
-                 property?.property?.property_videos && <VideoPlayer videoplay={property?.property?.property_videos} />
-              }
-          
+          {property?.property?.property_videos && (
+            <VideoPlayer videoplay={property?.property?.property_videos} />
+          )}
+
           <Text style={styles.neaerbytxt}>Near by Property</Text>
           <NearLocationProperty nearproperty={property} />
           {!isEmpty(rentAmount) && <PermonthRent rentAmount={rentAmount} />}
@@ -293,7 +314,7 @@ const PropertyDetail = () => {
 
           <RequestSentBtnSht ref={bottomSheetRef} />
 
-          <View style={{marginVertical: 80}} />
+          <View style={{marginVertical: 20}} />
         </View>
       </ScrollView>
       <GuestModal

@@ -16,6 +16,7 @@ import {FontText} from '../utlis/CustomFont';
 import {useNavigation} from '@react-navigation/native';
 import DotIndicatorImg from './DotindictaorImg';
 import {useSelector} from 'react-redux';
+import formatNumber from '../utlis/FormatNumber';
 
 const HostelInfoCard = ({hostel}) => {
   const rating = Number(hostel?.rating) || 0;
@@ -64,7 +65,8 @@ const HostelInfoCard = ({hostel}) => {
         <View>
           <Text style={styles.price}>Starting from </Text>
           <Text style={styles.amount}>
-            {hostel?.sharing[1]?.details[2]?.amount || 'no amount'}
+            {formatNumber(hostel?.sharing[0]?.details[0]?.amount) ||
+              'no amount'}
           </Text>
           <View style={{flexDirection: 'row', marginTop: 5}}>
             {StarArray.map((filled, index) => (

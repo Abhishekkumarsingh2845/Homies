@@ -43,6 +43,7 @@ const getPropertiesSlice = createSlice({
     builder.addCase(getNearPropertiesFunc.fulfilled, (state, action) => {
       state.loading = false;
       state.data = action?.payload?.response;
+      // console.log("Redux Stored Data:", state.data); 
     });
   },
 });

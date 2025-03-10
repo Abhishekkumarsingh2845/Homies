@@ -34,7 +34,10 @@ const AllHostelDetail = ({hostel, style}) => {
     <TouchableOpacity
       style={[styles.container, {style}]}
       onPress={() => navigation.navigate('SortbyScreen')}>
-      <Image source={Img.allhostelicon} style={styles.allhosteliconStyle} />
+      <Image
+        source={{uri: hostel?.property_images[0]}}
+        style={styles.allhosteliconStyle}
+      />
       <View
         style={{
           alignItems: 'flex-start',
@@ -43,11 +46,10 @@ const AllHostelDetail = ({hostel, style}) => {
         }}>
         <Text style={styles.person}>{hostel.availableFor}</Text>
         <Text style={styles.addresStyle}>{hostel.address}</Text>
-        <Text style={styles.rentStyle}>Rent - 5K/Month</Text>
-        {/* <Image
-          source={Img.ratingstaricon}
-          style={styles.ratingstariconcontainer}
-        /> */}
+        <Text style={styles.rentStyle}>
+          {hostel?.sharing[0]?.details[0]?.amount || 'no data'} /
+        </Text>
+
         <View
           style={{
             flexDirection: 'row',

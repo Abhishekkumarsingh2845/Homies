@@ -125,8 +125,6 @@
 //   },
 // });
 
-
-
 import {
   Image,
   ImageBackground,
@@ -137,10 +135,10 @@ import {
   View,
 } from 'react-native';
 import React from 'react';
-import { Img } from '../utlis/ImagesPath';
-import { useNavigation } from '@react-navigation/native';
-import { FontText } from '../utlis/CustomFont';
-import { ScreenDimensions } from '../utlis/DimensionApi';
+import {Img} from '../utlis/ImagesPath';
+import {useNavigation} from '@react-navigation/native';
+import {FontText} from '../utlis/CustomFont';
+import {ScreenDimensions} from '../utlis/DimensionApi';
 
 const Header = ({
   Img1,
@@ -151,21 +149,25 @@ const Header = ({
   locationIcon,
   heartIcon,
   bellIcon,
-  hght=100,
+  hght = 100,
   complaintbtn,
-  nav= null,
-  OnPressBookmark
+  nav = null,
+  OnPressBookmark,
 }) => {
   const navigation = useNavigation();
 
   return (
-    <ImageBackground source={Img.headerbg} style={[styles.container,{height:hght}]}>
+    <ImageBackground
+      source={Img.headerbg}
+      style={[styles.container, {height: hght}]}>
       <StatusBar backgroundColor={'#010101'} barStyle={'light-content'} />
       <View style={styles.logocontainer}>
         <View style={styles.leftcontinaer}>
           {/* <TouchableOpacity onPress={() => navigation.goBack()}> */}
-          <TouchableOpacity  onPress={() => {nav ? nav() : navigation.openDrawer()}}>
-
+          <TouchableOpacity
+            onPress={() => {
+              nav ? nav() : navigation.openDrawer();
+            }}>
             <Image
               source={Img1}
               style={[
@@ -179,14 +181,17 @@ const Header = ({
               ]}
             />
           </TouchableOpacity>
-
+          <View>
           <Image source={Img.primarylogo} style={styles.logoicon} />
+          </View>
+
+         
         </View>
         <View style={styles.rightcontinaer}>
           {/* Dynamic location icon */}
           <TouchableOpacity>
             <Image
-              source={locationIcon}  // Default to Img.lcn if no prop is provided
+              source={locationIcon} // Default to Img.lcn if no prop is provided
               style={styles.location}
             />
           </TouchableOpacity>
@@ -194,21 +199,21 @@ const Header = ({
           {/* Dynamic heart icon */}
           <TouchableOpacity onPress={OnPressBookmark}>
             <Image
-              source={heartIcon }  // Default to Img.hrt if no prop is provided
+              source={heartIcon} // Default to Img.hrt if no prop is provided
               style={styles.heart}
             />
           </TouchableOpacity>
 
           {/* Dynamic bell icon */}
-          <TouchableOpacity onPress={()=>navigation.navigate("Notification")}>
+          <TouchableOpacity onPress={() => navigation.navigate('Notification')}>
             <Image
-              source={bellIcon }  // Default to Img.bll if no prop is provided
+              source={bellIcon} // Default to Img.bll if no prop is provided
               style={styles.bell}
             />
           </TouchableOpacity>
         </View>
       </View>
-{complaintbtn}
+      {complaintbtn}
       {/* <View style={styles.complaintcontainer}>
         <Text style={styles.complainttxt}>Complaint</Text>
         <Text style={styles.complainttxt}>Disputes</Text>
@@ -271,20 +276,14 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     // backgroundColor: 'red',
   },
-  complaintcontainer:
-  {
-    flexDirection:"row",
-    width:"100%",
-    justifyContent:"space-around",
-    paddingHorizontal:40,
-    
-
-    
+  complaintcontainer: {
+    flexDirection: 'row',
+    width: '100%',
+    justifyContent: 'space-around',
+    paddingHorizontal: 40,
   },
-  complainttxt:
-  {
-    fontSize:16,
-    fontFamily:FontText.medium,
-
-  }
+  complainttxt: {
+    fontSize: 16,
+    fontFamily: FontText.medium,
+  },
 });

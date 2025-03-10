@@ -22,12 +22,17 @@ import {ScreenDimensions} from '../utlis/DimensionApi';
 const PropertyInfoCard = ({data}) => {
   const hostel = data.property;
   const navigation = useNavigation();
-
+  console.log('in=->>>>>>>>>>>>', hostel?._id);
+  console.log(
+    'checking the hostel id',
+    hostel?.hostel_transportation || 'no data',
+  );
   return (
     <TouchableOpacity
       style={styles.container}
-      onPress={() => navigation.navigate('PaymentHomeForm')}
-      >
+      onPress={() =>
+        navigation.navigate('PaymentHomeForm', {propertid: hostel._id})
+      }>
       <View style={styles.imgcontainer}>
         <View style={styles.largehosteimgstyle}>
           <Image
@@ -99,7 +104,7 @@ const PropertyInfoCard = ({data}) => {
             <View>
               <Text style={styles.hosteltxt}>Hostel Transportation</Text>
               <Text style={styles.hostelcab}>
-                {hostel?.hostel_transpotation}
+                {hostel?.hostel_transportation || 'no data'}
               </Text>
             </View>
           </View>

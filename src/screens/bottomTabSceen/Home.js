@@ -9,7 +9,7 @@ import {
 import React, {useEffect, useState} from 'react';
 import Header from '../../components/Header';
 import SecondaryHeader from '../../components/SecondaryHeader';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import {Img} from '../../utlis/ImagesPath';
 import Setting from 'react-native-vector-icons/Octicons';
 import FoodServices from '../../components/FoodServices';
@@ -19,8 +19,12 @@ import {FontText} from '../../utlis/CustomFont';
 import {Color} from '../../utlis/Color';
 import {get} from '../../utlis/Api';
 
-const Home = () => {
-  const [data, setData] = useState(null);
+const Home = ({route}) => {
+  // const route = useRoute();
+  const {propertid} = route.params || 'no data';
+  console.log('route.params', route?.params);
+  const propertyidtaking=route.params ;
+  const [data, setData] = useState({});
   const [banner, setBanner] = useState(null);
   console.log(
     '----------------------------------------------------------------',
@@ -30,12 +34,13 @@ const Home = () => {
 
   const PropertywithFood = async () => {
     const params = {
-      propertyId: '67bff9b538a34df307bf2b97',
+      propertyId: propertyidtaking,
     };
+    console.log("consoling the params of the propertyId",propertid);
     try {
-      const response = await get('./propertyWithFood', params);
-      setData(response.data[0]);
-      console.log('response of the property withFood=>>>', response.data[0]);
+      const response = await get('propertyWithFood', params);
+      setData(response?.data[0]);
+      console.log('response of the property withFood=>>>', response?.data[0]);
     } catch (error) {
       console.log('error in the propertyWithFood', error.message);
     }
@@ -43,7 +48,7 @@ const Home = () => {
 
   const GetBanner = async () => {
     try {
-      const response = await get('./getBannersForProperties');
+      const response = await get('getBannersForProperties');
       console.log('response of the getBannersForProperties', response.data);
       console.log('banner detail', response?.data[0]);
       setBanner(response.data[0]);
@@ -51,6 +56,7 @@ const Home = () => {
       console.log('error in the getBannersForProperties', error.message);
     }
   };
+
   console.log('kk', banner?.data?.[0].image_url);
   // console.log("->>>",data?.theme?.colorValue);
 

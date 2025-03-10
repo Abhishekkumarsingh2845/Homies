@@ -4,7 +4,7 @@ import {Img} from '../utlis/ImagesPath';
 import {FontText} from '../utlis/CustomFont';
 import {Color} from '../utlis/Color';
 
-const NearLocationProperty = ({property, nearproperty}) => {
+const NearLocationProperty = ({property, nearproperty,}) => {
 
   return (
     <TouchableOpacity style={styles.container}>
