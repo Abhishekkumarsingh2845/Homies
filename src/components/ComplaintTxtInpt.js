@@ -4,7 +4,7 @@ import {Color} from '../utlis/Color';
 import {FontText} from '../utlis/CustomFont';
 
 const ComplaintTxtInpt = ({
-  value , 
+  value,
   placeholder,
   error,
   setValue,
@@ -12,36 +12,27 @@ const ComplaintTxtInpt = ({
   label,
   height,
   multiline,
-  editable = true
-
+  editable = true,
 }) => {
-
-  const onChange = (value) => {
+  const onChange = value => {
     setValue(name, value);
-
-
-}
+  };
   return (
     <>
-    <Text style={styles.label}>{label}</Text>
-    <View style={[styles.container, {backgroundColor: "#FFFFFF"}]}>
-      
-      <TextInput
-        placeholder={placeholder} // Dynamic placeholder
-        placeholderTextColor={Color.clr73}
-        style={[styles.txtinptsty, {height: height}]}
-        multiline={multiline} // Dynamic multiline prop
-        value={value}
-        onChangeText={onChange}
-        editable={editable}
+      <Text style={styles.label}>{label}</Text>
+      <View style={[styles.container, {backgroundColor: '#FFFFFF'}]}>
+        <TextInput
+          placeholder={placeholder} // Dynamic placeholder
+          placeholderTextColor={Color.clr73}
+          style={[styles.txtinptsty, {height: height}]}
+          multiline={multiline} // Dynamic multiline prop
+          value={value}
+          onChangeText={onChange}
+          editable={editable}
         />
-    </View>
-    {
-      error &&     <Text style={styles.errorText} >{error}</Text>
-    }
-
-
-        </>
+      </View>
+      {error && <Text style={styles.errorText}>{error}</Text>}
+    </>
   );
 };
 
@@ -65,8 +56,8 @@ const styles = StyleSheet.create({
     color: '#333',
   },
   errorText: {
-    color: "red",
+    color: 'red',
     fontSize: 11,
-    textTransform: 'uppercase'
-},
+    textTransform: 'uppercase',
+  },
 });

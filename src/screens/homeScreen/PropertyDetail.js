@@ -147,6 +147,8 @@ const PropertyDetail = () => {
       );
     }
   };
+
+  
   const getOneProperty = async () => {
     const params = {
       propertyId: propertyID,

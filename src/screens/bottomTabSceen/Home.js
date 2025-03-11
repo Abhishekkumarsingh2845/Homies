@@ -23,7 +23,7 @@ const Home = ({route}) => {
   // const route = useRoute();
   const {propertid} = route.params || 'no data';
   console.log('route.params', route?.params);
-  const propertyidtaking=route.params ;
+  const propertyidtaking = route.params;
   const [data, setData] = useState({});
   const [banner, setBanner] = useState(null);
   console.log(
@@ -36,7 +36,7 @@ const Home = ({route}) => {
     const params = {
       propertyId: propertyidtaking,
     };
-    console.log("consoling the params of the propertyId",propertid);
+    console.log('consoling the params of the propertyId', propertyidtaking);
     try {
       const response = await get('propertyWithFood', params);
       setData(response?.data[0]);
@@ -56,7 +56,6 @@ const Home = ({route}) => {
       console.log('error in the getBannersForProperties', error.message);
     }
   };
-
   console.log('kk', banner?.data?.[0].image_url);
   // console.log("->>>",data?.theme?.colorValue);
 
