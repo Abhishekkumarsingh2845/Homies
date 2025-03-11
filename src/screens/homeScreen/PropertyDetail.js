@@ -136,6 +136,9 @@ const PropertyDetail = () => {
 
     try {
       const response = await post('visitRequest', data);
+      if(response.success){
+        bottomSheetRef.current?.expand()
+      }
       console.log('response of the visitRequest API ', response);
     } catch (error) {
       console.log(
@@ -171,8 +174,8 @@ const PropertyDetail = () => {
   };
 
   const handleVistBtn = () => {
-    console.log("bottomSheetRef======" , bottomSheetRef)
-    bottomSheetRef.current?.open()
+    bottomSheetRef.current?.expand()
+
     return
     setModalVisible(!isModalVisible);
   };
@@ -230,6 +233,7 @@ const PropertyDetail = () => {
   console.log('Property ID from Redux:', propertyId);
   return (
     <View style={styles.container}>
+
       <SafeAreaView />
 
       <SecondaryHeader
@@ -312,7 +316,6 @@ const PropertyDetail = () => {
             handleVistRequest={handleVistRequest}
           />
 
-          <RequestSentBtnSht ref={bottomSheetRef} />
 
           <View style={{marginVertical: 20}} />
         </View>
@@ -321,6 +324,8 @@ const PropertyDetail = () => {
         modalVisible={showGuestModal}
         setModalVisible={setShowGuestModal}
       />
+          <RequestSentBtnSht bottomSheetRef={bottomSheetRef}/>
+
     </View>
   );
 };

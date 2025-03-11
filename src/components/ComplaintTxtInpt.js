@@ -11,7 +11,9 @@ const ComplaintTxtInpt = ({
   name,
   label,
   height,
-  multiline
+  multiline,
+  editable = true
+
 }) => {
 
   const onChange = (value) => {
@@ -31,6 +33,7 @@ const ComplaintTxtInpt = ({
         multiline={multiline} // Dynamic multiline prop
         value={value}
         onChangeText={onChange}
+        editable={editable}
         />
     </View>
     {

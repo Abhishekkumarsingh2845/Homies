@@ -1,35 +1,32 @@
-import React, {forwardRef, useRef, useImperativeHandle} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import React, {forwardRef, useRef, useImperativeHandle, useCallback, useEffect} from 'react';
+import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import BottomSheet, {BottomSheetView} from '@gorhom/bottom-sheet';
+import { withDecay } from 'react-native-reanimated';
+import { Img } from '../utlis/ImagesPath';
 
-const RequestSentBtnSht = forwardRef((props, ref) => {
-  const bottomSheetRef = useRef(null);
-
-  // Allow external access to open the sheet
-  useImperativeHandle(ref, () => ({
-    open: () => {
-      bottomSheetRef.current?.expand(); // Open the bottom sheet properly
-    },
-    close: () => {
-      bottomSheetRef.current?.close(); // Close the Bottom Sheet
-    },
-  }));
+const RequestSentBtnSht = ({bottomSheetRef}) => {
 
   return (
-    <GestureHandlerRootView style={styles.container}>
+    <>
+
       <BottomSheet
         ref={bottomSheetRef}
-        snapPoints={['25%', '50%', '75%']} // Adjust for smooth interaction
+        snapPoints={['30%']} // Adjust for smooth interaction
         index={-1} // Hide initially
-        enablePanDownToClose={true}>
+        enablePanDownToClose={true}
+        style={styles.contentContainer}
+        handleComponent={null}
+        >
         <BottomSheetView style={styles.sheetContent}>
-          <Text>Visit Request Sent!</Text>
+        <Image source={Img.greentick} style={{width : 40 , height : 40 , margin : 20}} resizeMode='contain' />
+          <Text style={{color : 'black' , fontSize : 22 , fontWeight : 'bold'}}>Visit Request Sent!</Text>
         </BottomSheetView>
       </BottomSheet>
-    </GestureHandlerRootView>
+      
+      </>
   );
-});
+};
 
 export default RequestSentBtnSht;
 
@@ -41,5 +38,11 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+
+  },
+
+  contentContainer: {
+    flex: 1,
+    alignItems: 'center',
   },
 });

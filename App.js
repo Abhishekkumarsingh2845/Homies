@@ -2,7 +2,7 @@ if (__DEV__) {
   require('./ReactotronConfig');
 }
 
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   SafeAreaView,
   StatusBar,
@@ -14,13 +14,13 @@ import {
   LogBox,
 } from 'react-native';
 import MainNavigation from './src/navigations/MainNavigator';
-import {Color} from './src/utlis/Color';
-import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import { Color } from './src/utlis/Color';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import appsFlyer from 'react-native-appsflyer';
-import {Provider} from 'react-redux';
-import store, {persistor} from './src/store/Store';
+import { Provider } from 'react-redux';
+import store, { persistor } from './src/store/Store';
 import Toast from 'react-native-toast-message';
-import {PersistGate} from 'redux-persist/integration/react';
+import { PersistGate } from 'redux-persist/integration/react';
 import Splash from './src/screens/splashScreen/Splash';
 
 const App = () => {
@@ -112,13 +112,15 @@ const App = () => {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <View style={styles.container}>
+        {/* <View style={styles.container}> */}
+        <GestureHandlerRootView style={styles.container}>
           <StatusBar backgroundColor={'white'} barStyle={'dark-content'} />
 
           {showSplash ? <Splash /> : <MainNavigation />}
 
           <Toast />
-        </View>
+        </GestureHandlerRootView>
+        {/* </View> */}
       </PersistGate>
     </Provider>
   );

@@ -1,5 +1,5 @@
 import { Image, StyleSheet, Text, View } from 'react-native';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import SecondaryHeader from '../../components/SecondaryHeader';
 import { Img } from '../../utlis/ImagesPath';
 import Tick from 'react-native-vector-icons/EvilIcons';
@@ -9,22 +9,32 @@ import PrimaryBtn from '../../components/PrimaryBtn';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import ComplaintTxtInpt from '../../components/ComplaintTxtInpt';
 import { ScreenDimensions } from '../../utlis/DimensionApi';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 import { Formik } from 'formik'
 import { post } from '../../utlis/Api';
+import { getMyProperty } from '../../store/MyPropertySlice';
 
 const DisputesFormFill = () => {
   const navigation = useNavigation();
   const { token } = useSelector(state => state.auth.user);
     const { params } = useRoute()
     const [loading , setLoading] = useState(false)
+      const {data : myProperty} = useSelector(state => state.MyProperty)
+      const dispatch = useDispatch()
+      console.log("my property ----------------" , myProperty?.owner_name )
+    
 
 
+        useEffect(() => {
+          if (!myProperty?.landLordId) {
+            dispatch(getMyProperty());
+          }
+        }, []);
 
   const initialValues = {
-    landLord: '',
-    propertyName: '',
+    landLord: myProperty?.owner_name || '',
+    propertyName: myProperty?.property_name || '',
     description: ''
   }
 
@@ -48,17 +58,20 @@ const DisputesFormFill = () => {
       placeholder: 'Text Here...',
       keyboardType: 'default',
       label: 'LandLord Name',
-      multiline: false
+      multiline: false,
+      editable : false
 
     },
     {
       name: 'propertyName',
       error: '',
-      value: '',
+      value:  '',
       placeholder: 'Text Here...',
       keyboardType: 'default',
       label: 'Property Name',
-      multiline: true
+      multiline: true,
+      editable : false
+
     },
     {
       name: 'description',
@@ -68,7 +81,9 @@ const DisputesFormFill = () => {
       keyboardType: 'default',
       label: 'Description',
       height: 150,
-      multiline: true
+      multiline: true,
+      editable : true
+
     },
   ]
 
@@ -76,12 +91,10 @@ const DisputesFormFill = () => {
     setLoading(true)
 
     let data = {
-      // "propertyId": "6773a25f51be0fa4b0c3d953",
-      // "landLordId": "6773972194f1b2bc916447e6",
       landLordName: values.landLord,
       propertyName: values?.propertyName,
       dispute_description: values?.description,
-            landLordId : "6773972194f1b2bc916447e6"
+      landLordId : myProperty?.landLordId
     }
 
     try {
@@ -90,6 +103,7 @@ const DisputesFormFill = () => {
         data,
         token,
       );
+      console.log("response====tttt" , JSON.stringify(response))
       if (response) {
         params?.getDisputes()
         navigation.goBack()
@@ -132,6 +146,7 @@ const DisputesFormFill = () => {
                             label={item.label}
                             height={item.height}
                             multiline={item.multiline}
+                            editable={item?.editable}
 
                           />
 
