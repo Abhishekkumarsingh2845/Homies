@@ -51,7 +51,7 @@ const Home = ({navigation}) => {
       lat: '28.6285',
       ...filterData,
     };
-    console.log("params=====================111111" , params)
+    console.log('params=====================111111', params);
 
     try {
       dispatch(getNearPropertiesFunc(params));

@@ -3,47 +3,60 @@ import React from 'react';
 import {Color} from '../utlis/Color';
 import Calendar from 'react-native-vector-icons/Ionicons';
 import {Img} from '../utlis/ImagesPath';
-const Menu = ({Maintxt}) => {
+const Menu = ({Maintxt, senddata}) => {
+  console.log('0>>', senddata);
   return (
     <ImageBackground
       style={styles.container}
-      source={Img.Foodmenuicon} // Replace with your image path
+      source={Img.Foodmenuicon}
       resizeMode="cover">
       <Text style={styles.maintxt}>{Maintxt}</Text>
       <View style={styles.divider} />
       <View style={styles.calendarcontainer}>
         <Calendar name="calendar-outline" color={Color.btnclr} size={18} />
-        <Text style={styles.timingtxt}>07:00 AM -10:00AM</Text>
+        <Text style={styles.timingtxt}>{senddata?.startTime || 'no data'}</Text>
       </View>
       <View style={styles.maindishcontainer}>
         <View style={styles.twodishcontainer}>
           <View style={styles.dishnamecontainer}>
             <View style={styles.dot} />
-            <Text styles={styles.dishnametxt}>Bread Jam</Text>
+            <Text styles={styles.dishnametxt}>
+              {senddata?.foodItems?.[0] || 'no data'}
+            </Text>
           </View>
           <View style={styles.dishnamecontainer}>
             <View style={styles.dot} />
-            <Text styles={styles.dishnametxt}>Onion & Tomato Chutney</Text>
-          </View>
-        </View>
-        <View style={styles.twodishcontainer}>
-          <View style={styles.dishnamecontainer}>
-            <View style={styles.dot} />
-            <Text styles={styles.dishnametxt}>Bread Jam</Text>
-          </View>
-          <View style={styles.dishnamecontainer}>
-            <View style={styles.dot} />
-            <Text styles={styles.dishnametxt}>Onion & Tomato Chutney</Text>
+            <Text styles={styles.dishnametxt}>
+              {senddata?.foodItems?.[1] || 'no data'}
+            </Text>
           </View>
         </View>
         <View style={styles.twodishcontainer}>
           <View style={styles.dishnamecontainer}>
             <View style={styles.dot} />
-            <Text styles={styles.dishnametxt}>Bread Jam</Text>
+            <Text styles={styles.dishnametxt}>
+              {senddata?.foodItems?.[2] || 'no data'}
+            </Text>
           </View>
           <View style={styles.dishnamecontainer}>
             <View style={styles.dot} />
-            <Text styles={styles.dishnametxt}>Onion & Tomato Chutney</Text>
+            <Text styles={styles.dishnametxt}>
+              {senddata?.foodItems?.[3] || 'no data'}
+            </Text>
+          </View>
+        </View>
+        <View style={styles.twodishcontainer}>
+          <View style={styles.dishnamecontainer}>
+            <View style={styles.dot} />
+            <Text styles={styles.dishnametxt}>
+              {senddata?.foodItems?.[4] || 'no data'}
+            </Text>
+          </View>
+          <View style={styles.dishnamecontainer}>
+            <View style={styles.dot} />
+            <Text styles={styles.dishnametxt}>
+              {senddata?.foodItems?.[5] || 'no data'}
+            </Text>
           </View>
         </View>
       </View>
@@ -62,7 +75,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 10,
     borderRadius: 12,
-    overflow:"hidden",
+    overflow: 'hidden',
   },
   divider: {
     width: '100%',
@@ -73,8 +86,8 @@ const styles = StyleSheet.create({
   },
   maintxt: {
     alignSelf: 'center',
-    fontSize:16,
-    color:"#FFB83A",
+    fontSize: 16,
+    color: '#FFB83A',
   },
   calendarcontainer: {
     marginTop: 10,

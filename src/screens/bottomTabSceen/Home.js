@@ -18,8 +18,11 @@ import DotindictaorImg from '../../components/DotindictaorImg';
 import {FontText} from '../../utlis/CustomFont';
 import {Color} from '../../utlis/Color';
 import {get} from '../../utlis/Api';
+import {useDispatch, useSelector} from 'react-redux';
+import {setString} from '../../store/FoodColor';
 
 const Home = ({route}) => {
+  const dispatch = useDispatch();
   // const route = useRoute();
   const {propertid} = route.params || 'no data';
   console.log('route.params', route?.params);
@@ -40,6 +43,10 @@ const Home = ({route}) => {
     try {
       const response = await get('propertyWithFood', params);
       setData(response?.data[0]);
+      if (response?.data[0]?.theme?.colorValue) {
+        console.log('->>>>>color=>>>>>>', response?.data[0]?.theme?.colorValue);
+        dispatch(setString(response.data[0].theme.colorValue));
+      }
       console.log('response of the property withFood=>>>', response?.data[0]);
     } catch (error) {
       console.log('error in the propertyWithFood', error.message);
@@ -63,6 +70,9 @@ const Home = ({route}) => {
     PropertywithFood();
     GetBanner();
   }, []);
+
+  const storedString = useSelector(state => state.FoodColor.value);
+  console.log('Stored Redux Value:', storedString);
   // console.log("Property withFood->>>>>",data.foodDetails);
   return (
     <View style={styles.container}>
@@ -94,8 +104,18 @@ const Home = ({route}) => {
           {/* <Image source={Img.hstdetail} style={{width:300,resizeMode:"stretch",backgroundColor:"red",height:200,}}/> */}
         </View>
         {!!data && (
-          <FoodServices bgcolor={data?.theme?.colorValue} fooddetail={data} />
+          <FoodServices
+            bgcolor={data?.theme?.colorValue}
+            fooddetail={data}
+            OnPress={() =>
+              navigation.navigate('HomeTabNavigator', {
+                screen: 'FoodMenu',
+                params: route?.params,
+              })
+            }
+          />
         )}
+
         <Text style={styles.billboardtxt}>Bill Board</Text>
         <BillBoard />
         <BillBoard />

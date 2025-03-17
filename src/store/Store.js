@@ -4,6 +4,8 @@ import locationSlice from './LocationSlice';
 import getPropertiesSlice from "./PropertiesSlice"
 import MyPropertySlice from "./MyPropertySlice"
 import propertyReducer from "./Propert&LandlordId"
+import FoodColor from "./FoodColor"
+import FoodColorReducer from './FoodColor';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {persistStore, persistReducer} from 'redux-persist';
 
@@ -13,7 +15,8 @@ const RootReducers = combineReducers({
   location :  locationSlice,
   getPropertiesSlice : getPropertiesSlice,
   property: propertyReducer,
-  MyProperty : MyPropertySlice
+  MyProperty : MyPropertySlice,
+  FoodColor: FoodColorReducer,
 });
 const persistConfig = {
   key: 'root',

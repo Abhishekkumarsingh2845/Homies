@@ -21,15 +21,19 @@ import ComplaintNavigator from './ComplaintNavigator';
 import PaymentNavigator from './PaymentNavigator';
 import Chat from '../screens/ChatScreen/Chat';
 import ComplaintScr from '../screens/c&sScreen/ComplaintScr';
+import {useSelector} from 'react-redux';
 
-const BottomTab = () => {
+const BottomTab = ({route}) => {
   const Tab = createBottomTabNavigator();
+  const storedString = useSelector(state => state.FoodColor.value);
+  console.log('Stored Redux Value: inthe bottom tab', storedString);
+  console.log('route.params in the bottom tab', route?.params);
   return (
     <Tab.Navigator
       initialRouteName="Home"
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: '#FFB83A', // Color when tab is selected
+        tabBarActiveTintColor: storedString || '#FFB83A', // Color when tab is selected
         tabBarInactiveTintColor: '#AFAEAE',
       }}>
       {/* <Stack.Screen name="Home" component={Home} /> */}
@@ -41,7 +45,7 @@ const BottomTab = () => {
             <HomeIcon
               name="home"
               size={20}
-              color={focused ? '#FFB83A' : '#AFAEAE'}
+              color={focused ? storedString : '#AFAEAE'}
             />
           ),
           tabBarLabel: 'Home',
@@ -56,7 +60,7 @@ const BottomTab = () => {
               source={require('./../assets/images/wallet.png')}
               style={[
                 styles.imgstyle,
-                {tintColor: focused ? '#FFB83A' : '#AFAEAE'},
+                {tintColor: focused ? storedString : '#AFAEAE'},
               ]}
             />
           ),
@@ -72,7 +76,7 @@ const BottomTab = () => {
               source={require('./../assets/images/c/d.png')}
               style={[
                 styles.imgstyle,
-                {tintColor: focused ? '#FFB83A' : '#AFAEAE'},
+                {tintColor: focused ? storedString : '#AFAEAE'},
               ]}
             />
           ),
@@ -88,7 +92,7 @@ const BottomTab = () => {
               source={require('./../assets/images/chat.png')}
               style={[
                 styles.imgstyle,
-                {tintColor: focused ? '#FFB83A' : '#AFAEAE'},
+                {tintColor: focused ? storedString : '#AFAEAE'},
               ]}
             />
           ),
@@ -104,7 +108,7 @@ const BottomTab = () => {
               source={require('./../assets/images/store.png')}
               style={[
                 styles.imgstyle,
-                {tintColor: focused ? '#FFB83A' : '#AFAEAE'},
+                {tintColor: focused ? storedString : '#AFAEAE'},
               ]}
             />
           ),

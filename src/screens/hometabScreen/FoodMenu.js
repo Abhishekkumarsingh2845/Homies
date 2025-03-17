@@ -227,19 +227,46 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import SecondaryHeader from '../../components/SecondaryHeader';
 import {Img} from '../../utlis/ImagesPath';
 import FoodCatergory from '../../components/FoodCatergory';
 import DaySelector from '../../components/DaySelector';
 import Menu from '../../components/Menu';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import FoodCategory from '../../components/FoodCatergory';
+import {get} from '../../utlis/Api';
 
-const FoodMenu = () => {
+const FoodMenu = ({senddata}) => {
+  const route = useRoute();
+  const params = route.params; // Receiving the passed params
+
+  console.log('->>>>actual', params);
   const navigation = useNavigation();
   const [selectedTab, setSelectedTab] = useState('Food');
+  const [data, setData] = useState({});
+  const PropertywithFood = async () => {
+    console.log('PropertywithFood');
+    const params = {
+      propertyId: params,
+    };
+    console.log('consoling the params of the propertyId in the Foodmenu');
+    try {
+      const response = await get('propertyWithFood', params);
+      setData(response?.data[0]?.foodDetails);
+      console.log(
+        'response of the property withFood=>>> in the Foodmenu',
+        response?.data[0]?.foodDetails,
+      );
+    } catch (error) {
+      console.log('error in the propertyWithFood', error.message);
+    }
+  };
 
+  useEffect(() => {
+    console.log('useeffect ');
+    PropertywithFood();
+  }, []);
   return (
     <View style={styles.container}>
       <SecondaryHeader
@@ -249,7 +276,6 @@ const FoodMenu = () => {
       />
       <ScrollView>
         <View style={styles.subcontainer}>
-          {/* Scrollable row for FoodCatergory */}
           <ScrollView
             horizontal={true}
             showsHorizontalScrollIndicator={false}
@@ -277,7 +303,6 @@ const FoodMenu = () => {
             </View>
           </ScrollView>
 
-         
           <View
             style={{
               flexDirection: 'row',
@@ -314,20 +339,30 @@ const FoodMenu = () => {
                 Food
               </Text>
             </TouchableOpacity>
-          </View> 
- 
+          </View>
 
-
-<View>
-  <Text></Text>
-</View>
+          <View>
+            <Text></Text>
+          </View>
           {/* Apply the red border to the "Rooms" and "Food" tabs when Food is selected */}
           {selectedTab === 'Food' && <View style={styles.activeTabBorder} />}
 
           <DaySelector />
-          <Menu Maintxt={'Breakfast'} />
-          <Menu Maintxt={'Lunch'} />
-          <Menu Maintxt={'Dinner'} />
+          {/*     
+          <Menu Maintxt={"xx"} />
+          <Menu Maintxt={""}/>
+          <Menu Maintxt={"xx"} /> */}
+          {data && data.length > 0 ? (
+            data.map((item, index) => (
+              <Menu
+                key={index}
+                Maintxt={item.title || 'No Data'}
+                senddata={item}
+              />
+            ))
+          ) : (
+            <Text>No Data Available</Text>
+          )}
         </View>
         <View style={{marginVertical: 50}}></View>
       </ScrollView>
