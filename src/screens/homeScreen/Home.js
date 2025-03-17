@@ -9,49 +9,54 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-import React, {useCallback, useEffect, useState} from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import Header from '../../components/Header';
 import SearchBar from '../../components/SearchBar';
 import HstDetail from '../../components/HostelDetail';
 import NearbySeeAll from '../../components/NearbySeeAll';
-import {Img} from '../../utlis/ImagesPath';
+import { Img } from '../../utlis/ImagesPath';
 import Swiper from 'react-native-swiper';
-import {Color} from '../../utlis/Color';
+import { Color } from '../../utlis/Color';
 import DotindictaorImg from '../../components/DotindictaorImg';
 import LocationSearch from './LocationSearch';
 import MapSelect from '../../components/Map';
-import {get, post} from '../../utlis/Api';
+import { get, post } from '../../utlis/Api';
 import Geolocation from 'react-native-geolocation-service';
-import {useDispatch, useSelector} from 'react-redux';
-import {setLocation, setLocationStore} from '../../store/LocationSlice';
-import {useNavigation} from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux';
+import { setLocation, setLocationStore } from '../../store/LocationSlice';
+import { useNavigation } from '@react-navigation/native';
 import {
   getNearPropertiesFunc,
   setLikeUnlike,
 } from '../../store/PropertiesSlice';
-import {getMyProperty} from '../../store/MyPropertySlice';
+import { getMyProperty } from '../../store/MyPropertySlice';
 
-const Home = ({navigation}) => {
+const Home = ({ navigation }) => {
   const nav = useNavigation();
-  const {data: hostetData, loading} = useSelector(
+  const { data: hostetData, loading } = useSelector(
     state => state.getPropertiesSlice,
   );
-  // console.log("hostetData------------------------------" , hostetData.length , hostetData)
-
   const dispatch = useDispatch();
-  const {latitude, longitude} = useSelector(state => state.location);
+  const { latitude, longitude , name : placeName } = useSelector(state => state.location);
   const Navigation = useNavigation();
   const user = useSelector(state => state.auth.user);
+console.log("login screen--------1" ,latitude ,  placeName)
+
 
   const getHstdetail = async (filterData = {}) => {
     console.log('getHstdetail');
 
     const params = {
-      long: '77.3769',
-      lat: '28.6285',
+      // long: '77.3769' || latitude ,
+      // lat: '28.6285' || longitude,
+      lat: latitude,
+      long: longitude,
       ...filterData,
     };
+<<<<<<< HEAD
     console.log('params=====================111111', params);
+=======
+>>>>>>> b666e1c7ae7b39b8c7be51c19730f8ac90dcfb5b
 
     try {
       dispatch(getNearPropertiesFunc(params));
@@ -64,6 +69,11 @@ const Home = ({navigation}) => {
       // setloading(false);
     }
   };
+
+  useEffect(() => {
+
+      getHstdetail()
+  }, [latitude])
 
   const handleFilter = useCallback(filterData => {
     console.log('filterData', filterData);
@@ -97,21 +107,49 @@ const Home = ({navigation}) => {
     return true;
   };
 
+  const getPlaceName = async (latitude, longitude) => {
+    const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=AIzaSyA8KBPjCEIBIU0ujqQ7bacaQ5-dK2bUi7E`;
+
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      console.log("place name------", JSON.stringify(data))
+
+      if (data.status === 'OK') {
+        const formattedAddress = data.results[0]?.formatted_address;
+        dispatch(setLocationStore({latitude: latitude, longitude: longitude , name : data.results[0]?.formatted_address}));
+
+
+      } else {
+        console.error('Error fetching place name:', data.status);
+
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
   const getLocation = async () => {
+    console.log("position-----------------1")
+
     const hasPermission = await requestLocationPermission();
     if (!hasPermission) return;
 
     Geolocation.getCurrentPosition(
       position => {
-        const {latitude, longitude} = position.coords;
-        dispatch(setLocationStore({latitude: latitude, longitude: longitude}));
+        const { latitude, longitude } = position.coords;
+        console.log("position-----------------2", latitude, longitude)
+        // getPlaceName('28.6285', '77.3769')
+        getPlaceName(latitude, longitude)
+
+        dispatch(setLocationStore({ latitude: latitude, longitude: longitude }));
 
         console.log('system positon', latitude, longitude);
       },
       error => {
         console.log('Error getting location:', error.message);
       },
-      {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
+      { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 },
     );
   };
 
@@ -120,12 +158,18 @@ const Home = ({navigation}) => {
   };
 
   useEffect(() => {
+    console.log('useeffect------------------')
     if (!hostetData) {
       getHstdetail();
     }
     getLocation();
     getMyPropertyFunc();
   }, []);
+
+  const handlePlaceSelect = (place) => {
+    dispatch(setLocationStore({latitude: place?.lat, longitude: place?.lon , name : place?.name}))
+  };
+
 
   return (
     <View style={styles.container}>
@@ -135,9 +179,10 @@ const Home = ({navigation}) => {
         heartIcon={Img.hrt}
         OnPressBookmark={() => nav.navigate('BookMark')}
         bellIcon={Img.noitificationicon}
+        locationName={placeName}
       />
       <View style={styles.subcontainer}>
-        <SearchBar destination={LocationSearch} handleFilter={handleFilter} />
+        <SearchBar destination={'LocationSearch'} handleFilter={handleFilter} onSelect={handlePlaceSelect} />
 
         <ScrollView
           contentContainerStyle={{
@@ -167,7 +212,7 @@ const Home = ({navigation}) => {
                 data={hostetData}
                 contentContainerStyle={styles.flatlistcontainer}
                 keyExtractor={item => item._id.toString()}
-                renderItem={({item}) => (
+                renderItem={({ item }) => (
                   <HstDetail
                     hostel={item}
                     onLikePress={() => toggleLike(item._id)}

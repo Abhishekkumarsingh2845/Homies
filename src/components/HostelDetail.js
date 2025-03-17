@@ -14,10 +14,10 @@ import {useNavigation} from '@react-navigation/native';
 import {FontText} from '../utlis/CustomFont';
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import formatNumber from '../utlis/FormatNumber';
+import Toast from 'react-native-toast-message';
 
 const HstDetail = ({hostel, style, onLikePress}) => {
   const navigation = useNavigation();
-  // console.log('->>>>>nn', hostel?.property_images);
   // const [liked, setLiked] = useState(false);
 
   useEffect(() => {
@@ -32,19 +32,31 @@ const HstDetail = ({hostel, style, onLikePress}) => {
     <TouchableOpacity
       style={[styles.container, {marginTop: 10}]}
       onPress={() =>
-        navigation.navigate('PropertyDetail', {propertyID: hostel?._id})
+        {
+                if(hostel?.isFull){
+                Toast.show({
+                  type: 'error',
+                  text1: 'Property Full',
+                  text2: 'No More Room Available',
+                  position: 'bottom',
+                });
+                }
+                else{
+                  navigation.navigate('PropertyDetail', { propertyID: hostel?._id })
+                }
+              }
       }>
       <ImageBackground
         source={{uri: hostel?.property_images[0]}}
         style={styles.img}>
         {/* <ImageBackground source={Img.hstdetail} style={styles.img}> */}
-        {/* {true && (
+        {hostel?.isFull && (
           <RoomAvailability
             text={'No More Room Available'}
             backgroundColor={Color.noroomclr}
             textColor={Color.white}
           />
-        )} */}
+        )}
       </ImageBackground>
       <View style={styles.detailcontainer}>
         <View style={styles.left}>

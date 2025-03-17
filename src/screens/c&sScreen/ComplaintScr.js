@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { RefreshControl, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import SecondaryHeader from '../../components/SecondaryHeader';
 import Complaint from '../../components/Complaint';
@@ -21,8 +21,10 @@ const ComplaintScr = () => {
   const [complaint, setComplaint] = useState([]);
   const [disputes, setDisputes] = useState([]);
   const { token } = useSelector(state => state.auth.user);
+  const [refreshing, setRefreshing] = useState(false);
 
   const getComplaint = async () => {
+    setRefreshing(true);
     try {
       const response = await get('getAllComplaints', {}, token);
       console.log("getAllComplaints data  ==============", JSON.stringify(response?.data[0]?.data))
@@ -32,22 +34,30 @@ const ComplaintScr = () => {
     } catch (error) {
       console.log('Error:', error?.response?.data || error.message);
     }
+    setRefreshing(false);
   };
 
 
   const getDisputes = async () => {
+    setRefreshing(true);
     try {
       const response = await get('getAllDisputes', { sendBy: 'User' }, token);
       if (response.success) {
         // setComplaint(response.data[0]?.data);
+      console.log("getAllDisputes data  ==============", JSON.stringify(response?.data[0]?.data))
+
         setDisputes(response.data[0]?.data)
         // console.log('kdf', response?.data);
       }
     } catch (error) {
       console.log('Error:', error?.response?.data || error.message);
     }
+    setRefreshing(false);
+
   };
   useEffect(() => {
+      console.log("useeffect-======= running" )
+    
     getComplaint();
     getDisputes()
   }, []);
@@ -71,7 +81,12 @@ const ComplaintScr = () => {
       {selected == 'Complaint' && (
 
         <View style={styles.subcontainer}>
-          <ScrollView style={{ flex: 1 }}>
+          <ScrollView 
+          style={{ flex: 1 }}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={getComplaint} colors={[Color.primary]} />
+          }
+          >
 
             {complaint &&
               complaint?.map((item, index) => {
@@ -92,7 +107,12 @@ const ComplaintScr = () => {
 
       {selected == 'Disputes' && (
         <View style={styles.subcontainer}>
-          <ScrollView style={{ flex: 1 }}>
+          <ScrollView 
+          style={{ flex: 1 }}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={getDisputes} colors={[Color.primary]} />
+          }
+          >
 
             {
               disputes.map((item, index) => {

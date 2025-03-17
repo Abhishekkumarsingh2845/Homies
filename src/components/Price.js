@@ -12,7 +12,7 @@ const Price = ({setFilterData}) => {
   //   setFilterData(prev => ({
   //     ...prev,
   //     minPrice : minMax.min,
-  //     maxPrice : minMax.max
+  //     maxPrice :minMax.max
   //   }))
   // } , [minMax])
 

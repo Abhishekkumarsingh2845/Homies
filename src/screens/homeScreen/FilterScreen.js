@@ -21,6 +21,7 @@ const FilterScreen = () => {
   const filterFunc = () => {
     console.log('filterData============== > > > > > > >', filterData);
     params.handleFilter(filterData);
+    navigation.goBack()
   };
 
   

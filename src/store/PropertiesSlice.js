@@ -1,12 +1,12 @@
-import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import {api} from '../utlis/Api';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { api } from '../utlis/Api';
 
 export const getNearPropertiesFunc = createAsyncThunk(
   'properties/getNearProperties',
   async data => {
     try {
-      console.log("getNearProperties body----------" , data)
-      const res = await api.get('getNearProperties', {params: data});
+      console.log("getNearProperties body----------", data)
+      const res = await api.get('getNearProperties', { params: data });
       console.log("getNearProperties response--------------", JSON.stringify(res.data.data))
       return {
         status: res.data.success,
@@ -27,10 +27,16 @@ const getPropertiesSlice = createSlice({
   name: 'NearProperties',
   initialState: initialState,
   reducers: {
+    clearProperties: (state) => {
+      return {
+        loading: false,
+        data: [],
+      }
+    },
     setLikeUnlike(state, action) {
       state.data = state.data.map(item =>
         item._id === action.payload?.propertyId
-          ? {...item, isLiked: action?.payload?.isLiked}
+          ? { ...item, isLiked: action?.payload?.isLiked }
           : item,
       );
     },
@@ -47,5 +53,5 @@ const getPropertiesSlice = createSlice({
     });
   },
 });
-export const {setLikeUnlike} = getPropertiesSlice.actions;
+export const { setLikeUnlike , clearProperties} = getPropertiesSlice.actions;
 export default getPropertiesSlice.reducer;

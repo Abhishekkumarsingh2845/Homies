@@ -7,34 +7,47 @@ import {
   View,
 } from 'react-native';
 import React from 'react';
-import {Color} from '../utlis/Color';
-import {Img} from '../utlis/ImagesPath';
+import { Color } from '../utlis/Color';
+import { Img } from '../utlis/ImagesPath';
 import Icon from 'react-native-vector-icons/Octicons';
 import InterestTracker from './InterestTracker';
 import LikeShare from './LikeShare';
-import {FontText} from '../utlis/CustomFont';
-import {useNavigation} from '@react-navigation/native';
+import { FontText } from '../utlis/CustomFont';
+import { useNavigation } from '@react-navigation/native';
 import DotIndicatorImg from './DotindictaorImg';
-import {useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
 import formatNumber from '../utlis/FormatNumber';
+import RoomAvailability from './RoomAvailability';
+import Toast from 'react-native-toast-message';
 
-const HostelInfoCard = ({hostel}) => {
+const HostelInfoCard = ({ hostel }) => {
   const rating = Number(hostel?.rating) || 0;
 
-  const StarArray = Array.from({length: rating}, (_, index) => index < rating);
+  const StarArray = Array.from({ length: rating }, (_, index) => index < rating);
   const ll = StarArray.length;
 
   const navigation = useNavigation();
-  const {token} = useSelector(state => state.auth.user);
+  const { token } = useSelector(state => state.auth.user);
 
   return (
     <TouchableOpacity
       style={styles.container}
-      onPress={() =>
-        navigation.navigate('PropertyDetail', {propertyID: hostel?._id})
+      onPress={() =>{
+        if(hostel?.isFull){
+        Toast.show({
+          type: 'error',
+          text1: 'Property Full',
+          text2: 'No More Room Available',
+          position: 'bottom',
+        });
+        }
+        else{
+          navigation.navigate('PropertyDetail', { propertyID: hostel?._id })
+        }
+      }
       }>
       <ImageBackground
-        source={{uri: hostel?.property_images[0]}}
+        source={{ uri: hostel?.property_images[0] }}
         style={styles.hostelimg}>
         {/* <InterestTracker /> */}
         <LikeShare
@@ -50,7 +63,17 @@ const HostelInfoCard = ({hostel}) => {
           ))}
         </View>
       </ImageBackground>
+
+
+      {
+        hostel?.isFull &&
+        <View style={{ backgroundColor: Color.noroomclr, padding: 6, borderRadius: 10, alignSelf: 'flex-end' }}>
+          <Text style={{ fontSize: 14, color: 'white', backgroundColor: Color.noroomclr }}>No More Room Available</Text>
+        </View>
+      }
+
       <View style={styles.PgDetail}>
+
         <View>
           <Text style={styles.description}>{hostel?.property_name}</Text>
           <Text style={styles.location}>{hostel?.address}</Text>
@@ -58,7 +81,7 @@ const HostelInfoCard = ({hostel}) => {
             <View style={styles.homeverifycontainer}>
               <Icon name="verified" color="#027516" size={16} />
               <Text style={styles.homeverify}>Homies Verified</Text>
-              <View style={{marginVertical: 15}}></View>
+              <View style={{ marginVertical: 15 }}></View>
             </View>
           )}
         </View>
@@ -68,7 +91,7 @@ const HostelInfoCard = ({hostel}) => {
             {formatNumber(hostel?.sharing[0]?.details[0]?.amount) ||
               'no amount'}
           </Text>
-          <View style={{flexDirection: 'row', marginTop: 5}}>
+          <View style={{ flexDirection: 'row', marginTop: 5 }}>
             {StarArray.map((filled, index) => (
               <Image
                 key={index}
@@ -95,7 +118,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
 
     shadowColor: '#000', // Shadow color (iOS)
-    shadowOffset: {width: 0, height: 2}, // Shadow position (iOS)
+    shadowOffset: { width: 0, height: 2 }, // Shadow position (iOS)
     shadowOpacity: 0.2, // Shadow transparency (iOS)
     shadowRadius: 4, // Shadow blur radius (iOS),
   },
@@ -170,7 +193,7 @@ const styles = StyleSheet.create({
     bottom: 10, // Adjust the vertical position
     left: '50%', // Center horizontally
     flexDirection: 'row', // Align dots horizontally
-    transform: [{translateX: -30}], // Adjust this based on total dot width
+    transform: [{ translateX: -30 }], // Adjust this based on total dot width
   },
   dot: {
     width: 8, // Dot size

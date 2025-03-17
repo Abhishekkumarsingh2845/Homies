@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
   ActivityIndicator,
   FlatList,
@@ -10,55 +10,40 @@ import {
   View,
 } from 'react-native';
 
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Header from '../../components/Header';
-import {Img} from '../../utlis/ImagesPath';
+import { Img } from '../../utlis/ImagesPath';
 import SearchBar from '../../components/SearchBar';
 import HostelInfoCard from '../../components/HostelInfoCard';
 import SortByModal from '../../components/SortBymodal';
 import SortByBtn from '../../components/SortByBtn';
-import {Color} from '../../utlis/Color';
-import {getNearPropertiesFunc} from '../../store/PropertiesSlice';
+import { Color } from '../../utlis/Color';
+import { getNearPropertiesFunc } from '../../store/PropertiesSlice';
+import { useRoute } from '@react-navigation/native';
+import { setLocationStore } from '../../store/LocationSlice';
 
-const SortbyScreen = ({navigation}) => {
+const SortbyScreen = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [sortBy, setSortBy] = useState('');
+  console.log("setSortBy==================" , sortBy)
   const dispatch = useDispatch();
-  const {data: hostetData, loading} = useSelector(
+  const { data: hostetData, loading } = useSelector(
     state => state.getPropertiesSlice,
   );
 
   const openModal = () => setModalVisible(true);
   const closeModal = () => setModalVisible(false);
-  //in his function i have used simple api call
-  // const getHstdetail = useCallback(
-  //   async (filterData = {}) => {
-  //     const params = {
-  //       long: '77.376945',
-  //       lat: '28.628454',
-  //       sortType: sortBy, // Include sortBy in API call
-  //       ...filterData,
-  //     };
+  const { latitude, longitude , name : placeName } = useSelector(state => state.location);
 
-  //     try {
-  //       dispatch(getNearPropertiesFunc(params));
-  //     } catch (error) {
-  //       console.log(
-  //         'error in the getNearProperty',
-  //         error?.response?.data || error.message,
-  //       );
-  //     }
-  //   },
-  //   [dispatch, sortBy],
-  // );
 
   //in his function i have used thunk to make  api call
   const getHstdetail = useCallback(
     async (filterData = {}) => {
-      console.log('getHstdetail in the sortby');
+    console.log("getting refresh = = = " , latitude , longitude , placeName)
+
       const params = {
-        long: '77.376945',
-        lat: '28.628454',
+        long:  longitude|| '77.376945',
+        lat: latitude || '28.628454',
         sortType: sortBy,
         ...filterData,
       };
@@ -71,27 +56,34 @@ const SortbyScreen = ({navigation}) => {
         );
       }
     },
-    [dispatch, sortBy],
+    [dispatch, sortBy , latitude],
   );
   useEffect(() => {
-    getHstdetail();
+    if (sortBy) {
+      getHstdetail();
+    }
   }, [sortBy]);
+
+    const handlePlaceSelect = (place) => {
+      dispatch(setLocationStore({latitude: place?.lat, longitude: place?.lon , name : place?.name}))
+    };
 
   return (
     <View style={styles.container}>
       <SafeAreaView />
-      <Header Img1={Img.goback} nav={() => navigation.navigate('Home')} />
+      <Header Img1={Img.goback} nav={() => navigation.navigate('Home')}          locationName={placeName}     locationIcon={Img.lcn}/>
       <ScrollView
         contentContainerStyle={styles.subcontainer}
         refreshControl={
           <RefreshControl onRefresh={getHstdetail} refreshing={loading} />
         }>
-        <SearchBar
-          destination={() => {}}
+        {/* <SearchBar
+          destination={() => { }}
           placeholderText="Hostel Near Me"
           containerBgColor="white"
           handleFilter={getHstdetail}
-        />
+        /> */}
+                <SearchBar destination={'LocationSearch'} handleFilter={getHstdetail} onSelect={handlePlaceSelect} />
 
         {loading ? (
           <View style={styles.loaderContainer}>
@@ -101,8 +93,13 @@ const SortbyScreen = ({navigation}) => {
           <FlatList
             data={hostetData}
             showsVerticalScrollIndicator={false}
+            ListEmptyComponent={() => {
+              return( <View style={{ flex: 1, padding : 20 , alignItems : 'center'}}>
+                <Text style={{fontSize : 18 , fontWeight : 500}}>No Data Available</Text>
+              </View>)
+            }}
             keyExtractor={item => item.id}
-            renderItem={({item}) => <HostelInfoCard hostel={item} />}
+            renderItem={({ item }) => <HostelInfoCard hostel={item} />}
             refreshControl={
               <RefreshControl refreshing={loading} onRefresh={getHstdetail} />
             }
@@ -116,8 +113,8 @@ const SortbyScreen = ({navigation}) => {
           setSortBy={setSortBy}
         />
 
-        <SortByBtn mrntop={15} onPress={openModal} />
-        <View style={{marginVertical: 20}} />
+        {  hostetData?.length > 0 && <SortByBtn mrntop={15} onPress={openModal} /> }
+        <View style={{ marginVertical: 20 }} />
       </ScrollView>
     </View>
   );

@@ -26,7 +26,7 @@ const MyPropertySlice = createSlice({
   name: 'myProperty',
   initialState: initialState,
   reducers: {
-    clearMyProperty(state, action) {
+    clearMyProperty(state) {
       state.data = []
     },
   },
