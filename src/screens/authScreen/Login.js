@@ -7,7 +7,7 @@ import PrimaryTxtInp from '../../components/PrimaryTxtInp';
 import {ScreenDimensions} from '../../utlis/DimensionApi';
 import {post} from '../../utlis/Api';
 import {useNavigation} from '@react-navigation/native';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {setExist, setPhone} from '../../store/AuthSlice';
 import Toast from 'react-native-toast-message';
 import * as Yup from 'yup';
@@ -19,6 +19,8 @@ const Login = () => {
   const [error, setError] = useState(null);
   const dispatch = useDispatch();
   const navigation = useNavigation();
+  const { latitude, longitude , name : placeName } = useSelector(state => state.location);
+console.log("login screen--------" ,latitude ,  placeName)
 
   const handleLogIn = async values => {
     setLoading(true);

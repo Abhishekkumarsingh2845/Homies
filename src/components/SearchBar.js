@@ -71,7 +71,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {memo, useState} from 'react';
 import {Img} from '../utlis/ImagesPath';
 import {useNavigation} from '@react-navigation/native';
 import {FontText} from '../utlis/CustomFont';
@@ -83,7 +83,8 @@ const SearchBar = ({
   containerBgColor = '#EFEFEF',
   destination,
   handleFilter = null,
-  onChangeText
+  onChangeText ,
+  onSelect = null
 }) => {
   const navigation = useNavigation();
   const [modalVisible, setModalVisible] = useState(false);
@@ -93,7 +94,7 @@ const SearchBar = ({
 
   const handleNavigation = () => {
     if (destination) {
-      navigation.navigate(destination);
+      navigation.navigate(destination , {onSelect : onSelect });
     }
   };
 
@@ -108,7 +109,7 @@ const SearchBar = ({
   };
   return (
     <TouchableOpacity
-      style={[styles.container, {backgroundColor: containerBgColor}]}
+      style={[styles.container, {backgroundColor: 'white'}]}
       onPress={handleNavigation}>
       <TouchableOpacity>
         <Image source={Img.srch} style={styles.searchicon} />
@@ -132,7 +133,7 @@ const SearchBar = ({
   );
 };
 
-export default SearchBar;
+export default memo(SearchBar);
 
 const styles = StyleSheet.create({
   searchbar: {
@@ -141,6 +142,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: FontText.light,
     color: Color.clr73,
+    backgroundColor : 'transparent',
     lineHeight: 18,
     fontWeight: '400',
     lineHeight: 18,
@@ -153,6 +155,8 @@ const styles = StyleSheet.create({
     paddingVertical: Platform.OS === 'android' ? 2 : 15,
     borderRadius: 10,
     marginTop: 10,
+    backgroundColor : 'white',
+    // borderWidth : 10
   },
   searchicon: {
     width: 18,

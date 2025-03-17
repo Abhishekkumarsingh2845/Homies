@@ -18,6 +18,8 @@ import {clearToken, clearUser, setExist} from '../store/AuthSlice';
 import {useNavigation} from '@react-navigation/native';
 import {clearMyProperty} from '../store/MyPropertySlice';
 import Toast from 'react-native-toast-message';
+import { clearLocation } from '../store/LocationSlice';
+import { clearProperties } from '../store/PropertiesSlice';
 
 const LogoutModal = ({
   modalVisible,
@@ -42,6 +44,9 @@ const LogoutModal = ({
       if (response.success) {
         setModalVisible(!modalVisible);
         dispatch(clearUser({}));
+        dispatch(clearLocation())
+        dispatch(clearMyProperty())
+        dispatch(clearProperties())
 
         navigation.reset({
           index: 0,

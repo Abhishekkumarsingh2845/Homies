@@ -153,6 +153,7 @@ const Header = ({
   complaintbtn,
   nav = null,
   OnPressBookmark,
+  locationName =''
 }) => {
   const navigation = useNavigation();
 
@@ -181,20 +182,28 @@ const Header = ({
               ]}
             />
           </TouchableOpacity>
-          <View>
+          
+          <View style={{ height : hght , paddingLeft : 8  , justifyContent:'flex-end' ,paddingBottom : 6}}>
           <Image source={Img.primarylogo} style={styles.logoicon} />
+          <View style={{flexDirection : 'row' , alignItems : 'center' , gap : 4}}>
+          <Image
+              source={locationIcon} // Default to Img.lcn if no prop is provided
+              style={styles.location}
+            />
+          <Text style={{color : 'white' , fontFamily : FontText?.light , fontSize  :15}}>{locationName?.length < 23 ? locationName :  `${locationName.substring(0, 22)}...`}</Text>
+          </View>
           </View>
 
          
         </View>
         <View style={styles.rightcontinaer}>
           {/* Dynamic location icon */}
-          <TouchableOpacity>
+          {/* <TouchableOpacity>
             <Image
               source={locationIcon} // Default to Img.lcn if no prop is provided
               style={styles.location}
             />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
 
           {/* Dynamic heart icon */}
           <TouchableOpacity onPress={OnPressBookmark}>
@@ -241,10 +250,10 @@ const styles = StyleSheet.create({
     // tintColor: 'white',
   },
   logoicon: {
-    width: 80,
-    height: 120,
+    width: 90,
+    height: '60%',
     resizeMode: 'contain',
-    marginLeft: 8,
+    // backgroundColor : 'pink'
   },
   logocontainer: {
     width: '100%',
@@ -253,8 +262,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   location: {
-    width: 25,
-    height: 25,
+    width: 20,
+    height: 20,
     resizeMode: 'contain',
     // marginLeft:10,
   },

@@ -96,7 +96,7 @@
 //   },
 // });
 
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   StyleSheet,
   Text,
@@ -104,19 +104,27 @@ import {
   FlatList,
   Image,
   TouchableOpacity,
+  TextInput,
 } from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import SecondaryHeader from '../../components/SecondaryHeader';
-import {Img} from '../../utlis/ImagesPath';
+import { Img } from '../../utlis/ImagesPath';
 import SearchBar from '../../components/SearchBar';
-import {get} from '../../utlis/Api';
-import {Color} from '../../utlis/Color';
+import { get } from '../../utlis/Api';
+import { Color } from '../../utlis/Color';
+import { FontText } from '../../utlis/CustomFont';
 
 const LocationSearch = () => {
   const navigation = useNavigation();
   const [search, setSearch] = useState('');
   const [properties, setProperties] = useState([]);
-  console.log('search::', search);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [suggestions, setSuggestions] = useState([]);
+  console.log("suggestions---------", JSON.stringify(suggestions))
+  const route = useRoute()
+  const navParams = route?.params
+
+  console.log('search::', route);
 
   const getSearch = async () => {
     const params = {
@@ -135,9 +143,52 @@ const LocationSearch = () => {
     }
   };
 
-  useEffect(() => {
-    getSearch();
-  }, [search]);
+  // useEffect(() => {
+  //   getSearch();
+  // }, [search]);
+
+  const fetchPlaces = async (text) => {
+    if (text.length < 3) {
+      setSuggestions([]);
+      return;
+    }
+
+    const url = `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${text}&key=AIzaSyA8KBPjCEIBIU0ujqQ7bacaQ5-dK2bUi7E&components=country:IN`; // Restricting to India
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+
+      if (data.status === 'OK') {
+        setSuggestions(data.predictions);
+      } else {
+        setSuggestions([]);
+      }
+    } catch (error) {
+      console.error('Error fetching places:', error);
+      setSuggestions([]);
+    }
+  };
+
+  // Fetch place details to get coordinates
+  const fetchPlaceDetails = async (place_id) => {
+    const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${place_id}&key=AIzaSyA8KBPjCEIBIU0ujqQ7bacaQ5-dK2bUi7E`;
+
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      console.log("place coord==========", data.result.geometry.location)
+
+      if (data.status === 'OK') {
+        const { lat, lng } = data.result.geometry.location;
+        return { lat, lng };
+      }
+    } catch (error) {
+      console.error('Error fetching place details:', error);
+    }
+
+    return null;
+  };
+
 
   return (
     <View style={styles.container}>
@@ -148,31 +199,57 @@ const LocationSearch = () => {
       />
 
       <View style={styles.searchContainer}>
-        <SearchBar
-          placeholderText="Search your location"
-          containerBgColor="white"
-          value={search}
-          onChangeText={setSearch}
-          onSubmitEditing={getSearch}
-        />
+        <View
+          style={[styles.container2, { backgroundColor: 'white' }]}
+        >
+            <Image source={Img.srch} style={styles.searchicon} />
+          <TextInput
+            style={styles.searchbar}
+            placeholder={'Search your location'} // Dynamic placeholder
+            placeholderTextColor={'#737373'}
+            // onFocus={handleNavigation}
+            onChangeText={(text) => {
+              setSearchQuery(text);
+              fetchPlaces(text);
+            }}
+            value={searchQuery}
+          />
+
+        </View>
       </View>
 
-      <FlatList
-        data={properties}
-        keyExtractor={item => item._id}
-        contentContainerStyle={{marginTop: 10}}
-        renderItem={({item}) => (
-          <TouchableOpacity
-            style={styles.card}
-            onPress={() =>
-              navigation.navigate('PropertyDetail', {propertyID: item._id})
-            }>
-            <View style={styles.details}>
-              <Text style={styles.name}>{item.property_name}</Text>
-            </View>
-          </TouchableOpacity>
-        )}
-      />
+      {suggestions.length > 0 && (
+        <View style={{ width: '90%', alignSelf: 'center' }}>
+
+          <FlatList
+            data={suggestions}
+            keyExtractor={(item) => item.place_id}
+            renderItem={({ item }) => (
+              <TouchableOpacity
+                style={{ padding: 10, borderBottomWidth: 1, borderColor: 'gray' }}
+                onPress={async () => {
+                  setSearchQuery(item.description);
+                  setSuggestions([]);
+
+                  // Fetch coordinates
+                  const coordinates = await fetchPlaceDetails(item.place_id);
+                  if (coordinates) {
+                    navParams?.onSelect({
+                          name: item?.structured_formatting?.main_text || item.description,
+                          lat: coordinates.lat,
+                          lon: coordinates.lng,
+                      });
+                  }
+                  navigation.goBack()
+                }}
+              >
+                <Text style={{ color: 'black', fontSize: 15 }}>{item?.description}</Text>
+              </TouchableOpacity>
+            )}
+          />
+        </View>
+
+      )}
     </View>
   );
 };
@@ -182,7 +259,7 @@ export default LocationSearch;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Color.white,
+    backgroundColor: '#ecedee',
   },
   searchContainer: {
     padding: 10,
@@ -218,5 +295,34 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: 'bold',
     color: Color.blue,
+  },
+
+
+  container2: {
+    width: '100%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 18,
+    paddingVertical: Platform.OS === 'android' ? 2 : 15,
+    borderRadius: 10,
+    marginTop: 10,
+    backgroundColor: 'white',
+    // borderWidth : 10
+  },
+  searchicon: {
+    width: 18,
+    height: 18,
+  },
+
+  searchbar: {
+    flex: 1,
+    marginLeft: 10,
+    fontSize: 16,
+    fontFamily: FontText.light,
+    color: Color.clr73,
+    backgroundColor : 'transparent',
+    lineHeight: 18,
+    fontWeight: '400',
+    lineHeight: 18,
   },
 });

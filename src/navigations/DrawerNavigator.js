@@ -88,7 +88,7 @@ const CustomDrawerContent = ({navigation}) => {
           style={styles.imageContainer}
           onPress={() => navigation.navigate('Profile')}>
           <Image
-            source={Img.profilepicicon} // Replace with your image path
+            source={{ uri: user?.profileImage }} 
             style={styles.drawerImage}
           />
           <View>

@@ -79,6 +79,7 @@ export const get = async (endpoint, params = {}) => {
     const response = await api.get(endpoint, {params});
     return response?.data;
   } catch (error) {
+    console.log(`error of get ${endpoint}============` , error)
     throw error;
   }
 };
@@ -91,7 +92,8 @@ export const post = async (endpoint, data = {}) => {
 
     return response?.data;
   } catch (error) {
-    console.log('error--- post', error);
+    console.log(`error of post ${endpoint}============` , error)
+
 
     throw error;
   }
@@ -102,6 +104,8 @@ export const put = async (endpoint, data = {}) => {
     const response = await api.put(endpoint, data);
     return response?.data;
   } catch (error) {
+    console.log(`error of put ${endpoint}============` , error)
+
     throw error;
   }
 };

@@ -9,25 +9,25 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
-import {Img} from '../../utlis/ImagesPath';
+import React, { useEffect, useState } from 'react';
+import { Img } from '../../utlis/ImagesPath';
 import PersonalDetailCard from '../../components/PersonalDetailCard';
 import SeeAllDocument from '../../components/SeeAllDocument';
 import Logout from 'react-native-vector-icons/MaterialIcons';
-import {FontText} from '../../utlis/CustomFont';
-import {Color} from '../../utlis/Color';
+import { FontText } from '../../utlis/CustomFont';
+import { Color } from '../../utlis/Color';
 import SecondaryHeader from '../../components/SecondaryHeader';
 import LogoutModal from '../../components/LogoutModal';
-import {useNavigation} from '@react-navigation/native';
-import {useDispatch, useSelector} from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   openCamera,
   openGallery,
   uploadImageUrl,
 } from '../../utlis/ImageHandler';
-import {post} from '../../utlis/Api';
-import {setUser} from '../../store/AuthSlice';
-import {getMyProperty} from '../../store/MyPropertySlice';
+import { post } from '../../utlis/Api';
+import { setUser } from '../../store/AuthSlice';
+import { getMyProperty } from '../../store/MyPropertySlice';
 const Profile = () => {
   const propertyId = useSelector(state => state.property.propertyId);
   const landLordId = useSelector(state => state.property.landLordId);
@@ -37,11 +37,11 @@ const Profile = () => {
 
   const [modalVisible, setModalVisible] = useState(false);
   const user = useSelector(state => state.auth.user);
-  console.log('user ================= > ', user);
   const [modalMsg, setModalMsg] = useState('');
   const navigation = useNavigation();
   const [modalType, setModalType] = useState('');
-  const {data: myProperty} = useSelector(state => state.MyProperty);
+  const { data: myProperty } = useSelector(state => state.MyProperty);
+  console.log('myProperty ================= > ', myProperty);
 
   const dispatch = useDispatch();
 
@@ -113,7 +113,7 @@ const Profile = () => {
     <View style={styles.container}>
       <SafeAreaView />
 
- 
+
 
       <ImageBackground source={Img.headerbg} style={styles.imageBackground}>
         <StatusBar backgroundColor={'#010101'} barStyle={'light-content'} />
@@ -132,7 +132,7 @@ const Profile = () => {
             },
           ]}>
           <Image
-            source={{uri: user?.profileImage}}
+            source={{ uri: user?.profileImage }}
             style={{
               width: '90%',
               height: '90%',
@@ -143,7 +143,7 @@ const Profile = () => {
           />
           <TouchableOpacity
             onPress={galleryFunc}
-            style={{position: 'absolute', right: 30, bottom: 5}}>
+            style={{ position: 'absolute', right: 30, bottom: 5 }}>
             <Image
               source={Img.editicon}
               style={{
@@ -160,13 +160,13 @@ const Profile = () => {
       <Text
         style={[
           styles.profileText,
-          {marginTop: dimensions.screenHeight * 0.11},
+          { marginTop: dimensions.screenHeight * 0.11 },
         ]}>
         {/* Room No- 001 */}
       </Text>
       <PersonalDetailCard />
       <SeeAllDocument />
-      <View style={{paddingHorizontal: 20}}>
+      <View style={{ paddingHorizontal: 20 }}>
         <View
           style={{
             flexDirection: 'row',
@@ -190,20 +190,24 @@ const Profile = () => {
             </Text>
           </TouchableOpacity>
         </View>
-        <TouchableOpacity
-          onPress={() =>
-            toggleModal('Are you Sure Leave Your Property', 'leave')
-          }>
-          <Text
-            style={{
-              fontSize: 18,
-              fontFamily: FontText.medium,
-              color: Color.black,
-              marginVertical: 10,
-            }}>
-            Leave Property
-          </Text>
-        </TouchableOpacity>
+
+        {
+          myProperty?.landLordId && <TouchableOpacity
+            onPress={() =>
+              toggleModal('Are you Sure Leave Your Property', 'leave')
+            }>
+            <Text
+              style={{
+                fontSize: 18,
+                fontFamily: FontText.medium,
+                color: Color.black,
+                marginVertical: 10,
+              }}>
+              Leave Property
+            </Text>
+          </TouchableOpacity>
+        }
+
         <TouchableOpacity
           onPress={() =>
             toggleModal('Are you Sure delete Your Account', ' delete')
