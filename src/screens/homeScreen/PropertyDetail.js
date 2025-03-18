@@ -176,9 +176,7 @@ const PropertyDetail = () => {
   };
 
   const handleVistBtn = () => {
-    bottomSheetRef.current?.expand()
 
-    return
     setModalVisible(!isModalVisible);
   };
 

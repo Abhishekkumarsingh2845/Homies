@@ -41,6 +41,12 @@ console.log("login screen--------" ,latitude ,  placeName)
       // setError('Login Failed');
     } catch (error) {
       console.log('Error in Logging', error);
+       Toast.show({
+                type: 'error',
+                text1: 'Error in Login',
+                text2: error.message,
+                position: 'bottom',
+              });
     } finally {
       setLoading(false);
     }
