@@ -39,7 +39,6 @@ const Home = ({route}) => {
     const params = {
       propertyId: propertyidtaking,
     };
-    console.log('consoling the params of the propertyId', propertyidtaking);
     try {
       const response = await get('propertyWithFood', params);
       setData(response?.data[0]);

@@ -153,11 +153,17 @@ const LogoutModal = ({
                 textColor={Color.white}
                 borderColor="green"
                 onPress={() => {
-                  modalType == 'logout'
-                    ? logoutUser()
-                    : modalType == 'leave'
-                    ? leaveProperty()
-                    : deleteuser();
+                  if(modalType == 'logout'){
+                    logoutUser()
+                  }
+                   if(modalType == 'leave'){
+                    leaveProperty()
+                  }
+                  if(modalType == 'delete'){
+                    deleteuser()
+                  }
+
+                 
                   // dispatch(clearToken(token));
                   // setModalVisible(!modalVisible);
                 }}

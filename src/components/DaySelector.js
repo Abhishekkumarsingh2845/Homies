@@ -3,14 +3,14 @@ import React, {useState} from 'react';
 import {Color} from '../utlis/Color';
 import {FontText} from '../utlis/CustomFont';
 
-const DaySelector = () => {
+const DaySelector = ({selectedDay, setSelectedDay}) => {
   const [selectedId, setSelectedId] = useState(null);
 
   const data = [
     {id: 1, txt: 'Mon'},
-    {id: 2, txt: 'Tue'},
+    {id: 2, txt: 'Tues'},
     {id: 3, txt: 'Wed'},
-    {id: 4, txt: 'Thu'},
+    {id: 4, txt: 'Thurs'},
     {id: 5, txt: 'Fri'},
     {id: 6, txt: 'Sat'},
     {id: 7, txt: 'Sun'},
@@ -19,7 +19,7 @@ const DaySelector = () => {
   return (
     <View style={styles.container}>
       <FlatList
-      showsHorizontalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}
         data={data}
         horizontal={true}
         keyExtractor={item => item.id.toString()}
@@ -28,16 +28,15 @@ const DaySelector = () => {
             style={[
               styles.dateTxtContainer,
               {
-                backgroundColor:
-                  selectedId === item.id ? Color.white : Color.btnclr,
+                backgroundColor: selectedDay === item.txt ? Color.white : Color.btnclr,
               },
             ]}
-            onPress={() => setSelectedId(item.id)}>
+            onPress={() => setSelectedDay(item.txt)}>
             <Text
               style={[
                 styles.txtStyle,
                 {
-                  color: selectedId === item.id ? Color.black : Color.white,
+                  color: selectedDay === item.txt ? Color.black : Color.white,
                 },
               ]}>
               {item.txt}
