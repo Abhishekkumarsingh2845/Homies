@@ -6,11 +6,11 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from '../../components/Header';
 import SecondaryHeader from '../../components/SecondaryHeader';
-import {useNavigation, useRoute} from '@react-navigation/native';
-import {Img} from '../../utlis/ImagesPath';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { Img } from '../../utlis/ImagesPath';
 import Setting from 'react-native-vector-icons/Octicons';
 import FoodServices from '../../components/FoodServices';
 import BillBoard from '../../components/BillBoard';
@@ -23,8 +23,13 @@ import {setString} from '../../store/FoodColor';
 
 const Home = ({route}) => {
   const dispatch = useDispatch();
+import { FontText } from '../../utlis/CustomFont';
+import { Color } from '../../utlis/Color';
+import { get } from '../../utlis/Api';
+
+const Home = ({ route }) => {
   // const route = useRoute();
-  const {propertid} = route.params || 'no data';
+  const { propertid } = route.params || 'no data';
   console.log('route.params', route?.params);
   const propertyidtaking = route.params;
   const [data, setData] = useState({});
@@ -62,8 +67,6 @@ const Home = ({route}) => {
       console.log('error in the getBannersForProperties', error.message);
     }
   };
-  console.log('kk', banner?.data?.[0].image_url);
-  // console.log("->>>",data?.theme?.colorValue);
 
   useEffect(() => {
     PropertywithFood();
@@ -82,13 +85,17 @@ const Home = ({route}) => {
         onPress={() => navigation.openDrawer()}
       />
       <View style={styles.subcontainer}>
-        <Text style={styles.bannertxt}>Banner</Text>
-        <Image
-          source={{
-            uri: banner?.data?.[0].image_url,
-          }}
-          style={{width: '100%', height: 120, resizeMode: 'stretch'}}
-        />
+        {banner?.data?.[0]?.image_url && 
+        <>
+          <Text style={styles.bannertxt}>Banner</Text>
+          <Image
+            source={{
+              uri: banner?.data?.[0]?.image_url,
+            }}
+            style={{ width: '100%', height: 120, resizeMode: 'stretch' }}
+          />
+        </>
+        }
 
         {/* <DotindictaorImg imageSource={Img.hstdetail} activeDotColor="#FF9457" /> */}
         {/* <DotindictaorImg
@@ -99,9 +106,7 @@ const Home = ({route}) => {
         <TouchableOpacity>
           <Text style={styles.foodservicetxt}>Food Services</Text>
         </TouchableOpacity>
-        <View style={{paddingHorizontal: 10}}>
-          {/* <Image source={Img.hstdetail} style={{width:300,resizeMode:"stretch",backgroundColor:"red",height:200,}}/> */}
-        </View>
+
         {!!data && (
           <FoodServices
             bgcolor={data?.theme?.colorValue}
