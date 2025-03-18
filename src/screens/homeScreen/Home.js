@@ -50,10 +50,10 @@ const Home = ({navigation}) => {
     console.log('getHstdetail');
 
     const params = {
-      long: '77.3769' ,
-      lat: '28.6285' ,
-      // lat: latitude,
-      // long: longitude,
+      // long: '77.3769' ,
+      // lat: '28.6285' ,
+      lat: latitude,
+      long: longitude,
       ...filterData,
     };
     console.log('params=====================111111', params);

@@ -23,22 +23,17 @@ import {setString} from '../../store/FoodColor';
 
 const Home = ({route}) => {
   const dispatch = useDispatch();
-import { FontText } from '../../utlis/CustomFont';
-import { Color } from '../../utlis/Color';
-import { get } from '../../utlis/Api';
-
-const Home = ({ route }) => {
-  // const route = useRoute();
-  const { propertid } = route.params || 'no data';
-  console.log('route.params', route?.params);
-  const propertyidtaking = route.params;
-  const [data, setData] = useState({});
-  const [banner, setBanner] = useState(null);
-  console.log(
-    '----------------------------------------------------------------',
-    banner?.data[0]?.image_url,
-  );
-  const navigation = useNavigation();
+// const route = useRoute();
+const { propertid } = route.params || 'no data';
+console.log('route.params', route?.params);
+const propertyidtaking = route.params;
+const [data, setData] = useState({});
+const [banner, setBanner] = useState(null);
+console.log(
+  '----------------------------------------------------------------',
+  banner?.data[0]?.image_url,
+);
+const navigation = useNavigation();
 
   const PropertywithFood = async () => {
     const params = {
