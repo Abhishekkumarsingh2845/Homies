@@ -128,5 +128,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 15,
     marginTop: 5,
     fontFamily: FontText.medium,
+    color:"black"
   },
 });

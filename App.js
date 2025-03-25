@@ -22,6 +22,34 @@ import store, { persistor } from './src/store/Store';
 import Toast from 'react-native-toast-message';
 import { PersistGate } from 'redux-persist/integration/react';
 import Splash from './src/screens/splashScreen/Splash';
+import notifee, { AuthorizationStatus } from '@notifee/react-native';
+import { getMessaging } from '@react-native-firebase/messaging';
+import { getToken, requestUserPermissionForNotification } from './src/utlis/Notification';
+
+import { notificationFunction } from './src/utlis/Notification';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 const App = () => {
   const [inviteLink, setInviteLink] = useState(null);
@@ -109,6 +137,36 @@ const App = () => {
     }, 8000);
     return () => clearTimeout(timer);
   }, []);
+
+  useEffect(() => {
+    const unsubscribe = getMessaging().onMessage(async remoteMessage => {
+      console.log('remoteMessage', remoteMessage);
+      // Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
+      notificationFunction(remoteMessage)
+    });
+
+    return unsubscribe;
+  }, []);
+
+  async function requestUserPermission() {
+    const settings = await notifee.requestPermission();
+
+    if (settings.authorizationStatus >= AuthorizationStatus.AUTHORIZED) {
+      // console.log('Permission settings:', settings);
+    } else {
+      console.log('User declined permissions');
+    }
+  }
+
+  useEffect(() => {
+    // notificaion permission check
+    requestUserPermission();
+  }, [])
+
+  useEffect(() => {
+    requestUserPermissionForNotification();
+    getToken();
+  }, [])
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>

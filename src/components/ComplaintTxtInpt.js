@@ -15,6 +15,7 @@ const ComplaintTxtInpt = ({
   editable = true,
 }) => {
   const onChange = value => {
+    console.log("name======-=" , value);
     setValue(name, value);
   };
   return (
@@ -26,6 +27,7 @@ const ComplaintTxtInpt = ({
           placeholderTextColor={Color.clr73}
           style={[styles.txtinptsty, {height: height}]}
           multiline={multiline} // Dynamic multiline prop
+          setValue={setValue}
           value={value}
           onChangeText={onChange}
           editable={editable}

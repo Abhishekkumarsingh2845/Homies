@@ -6,6 +6,7 @@ import MyPropertySlice from "./MyPropertySlice"
 import propertyReducer from "./Propert&LandlordId"
 import FoodColor from "./FoodColor"
 import FoodColorReducer from './FoodColor';
+import fcmSlice, { setFcmToken } from"./FcmTokenSlice";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {persistStore, persistReducer} from 'redux-persist';
 
@@ -17,6 +18,7 @@ const RootReducers = combineReducers({
   property: propertyReducer,
   MyProperty : MyPropertySlice,
   FoodColor: FoodColorReducer,
+  setFcmToken:fcmSlice,
 });
 const persistConfig = {
   key: 'root',

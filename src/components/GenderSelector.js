@@ -163,7 +163,7 @@ const GenderSelector = ({setFilterData}) => {
             <View style={styles.uncheckbox}></View>
           )}
         </TouchableOpacity>
-        <Text style={styles.text}>Co-living</Text>
+        <Text style={styles.text}>other</Text>
       </View>
     </View>
   );

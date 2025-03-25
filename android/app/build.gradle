@@ -1,6 +1,7 @@
 apply plugin: "com.android.application"
 apply plugin: "org.jetbrains.kotlin.android"
 apply plugin: "com.facebook.react"
+apply plugin: 'com.google.gms.google-services'
 apply from: file("../../node_modules/react-native-vector-icons/fonts.gradle")
 
 /**
@@ -74,7 +75,7 @@ def enableProguardInReleaseBuilds = false
 
 
 
- 
+
 def jscFlavor = 'org.webkit:android-jsc:+'
 
 android {
@@ -84,7 +85,7 @@ android {
 
     namespace "com.home_new_one"
     defaultConfig {
-        applicationId "com.home_new_one"
+        applicationId "com.homiesUserapp"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
