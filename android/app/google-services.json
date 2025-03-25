@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "348292087405",
+    "project_id": "homieslandlord",
+    "storage_bucket": "homieslandlord.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:348292087405:android:6066458716512a9b16c964",
+        "android_client_info": {
+          "package_name": "com.homiesUserapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTSzNbeyDA9UKnuOMjBA5Z_ASnw_Bd7ZY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:348292087405:android:26d921f8279e797216c964",
+        "android_client_info": {
+          "package_name": "com.homieslandlordapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTSzNbeyDA9UKnuOMjBA5Z_ASnw_Bd7ZY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

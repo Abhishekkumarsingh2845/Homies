@@ -176,7 +176,6 @@ const PropertyDetail = () => {
   };
 
   const handleVistBtn = () => {
-
     setModalVisible(!isModalVisible);
   };
 

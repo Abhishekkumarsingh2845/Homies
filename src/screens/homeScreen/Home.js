@@ -11,31 +11,31 @@ import {
   Text,
   View,
 } from 'react-native';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import Header from '../../components/Header';
 import SearchBar from '../../components/SearchBar';
 import HstDetail from '../../components/HostelDetail';
 import NearbySeeAll from '../../components/NearbySeeAll';
-import { Img } from '../../utlis/ImagesPath';
+import {Img} from '../../utlis/ImagesPath';
 import Swiper from 'react-native-swiper';
-import { Color } from '../../utlis/Color';
+import {Color} from '../../utlis/Color';
 import DotindictaorImg from '../../components/DotindictaorImg';
 import LocationSearch from './LocationSearch';
 import MapSelect from '../../components/Map';
-import { get, post } from '../../utlis/Api';
+import {get, post} from '../../utlis/Api';
 import Geolocation from 'react-native-geolocation-service';
-import { useDispatch, useSelector } from 'react-redux';
-import { setLocation, setLocationStore } from '../../store/LocationSlice';
-import { useNavigation } from '@react-navigation/native';
+import {useDispatch, useSelector} from 'react-redux';
+import {setLocation, setLocationStore} from '../../store/LocationSlice';
+import {useNavigation} from '@react-navigation/native';
 import {
   getNearPropertiesFunc,
   setLikeUnlike,
 } from '../../store/PropertiesSlice';
-import { getMyProperty } from '../../store/MyPropertySlice';
+import {getMyProperty} from '../../store/MyPropertySlice';
 
-const Home = ({ navigation }) => {
+const Home = ({navigation}) => {
   const nav = useNavigation();
-  const { data: hostetData, loading } = useSelector(
+  const {data: hostetData, loading} = useSelector(
     state => state.getPropertiesSlice,
   );
   const dispatch = useDispatch();
@@ -48,12 +48,13 @@ const Home = ({ navigation }) => {
   const getHstdetail = async (filterData = {}) => {
     if (!latitude) return
     const params = {
-      // long: '77.3769' || latitude ,
-      // lat: '28.6285' || longitude,
-      lat: latitude,
-      long: longitude,
+      long: '77.3769',
+      lat: '28.6285',
+      // lat: latitude,
+      // long: longitude,
       ...filterData,
     };
+    console.log('params=====================111111', params);
 
     console.log("params ---------", params)
     try {
@@ -102,7 +103,7 @@ const Home = ({ navigation }) => {
     try {
       const response = await fetch(url);
       const data = await response.json();
-      console.log("place name------", JSON.stringify(data))
+      console.log('place name------', JSON.stringify(data));
 
       if (data.status === 'OK') {
         const formattedAddress = data.results[0]?.formatted_address;
@@ -111,7 +112,6 @@ const Home = ({ navigation }) => {
 
       } else {
         console.error('Error fetching place name:', data.status);
-
       }
     } catch (error) {
       console.error('Error:', error);
@@ -159,16 +159,16 @@ const Home = ({ navigation }) => {
       position => {
         const { latitude, longitude } = position.coords;
         // getPlaceName('28.6285', '77.3769')
-        getPlaceName(latitude, longitude)
+        getPlaceName(latitude, longitude);
 
-        dispatch(setLocationStore({ latitude: latitude, longitude: longitude }));
+        dispatch(setLocationStore({latitude: latitude, longitude: longitude}));
 
         console.log('Geolocation position================', latitude, longitude);
       },
       error => {
         console.log('Error getting location:', error.message);
       },
-      { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 },
+      {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
     );
   };
 
@@ -188,7 +188,6 @@ const Home = ({ navigation }) => {
     dispatch(setLocationStore({ latitude: place?.lat, longitude: place?.lon, name: place?.name }))
   };
 
-
   return (
     <View style={styles.container}>
       <Header
@@ -200,7 +199,11 @@ const Home = ({ navigation }) => {
         locationName={placeName}
       />
       <View style={styles.subcontainer}>
-        <SearchBar destination={'LocationSearch'} handleFilter={handleFilter} onSelect={handlePlaceSelect} />
+        <SearchBar
+          destination={'LocationSearch'}
+          handleFilter={handleFilter}
+          onSelect={handlePlaceSelect}
+        />
 
         <ScrollView
           contentContainerStyle={{
@@ -230,7 +233,7 @@ const Home = ({ navigation }) => {
                 data={hostetData}
                 contentContainerStyle={styles.flatlistcontainer}
                 keyExtractor={item => item._id.toString()}
-                renderItem={({ item }) => (
+                renderItem={({item}) => (
                   <HstDetail
                     hostel={item}
                     onLikePress={() => toggleLike(item._id)}

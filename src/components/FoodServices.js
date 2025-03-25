@@ -4,18 +4,20 @@ import {Color} from '../utlis/Color';
 import {FontText} from '../utlis/CustomFont';
 import {useNavigation} from '@react-navigation/native';
 
-const FoodServices = ({fooddetail, data, bgcolor = 'white'}) => {
+const FoodServices = ({fooddetail, data, bgcolor = 'white',OnPress}) => {
   const navigation = useNavigation();
   console.log('food', fooddetail);
   console.log('food detail', fooddetail);
   return (
     <TouchableOpacity
       style={[styles.container, {backgroundColor: bgcolor}]}
-      onPress={() =>
-        navigation.navigate('HomeTabNavigator', {
-          screen: 'FoodMenu',
-        })
-      }>
+      // onPress={() =>
+      //   navigation.navigate('HomeTabNavigator', {
+      //     screen: 'FoodMenu',
+      //   })
+      // }
+      onPress={OnPress}
+      >
       <Text style={styles.daytxt}>
         {fooddetail?.foodDetails?.[0]?.week || 'no data'}
       </Text>

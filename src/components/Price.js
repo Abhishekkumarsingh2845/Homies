@@ -18,7 +18,7 @@ const Price = ({setFilterData}) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.pricetxt}>Price, $</Text>
+      <Text style={styles.pricetxt}>Price,₹</Text>
       <View style={styles.maxmincontainer}>
         <TextInput placeholder="Min" placeholderTextColor={"#9AA6AC"} style={styles.minplacehldcontainer}  keyboardType='number-pad' value={minMax.min} onChangeText={(text) => {setMinMax(prev => ({...prev , min : text}))}}/>
         <TextInput placeholder="Max" placeholderTextColor={"#9AA6AC"} style={styles.maxplacehldcontainer}  keyboardType='number-pad' value={minMax.max} 

@@ -60,7 +60,7 @@ const Intro = () => {
         destination={'Login'}
         clr={Color.white}
         bgcolor={Color.primary}
-        mgntop={ScreenDimensions.screenHeight * 0.12}
+        mgntop={ScreenDimensions.screenHeight * 0.06}
         Onpress={() => handleNext()}
       />
       <View style={{marginBottom: 50}}></View>
@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
     // lineHeight: 19.6,
     color: Color.black,
     alignSelf: 'center',
-    letterSpacing: 0.3,
+    // letterSpacing: 0.3,
     marginTop: 5,
   },
   price: {
@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
     // lineHeight: 19.6,
     color: Color.black,
     alignSelf: 'center',
-    letterSpacing: 0.3,
+    // letterSpacing: 0.3,
     // marginTop:15
   },
 });

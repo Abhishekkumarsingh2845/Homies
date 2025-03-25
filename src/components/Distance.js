@@ -77,14 +77,14 @@ const styles = StyleSheet.create({
   mintxt: {
     fontSize: 16,
     fontFamily: FontText.medium,
-    lineHeight: 24,
-    Color: '#575555',
+    lineHeight: 20,
+color:"black"
   },
 
   maxtxt: {
     fontSize: 16,
     fontFamily: FontText.medium,
     lineHeight: 24,
-    Color: '#575555',
+color:"black"
   },
 });
