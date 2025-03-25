@@ -6,7 +6,7 @@ export const getMyProperty = createAsyncThunk(
   async () => {
     try {
       const res = await api.get('getUserProperty');
-      console.log("sachin - - - - - - -" , res?.data)
+      // console.log("sachin - - - - - - -" , res?.data)
       return {
         status: res.data.success,
         message: res.data.message,

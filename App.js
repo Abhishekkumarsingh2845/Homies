@@ -22,6 +22,8 @@ import store, { persistor } from './src/store/Store';
 import Toast from 'react-native-toast-message';
 import { PersistGate } from 'redux-persist/integration/react';
 import Splash from './src/screens/splashScreen/Splash';
+import Geolocation from 'react-native-geolocation-service';
+
 
 const App = () => {
   const [inviteLink, setInviteLink] = useState(null);
@@ -104,6 +106,12 @@ const App = () => {
   const [showSplash, setShowSplash] = useState(true);
 
   useEffect(() => {
+
+    Geolocation.setRNConfiguration({
+      skipPermissionRequests: true,
+      authorizationLevel: 'auto',
+      locationProvider: 'auto',
+    });
     const timer = setTimeout(() => {
       setShowSplash(false);
     }, 8000);

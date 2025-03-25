@@ -1,5 +1,6 @@
 import {
   ActivityIndicator,
+  Alert,
   FlatList,
   Image,
   PermissionsAndroid,
@@ -7,6 +8,7 @@ import {
   RefreshControl,
   ScrollView,
   StyleSheet,
+  Text,
   View,
 } from 'react-native';
 import React, { useCallback, useEffect, useState } from 'react';
@@ -37,15 +39,14 @@ const Home = ({ navigation }) => {
     state => state.getPropertiesSlice,
   );
   const dispatch = useDispatch();
-  const { latitude, longitude , name : placeName } = useSelector(state => state.location);
+  const { latitude, longitude, name: placeName } = useSelector(state => state.location);
   const Navigation = useNavigation();
   const user = useSelector(state => state.auth.user);
-console.log("login screen--------1" ,latitude ,  placeName)
+  console.log("Home screen lat long================", latitude, longitude, placeName , hostetData)
 
 
   const getHstdetail = async (filterData = {}) => {
-    console.log('getHstdetail');
-
+    if (!latitude) return
     const params = {
       // long: '77.3769' || latitude ,
       // lat: '28.6285' || longitude,
@@ -54,6 +55,7 @@ console.log("login screen--------1" ,latitude ,  placeName)
       ...filterData,
     };
 
+    console.log("params ---------", params)
     try {
       dispatch(getNearPropertiesFunc(params));
     } catch (error) {
@@ -67,8 +69,9 @@ console.log("login screen--------1" ,latitude ,  placeName)
   };
 
   useEffect(() => {
-
+    if(latitude && !hostetData?.length){
       getHstdetail()
+    }
   }, [latitude])
 
   const handleFilter = useCallback(filterData => {
@@ -93,16 +96,6 @@ console.log("login screen--------1" ,latitude ,  placeName)
     }
   };
 
-  const requestLocationPermission = async () => {
-    if (Platform.OS === 'android') {
-      const granted = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-      );
-      return granted === PermissionsAndroid.RESULTS.GRANTED;
-    }
-    return true;
-  };
-
   const getPlaceName = async (latitude, longitude) => {
     const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=AIzaSyA8KBPjCEIBIU0ujqQ7bacaQ5-dK2bUi7E`;
 
@@ -113,7 +106,7 @@ console.log("login screen--------1" ,latitude ,  placeName)
 
       if (data.status === 'OK') {
         const formattedAddress = data.results[0]?.formatted_address;
-        dispatch(setLocationStore({latitude: latitude, longitude: longitude , name : data.results[0]?.formatted_address}));
+        dispatch(setLocationStore({ latitude: latitude, longitude: longitude, name: data.results[0]?.formatted_address }));
 
 
       } else {
@@ -125,22 +118,52 @@ console.log("login screen--------1" ,latitude ,  placeName)
     }
   };
 
-  const getLocation = async () => {
-    console.log("position-----------------1")
 
+  const requestLocationPermission = async () => {
+    console.log("requestLocationPermission function called ✅✅✅");
+    if (Platform.OS === 'android') {
+      try {
+        const granted = await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+          {
+            title: 'Location Access Required',
+            message: 'This app needs to access your location.',
+          },
+        );
+        console.log("requestLocationPermission function called ✅✅✅ =========", granted);
+
+        if (granted !== PermissionsAndroid.RESULTS.GRANTED) {
+          Alert.alert(
+            'Permission Denied',
+            'Location permission is required to use this feature.',
+          );
+          return false;
+        }
+        return true;
+      } catch (err) {
+        console.warn(err);
+        return false;
+      }
+    }
+    return true; // iOS permissions are handled via Info.plist
+  };
+  const getLocation = async () => {
+    console.log("getLocation calling--------------------")
+    console.log("Calling requestLocationPermission...");
     const hasPermission = await requestLocationPermission();
+    console.log("hasPermission calling--------------------", hasPermission)
+
     if (!hasPermission) return;
 
     Geolocation.getCurrentPosition(
       position => {
         const { latitude, longitude } = position.coords;
-        console.log("position-----------------2", latitude, longitude)
         // getPlaceName('28.6285', '77.3769')
         getPlaceName(latitude, longitude)
 
         dispatch(setLocationStore({ latitude: latitude, longitude: longitude }));
 
-        console.log('system positon', latitude, longitude);
+        console.log('Geolocation position================', latitude, longitude);
       },
       error => {
         console.log('Error getting location:', error.message);
@@ -149,21 +172,20 @@ console.log("login screen--------1" ,latitude ,  placeName)
     );
   };
 
+
+
+
   const getMyPropertyFunc = async () => {
     dispatch(getMyProperty());
   };
 
-  useEffect(() => {
-    console.log('useeffect------------------')
-    if (!hostetData) {
-      getHstdetail();
-    }
+  useEffect(() =>{
     getLocation();
     getMyPropertyFunc();
-  }, []);
+  },[])
 
   const handlePlaceSelect = (place) => {
-    dispatch(setLocationStore({latitude: place?.lat, longitude: place?.lon , name : place?.name}))
+    dispatch(setLocationStore({ latitude: place?.lat, longitude: place?.lon, name: place?.name }))
   };
 
 

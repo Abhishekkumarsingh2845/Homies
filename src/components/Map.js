@@ -1,5 +1,5 @@
 
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
   View,
@@ -9,68 +9,34 @@ import {
   Platform,
   TouchableOpacity,
 } from 'react-native';
-import MapView, {Marker} from 'react-native-maps';
+import MapView, { Marker } from 'react-native-maps';
 import Geolocation from 'react-native-geolocation-service';
+import { useSelector } from 'react-redux';
 
 const noidaLocation = {
   latitude: 28.62583951050634,
   longitude: 77.37755309671795,
-  latitudeDelta:28.62583951050634,
+  latitudeDelta: 28.62583951050634,
   longitudeDelta: 77.37755309671795,
 };
 
 const MapSelect = () => {
-  const [location, setLocation] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const { latitude, longitude } = useSelector(state => state.location);
 
-  const requestLocationPermission = async () => {
-    if (Platform.OS === 'android') {
-      try {
-        const granted = await PermissionsAndroid.request(
-          PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-        );
-        return granted === PermissionsAndroid.RESULTS.GRANTED;
-      } catch (err) {
-        console.error('Permission error:', err);
-        return false;
-      }
-    }
-    return true;
-  };
+  const [location, setLocation] = useState(null);
+
 
   useEffect(() => {
-    const fetchLocation = async () => {
-      const hasPermission = await requestLocationPermission();
-      if (hasPermission) {
-        Geolocation.getCurrentPosition(
-          ({coords}) => {
-            setLocation({
-              latitude: coords.latitude,
-              longitude: coords.longitude,
-              latitudeDelta: 0.0099,
-              longitudeDelta: 0.0421,
-            });
-          
-            setLoading(false);
-          },
-          error => {
-            console.error('Location error:', error);
-            // Fallback to Noida if there's an error
-            setLocation(noidaLocation);
-            setLoading(false);
-          },
-          {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
-        );
-      } else {
-        alert(
-          'Permission to access location was denied. Showing Noida by default.',
-        );
-        setLocation(noidaLocation);
-        setLoading(false);
-      }
-    };
-    fetchLocation();
-  }, []);
+    if (latitude) {
+
+      setLocation({
+        latitude: latitude,
+        longitude: longitude,
+        latitudeDelta: 0.0099,
+        longitudeDelta: 0.0421,
+      });
+    }
+  }, [latitude]);
 
   // Zoom in by reducing the deltas
   const handleZoomIn = () => {
@@ -94,7 +60,7 @@ const MapSelect = () => {
     }
   };
 
-  if (loading) {
+  if (!location) {
     return (
       <View style={styles.loaderContainer}>
         <ActivityIndicator size="large" color="#007BFF" />
@@ -137,7 +103,7 @@ const styles = StyleSheet.create({
     height: 200,
     borderRadius: 10,
     alignSelf: 'center',
-    marginTop:10
+    marginTop: 10
   },
   mapContainer: {
     flex: 1,
@@ -165,7 +131,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     elevation: 5,
     shadowColor: '#000',
-    shadowOffset: {width: 0, height: 2},
+    shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.3,
   },
   zoomText: {
