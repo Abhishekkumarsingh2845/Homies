@@ -21,6 +21,9 @@ import SignUp from '../screens/authScreen/SignUp';
 import OtpVerify from '../screens/authScreen/OtpVerify';
 import Splash from '../screens/splashScreen/Splash';
 import Intro from '../screens/authScreen/Intro';
+import Chat from '../screens/ChatScreen/Chat';
+import ChatMessage from '../screens/ChatScreen/ChatMessage';
+import AdminMessage from '../screens/ChatScreen/AdminMessage';
 
 const MainNavigation = () => {
   const {token} = useSelector(state => state.auth.user);
@@ -75,7 +78,6 @@ const MainNavigation = () => {
             <Stack.Screen
               name="HomeTabNavigator"
               component={HomeTabNavigator}
-
             />
             <Stack.Screen name="ChatNavigator" component={ChatNavigator} />
             <Stack.Screen name="Profile" component={Profile} />
@@ -87,6 +89,9 @@ const MainNavigation = () => {
             <Stack.Screen name="Payment" component={Payment} />
             <Stack.Screen name="Referral" component={Refferal} />
             <Stack.Screen name="Notification" component={Notification} />
+            <Stack.Screen name="Chat" component={Chat} />
+            <Stack.Screen name="ChatMessage" component={ChatMessage} />
+            <Stack.Screen name="AdminMessage" component={AdminMessage} />
           </>
         )}
       </Stack.Navigator>

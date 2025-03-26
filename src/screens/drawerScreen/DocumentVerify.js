@@ -1,4 +1,4 @@
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import {ScrollView, StyleSheet, Text, TextInput, View} from 'react-native';
 import React, {useState} from 'react';
 import SecondaryHeader from '../../components/SecondaryHeader';
 import PrimaryBtn from '../../components/PrimaryBtn';
@@ -9,6 +9,7 @@ import {FontText} from '../../utlis/CustomFont';
 import {Img} from '../../utlis/ImagesPath';
 import {useNavigation} from '@react-navigation/native';
 import {post} from '../../utlis/Api';
+import Uploaddoc from '../../components/Uploaddoc';
 
 const DocumentVerify = () => {
   const navigation = useNavigation();
@@ -18,7 +19,6 @@ const DocumentVerify = () => {
   const [college, setcollege] = useState('');
 
   const uploadDocument = async () => {
-
     const data = {
       parentsDetails: {
         parentName: parentName,
@@ -29,14 +29,10 @@ const DocumentVerify = () => {
         collegeName: college,
       },
     };
-    console.log('Data before API call:', data); 
+    console.log('Data before API call:', data);
     try {
-
       const response = await post('uplaodDocuments', data);
-      console.log(
-        'response of the  upload document response',
-        response.data,
-      );
+      console.log('response of the  upload document response', response.data);
     } catch (error) {
       console.log(
         'error in the  response',
@@ -60,30 +56,34 @@ const DocumentVerify = () => {
         <Text style={styles.uploadtxt}>Student / Job ID</Text>
         <Opencamera fixheight={80} operationtxt={'Browse file from gallery'} />
         <Text style={styles.uploadtxt}>College Name</Text>
-        <ComplaintTxtInpt
+        {/* <ComplaintTxtInpt
           value={college}
           setValue={(text) => {console.log("college name" , text);}}
           placeholder="College Name"
-        />
+        /> */} 
+        <Uploaddoc onchgtxt={setcollege}  value={college} placeholder={"College"} />
         <Text style={styles.uploadtxt}>Parents Details</Text>
         <Text style={styles.uploadtxt}>Name</Text>
-        <ComplaintTxtInpt
+        {/* <ComplaintTxtInpt
           value={parentName}
           setValue={setParentName}
           placeholder="Name"
-        />
+        /> */}
+         <Uploaddoc onchgtxt={setParentName}  value={parentName} placeholder={"Name"} />
         <Text style={styles.uploadtxt}>Phone Number</Text>
-        <ComplaintTxtInpt
+        {/* <ComplaintTxtInpt
           value={phone}
           setValue={setphone}
           placeholder="Phone Number"
-        />
+        /> */}
+         <Uploaddoc onchgtxt={setphone}  value={phone} placeholder={"Phone Number"} />
         <Text style={styles.uploadtxt}>Address</Text>
-        <ComplaintTxtInpt
+        {/* <ComplaintTxtInpt
           value={address}
           setValue={setaddress}
           placeholder="Address"
-        />
+        /> */}
+         <Uploaddoc onchgtxt={setaddress}  value={address} placeholder={"Address"} />
         <PrimaryBtn
           mgntop={20}
           txt={'Submit'}

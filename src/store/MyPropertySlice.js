@@ -19,7 +19,7 @@ export const getMyProperty = createAsyncThunk(
 );
 
 let initialState = {
-//   loading: false,
+
   data: [],
 };
 const MyPropertySlice = createSlice({

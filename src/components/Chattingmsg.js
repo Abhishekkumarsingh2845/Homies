@@ -3,13 +3,12 @@ import React from 'react';
 import {FontText} from '../utlis/CustomFont';
 import {Color} from '../utlis/Color';
 
-const Chattingmsg = ({alignTo, bgColor, textColor}) => {
+const Chattingmsg = ({alignTo, bgColor, textColor,msg}) => {
   return (
     <View style={{alignItems: alignTo, justifyContent: 'flex-end'}}>
       <View style={[styles.container, {backgroundColor: bgColor}]}>
         <Text style={[styles.txt, {color: textColor}]}>
-          Lorem ipsum dolor sit amet consectetur. Nunc tincidunt at at a ac.
-          Lorem
+         {msg}
         </Text>
       </View>
       <Text
