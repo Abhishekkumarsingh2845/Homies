@@ -11,49 +11,66 @@ import {
   Text,
   View,
 } from 'react-native';
-import React, {useCallback, useEffect, useState} from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import Header from '../../components/Header';
 import SearchBar from '../../components/SearchBar';
 import HstDetail from '../../components/HostelDetail';
 import NearbySeeAll from '../../components/NearbySeeAll';
-import {Img} from '../../utlis/ImagesPath';
+import { Img } from '../../utlis/ImagesPath';
 import Swiper from 'react-native-swiper';
-import {Color} from '../../utlis/Color';
+import { Color } from '../../utlis/Color';
 import DotindictaorImg from '../../components/DotindictaorImg';
 import LocationSearch from './LocationSearch';
 import MapSelect from '../../components/Map';
-import {get, post} from '../../utlis/Api';
+import { get, post } from '../../utlis/Api';
 import Geolocation from 'react-native-geolocation-service';
-import {useDispatch, useSelector} from 'react-redux';
-import {setLocation, setLocationStore} from '../../store/LocationSlice';
-import {useNavigation} from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux';
+import { setLocation, setLocationStore } from '../../store/LocationSlice';
+import { useNavigation } from '@react-navigation/native';
+import Toast from 'react-native-toast-message';
+
 import {
   getNearPropertiesFunc,
   setLikeUnlike,
 } from '../../store/PropertiesSlice';
-import {getMyProperty} from '../../store/MyPropertySlice';
+import { getMyProperty } from '../../store/MyPropertySlice';
 
-const Home = ({navigation}) => {
+const Home = ({ navigation }) => {
   const nav = useNavigation();
-  const {data: hostetData, loading} = useSelector(
+  const { data: hostetData, loading } = useSelector(
     state => state.getPropertiesSlice,
   );
   const dispatch = useDispatch();
   const { latitude, longitude, name: placeName } = useSelector(state => state.location);
   const Navigation = useNavigation();
   const user = useSelector(state => state.auth.user);
-  console.log("Home screen lat long================", latitude, longitude, placeName , hostetData)
+  console.log("Home screen lat long================", latitude, longitude, placeName, hostetData)
 
 
   const getHstdetail = async (filterData = {}) => {
+    console.log("getHstdetail ==========================")
     if (!latitude) return
-    const params = {
-      long: '77.3769',
-      lat: '28.6285',
-      // lat: latitude,
-      // long: longitude,
-      ...filterData,
-    };
+    let params
+    if (user?._id) {
+      params = {
+        // long: '77.3769',
+        // lat: '28.6285',
+        lat: latitude,
+        long: longitude,
+        ...filterData,
+        userId: user?._id,
+      };
+    }
+    else {
+      params = {
+        // long: '77.3769',
+        // lat: '28.6285',
+        lat: latitude,
+        long: longitude,
+        ...filterData,
+      };
+    }
+
     console.log('params=====================111111', params);
 
     console.log("params ---------", params)
@@ -70,10 +87,17 @@ const Home = ({navigation}) => {
   };
 
   useEffect(() => {
-    if(latitude && !hostetData?.length){
+    console.log("changed value =============" , latitude)
+    if (latitude) {
       getHstdetail()
     }
   }, [latitude])
+
+  useEffect(() =>{
+    if (!hostetData?.length) {
+      getHstdetail()
+    }
+  },[])
 
   const handleFilter = useCallback(filterData => {
     console.log('filterData', filterData);
@@ -81,6 +105,16 @@ const Home = ({navigation}) => {
   }, []);
 
   const toggleLike = async propertyId => {
+
+    if (!user?._id) {
+      console.log("toast chl ra h ??")
+      Toast.show({
+        type: 'error',
+        text1: 'Please Log In',
+        text2: "Log In to Like The Property!",
+      });
+      return
+    }
     try {
       const response = await post('likeProperty', {
         propertyId,
@@ -161,14 +195,14 @@ const Home = ({navigation}) => {
         // getPlaceName('28.6285', '77.3769')
         getPlaceName(latitude, longitude);
 
-        dispatch(setLocationStore({latitude: latitude, longitude: longitude}));
+        dispatch(setLocationStore({ latitude: latitude, longitude: longitude }));
 
         console.log('Geolocation position================', latitude, longitude);
       },
       error => {
         console.log('Error getting location:', error.message);
       },
-      {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
+      { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 },
     );
   };
 
@@ -176,13 +210,14 @@ const Home = ({navigation}) => {
 
 
   const getMyPropertyFunc = async () => {
-    dispatch(getMyProperty());
+    console.log("user?._id", user?._id)
+    dispatch(getMyProperty(user?._id));
   };
 
-  useEffect(() =>{
+  useEffect(() => {
     getLocation();
     getMyPropertyFunc();
-  },[])
+  }, [])
 
   const handlePlaceSelect = (place) => {
     dispatch(setLocationStore({ latitude: place?.lat, longitude: place?.lon, name: place?.name }))
@@ -233,7 +268,7 @@ const Home = ({navigation}) => {
                 data={hostetData}
                 contentContainerStyle={styles.flatlistcontainer}
                 keyExtractor={item => item._id.toString()}
-                renderItem={({item}) => (
+                renderItem={({ item }) => (
                   <HstDetail
                     hostel={item}
                     onLikePress={() => toggleLike(item._id)}
@@ -250,6 +285,9 @@ const Home = ({navigation}) => {
           )}
         </ScrollView>
       </View>
+      {/* <Text>Hi</Text> */}
+      <Toast />
+
     </View>
   );
 };

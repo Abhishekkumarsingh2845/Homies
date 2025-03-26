@@ -1,6 +1,6 @@
-import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
+import React, { useEffect } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import AuthNavigator from './AuthNavigator';
 import HomeNavigator from './HomeNavigator';
 import ComplaintNavigator from './ComplaintNavigator';
@@ -14,25 +14,39 @@ import Refferal from '../screens/drawerScreen/Refferal';
 import PaymentNavigator from './PaymentNavigator';
 import ChatNavigator from '../screens/bottomTabSceen/ChatNavigator';
 import Notification from '../screens/homeScreen/Notification';
-import {useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Login from '../screens/authScreen/Login';
 import LoginSignup from '../screens/authScreen/LoginSignup';
 import SignUp from '../screens/authScreen/SignUp';
 import OtpVerify from '../screens/authScreen/OtpVerify';
 import Splash from '../screens/splashScreen/Splash';
 import Intro from '../screens/authScreen/Intro';
+import { setFcmToken } from '../store/FcmTokenSlice';
+import { getToken } from '../utlis/Notification';
 
 const MainNavigation = () => {
-  const {token} = useSelector(state => state.auth.user);
+  const { token } = useSelector(state => state.auth.user);
   console.log('token ---------------->>>>>>>>>', token);
+  const dispatch = useDispatch()
 
   const Stack = createStackNavigator();
+
+
+  const getTokenFunc = async () => {
+    let res = await getToken();
+    dispatch(setFcmToken(res));
+
+  }
+
+  useEffect(() => {
+    getTokenFunc()
+  }, [])
 
   return (
     <NavigationContainer>
       <Stack.Navigator
         initialRouteName={token ? 'DrawerNavigator' : 'Intro'}
-        screenOptions={{headerShown: false}}>
+        screenOptions={{ headerShown: false }}>
         {!token ? (
           <>
             <Stack.Screen

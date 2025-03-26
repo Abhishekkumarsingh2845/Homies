@@ -51,7 +51,7 @@ const PersonalDetailElement = ({
       setShowTextInput(false);
 
       } catch (error) {
-        console.log('error in sign up submit', error);
+        console.log('error in sign up submit 11', error);
       setShowTextInput(false);
 
       }

@@ -22,7 +22,8 @@ import { Formik } from 'formik'
 const SignUp = () => {
   const navigation = useNavigation();
   const route = useRoute();
-  const { phoneNo} = route.params || '';
+  const data= route.params || '';
+  console.log("data --------------" , data)
 
   const [phonee, setPhone] = useState('');
   const [emailid, setEmailId] = useState(null);
@@ -35,20 +36,22 @@ const SignUp = () => {
   const handleSignUp = async (values) => {
     setLoading(true)
     console.log("res-------" , values)
-    const data = {
+    const dataForLogin = {
       name : values.name,
       email : values?.email,
-      phone : values?.phone
+      // phone : values?.phone,
+      ...data
     }
     try {
-      const response = await post('login', data);
+      console.log("signUp data============" , dataForLogin)
+      const response = await post('login', dataForLogin);
       console.log("login data ----------" , response)
       if (response?.success) {
         dispatch(setUser(response));
         navigation.navigate('DrawerNavigator');
       }
     } catch (error) {
-      console.log('error in sign up submit', error);
+      console.log('error in sign up submit 3', error);
     }
     setLoading(false)
 
@@ -66,7 +69,7 @@ const SignUp = () => {
   const initialValues = {
     name: '',
     email: '',
-    phone: phoneNo || '',
+    phone: data?.phone || '',
     refCode: ''
   }
 
@@ -78,6 +81,7 @@ const SignUp = () => {
       placeholder: 'Enter Full Name',
       keyboardType: 'default',
       label: 'Full Name*',
+      editable : true
     },
     {
       name: 'phone',
@@ -86,6 +90,7 @@ const SignUp = () => {
       placeholder: 'Enter Your Phone Number',
       keyboardType: 'numeric',
       label: 'Phone number*',
+      editable : false
     },
     {
       name: 'email',
@@ -94,6 +99,7 @@ const SignUp = () => {
       placeholder: 'Enter Your Email',
       label: 'Email ( Optional )',
       keyboardType: 'default',
+      editable : true
 
     },
 
@@ -104,6 +110,7 @@ const SignUp = () => {
       placeholder: 'Code',
       label: 'Referral Code',
       keyboardType: 'default',
+      editable : true
 
     }
   ]
@@ -206,6 +213,7 @@ const SignUp = () => {
                         mrgtop={5}
                         maxlen={50}
                         keyboardType={item.keyboardType}
+                        editable ={ item?.editable}
                       />
                       </View>
 

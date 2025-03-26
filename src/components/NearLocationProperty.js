@@ -5,7 +5,7 @@ import {FontText} from '../utlis/CustomFont';
 import {Color} from '../utlis/Color';
 
 const NearLocationProperty = ({property, nearproperty,}) => {
-
+console.log("nearproperty==============" , nearproperty)
   return (
     <TouchableOpacity style={styles.container}>
       <Image

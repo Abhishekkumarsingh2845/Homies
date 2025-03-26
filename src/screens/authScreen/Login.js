@@ -1,17 +1,16 @@
-import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
-import React, {useState} from 'react';
-import {Color} from '../../utlis/Color';
+import { Platform, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Color } from '../../utlis/Color';
 import PrimaryBtn from '../../components/PrimaryBtn';
-import Account from '../../components/Account';
 import PrimaryTxtInp from '../../components/PrimaryTxtInp';
-import {ScreenDimensions} from '../../utlis/DimensionApi';
-import {post} from '../../utlis/Api';
-import {useNavigation} from '@react-navigation/native';
-import {useDispatch, useSelector} from 'react-redux';
-import {setExist, setPhone} from '../../store/AuthSlice';
+import { ScreenDimensions } from '../../utlis/DimensionApi';
+import { post } from '../../utlis/Api';
+import { useNavigation } from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux';
 import Toast from 'react-native-toast-message';
 import * as Yup from 'yup';
-import {Formik} from 'formik';
+import { Formik } from 'formik';
+import { getToken } from '../../utlis/Notification';
 
 const Login = () => {
   const [phoneNo, setPhone] = useState(null);
@@ -19,8 +18,10 @@ const Login = () => {
   const [error, setError] = useState(null);
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const { latitude, longitude , name : placeName } = useSelector(state => state.location);
-console.log("login screen--------" ,latitude ,  placeName)
+  const { latitude, longitude, name: placeName } = useSelector(state => state.location);
+  const { fcmToken } = useSelector((state) => state?.setFcmToken)
+
+  console.log("login screen--------", latitude, placeName)
 
   const handleLogIn = async values => {
     setLoading(true);
@@ -41,12 +42,12 @@ console.log("login screen--------" ,latitude ,  placeName)
       // setError('Login Failed');
     } catch (error) {
       console.log('Error in Logging', error);
-       Toast.show({
-                type: 'error',
-                text1: 'Error in Login',
-                text2: error.message,
-                position: 'bottom',
-              });
+      Toast.show({
+        type: 'error',
+        text1: 'Error in Login',
+        text2: error.message,
+        position: 'bottom',
+      });
     } finally {
       setLoading(false);
     }
@@ -58,6 +59,32 @@ console.log("login screen--------" ,latitude ,  placeName)
       .matches(/^[0-9]{10}$/, 'Phone number must be exactly 10 digits')
       .notOneOf(['0000000000'], 'Invalid Phone Number'),
   });
+
+  useEffect(() => {
+    getToken()
+  }, [])
+
+
+  const handleGuestFlow = async () => {
+    console.log("sachin---dugeufue")
+    const data = {
+      userType: "Guest",
+      deviceType: Platform?.OS,
+      deviceToken: fcmToken
+
+    }
+    try {
+
+      const response = await post('login', data);
+      console.log("guest data ----------------------", response)
+      if (response?.success) {
+        navigation.navigate('DrawerNavigator');
+      }
+    } catch (error) {
+      console.log('error in sign up submit 2', error);
+    }
+
+  };
 
   return (
     <View style={styles.container}>
@@ -75,12 +102,12 @@ console.log("login screen--------" ,latitude ,  placeName)
       /> */}
 
       <Formik
-        initialValues={{phone: ''}}
+        initialValues={{ phone: '' }}
         validationSchema={validationSchema}
         onSubmit={handleLogIn}
         validateOnChange={false}
         validateOnBlur={false}>
-        {({values, errors, setFieldValue, handleSubmit}) => {
+        {({ values, errors, setFieldValue, handleSubmit }) => {
           return (
             <>
               <Text style={styles.phno}>Phone number</Text>
@@ -118,9 +145,7 @@ console.log("login screen--------" ,latitude ,  placeName)
         bgcolor={Color.white}
         brdcolor={Color.primary}
         brdwdth={1.5}
-        Onpress={() => {
-          navigation.navigate('DrawerNavigator');
-        }}
+        Onpress={handleGuestFlow}
         // destination={'LoginSignup'}
         mgntop={ScreenDimensions.screenHeight * 0.03}
       />

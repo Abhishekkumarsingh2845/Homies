@@ -5,6 +5,7 @@ import {
   View,
   TouchableOpacity,
   SafeAreaView,
+  Platform,
 } from 'react-native';
 import React, {useState, useEffect} from 'react';
 import Toast from 'react-native-toast-message';
@@ -18,6 +19,8 @@ import {setUser} from '../../store/AuthSlice';
 import {post} from '../../utlis/Api';
 
 const LoginSignup = () => {
+  const {fcmToken} = useSelector((state) => state?.setFcmToken)
+  console.log("fcmToken--------------",fcmToken)
   const navigation = useNavigation();
   const route = useRoute();
   const {otpR, isExist, phoneNo} = route.params || '';
@@ -45,6 +48,12 @@ const LoginSignup = () => {
   }, [originalOtp]);
 
   const handleVerfiyotp = async () => {
+    const data = {
+      phone : phoneNo ,
+      userType : "User",
+      deviceType : Platform?.OS,
+      deviceToken : fcmToken
+    }
     // / Check if OTP is blank
     if (!otp || otp.join('').trim() === '') {
       Toast.show({
@@ -64,14 +73,15 @@ const LoginSignup = () => {
         });
       } else {
         console.log('isExist====', isExist);
-        navigation.navigate('SignUp' , {phoneNo : phoneNo});
+        navigation.navigate('SignUp' ,data);
         return;
       }
     } else if (otp?.join('') == originalOtp) {
       console.log('if otp=====');
 
       try {
-        const response = await post('login', {phone: phoneNo});
+
+        const response = await post('login', data);
         console.log("login data ----------------------" , response)
         if (response?.success) {
           // dispatch(setUser(response));
@@ -81,7 +91,7 @@ const LoginSignup = () => {
           });
         }
       } catch (error) {
-        console.log('error in sign up submit --', error);
+        console.log('error in sign up submit 2', error);
       }
     } else {
       Toast.show({

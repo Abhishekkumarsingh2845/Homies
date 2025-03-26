@@ -23,7 +23,7 @@ import Toast from 'react-native-toast-message';
 import { PersistGate } from 'redux-persist/integration/react';
 import Splash from './src/screens/splashScreen/Splash';
 import Geolocation from 'react-native-geolocation-service';
-import notifee, { AuthorizationStatus } from '@notifee/react-native';
+// import notifee, { AuthorizationStatus } from '@notifee/react-native';
 import { getMessaging } from '@react-native-firebase/messaging';
 import { getToken, requestUserPermissionForNotification } from './src/utlis/Notification';
 
@@ -167,12 +167,14 @@ const App = () => {
 
   useEffect(() => {
     // notificaion permission check
-    requestUserPermission();
+    // requestUserPermission();
   }, [])
+
 
   useEffect(() => {
     requestUserPermissionForNotification();
-    getToken();
+
+
   }, [])
   return (
     <Provider store={store}>

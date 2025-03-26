@@ -21,7 +21,7 @@ const Distance = ({setFilterData}) => {
         <Text style={styles.maxtxt}>Max</Text>
       </View>
       <View style={styles.textContainer}>
-        <Text>0km</Text>
+        <Text style={{color : 'black'}}>0km</Text>
 
         <Slider
           style={{width: 250, height: 30}}
@@ -37,7 +37,7 @@ const Distance = ({setFilterData}) => {
         value={value}
         />
 
-        <Text>{value} km</Text>
+        <Text style={{color : 'black'}}>{value} km</Text>
       </View>
     </View>
   );
