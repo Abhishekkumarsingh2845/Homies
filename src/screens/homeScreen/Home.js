@@ -1,5 +1,6 @@
 import {
   ActivityIndicator,
+  Alert,
   FlatList,
   Image,
   PermissionsAndroid,
@@ -7,57 +8,72 @@ import {
   RefreshControl,
   ScrollView,
   StyleSheet,
+  Text,
   View,
 } from 'react-native';
-import React, {useCallback, useEffect, useState} from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import Header from '../../components/Header';
 import SearchBar from '../../components/SearchBar';
 import HstDetail from '../../components/HostelDetail';
 import NearbySeeAll from '../../components/NearbySeeAll';
-import {Img} from '../../utlis/ImagesPath';
+import { Img } from '../../utlis/ImagesPath';
 import Swiper from 'react-native-swiper';
-import {Color} from '../../utlis/Color';
+import { Color } from '../../utlis/Color';
 import DotindictaorImg from '../../components/DotindictaorImg';
 import LocationSearch from './LocationSearch';
 import MapSelect from '../../components/Map';
-import {get, post} from '../../utlis/Api';
+import { get, post } from '../../utlis/Api';
 import Geolocation from 'react-native-geolocation-service';
-import {useDispatch, useSelector} from 'react-redux';
-import {setLocation, setLocationStore} from '../../store/LocationSlice';
-import {useNavigation} from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux';
+import { setLocation, setLocationStore } from '../../store/LocationSlice';
+import { useNavigation } from '@react-navigation/native';
+import Toast from 'react-native-toast-message';
+
 import {
   getNearPropertiesFunc,
   setLikeUnlike,
 } from '../../store/PropertiesSlice';
-import {getMyProperty} from '../../store/MyPropertySlice';
+import { getMyProperty } from '../../store/MyPropertySlice';
 
-const Home = ({navigation}) => {
+const Home = ({ navigation }) => {
   const nav = useNavigation();
-  const {data: hostetData, loading} = useSelector(
+  const { data: hostetData, loading } = useSelector(
     state => state.getPropertiesSlice,
   );
   const dispatch = useDispatch();
-  const {
-    latitude,
-    longitude,
-    name: placeName,
-  } = useSelector(state => state.location);
+  const { latitude, longitude, name: placeName } = useSelector(state => state.location);
   const Navigation = useNavigation();
   const user = useSelector(state => state.auth.user);
-  console.log('login screen--------1', latitude, placeName);
+  console.log("Home screen lat long================", latitude, longitude, placeName, hostetData)
+
 
   const getHstdetail = async (filterData = {}) => {
-    console.log('getHstdetail');
+    console.log("getHstdetail ==========================")
+    if (!latitude) return
+    let params
+    if (user?._id) {
+      params = {
+        // long: '77.3769',
+        // lat: '28.6285',
+        lat: latitude,
+        long: longitude,
+        ...filterData,
+        userId: user?._id,
+      };
+    }
+    else {
+      params = {
+        // long: '77.3769',
+        // lat: '28.6285',
+        lat: latitude,
+        long: longitude,
+        ...filterData,
+      };
+    }
 
-    const params = {
-      long: '77.3769',
-      lat: '28.6285',
-      // lat: latitude,
-      // long: longitude,
-      ...filterData,
-    };
     console.log('params=====================111111', params);
 
+    console.log("params ---------", params)
     try {
       dispatch(getNearPropertiesFunc(params));
     } catch (error) {
@@ -71,8 +87,17 @@ const Home = ({navigation}) => {
   };
 
   useEffect(() => {
-    getHstdetail();
-  }, [latitude]);
+    console.log("changed value =============" , latitude)
+    if (latitude) {
+      getHstdetail()
+    }
+  }, [latitude])
+
+  useEffect(() =>{
+    if (!hostetData?.length) {
+      getHstdetail()
+    }
+  },[])
 
   const handleFilter = useCallback(filterData => {
     console.log('filterData', filterData);
@@ -80,6 +105,16 @@ const Home = ({navigation}) => {
   }, []);
 
   const toggleLike = async propertyId => {
+
+    if (!user?._id) {
+      console.log("toast chl ra h ??")
+      Toast.show({
+        type: 'error',
+        text1: 'Please Log In',
+        text2: "Log In to Like The Property!",
+      });
+      return
+    }
     try {
       const response = await post('likeProperty', {
         propertyId,
@@ -96,16 +131,6 @@ const Home = ({navigation}) => {
     }
   };
 
-  const requestLocationPermission = async () => {
-    if (Platform.OS === 'android') {
-      const granted = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-      );
-      return granted === PermissionsAndroid.RESULTS.GRANTED;
-    }
-    return true;
-  };
-
   const getPlaceName = async (latitude, longitude) => {
     const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=AIzaSyA8KBPjCEIBIU0ujqQ7bacaQ5-dK2bUi7E`;
 
@@ -116,13 +141,9 @@ const Home = ({navigation}) => {
 
       if (data.status === 'OK') {
         const formattedAddress = data.results[0]?.formatted_address;
-        dispatch(
-          setLocationStore({
-            latitude: latitude,
-            longitude: longitude,
-            name: data.results[0]?.formatted_address,
-          }),
-        );
+        dispatch(setLocationStore({ latitude: latitude, longitude: longitude, name: data.results[0]?.formatted_address }));
+
+
       } else {
         console.error('Error fetching place name:', data.status);
       }
@@ -131,51 +152,75 @@ const Home = ({navigation}) => {
     }
   };
 
-  const getLocation = async () => {
-    console.log('position-----------------1');
 
+  const requestLocationPermission = async () => {
+    console.log("requestLocationPermission function called ✅✅✅");
+    if (Platform.OS === 'android') {
+      try {
+        const granted = await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+          {
+            title: 'Location Access Required',
+            message: 'This app needs to access your location.',
+          },
+        );
+        console.log("requestLocationPermission function called ✅✅✅ =========", granted);
+
+        if (granted !== PermissionsAndroid.RESULTS.GRANTED) {
+          Alert.alert(
+            'Permission Denied',
+            'Location permission is required to use this feature.',
+          );
+          return false;
+        }
+        return true;
+      } catch (err) {
+        console.warn(err);
+        return false;
+      }
+    }
+    return true; // iOS permissions are handled via Info.plist
+  };
+  const getLocation = async () => {
+    console.log("getLocation calling--------------------")
+    console.log("Calling requestLocationPermission...");
     const hasPermission = await requestLocationPermission();
+    console.log("hasPermission calling--------------------", hasPermission)
+
     if (!hasPermission) return;
 
     Geolocation.getCurrentPosition(
       position => {
-        const {latitude, longitude} = position.coords;
-        console.log('position-----------------2', latitude, longitude);
+        const { latitude, longitude } = position.coords;
         // getPlaceName('28.6285', '77.3769')
         getPlaceName(latitude, longitude);
 
-        dispatch(setLocationStore({latitude: latitude, longitude: longitude}));
+        dispatch(setLocationStore({ latitude: latitude, longitude: longitude }));
 
-        console.log('system positon', latitude, longitude);
+        console.log('Geolocation position================', latitude, longitude);
       },
       error => {
         console.log('Error getting location:', error.message);
       },
-      {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
+      { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 },
     );
   };
 
+
+
+
   const getMyPropertyFunc = async () => {
-    dispatch(getMyProperty());
+    console.log("user?._id", user?._id)
+    dispatch(getMyProperty(user?._id));
   };
 
   useEffect(() => {
-    console.log('useeffect------------------');
-    if (!hostetData) {
-      getHstdetail();
-    }
     getLocation();
     getMyPropertyFunc();
-  }, []);
+  }, [])
 
-  const handlePlaceSelect = place => {
-    dispatch(
-      setLocationStore({
-        latitude: place?.lat,
-        longitude: place?.lon,
-        name: place?.name,
-      }),
-    );
+  const handlePlaceSelect = (place) => {
+    dispatch(setLocationStore({ latitude: place?.lat, longitude: place?.lon, name: place?.name }))
   };
 
   return (
@@ -223,7 +268,7 @@ const Home = ({navigation}) => {
                 data={hostetData}
                 contentContainerStyle={styles.flatlistcontainer}
                 keyExtractor={item => item._id.toString()}
-                renderItem={({item}) => (
+                renderItem={({ item }) => (
                   <HstDetail
                     hostel={item}
                     onLikePress={() => toggleLike(item._id)}
@@ -240,6 +285,9 @@ const Home = ({navigation}) => {
           )}
         </ScrollView>
       </View>
+      {/* <Text>Hi</Text> */}
+      <Toast />
+
     </View>
   );
 };

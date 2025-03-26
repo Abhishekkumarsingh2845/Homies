@@ -50,6 +50,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     width: 120,
     alignItems: 'center',
+    color:'black',
     
     justifyContent: 'center',
     padding: 5,
@@ -61,6 +62,8 @@ const styles = StyleSheet.create({
   },
   maxplacehldcontainer:
   {
+    color:'black',
+
     marginLeft:10,
     backgroundColor: '#FFFFFF',
     width: 120,

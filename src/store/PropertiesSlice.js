@@ -14,7 +14,7 @@ export const getNearPropertiesFunc = createAsyncThunk(
         response: res.data.data[0]?.data,
       };
     } catch (error) {
-      console.log('error getNearPropertiesFunc', error);
+      console.log('getNearPropertiesFunc error=================', error);
     }
   },
 );

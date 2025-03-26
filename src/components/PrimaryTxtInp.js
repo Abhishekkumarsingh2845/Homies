@@ -13,6 +13,8 @@ const PrimaryTxtInp = ({
   mrgtop,
   maxlen,
   keyboardType,
+  editable = true
+
 }) => {
   const onChange = value => {
     setValue(name, value);
@@ -28,6 +30,7 @@ const PrimaryTxtInp = ({
           placeholderTextColor={Color.clr87}
           keyboardType={keyboardType}
           maxLength={maxlen}
+          editable ={editable}
         />
       </View>
       {error && <Text style={styles.errorText}>{error}</Text>}

@@ -18,9 +18,10 @@ export const getToken = async () => {
   try {
     const FCMToken = await messaging().getToken();
     console.log('->>>fcmtoken', FCMToken);
+    return FCMToken
     if (FCMToken) {
-      const dispatch = useDispatch();
-      dispatch(setFcmToken(FCMToken));
+      // const dispatch = useDispatch();
+      // dispatch(setFcmToken(FCMToken));
     }
   } catch (error) {
     console.log('error in getToken', error);
