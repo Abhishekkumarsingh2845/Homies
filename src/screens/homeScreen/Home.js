@@ -61,6 +61,7 @@ const Home = ({ navigation }) => {
         userId: user?._id,
       };
     }
+
     else {
       params = {
         // long: '77.3769',
