@@ -53,10 +53,10 @@ const Home = ({ navigation }) => {
     let params
     if (user?._id) {
       params = {
-        // long: '77.3769',
-        // lat: '28.6285',
-        lat: latitude,
-        long: longitude,
+        long: '77.3769',
+        lat: '28.6285',
+        // lat: latitude,
+        // long: longitude,
         ...filterData,
         userId: user?._id,
       };
@@ -64,10 +64,10 @@ const Home = ({ navigation }) => {
 
     else {
       params = {
-        // long: '77.3769',
-        // lat: '28.6285',
-        lat: latitude,
-        long: longitude,
+        long: '77.3769',
+        lat: '28.6285',
+        // lat: latitude,
+        // long: longitude,
         ...filterData,
       };
     }
