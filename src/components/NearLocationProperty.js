@@ -4,28 +4,32 @@ import {Img} from '../utlis/ImagesPath';
 import {FontText} from '../utlis/CustomFont';
 import {Color} from '../utlis/Color';
 
-const NearLocationProperty = ({property, nearproperty,}) => {
+const NearLocationProperty = ({ nearproperty,}) => {
 console.log("nearproperty==============" , nearproperty)
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity style={styles.container} activeOpacity={1}>
       <Image
         source={
           nearproperty?.property_images?.[0]
-            ? {uri: nearproperty?.property?.property_images[0]}
+            ? {uri: nearproperty?.property_images[0]}
             : Img.allhostelicon
         }
         style={{width: 100, height: 80, borderRadius: 10}}
       />
       <View style={styles.txtcontainer}>
         <Text style={styles.hosteltxt}>
-          {nearproperty?.property?.property_name}
+          {nearproperty?.property_name}
         </Text>
         <Text style={styles.addresstxt}>
-          {nearproperty?.property?.address || 'no data'}
+          {nearproperty?.address || 'no data'}
         </Text>
         <Text style={styles.rentcontainer}>
-          {nearproperty?.property?.sharing?.[0]?.details?.[0]?.amount ||
-            'no data'}
+          {
+          nearproperty?.sharing?.[0]?.details?.[0]?.amount ?
+          `Rs ${ nearproperty?.sharing?.[0]?.details?.[0]?.amount }`
+          :
+            'no data'
+          }
         </Text>
       </View>
     </TouchableOpacity>

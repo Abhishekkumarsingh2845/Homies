@@ -10,8 +10,8 @@ import {
   Button,
   Alert,
 } from 'react-native';
-import React, {useEffect, useRef, useState} from 'react';
-import {Color} from '../../utlis/Color';
+import React, { useEffect, useRef, useState } from 'react';
+import { Color } from '../../utlis/Color';
 import PropertyInfoCard from '../../components/PropertyInfoCard';
 import SecondaryHeader from '../../components/SecondaryHeader';
 import Amenity from '../../components/Amenity';
@@ -22,20 +22,20 @@ import NearLocationProperty from '../../components/NearLocationProperty';
 import PermonthRent from '../../components/PermonthRent';
 import VisitRequestbtn from '../../components/VisitRequestbtn';
 import SignUpModal from '../../components/SignUpModal';
-import {Img} from '../../utlis/ImagesPath';
-import {useNavigation, useRoute} from '@react-navigation/native';
-import {FontText} from '../../utlis/CustomFont';
+import { Img } from '../../utlis/ImagesPath';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { FontText } from '../../utlis/CustomFont';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Wifi from 'react-native-vector-icons/FontAwesome5';
 import Pool from 'react-native-vector-icons/MaterialIcons';
 import CalendarModal from '../../components/Calendarcmp';
 import RequestSentBtnSht from '../../components/RequestSentBtnSht';
 import GuestModal from '../../components/GuestModal';
-import {useDispatch, useSelector} from 'react-redux';
-import {get, post} from '../../utlis/Api';
+import { useDispatch, useSelector } from 'react-redux';
+import { get, post } from '../../utlis/Api';
 import VideoPlayer from '../../components/Video';
-import {setLandlordId, setPropertyId} from '../../store/Propert&LandlordId';
-import {getMyProperty} from '../../store/MyPropertySlice';
+import { setLandlordId, setPropertyId } from '../../store/Propert&LandlordId';
+import { getMyProperty } from '../../store/MyPropertySlice';
 import Toast from 'react-native-toast-message';
 
 // import {Image} from 'react-native-svg';
@@ -47,25 +47,28 @@ const PropertyDetail = () => {
   const propertyID = route?.params?.propertyID ?? null;
   const [isModalVisible, setModalVisible] = useState(false);
   const [showGuestModal, setShowGuestModal] = useState(false);
-  const {token, _id} = useSelector(state => state.auth.user);
+  const { token, _id } = useSelector(state => state.auth.user);
   const [property, setPropertyData] = useState({});
-
-  console.log(
-    'property = ======================',
-    property?.property?.property_videos,
-  );
   const [selected, setSelected] = useState(null);
   const [loading, setloading] = useState();
-  const [hostetData, sethostelData] = useState([]);
-  const [nearpropertyN, setNearPropertyN] = useState([]);
   const [selectedSharing, setSelectedSharing] = useState({});
   const [selectedPlan, setSelectedPlan] = useState({});
   const [rentAmount, setRentAmount] = useState({
     amount: '',
     planDuration: '',
   });
+  const [NearByProperty, setNearByProperty] = useState({})
+  console.log("NearByProperty----------------" , NearByProperty)
+  console.log("property----------------" , property)
+
+
+
+  const { data: hostetData } = useSelector(
+    state => state.getPropertiesSlice,
+  );
+
   const isEmpty = obj => JSON.stringify(obj) === '{}';
-  console.log('property id coming from the Home screen:', propertyID);
+
   const getAmountFunc = () => {
     let amount = selectedSharing?.details?.find(
       item =>
@@ -97,27 +100,6 @@ const PropertyDetail = () => {
 
   const bottomSheetRef = useRef(null);
 
-  const getHstdetail = async () => {
-    const params = {
-      long: '77.376945',
-      lat: '28.628454',
-    };
-
-    try {
-      const response = await get('getNearProperties', params);
-      sethostelData(response?.data[0]?.data);
-      setNearPropertyN(response?.data?.[2]);
-      console.log(
-        'checking the data of the getnearproperty ->>',
-        response?.data[1]?.data,
-      );
-    } catch (error) {
-      console.log(
-        'error in  the getNearProperty',
-        error?.response?.data || error.message,
-      );
-    }
-  };
 
   const handleVistRequest = async (date, time) => {
     console.log(
@@ -136,7 +118,7 @@ const PropertyDetail = () => {
 
     try {
       const response = await post('visitRequest', data);
-      if(response.success){
+      if (response.success) {
         bottomSheetRef.current?.expand()
       }
       console.log('response of the visitRequest API ', response);
@@ -148,7 +130,7 @@ const PropertyDetail = () => {
     }
   };
 
-  
+
   const getOneProperty = async () => {
     const params = {
       propertyId: propertyID,
@@ -220,16 +202,27 @@ const PropertyDetail = () => {
 
   useEffect(() => {
     getOneProperty();
-    getHstdetail();
     if (!token) {
       setShowGuestModal(true);
     } else {
       setShowGuestModal(false);
     }
+    // const res = hostetData?.find(item => item?._id !== property?.property?._id)
+    // console.log("data h bhai ==", hostetData[0], "property hai bhai===============", property)
+    // setNearByProperty(res)
+
   }, []);
+
+  useEffect(() => {
+    if (hostetData?.length > 0 && !isEmpty(property)) {
+      const res = hostetData?.find(item => item?._id !== property?.property?._id)
+      setNearByProperty(res)
+    }
+  }, [hostetData, property])
 
   const propertyId = useSelector(state => state.property.propertyId);
   console.log('Property ID from Redux:', propertyId);
+
   return (
     <View style={styles.container}>
 
@@ -264,7 +257,7 @@ const PropertyDetail = () => {
               icon={
                 <Image
                   source={Img.parkingicon}
-                  style={{width: 25, height: 20, resizeMode: 'contain'}}
+                  style={{ width: 25, height: 20, resizeMode: 'contain' }}
                 />
               }
             />
@@ -274,7 +267,7 @@ const PropertyDetail = () => {
               icon={
                 <Image
                   source={Img.gymicon}
-                  style={{width: 25, height: 20, resizeMode: 'contain'}}
+                  style={{ width: 25, height: 20, resizeMode: 'contain' }}
                 />
               }
             />
@@ -300,7 +293,7 @@ const PropertyDetail = () => {
           )}
 
           <Text style={styles.neaerbytxt}>Near by Property</Text>
-          <NearLocationProperty nearproperty={property} />
+         {NearByProperty && <NearLocationProperty nearproperty={NearByProperty} />}
           {!isEmpty(rentAmount) && <PermonthRent rentAmount={rentAmount} />}
 
           <VisitRequestbtn
@@ -316,14 +309,14 @@ const PropertyDetail = () => {
           />
 
 
-          <View style={{marginVertical: 20}} />
+          <View style={{ marginVertical: 20 }} />
         </View>
       </ScrollView>
       <GuestModal
         modalVisible={showGuestModal}
         setModalVisible={setShowGuestModal}
       />
-          <RequestSentBtnSht bottomSheetRef={bottomSheetRef}/>
+      <RequestSentBtnSht bottomSheetRef={bottomSheetRef} />
 
     </View>
   );

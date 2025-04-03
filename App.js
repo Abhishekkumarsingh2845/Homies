@@ -29,28 +29,6 @@ import Geolocation from 'react-native-geolocation-service';
 import { notificationFunction } from './src/utlis/Notification';
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 const App = () => {
   const [inviteLink, setInviteLink] = useState(null);
   LogBox.ignoreAllLogs();
@@ -146,7 +124,7 @@ const App = () => {
 
   useEffect(() => {
     const unsubscribe = getMessaging().onMessage(async remoteMessage => {
-      console.log('remoteMessage', remoteMessage);
+      console.log('remoteMessage-----', remoteMessage);
       // Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
       notificationFunction(remoteMessage)
     });
@@ -170,11 +148,11 @@ const App = () => {
   }, [])
 
 
-  useEffect(() => {
-    requestUserPermissionForNotification();
+  // useEffect(() => {
+  //   requestUserPermissionForNotification();
 
 
-  }, [])
+  // }, [])
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>

@@ -36,6 +36,7 @@ const VideoPlayer = ({videoplay}) => {
             <Video
               key={index}
               source={{uri: item}}
+              paused={true}
               style={{
                 width: ScreenDimensions.screenWidth * 0.26,
                 height: ScreenDimensions.screenHeight * 0.1,
