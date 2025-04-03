@@ -5,6 +5,16 @@ import Calendar from 'react-native-vector-icons/Ionicons';
 import {Img} from '../utlis/ImagesPath';
 const Menu = ({Maintxt, senddata}) => {
   console.log('0>>', senddata);
+  const chunkArray = (arr, size) => {
+    return arr?.length
+      ? arr.reduce(
+          (acc, _, i) => (i % size ? acc : [...acc, arr.slice(i, i + size)]),
+          [],
+        )
+      : [];
+  };
+
+  const foodChunks = chunkArray(senddata?.foodItems || [], 2);
   return (
     <ImageBackground
       style={styles.container}
@@ -15,32 +25,40 @@ const Menu = ({Maintxt, senddata}) => {
       <View style={styles.calendarcontainer}>
         <Calendar name="calendar-outline" color={Color.btnclr} size={18} />
         <Text style={styles.timingtxt}>{senddata?.startTime || 'no data'}</Text>
+        <Text style={styles.timingtxt}>--{senddata?.endTime || 'no data'}</Text>
       </View>
       <View style={styles.maindishcontainer}>
-        <View style={styles.twodishcontainer}>
+        {/* <View style={styles.twodishcontainer}>
           <View style={styles.dishnamecontainer}>
             <View style={styles.dot} />
-            <Text styles={styles.dishnametxt}>
-              {senddata?.foodItems?.[0] || 'no data'}
-            </Text>
+            {senddata?.foodItems?.[0] && (
+              <Text style={{fontSize: 22, color: 'black'}}>
+                {senddata?.foodItems?.[0] || 'no data'}
+              </Text>
+            )}
           </View>
           <View style={styles.dishnamecontainer}>
             <View style={styles.dot} />
-            <Text styles={styles.dishnametxt}>
-              {senddata?.foodItems?.[1] || 'no data'}
-            </Text>
+            {senddata?.foodItems?.[1] && (
+              <Text style={styles.dishnametxt}>
+                {senddata?.foodItems?.[1] || 'no data'}
+              </Text>
+            )}
           </View>
         </View>
         <View style={styles.twodishcontainer}>
           <View style={styles.dishnamecontainer}>
-            <View style={styles.dot} />
-            <Text styles={styles.dishnametxt}>
-              {senddata?.foodItems?.[2] || 'no data'}
-            </Text>
+            {senddata?.foodItems?.[2] && (
+              <View style={styles.dot}>
+                <Text style={styles.dishnametxt}>
+                  {senddata?.foodItems?.[2] || 'no data'}
+                </Text>
+              </View>
+            )}
           </View>
           <View style={styles.dishnamecontainer}>
             <View style={styles.dot} />
-            <Text styles={styles.dishnametxt}>
+            <Text style={styles.dishnametxt}>
               {senddata?.foodItems?.[3] || 'no data'}
             </Text>
           </View>
@@ -48,16 +66,28 @@ const Menu = ({Maintxt, senddata}) => {
         <View style={styles.twodishcontainer}>
           <View style={styles.dishnamecontainer}>
             <View style={styles.dot} />
-            <Text styles={styles.dishnametxt}>
+            <Text style={styles.dishnametxt}>
               {senddata?.foodItems?.[4] || 'no data'}
             </Text>
           </View>
           <View style={styles.dishnamecontainer}>
             <View style={styles.dot} />
-            <Text styles={styles.dishnametxt}>
+            <Text style={styles.dishnametxt}>
               {senddata?.foodItems?.[5] || 'no data'}
             </Text>
           </View>
+        </View> */}
+        <View style={styles.maindishcontainer}>
+          {foodChunks.map((pair, index) => (
+            <View key={index} style={styles.twodishcontainer}>
+              {pair.map((item, idx) => (
+                <View key={idx} style={styles.dishnamecontainer}>
+                  <View style={styles.dot} />
+                  <Text style={styles.dishnametxt}>{item || 'no data'}</Text>
+                </View>
+              ))}
+            </View>
+          ))}
         </View>
       </View>
     </ImageBackground>
@@ -96,11 +126,14 @@ const styles = StyleSheet.create({
   },
   timingtxt: {
     marginLeft: 10,
+    fontSize: 14,
+    color: 'black',
+    fontWeight: '500',
   },
   dot: {
     width: 5,
     height: 5,
-    backgroundColor: 'black', // Color of the dot
+    backgroundColor: 'black',
     borderRadius: 5, // Half of the width/height to make it circular
     marginRight: 5,
   },
@@ -110,8 +143,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   dishnametxt: {
-    fontSize: 14,
-    color: 'red',
+    fontSize: 16,
+    color: 'black',
+    marginVertical: 5,
+    fontWeight: '500',
   },
   twodishcontainer: {
     flexDirection: 'row',

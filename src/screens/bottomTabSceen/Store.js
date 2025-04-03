@@ -8,12 +8,19 @@ import {FontText} from '../../utlis/CustomFont';
 import {Color} from '../../utlis/Color';
 import {useNavigation} from '@react-navigation/native';
 import {get} from '../../utlis/Api';
+import {useSelector} from 'react-redux';
 
 const Store = () => {
   const navigation = useNavigation();
   const [loading, setloading] = useState(false);
   const [storeData, setstoreData] = useState([]);
-
+  const [refreshing, setRefreshing] = useState(false);
+  const {
+    latitude,
+    longitude,
+    name: placeName,
+  } = useSelector(state => state.location);
+  latitude, console.log('long and lat->>', latitude, longitude);
   const categories = [
     {
       id: '1',
@@ -44,15 +51,19 @@ const Store = () => {
       bottomTxt: '&Essentials',
     },
   ];
+
   const getStoreDetail = async groceryType => {
+    setloading(true);
     const params = {
-      long: '77.3649',
-      lat: '28.6280',
+      long: latitude,
+      lat: longitude,
       groceryType: groceryType,
     };
+
     try {
       const response = await get('getNearStores', params);
-      console.log('->>>liehcbfhw', response.data);
+      console.log('params in the getNearStores', params);
+      console.log('response in the store ', response.data[0]?.data);
       setstoreData(response?.data[0]?.data);
     } catch (error) {
       console.log(
@@ -60,11 +71,18 @@ const Store = () => {
         error?.response?.data || error.message,
       );
     }
+    setloading(true);
   };
 
   const handleStore = groceryType => {
     getStoreDetail(groceryType);
     console.log('->>', groceryType);
+  };
+
+  const onRefresh = async () => {
+    setRefreshing(true);
+    await getStoreDetail('vegetable');
+    setRefreshing(false);
   };
 
   return (

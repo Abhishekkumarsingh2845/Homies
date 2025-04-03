@@ -15,7 +15,7 @@
 //   const navigation = useNavigation();
 //   const {data: myProperty} = useSelector(state => state.MyProperty);
 //   const user = useSelector(state => state.auth.user);
- 
+
 //   const userId = user._id;
 //   console.log("->>>userid in the chatscreen",userId);
 //   console.log('->>>>>>>>propertid in the chatscreen', myProperty);
@@ -127,9 +127,9 @@ const Chat = () => {
   const navigation = useNavigation();
   const {data: myProperty} = useSelector(state => state.MyProperty);
   const user = useSelector(state => state.auth.user);
-  
+
   const userId = user._id;
-  console.log("->>>userid in the chatscreen", userId);
+  console.log('->>>userid in the chatscreen', userId);
   console.log('->>>>>>>>propertid in the chatscreen', myProperty);
 
   const propertyId = myProperty?._id;
@@ -145,6 +145,7 @@ const Chat = () => {
       const response = await get('userPropertyGroup', params);
       console.log('Response from userPropertyGroup:', response.data);
       setChat(response.data);
+      console.log("getting the group name",response.data);
 
       if (response.data.length > 0) {
         setRoomId(response.data[0]._id); // Set roomId dynamically from API response
@@ -166,7 +167,7 @@ const Chat = () => {
       };
       console.log('🛠️ Sending room data to SOCKET:', roomData);
       SOCKET.emit('join_room', roomData);
-  
+
       SOCKET.on('connect', () => {
         console.log('Socket Connected in the Chat screen', SOCKET.id);
       });
@@ -192,7 +193,9 @@ const Chat = () => {
           chat.map(item => (
             <ChatCmp
               onPress={() =>
-                navigation.navigate('ChatMessage', {chatId: item._id})
+                navigation.navigate('ChatMessage', {chatId: item._id,
+                  groupName:item.groupName
+                })
               }
               // iddd={item._id}
               key={item._id}

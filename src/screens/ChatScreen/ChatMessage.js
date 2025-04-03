@@ -14,11 +14,15 @@ const ChatMessage = () => {
   const [msg, setmsg] = useState([]);
   const route = useRoute();
   const chatId = route.params?.chatId;
+  groupName = route.params?.groupName;
   console.log('Chat ID:', chatId);
+  console.log('groupName', groupName);
   const getgroupMessage = async () => {
     const params = {
       groupId: chatId,
     };
+
+
     try {
       const response = await get('getGroupMessage', params);
       console.log('response of the getgroupMessage', response.data);
@@ -26,6 +30,7 @@ const ChatMessage = () => {
     } catch (error) {
       console.log('error in the getgroupMessage', error.message);
     }
+    
   };
   useEffect(() => {
     getgroupMessage();
@@ -37,7 +42,7 @@ const ChatMessage = () => {
 
       <SecondaryHeader
         gobackImage={Img.goback}
-        detailtxt={'Property Group Name'}
+        detailtxt={groupName || 'Property Name'}
         onPress={() => navigation.goBack()}
       />
 
@@ -56,9 +61,12 @@ const ChatMessage = () => {
           <Text>No messages found</Text>
         )}
       </View>
-      <View style={{marginTop: 320}}>
-        <MessageTypeBar />
+      <View style={styles.admincontainer}>
+        <Text style={styles.admintxt}>Only Admin can send message </Text>
       </View>
+      {/* <View style={{marginTop: 320}}>
+        <MessageTypeBar />
+      </View> */}
     </View>
   );
 };
@@ -73,5 +81,18 @@ const styles = StyleSheet.create({
   messagecontainer: {
     marginTop: 20,
     paddingHorizontal: 20,
+  },
+  admintxt: {
+    fontSize: 12,
+    color: '#575757',
+  },
+  admincontainer: {
+    backgroundColor: '#FFCF9D',
+    position: 'absolute',
+    bottom: 0,
+    width: '100%',
+    paddingVertical: 15,
+    textAlign: 'center',
+    alignItems: 'center',
   },
 });

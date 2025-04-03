@@ -1,4 +1,3 @@
-
 import {
   StyleSheet,
   Text,
@@ -30,7 +29,7 @@ const FoodMenu = ({senddata}) => {
 
     const params = {
       propertyId: propertyId,
-      week: selectedDay, 
+      week: selectedDay,
     };
 
     console.log(
@@ -42,7 +41,7 @@ const FoodMenu = ({senddata}) => {
       setData(response?.data[0]?.foodDetails);
       console.log(
         'response of the property withFood=>>> in the Foodmenu',
-        response?.data[0]?.foodDetails,
+        response?.data[0],
       );
     } catch (error) {
       console.log('error in the propertyWithFood', error.message);
@@ -133,13 +132,16 @@ const FoodMenu = ({senddata}) => {
           {/* Apply the red border to the "Rooms" and "Food" tabs when Food is selected */}
           {selectedTab === 'Food' && <View style={styles.activeTabBorder} />}
 
-          <DaySelector selectedDay={selectedDay} setSelectedDay={setSelectedDay} />
-         
+          <DaySelector
+            selectedDay={selectedDay}
+            setSelectedDay={setSelectedDay}
+          />
+
           {data && data.length > 0 ? (
             data.map((item, index) => (
               <Menu
                 key={index}
-                Maintxt={item.title || 'No Data'}
+                Maintxt={item.title}
                 senddata={item}
               />
             ))
