@@ -1,40 +1,20 @@
-import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import { Image, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
 import SecondaryHeader from '../../components/SecondaryHeader';
 import DownloadDoc from '../../components/DownloadDoc';
-import {Img} from '../../utlis/ImagesPath';
-import {useNavigation} from '@react-navigation/native';
-import {FontText} from '../../utlis/CustomFont';
-import {Color} from '../../utlis/Color';
-import {get} from '../../utlis/Api';
-import {useSelector} from 'react-redux';
+import { Img } from '../../utlis/ImagesPath';
+import { useNavigation } from '@react-navigation/native';
+import { FontText } from '../../utlis/CustomFont';
+import { Color } from '../../utlis/Color';
+import { get } from '../../utlis/Api';
+import { useSelector } from 'react-redux';
+import { ScreenDimensions } from '../../utlis/DimensionApi';
 
 const PersonDoument = () => {
   const navigation = useNavigation();
-  const [profile, setProfile] = useState({});
-  const user = useSelector(state => state.auth.user);
-  const editUserName = async () => {
-    try {
-      const response = await get(
-        'userProfile',
-        {},
-        (token =
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2RkNjZlNGQwMmY1ZmUzNTg3MzU5NTUiLCJpYXQiOjE3NDI1NjMwNzB9.N0gKpQBBQuCRKXGwBEqyDsrb-5opDBf1N9LqZjGsUSo'),
-      );
-      if (response.success) {
-        setProfile(response.data);
-        console.log('name of the userprofile in draqwer', response.data);
-      }
-    } catch (error) {
-      console.log(
-        'error in the editUserprofile',
-        error?.response?.data || error?.message,
-      );
-    }
-  };
-  useEffect(() => {
-    editUserName();
-  }, []);
+  const user = useSelector(state => state?.auth?.user);
+  console.log("user-----------------qqqq>>>", user)
+
   return (
     <View style={styles.container}>
       <SafeAreaView />
@@ -43,27 +23,31 @@ const PersonDoument = () => {
         detailtxt={'Document'}
         onPress={() => navigation.goBack('DrawerNavigator')}
       />
-      <View style={{paddingHorizontal: 20}}>
+      <View style={{ paddingHorizontal: 20 }}>
         <Text style={styles.boldtxt}>Student Aadhar Card</Text>
-        <DownloadDoc />
-        <Text style={{fontsize:12,color:"red"}}>{profile.profileImage}</Text>
-
-
- 
-        <Text style={styles.boldtxt}>College Name</Text>
+        {/* <DownloadDoc /> */}
+      {user?.studentAadhar ?
+        <Image source={{ uri: user?.studentAadhar }} style={{ width: ScreenDimensions?.screenWidth * 0.9, height: ScreenDimensions?.screenWidth * 0.5, borderWidth: 2, resizeMode: 'contain' }} />
+        :
         <Text style={styles.boldtxt}>
-          {profile.collegeName || 'Rohit Kumar'}
+        {'Not Added'}
+      </Text>
+      }
+
+        <Text style={styles.boldtxt}>College Name</Text>
+        <Text style={{ marginTop: 10, color: 'black' }}>
+          {user?.collegeName || 'Not Mentioned'}
         </Text>
         <Text style={styles.boldtxt}>Parents Details</Text>
         <Text style={styles.boldtxt}>Name</Text>
-        <Text style={{marginTop: 10, color: 'black'}}>
-          {profile.name || 'Abhishek'}
+        <Text style={{ marginTop: 10, color: 'black' }}>
+          {user?.parentsDetails?.parentName || 'Not Mentioned'}
         </Text>
         <Text style={styles.boldtxt}>Phone Number</Text>
-        <Text style={{marginTop: 10, color: 'black'}}>
-          {profile.phone || '917654327865'}
+        <Text style={{ marginTop: 10, color: 'black' }}>
+          {user?.parentsDetails?.parentPhone || 'Not Mentioned'}
         </Text>
-      
+
       </View>
     </View>
   );

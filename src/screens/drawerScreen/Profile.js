@@ -42,6 +42,7 @@ const Profile = () => {
   const [modalType, setModalType] = useState('');
   const {data: myProperty} = useSelector(state => state.MyProperty);
   console.log('myProperty ================= > ', myProperty);
+  console.log("user profile")
 
   const dispatch = useDispatch();
 

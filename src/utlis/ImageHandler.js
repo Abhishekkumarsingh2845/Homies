@@ -1,10 +1,10 @@
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import axios from 'axios';
 
-export const openGallery = async () => {
+export const openGallery = async (mediaType =  'mixed') => {
   try {
     const res = await launchImageLibrary({
-      mediaType: 'mixed',
+      mediaType: mediaType,
     });
     return {
       status: true,

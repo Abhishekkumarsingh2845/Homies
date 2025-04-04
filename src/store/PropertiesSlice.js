@@ -7,7 +7,7 @@ export const getNearPropertiesFunc = createAsyncThunk(
     try {
       console.log("getNearProperties body----------", data)
       const res = await api.get('getNearProperties', { params: data });
-      console.log("getNearProperties response--------------", JSON.stringify(res.data.data))
+      // console.log("getNearProperties response--------------", JSON.stringify(res.data.data))
       return {
         status: res.data.success,
         message: res.data.message,
