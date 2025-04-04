@@ -25,10 +25,10 @@ const RateReview = () => {
   const {data: myProperty} = useSelector(state => state.MyProperty);
 
   const propertyId = useSelector(state => state.property.propertyId);
-  console.log(
-    'Property ID  in the rate and review->>>>>>>>>>>>>>>>>>>>>>>>>>>>>',
-    myProperty._id,
-  );
+  // console.log(
+  //   'Property ID  in the rate and review->>>>>>>>>>>>>>>>>>>>>>>>>>>>>',
+  //   myProperty._id,
+  // );
   const [selected, setselected] = useState(0);
   const [text, setText] = useState('');
   const StarArray = new Array(5).fill(0);
@@ -39,7 +39,7 @@ const RateReview = () => {
   const handleRating = async () => {
     console.log('Feedback Text:', text);
     const data = {
-      propId: myProperty._id,
+      propId: myProperty?._id,
       rating: selected,
       feedbacks: text,
     };
@@ -88,7 +88,7 @@ const RateReview = () => {
             </TouchableOpacity>
           ))}
         </View>
-        <Text style={styles.starcounttxt}>4/5 stars</Text>
+        {/* <Text style={styles.starcounttxt}>4/5 stars</Text> */}
       </View>
       <View style={{paddingHorizontal: 20}}>
         <Text style={{marginVertical: 10, textAlign: 'left'}}>
@@ -104,6 +104,8 @@ const RateReview = () => {
           style={{
             fontFamily: FontText.light,
             padding: 30,
+            color: 'black',
+            alignItems:"flex-start",
             backgroundColor: '#FFFFFF',
           }}
           value={text}
@@ -161,3 +163,5 @@ const styles = StyleSheet.create({
     color: '#6B7280',
   },
 });
+
+

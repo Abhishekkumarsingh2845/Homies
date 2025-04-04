@@ -1,4 +1,11 @@
-import {ScrollView, StyleSheet, Text, TextInput, View} from 'react-native';
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React, {useState} from 'react';
 import SecondaryHeader from '../../components/SecondaryHeader';
 import PrimaryBtn from '../../components/PrimaryBtn';
@@ -10,6 +17,7 @@ import {Img} from '../../utlis/ImagesPath';
 import {useNavigation} from '@react-navigation/native';
 import {post} from '../../utlis/Api';
 import Uploaddoc from '../../components/Uploaddoc';
+import {openGallery, uploadImageUrl} from '../../utlis/ImageHandler';
 
 const DocumentVerify = () => {
   const navigation = useNavigation();
@@ -17,6 +25,7 @@ const DocumentVerify = () => {
   const [phone, setphone] = useState('');
   const [address, setaddress] = useState('');
   const [college, setcollege] = useState('');
+  const [addhar, setaddhar] = useState('');
 
   const uploadDocument = async () => {
     const data = {
@@ -26,6 +35,7 @@ const DocumentVerify = () => {
         address: address,
       },
       documents: {
+        studentAadhar: addhar,
         collegeName: college,
       },
     };
@@ -41,6 +51,32 @@ const DocumentVerify = () => {
     }
   };
 
+  const galleryFunc = async () => {
+    console.log('res--------------1');
+
+    let res = await openGallery();
+    // const as = res.response[0].uri;
+
+    console.log('res--------------->>>>>>bnsdjkbkb', res.response[0].uri);
+    
+    if (res.status) {
+      const data = {
+        uri: res.response[0].uri,
+        name: 'image.jpg',
+        type: 'image/jpeg',
+      };
+      let imageRes = await uploadImageUrl(data);
+      console.log("-<bjfdsbv",imageRes);
+      console.log('image data ======', imageRes);
+ 
+      if (imageRes.status) {
+        console.log("imageRes?.imageUrl," , imageRes?.imageUrl,)
+
+        setaddhar(imageRes?.imageUrl);
+      }
+    }
+  };
+
   return (
     <View style={styles.conttainer}>
       <SecondaryHeader
@@ -50,18 +86,33 @@ const DocumentVerify = () => {
       />
       <ScrollView contentContainerStyle={styles.subcontainer}>
         <Text style={styles.uploadtxt}>Upload your Documents</Text>
-        <Text style={styles.uploadtxt}>Student Aadhar Card</Text>
-        <Opencamera fixheight={80} operationtxt={'Browse file from gallery'} />
+        <TouchableOpacity
+          style={{
+            backgroundColor: 'white',
+            borderRadius: 10,
+            paddingVertical: 40,
+            alignItems: 'center',
+            justifyContent: 'center',
+            paddingHorizontal: 10,
+          }}
+          onPress={galleryFunc}>
+          {addhar ? (
+            <Text style={{color: 'blue', textAlign: 'center'}}>Sucess</Text>
+          ) : (
+            <Text style={{color: 'gray'}}>Tap to Upload</Text>
+          )}
+        </TouchableOpacity>
 
         <Text style={styles.uploadtxt}>Student / Job ID</Text>
-        <Opencamera fixheight={80} operationtxt={'Browse file from gallery'} />
+
         <Text style={styles.uploadtxt}>College Name</Text>
-        {/* <ComplaintTxtInpt
+
+        <Uploaddoc
+          onchgtxt={setcollege}
           value={college}
-          setValue={(text) => {console.log("college name" , text);}}
-          placeholder="College Name"
-        /> */} 
-        <Uploaddoc onchgtxt={setcollege}  value={college} placeholder={"College"} />
+          placeholder={'College'}
+        />
+
         <Text style={styles.uploadtxt}>Parents Details</Text>
         <Text style={styles.uploadtxt}>Name</Text>
         {/* <ComplaintTxtInpt
@@ -69,21 +120,29 @@ const DocumentVerify = () => {
           setValue={setParentName}
           placeholder="Name"
         /> */}
-         <Uploaddoc onchgtxt={setParentName}  value={parentName} placeholder={"Name"} />
+        <Uploaddoc
+          onchgtxt={setParentName}
+          value={parentName}
+          placeholder={'Name'}
+        />
         <Text style={styles.uploadtxt}>Phone Number</Text>
-        {/* <ComplaintTxtInpt
+
+        <Uploaddoc
+          onchgtxt={setphone}
           value={phone}
-          setValue={setphone}
-          placeholder="Phone Number"
-        /> */}
-         <Uploaddoc onchgtxt={setphone}  value={phone} placeholder={"Phone Number"} />
+          placeholder={'Phone Number'}
+        />
         <Text style={styles.uploadtxt}>Address</Text>
         {/* <ComplaintTxtInpt
           value={address}
           setValue={setaddress}
           placeholder="Address"
         /> */}
-         <Uploaddoc onchgtxt={setaddress}  value={address} placeholder={"Address"} />
+        <Uploaddoc
+          onchgtxt={setaddress}
+          value={address}
+          placeholder={'Address'}
+        />
         <PrimaryBtn
           mgntop={20}
           txt={'Submit'}

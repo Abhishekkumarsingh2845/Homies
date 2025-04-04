@@ -2,6 +2,7 @@ import messaging from '@react-native-firebase/messaging';
 import {PermissionsAndroid} from 'react-native';
 import {useDispatch} from 'react-redux';
 import {setFcmToken} from '../store/FcmTokenSlice';
+import notifee from '@notifee/react-native';
 
 export async function requestUserPermissionForNotification() {
   const authStatus = await messaging().requestPermission();
@@ -28,9 +29,9 @@ export const getToken = async () => {
   }
 };
 
-export const notificationFunction = async (body: any) => {
+export const notificationFunction = async (body) => {
   console.log('body inside notificationFunction', JSON.stringify(body));
-
+  await notifee.requestPermission()
   const channelId = await notifee.createChannel({
     id: 'default',
     name: 'Default Channel',
@@ -45,9 +46,12 @@ export const notificationFunction = async (body: any) => {
     body: body?.data?.body,
     android: {
       channelId,
-
+      smallIcon :'ic_launcher',
       priority: 1,
       sound: 'default',
+      pressAction: {
+        id: 'default',
+    },
     },
   });
 };

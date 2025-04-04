@@ -71,10 +71,7 @@ const CustomDrawerContent = ({navigation}) => {
       label: 'FAQ',
       screen: 'FAQ',
     },
-    {
-      label: 'Help',
-      screen: 'Help',
-    },
+    
     {
       label: 'Document Verify',
       screen: 'DocumentVerify',
