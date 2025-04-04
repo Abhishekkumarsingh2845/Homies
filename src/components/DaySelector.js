@@ -10,7 +10,7 @@ const DaySelector = ({selectedDay, setSelectedDay}) => {
     {id: 1, txt: 'Mon'},
     {id: 2, txt: 'Tues'},
     {id: 3, txt: 'Wed'},
-    {id: 4, txt: 'Thurs'},
+    {id: 4, txt: 'Thur'},
     {id: 5, txt: 'Fri'},
     {id: 6, txt: 'Sat'},
     {id: 7, txt: 'Sun'},
@@ -28,7 +28,8 @@ const DaySelector = ({selectedDay, setSelectedDay}) => {
             style={[
               styles.dateTxtContainer,
               {
-                backgroundColor: selectedDay === item.txt ? Color.white : Color.btnclr,
+                backgroundColor:
+                  selectedDay === item.txt ? Color.white : Color.btnclr,
               },
             ]}
             onPress={() => setSelectedDay(item.txt)}>
@@ -70,7 +71,7 @@ const styles = StyleSheet.create({
   },
   dateTxtContainer: {
     paddingVertical: 5,
-    marginHorizontal:4,
+    marginHorizontal: 4,
     // padding: 10, // Adds padding inside each item
     borderRadius: 8, // Optional for rounded corners
     // Adds spacing between items

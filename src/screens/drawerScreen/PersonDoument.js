@@ -13,6 +13,8 @@ const PersonDoument = () => {
   const navigation = useNavigation();
   const [profile, setProfile] = useState({});
   const user = useSelector(state => state.auth.user);
+
+
   const editUserName = async () => {
     try {
       const response = await get(
@@ -35,6 +37,8 @@ const PersonDoument = () => {
   useEffect(() => {
     editUserName();
   }, []);
+
+  
   return (
     <View style={styles.container}>
       <SafeAreaView />
@@ -46,10 +50,8 @@ const PersonDoument = () => {
       <View style={{paddingHorizontal: 20}}>
         <Text style={styles.boldtxt}>Student Aadhar Card</Text>
         <DownloadDoc />
-        <Text style={{fontsize:12,color:"red"}}>{profile.profileImage}</Text>
+        <Text style={{fontsize: 12, color: 'red'}}>{profile.profileImage}</Text>
 
-
- 
         <Text style={styles.boldtxt}>College Name</Text>
         <Text style={styles.boldtxt}>
           {profile.collegeName || 'Rohit Kumar'}
@@ -63,7 +65,6 @@ const PersonDoument = () => {
         <Text style={{marginTop: 10, color: 'black'}}>
           {profile.phone || '917654327865'}
         </Text>
-      
       </View>
     </View>
   );
@@ -83,5 +84,3 @@ const styles = StyleSheet.create({
     color: Color.black,
   },
 });
-
-

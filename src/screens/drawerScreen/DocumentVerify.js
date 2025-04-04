@@ -3,6 +3,7 @@ import {
   StyleSheet,
   Text,
   TextInput,
+  ToastAndroid,
   TouchableOpacity,
   View,
 } from 'react-native';
@@ -18,6 +19,7 @@ import {useNavigation} from '@react-navigation/native';
 import {post} from '../../utlis/Api';
 import Uploaddoc from '../../components/Uploaddoc';
 import {openGallery, uploadImageUrl} from '../../utlis/ImageHandler';
+import Toast from 'react-native-toast-message';
 
 const DocumentVerify = () => {
   const navigation = useNavigation();
@@ -43,6 +45,11 @@ const DocumentVerify = () => {
     try {
       const response = await post('uplaodDocuments', data);
       console.log('response of the  upload document response', response.data);
+      Toast.show({
+        type: 'success',
+        text1: 'Upload Successful',
+        text2: 'Your document has been uploaded!',
+      });
     } catch (error) {
       console.log(
         'error in the  response',
@@ -58,7 +65,7 @@ const DocumentVerify = () => {
     // const as = res.response[0].uri;
 
     console.log('res--------------->>>>>>bnsdjkbkb', res.response[0].uri);
-    
+
     if (res.status) {
       const data = {
         uri: res.response[0].uri,
@@ -66,11 +73,11 @@ const DocumentVerify = () => {
         type: 'image/jpeg',
       };
       let imageRes = await uploadImageUrl(data);
-      console.log("-<bjfdsbv",imageRes);
+      console.log('-<bjfdsbv', imageRes);
       console.log('image data ======', imageRes);
- 
+
       if (imageRes.status) {
-        console.log("imageRes?.imageUrl," , imageRes?.imageUrl,)
+        console.log('imageRes?.imageUrl,', imageRes?.imageUrl);
 
         setaddhar(imageRes?.imageUrl);
       }
@@ -97,7 +104,9 @@ const DocumentVerify = () => {
           }}
           onPress={galleryFunc}>
           {addhar ? (
-            <Text style={{color: 'blue', textAlign: 'center'}}>Sucess</Text>
+            <Text style={{color: Color.btnclr, textAlign: 'center'}}>
+              Upload successfully
+            </Text>
           ) : (
             <Text style={{color: 'gray'}}>Tap to Upload</Text>
           )}
@@ -115,11 +124,7 @@ const DocumentVerify = () => {
 
         <Text style={styles.uploadtxt}>Parents Details</Text>
         <Text style={styles.uploadtxt}>Name</Text>
-        {/* <ComplaintTxtInpt
-          value={parentName}
-          setValue={setParentName}
-          placeholder="Name"
-        /> */}
+
         <Uploaddoc
           onchgtxt={setParentName}
           value={parentName}
@@ -133,11 +138,7 @@ const DocumentVerify = () => {
           placeholder={'Phone Number'}
         />
         <Text style={styles.uploadtxt}>Address</Text>
-        {/* <ComplaintTxtInpt
-          value={address}
-          setValue={setaddress}
-          placeholder="Address"
-        /> */}
+
         <Uploaddoc
           onchgtxt={setaddress}
           value={address}
@@ -149,6 +150,7 @@ const DocumentVerify = () => {
           bgcolor={Color.primary}
           Onpress={() => uploadDocument()}
         />
+        <Toast />
         <View style={{marginVertical: 20}}></View>
       </ScrollView>
     </View>

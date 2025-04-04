@@ -12,7 +12,7 @@ const StoreDetail = ({strdetail}) => {
       <Image source={Img.storeimgicon} style={styles.imgstyle} />
       <View style={styles.detailcontainer}>
         {/* <Text style={styles.namextx}> Fresh Express </Text> */}
-        <Text style={styles.namextx}>{strdetail?.name} </Text>
+        <Text style={styles.namextx}>{strdetail?.name || 'no data'} </Text>
         <View style={styles.addressdetail}>
           <Location name="location-pin" size={16} color={'#FF9457'} />
 
@@ -85,11 +85,13 @@ const styles = StyleSheet.create({
   },
   addresstxt: {
     fontSize: 10,
+    color: 'black',
   },
   phonetxt: {
     fontSize: 10,
     lineHeight: 15,
     // color:"red",
+    color: 'black',
     marginRight: 15,
   },
 });

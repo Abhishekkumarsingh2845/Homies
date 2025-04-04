@@ -53,17 +53,16 @@ const Store = () => {
   ];
 
   const getStoreDetail = async groceryType => {
-    setloading(true);
     const params = {
-      long: latitude,
-      lat: longitude,
+      long: longitude,
+      lat: latitude,
       groceryType: groceryType,
     };
 
     try {
       const response = await get('getNearStores', params);
       console.log('params in the getNearStores', params);
-      console.log('response in the store ', response.data[0]?.data);
+      console.log('response in the store ', response?.data);
       setstoreData(response?.data[0]?.data);
     } catch (error) {
       console.log(
@@ -71,7 +70,6 @@ const Store = () => {
         error?.response?.data || error.message,
       );
     }
-    setloading(true);
   };
 
   const handleStore = groceryType => {
