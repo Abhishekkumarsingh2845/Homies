@@ -68,13 +68,14 @@ const DocumentVerify = () => {
       } catch (error) {
         console.log( 'error in the  response', error.response || error.message.data,
         );
+        Toast.show({
+          type: 'error',
+          text1: 'Try Again',
+          text2: 'Something Went Wrong',
+          position: 'bottom',
+        });
       }
-      Toast.show({
-        type: 'error',
-        text1: 'Try Again',
-        text2: 'Something Went Wrong',
-        position: 'bottom',
-      });
+
       setloading(false)
 
     }

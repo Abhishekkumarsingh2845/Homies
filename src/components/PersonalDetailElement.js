@@ -24,7 +24,7 @@ const PersonalDetailElement = ({
   field = '',
 }) => {
 
-  const {token} = useSelector(state => state.auth.user);
+  const {token ,studentAadhar } = useSelector(state => state.auth.user);
   const [showTextInput, setShowTextInput] = useState(false);
   const [value, setValue] = useState(subtitle);
   const dispatch = useDispatch();
@@ -40,6 +40,7 @@ const PersonalDetailElement = ({
         data = {
           documents: {
             collegeName: value,
+            studentAadhar : studentAadhar || ''
         },
         }
       }
