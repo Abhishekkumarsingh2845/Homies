@@ -65,7 +65,7 @@ const ComplaintScr = () => {
 
     <View style={styles.container}>
       <Header
-        hght={160}
+        hght={ScreenDimensions?.screenHeight * 0.2}
         Img1={Img.draw}
         complaintbtn={
           <View style={styles.complaintcontainer}>
@@ -152,13 +152,14 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: ScreenDimensions.screenWidth * 0.03,
     paddingBottom: 12,
-    borderRightWidth: 2,
-    borderLeftWidth: 2,
-    borderTopWidth: 2,
+    // borderRightWidth: 2,
+    // borderLeftWidth: 2,
+    // borderTopWidth: 2,
     borderTopStartRadius: 20,
     borderTopRightRadius: 20,
-    borderColor: '#D9D9D9',
+    // borderColor: '#D9D9D9',
     backgroundColor: '#D9D9D9',
+
   },
   complaintcontainer: {
     flexDirection: 'row',

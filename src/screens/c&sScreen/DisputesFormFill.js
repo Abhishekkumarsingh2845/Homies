@@ -22,7 +22,7 @@ const DisputesFormFill = () => {
     const [loading , setLoading] = useState(false)
       const {data : myProperty} = useSelector(state => state.MyProperty)
       const dispatch = useDispatch()
-      console.log("my property ----------------" , myProperty?.owner_name )
+      console.log("my property ----------------" , myProperty )
     
 
 
@@ -94,7 +94,8 @@ const DisputesFormFill = () => {
       landLordName: values.landLord,
       propertyName: values?.propertyName,
       dispute_description: values?.description,
-      landLordId : myProperty?.landLordId
+      landLordId : myProperty?.landLordId,
+      propertyId : myProperty?._id
     }
 
     try {
