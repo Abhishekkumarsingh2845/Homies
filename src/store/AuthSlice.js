@@ -3,6 +3,13 @@ const initialState = {
   user: {
     token: null,
     isExist: false,
+    user_id: null,
+    phone: null,
+    profileImage: null,
+    name: null,
+    email: null,
+    token: null,
+    _id : null
   },
 };
 const authSlice = createSlice({
@@ -26,7 +33,10 @@ const authSlice = createSlice({
         name: data?.name,
         email: data?.email,
         token: data?.jwtToken,
-        _id : data?._id
+        _id : data?._id,
+        collegeName : data?.documents?.collegeName || null,
+        studentAadhar :  data?.documents?.studentAadhar || null,
+        parentsDetails : data?.parentsDetails || null
       };
     },
   },

@@ -16,7 +16,7 @@ const Splash = ({navigation}) => {
     <View style={styles.container}>
       <StatusBar backgroundColor={'black'} />
       <Video
-        source={require('../../assets/videos/splash.mp4')}
+        source={require('../../assets/videos/pp.mp4')}
         style={styles.video}
         resizeMode="contain"
       />
@@ -24,7 +24,14 @@ const Splash = ({navigation}) => {
   );
 };
 
+
 export default Splash;
+
+
+
+
+
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

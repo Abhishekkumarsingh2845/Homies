@@ -176,6 +176,53 @@ const styles = StyleSheet.create({
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React from 'react';
+// import { View } from 'react-native';
+// import MySvgIcon from "../Homies/src/assets/images/export.svg";
+
+// const App = () => {
+//   return (
+//     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+//       <MySvgIcon width={200} height={200} />
+//     </View>
+//   );
+// };
+
+// export default App;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // if (__DEV__) {
 //   require('./ReactotronConfig');
 // }

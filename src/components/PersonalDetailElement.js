@@ -23,9 +23,8 @@ const PersonalDetailElement = ({
   editIcon,
   field = '',
 }) => {
-  console.log('value====== res 1111', field);
 
-  const {token} = useSelector(state => state.auth.user);
+  const {token ,studentAadhar } = useSelector(state => state.auth.user);
   const [showTextInput, setShowTextInput] = useState(false);
   const [value, setValue] = useState(subtitle);
   const dispatch = useDispatch();
@@ -34,19 +33,27 @@ const PersonalDetailElement = ({
   };
 
   const updateFunc = async () => {
-    console.log('value====== res 1111', field);
 
     if (field) {
-      const data = {
-        [field]: value,
-      };
+      let data
+      if(field == 'collegeName'){
+        data = {
+          documents: {
+            collegeName: value,
+            studentAadhar : studentAadhar || ''
+        },
+        }
+      }
+      else{
+        data = {
+          [field]: value,
+        };
+      }
       // return
       try {
         const response = await post('updateProfile', data, token);
-        console.log('value====== res 1111', response);
         if (response?.success) {
           dispatch(setUser(response));
-          // navigation.navigate('HomeNavigator');
         }
       setShowTextInput(false);
 

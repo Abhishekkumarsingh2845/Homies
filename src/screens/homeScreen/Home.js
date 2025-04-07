@@ -34,6 +34,7 @@ import {
   setLikeUnlike,
 } from '../../store/PropertiesSlice';
 import { getMyProperty } from '../../store/MyPropertySlice';
+import { setUser } from '../../store/AuthSlice';
 
 const Home = ({ navigation }) => {
   const nav = useNavigation();
@@ -223,6 +224,30 @@ const Home = ({ navigation }) => {
     dispatch(setLocationStore({ latitude: place?.lat, longitude: place?.lon, name: place?.name }))
   };
 
+    const getUserDetail = async () => {
+      try {
+        const response = await get('userProfile', {}, user?.token);
+        if (response.success) {
+          console.log('userProfile------------------>>', response);
+                    dispatch(setUser(response));
+        }
+      } catch (error) {
+        console.log(
+         "userProfile------------------>> error",
+          error?.response?.data || error?.message,
+        );
+      }
+    };
+    useEffect(() => {
+      if(user.token){
+        getUserDetail();
+      }
+    }, [user?.token]);
+
+    const onRefresh = () =>{
+      getHstdetail()
+      getUserDetail()
+    }
   return (
     <View style={styles.container}>
       <Header
@@ -247,7 +272,7 @@ const Home = ({ navigation }) => {
           }}
           showsVerticalScrollIndicator={false}
           refreshControl={
-            <RefreshControl onRefresh={getHstdetail} refreshing={loading} />
+            <RefreshControl onRefresh={onRefresh} refreshing={loading} />
           }>
           <MapSelect />
           <DotindictaorImg

@@ -1,4 +1,5 @@
 import {
+  Image,
   ScrollView,
   StyleSheet,
   Text,
@@ -11,14 +12,13 @@ import React, {useState} from 'react';
 import SecondaryHeader from '../../components/SecondaryHeader';
 import PrimaryBtn from '../../components/PrimaryBtn';
 import {Color} from '../../utlis/Color';
-import ComplaintTxtInpt from '../../components/ComplaintTxtInpt';
-import Opencamera from '../../components/Opencamera';
 import {FontText} from '../../utlis/CustomFont';
 import {Img} from '../../utlis/ImagesPath';
 import {useNavigation} from '@react-navigation/native';
 import {post} from '../../utlis/Api';
 import Uploaddoc from '../../components/Uploaddoc';
 import {openGallery, uploadImageUrl} from '../../utlis/ImageHandler';
+import {ScreenDimensions} from '../../utlis/DimensionApi';
 import Toast from 'react-native-toast-message';
 
 const DocumentVerify = () => {
@@ -28,59 +28,71 @@ const DocumentVerify = () => {
   const [address, setaddress] = useState('');
   const [college, setcollege] = useState('');
   const [addhar, setaddhar] = useState('');
+  const [loading, setloading] = useState(false);
 
   const uploadDocument = async () => {
-    const data = {
-      parentsDetails: {
-        parentName: parentName,
-        parentPhone: phone,
-        address: address,
-      },
-      documents: {
-        studentAadhar: addhar,
-        collegeName: college,
-      },
+    setloading(true);
+
+    const ImageData = {
+      uri: addhar,
+      name: 'image.jpg',
+      type: 'image/jpeg',
     };
-    console.log('Data before API call:', data);
-    try {
-      const response = await post('uplaodDocuments', data);
-      console.log('response of the  upload document response', response.data);
+
+    let imageRes = await uploadImageUrl(ImageData);
+
+    if (imageRes.status) {
+      const data = {
+        parentsDetails: {
+          parentName: parentName,
+          parentPhone: phone,
+          address: address,
+        },
+        documents: {
+          studentAadhar: imageRes?.imageUrl,
+          collegeName: college,
+        },
+      };
+      try {
+        const response = await post('uplaodDocuments', data);
+        Toast.show({
+          type: 'success',
+          text1: 'Success',
+          text2: 'Form Filled Successfully',
+          position: 'bottom',
+        });
+        setTimeout(() => {
+          navigation.goBack();
+        }, 1000);
+      } catch (error) {
+        console.log(
+          'error in the  response',
+          error.response || error.message.data,
+        );
+        Toast.show({
+          type: 'error',
+          text1: 'Try Again',
+          text2: 'Something Went Wrong',
+          position: 'bottom',
+        });
+      }
+
+      setloading(false);
+    } else {
       Toast.show({
-        type: 'success',
-        text1: 'Upload Successful',
-        text2: 'Your document has been uploaded!',
+        type: 'error',
+        text1: 'Try Again',
+        text2: 'Something Went Wrong',
+        position: 'bottom',
       });
-    } catch (error) {
-      console.log(
-        'error in the  response',
-        error.response || error.message.data,
-      );
+      setloading(false);
     }
   };
 
   const galleryFunc = async () => {
-    console.log('res--------------1');
-
-    let res = await openGallery();
-    // const as = res.response[0].uri;
-
-    console.log('res--------------->>>>>>bnsdjkbkb', res.response[0].uri);
-
-    if (res.status) {
-      const data = {
-        uri: res.response[0].uri,
-        name: 'image.jpg',
-        type: 'image/jpeg',
-      };
-      let imageRes = await uploadImageUrl(data);
-      console.log('-<bjfdsbv', imageRes);
-      console.log('image data ======', imageRes);
-
-      if (imageRes.status) {
-        console.log('imageRes?.imageUrl,', imageRes?.imageUrl);
-
-        setaddhar(imageRes?.imageUrl);
-      }
+    let res = await openGallery('photo');
+    if (res?.status) {
+      setaddhar(res.response[0].uri);
     }
   };
 
@@ -93,25 +105,30 @@ const DocumentVerify = () => {
       />
       <ScrollView contentContainerStyle={styles.subcontainer}>
         <Text style={styles.uploadtxt}>Upload your Documents</Text>
-        <TouchableOpacity
-          style={{
-            backgroundColor: 'white',
-            borderRadius: 10,
-            paddingVertical: 40,
-            alignItems: 'center',
-            justifyContent: 'center',
-            paddingHorizontal: 10,
-          }}
-          onPress={galleryFunc}>
-          {addhar ? (
-            <Text style={{color: Color.btnclr, textAlign: 'center'}}>
-              Upload successfully
-            </Text>
-          ) : (
+        {addhar ? (
+          <Image
+            source={{uri: addhar}}
+            style={{
+              width: ScreenDimensions?.screenWidth * 0.9,
+              height: ScreenDimensions?.screenWidth * 0.5,
+              borderWidth: 2,
+              resizeMode: 'contain',
+            }}
+          />
+        ) : (
+          <TouchableOpacity
+            style={{
+              backgroundColor: 'white',
+              borderRadius: 10,
+              paddingVertical: 40,
+              alignItems: 'center',
+              justifyContent: 'center',
+              paddingHorizontal: 10,
+            }}
+            onPress={galleryFunc}>
             <Text style={{color: 'gray'}}>Tap to Upload</Text>
-          )}
-        </TouchableOpacity>
-
+          </TouchableOpacity>
+        )}
         <Text style={styles.uploadtxt}>Student / Job ID</Text>
 
         <Text style={styles.uploadtxt}>College Name</Text>
@@ -149,10 +166,11 @@ const DocumentVerify = () => {
           txt={'Submit'}
           bgcolor={Color.primary}
           Onpress={() => uploadDocument()}
+          loading={loading}
         />
-        <Toast />
         <View style={{marginVertical: 20}}></View>
       </ScrollView>
+      <Toast />
     </View>
   );
 };
