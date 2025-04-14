@@ -35,6 +35,7 @@ import {
 } from '../../store/PropertiesSlice';
 import { getMyProperty } from '../../store/MyPropertySlice';
 import { setUser } from '../../store/AuthSlice';
+import { FindSubLocality } from '../../utlis/LocationName';
 
 const Home = ({ navigation }) => {
   const nav = useNavigation();
@@ -141,8 +142,10 @@ const Home = ({ navigation }) => {
       console.log('place name------', JSON.stringify(data));
 
       if (data.status === 'OK') {
+        let name = FindSubLocality(data.results[0]?.address_components)
         const formattedAddress = data.results[0]?.formatted_address;
-        dispatch(setLocationStore({ latitude: latitude, longitude: longitude, name: data.results[0]?.formatted_address }));
+        dispatch(setLocationStore({ latitude: latitude, longitude: longitude, name: name }));
+        // dispatch(setLocationStore({ latitude: latitude, longitude: longitude, name: data.results[0]?.formatted_address }));
 
 
       } else {

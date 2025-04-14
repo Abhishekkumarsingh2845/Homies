@@ -113,6 +113,7 @@ import SearchBar from '../../components/SearchBar';
 import { get } from '../../utlis/Api';
 import { Color } from '../../utlis/Color';
 import { FontText } from '../../utlis/CustomFont';
+import { FindSubLocality } from '../../utlis/LocationName';
 
 const LocationSearch = () => {
   const navigation = useNavigation();
@@ -157,6 +158,7 @@ const LocationSearch = () => {
     try {
       const response = await fetch(url);
       const data = await response.json();
+      console.log("place response=====================111" , JSON.stringify(data.predictions))
 
       if (data.status === 'OK') {
         setSuggestions(data.predictions);
@@ -169,6 +171,7 @@ const LocationSearch = () => {
     }
   };
 
+
   // Fetch place details to get coordinates
   const fetchPlaceDetails = async (place_id) => {
     const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${place_id}&key=AIzaSyA8KBPjCEIBIU0ujqQ7bacaQ5-dK2bUi7E`;
@@ -176,11 +179,12 @@ const LocationSearch = () => {
     try {
       const response = await fetch(url);
       const data = await response.json();
-      console.log("place coord==========", data.result.geometry.location)
+      console.log("place coord==========", data.result)
+     let name =  FindSubLocality(data?.result?.address_components)
 
       if (data.status === 'OK') {
         const { lat, lng } = data.result.geometry.location;
-        return { lat, lng };
+        return { lat, lng , name};
       }
     } catch (error) {
       console.error('Error fetching place details:', error);
@@ -235,7 +239,8 @@ const LocationSearch = () => {
                   const coordinates = await fetchPlaceDetails(item.place_id);
                   if (coordinates) {
                     navParams?.onSelect({
-                          name: item?.structured_formatting?.main_text || item.description,
+                          // name: item?.structured_formatting?.main_text || item.description,
+                          name : coordinates?.name,
                           lat: coordinates.lat,
                           lon: coordinates.lng,
                       });

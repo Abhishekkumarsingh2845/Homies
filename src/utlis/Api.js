@@ -92,7 +92,9 @@ export const post = async (endpoint, data = {}) => {
 
     return response?.data;
   } catch (error) {
-    console.log('===========================' , JSON.stringify(error.response))
+    // console.log('===========================' , JSON.stringify(error.response))
+    console.log(`error of get ${endpoint}============` , error)
+
     throw error.response.data;
   }
 };
