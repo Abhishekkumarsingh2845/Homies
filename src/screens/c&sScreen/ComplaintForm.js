@@ -21,6 +21,7 @@ const ComplaintForm = () => {
   const {token} = useSelector(state => state.auth.user);
   const {data : myProperty} = useSelector(state => state.MyProperty)
   const {params} = useRoute();
+  console.log("myProperty===============" , myProperty)
 
   const initialValues = {
     topic: '',
@@ -113,6 +114,7 @@ const ComplaintForm = () => {
           mediaUrl: item?.url,
         };
       }),
+      propertyId : myProperty?._id,
       landLordId: myProperty?.landLordId,
     };
 

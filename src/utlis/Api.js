@@ -43,7 +43,7 @@
 import axios from 'axios';
 import store from '../store/Store';
 
-const BASE_URL = 'http://15.206.16.230:8084/api/v1/user/';
+const BASE_URL = 'http://13.201.93.144:8084/api/v1/user/';
 
 export const api = axios.create({
   baseURL: BASE_URL,

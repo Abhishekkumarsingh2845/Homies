@@ -183,7 +183,7 @@ const Header = ({
             />
           </TouchableOpacity>
           
-          <View style={{ height : hght , paddingLeft : 8  , justifyContent:'flex-end' ,paddingBottom : 6}}>
+          <View style={{  paddingLeft : 8  , justifyContent:'flex-end' ,paddingBottom : 6}}>
           <Image source={Img.primarylogo} style={styles.logoicon} />
           <View style={{flexDirection : 'row' , alignItems : 'center' , gap : 4}}>
           <Image

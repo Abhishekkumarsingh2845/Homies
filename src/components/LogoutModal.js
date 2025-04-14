@@ -18,8 +18,8 @@ import {clearToken, clearUser, setExist} from '../store/AuthSlice';
 import {useNavigation} from '@react-navigation/native';
 import {clearMyProperty} from '../store/MyPropertySlice';
 import Toast from 'react-native-toast-message';
-import { clearLocation } from '../store/LocationSlice';
-import { clearProperties } from '../store/PropertiesSlice';
+import {clearLocation} from '../store/LocationSlice';
+import {clearProperties} from '../store/PropertiesSlice';
 
 const LogoutModal = ({
   modalVisible,
@@ -34,8 +34,8 @@ const LogoutModal = ({
   const {token} = useSelector(state => state.auth.user);
   // const {data: myProperty} = useSelector(state => state.MyProperty);
   // console.log('logout modal', modalType);
-  const {data : myProperty} = useSelector(state => state.MyProperty)
-  console.log("logout modal" , myProperty)
+  const {data: myProperty} = useSelector(state => state.MyProperty);
+  console.log('logout modal', myProperty);
 
   const logoutUser = async () => {
     setLoading(true);
@@ -44,9 +44,9 @@ const LogoutModal = ({
       if (response.success) {
         setModalVisible(!modalVisible);
         dispatch(clearUser({}));
-        dispatch(clearLocation())
-        dispatch(clearMyProperty())
-        dispatch(clearProperties())
+        dispatch(clearLocation());
+        dispatch(clearMyProperty());
+        dispatch(clearProperties());
 
         navigation.reset({
           index: 0,
@@ -99,6 +99,7 @@ const LogoutModal = ({
     const params = {
       propertyId: myProperty?._id,
       landLordId: myProperty?.landLordId,
+      
       // reason: 'I am leaving this property',
     };
     console.log('body leave property', params);
@@ -138,8 +139,8 @@ const LogoutModal = ({
         setModalVisible(!modalVisible);
       }}>
       {loading ? (
-        <View style={{flex:1,justifyContent:"center",alignItems:"center"}}>
-        <ActivityIndicator color={Color.primary} />
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+          <ActivityIndicator color={Color.primary} />
         </View>
       ) : (
         <View style={styles.centeredView}>
@@ -153,17 +154,16 @@ const LogoutModal = ({
                 textColor={Color.white}
                 borderColor="green"
                 onPress={() => {
-                  if(modalType == 'logout'){
-                    logoutUser()
+                  if (modalType == 'logout') {
+                    logoutUser();
                   }
-                   if(modalType == 'leave'){
-                    leaveProperty()
+                  if (modalType == 'leave') {
+                    leaveProperty();
                   }
-                  if(modalType == 'delete'){
-                    deleteuser()
+                  if (modalType == 'delete') {
+                    deleteuser();
                   }
 
-                 
                   // dispatch(clearToken(token));
                   // setModalVisible(!modalVisible);
                 }}

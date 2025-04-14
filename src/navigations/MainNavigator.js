@@ -46,7 +46,7 @@ const MainNavigation = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName={token ? 'DrawerNavigator' : 'Splash'}
+        initialRouteName={token ? 'DrawerNavigator' : 'Intro'}
         screenOptions={{headerShown: false}}>
         {!token ? (
           <>

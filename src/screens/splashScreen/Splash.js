@@ -12,6 +12,7 @@ const Splash = ({navigation}) => {
   //   return () => clearTimeout(timer);
   // }, [navigation]);
 
+  
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor={'black'} />
@@ -24,13 +25,7 @@ const Splash = ({navigation}) => {
   );
 };
 
-
 export default Splash;
-
-
-
-
-
 
 const styles = StyleSheet.create({
   container: {

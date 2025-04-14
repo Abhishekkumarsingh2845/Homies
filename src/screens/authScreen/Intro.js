@@ -19,6 +19,8 @@ import DotindictaorImg from '../../components/DotindictaorImg';
 import {ScreenDimensions} from '../../utlis/DimensionApi';
 import {useNavigation} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
+
+
 const Intro = () => {
   const dispatch = useDispatch();
   const {width: screenWidth, height: screenHeight} = Dimensions.get('window');
@@ -39,7 +41,7 @@ const Intro = () => {
       </TouchableOpacity>
 
       <DotindictaorImg
-        imageSource={require('../../assets/images/introimg1.png')}
+     imageSource={[Img.intro_1, Img.intro_2, Img.intro_3]}
         // height={380}
         // width={335}
         height={screenHeight * 0.5} // 45% of the screen height

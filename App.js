@@ -2,7 +2,7 @@ if (__DEV__) {
   require('./ReactotronConfig');
 }
 
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   SafeAreaView,
   StatusBar,
@@ -14,19 +14,22 @@ import {
   LogBox,
 } from 'react-native';
 import MainNavigation from './src/navigations/MainNavigator';
-import { Color } from './src/utlis/Color';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import {Color} from './src/utlis/Color';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import appsFlyer from 'react-native-appsflyer';
-import { Provider } from 'react-redux';
-import store, { persistor } from './src/store/Store';
+import {Provider} from 'react-redux';
+import store, {persistor} from './src/store/Store';
 import Toast from 'react-native-toast-message';
-import { PersistGate } from 'redux-persist/integration/react';
+import {PersistGate} from 'redux-persist/integration/react';
 import Splash from './src/screens/splashScreen/Splash';
-import notifee, { AuthorizationStatus } from '@notifee/react-native';
-import { getMessaging } from '@react-native-firebase/messaging';
-import { getToken, requestUserPermissionForNotification } from './src/utlis/Notification';
+import notifee, {AuthorizationStatus} from '@notifee/react-native';
+import {getMessaging} from '@react-native-firebase/messaging';
+import {
+  getToken,
+  requestUserPermissionForNotification,
+} from './src/utlis/Notification';
 import Geolocation from 'react-native-geolocation-service';
-import { notificationFunction } from './src/utlis/Notification';
+import {notificationFunction} from './src/utlis/Notification';
 
 const App = () => {
   const [inviteLink, setInviteLink] = useState(null);
@@ -109,7 +112,6 @@ const App = () => {
   const [showSplash, setShowSplash] = useState(true);
 
   useEffect(() => {
-
     Geolocation.setRNConfiguration({
       skipPermissionRequests: true,
       authorizationLevel: 'auto',
@@ -117,7 +119,7 @@ const App = () => {
     });
     const timer = setTimeout(() => {
       setShowSplash(false);
-    }, 8000);
+    }, 3000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -125,7 +127,7 @@ const App = () => {
     const unsubscribe = getMessaging().onMessage(async remoteMessage => {
       console.log('remoteMessage-----', remoteMessage);
       // Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
-      notificationFunction(remoteMessage)
+      notificationFunction(remoteMessage);
     });
 
     return unsubscribe;
@@ -144,7 +146,7 @@ const App = () => {
   useEffect(() => {
     // notificaion permission check
     requestUserPermission();
-  }, [])
+  }, []);
 
   // useEffect(() => {
   //   requestUserPermissionForNotification();
@@ -178,17 +180,6 @@ const styles = StyleSheet.create({
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 // import React from 'react';
 // import { View } from 'react-native';
 // import MySvgIcon from "../Homies/src/assets/images/export.svg";
@@ -202,26 +193,6 @@ const styles = StyleSheet.create({
 // };
 
 // export default App;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // if (__DEV__) {
 //   require('./ReactotronConfig');

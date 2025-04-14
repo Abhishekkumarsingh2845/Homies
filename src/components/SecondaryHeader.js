@@ -10,7 +10,7 @@ import {
 import React from 'react';
 import {Img} from '../utlis/ImagesPath';
 import {FontText} from '../utlis/CustomFont';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 
 const SecondaryHeader = ({
   detailtxt,
@@ -19,27 +19,28 @@ const SecondaryHeader = ({
   notificationIcon,
   share,
   tintColor,
-  
 }) => {
-  const navigation=useNavigation();
+  const navigation = useNavigation();
   return (
     <ImageBackground source={Img.headerbg} style={styles.container}>
       <StatusBar backgroundColor={'#010101'} barStyle={'light-content'} />
 
       <TouchableOpacity style={styles.subcontainer} onPress={onPress}>
-
         <Image source={gobackImage} style={styles.gobackstyle} />
         <Text style={styles.textstyle}>{detailtxt}</Text>
         {/* <Image source={Img.bellicon} style={styles.imgcontainer} /> */}
-        <TouchableOpacity style={{position: 'absolute', right: 50}} >
+        <TouchableOpacity style={{position: 'absolute', right: 50}}>
           <Image source={share} style={styles.imgcontainer} />
         </TouchableOpacity>
-        <TouchableOpacity style={{position: 'absolute', right: 10}} onPress={()=>navigation.navigate("Notification")}>
-          <Image source={notificationIcon} style={[styles.imgcontainer,{tintColor}]}  />
+        <TouchableOpacity
+          style={{position: 'absolute', right: 10}}
+          onPress={() => navigation.navigate('Notification')}>
+          <Image
+            source={notificationIcon}
+            style={[styles.imgcontainer, {tintColor}]}
+          />
         </TouchableOpacity>
       </TouchableOpacity>
-
-
     </ImageBackground>
   );
 };
@@ -74,7 +75,6 @@ const styles = StyleSheet.create({
   imgcontainer: {
     width: 23,
     height: 23,
-    resizeMode:"contain",
-   
+    resizeMode: 'contain',
   },
 });
