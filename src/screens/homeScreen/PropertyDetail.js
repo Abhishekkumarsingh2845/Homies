@@ -10,8 +10,8 @@ import {
   Button,
   Alert,
 } from 'react-native';
-import React, { useEffect, useRef, useState } from 'react';
-import { Color } from '../../utlis/Color';
+import React, {useEffect, useRef, useState} from 'react';
+import {Color} from '../../utlis/Color';
 import PropertyInfoCard from '../../components/PropertyInfoCard';
 import SecondaryHeader from '../../components/SecondaryHeader';
 import Amenity from '../../components/Amenity';
@@ -22,21 +22,22 @@ import NearLocationProperty from '../../components/NearLocationProperty';
 import PermonthRent from '../../components/PermonthRent';
 import VisitRequestbtn from '../../components/VisitRequestbtn';
 import SignUpModal from '../../components/SignUpModal';
-import { Img } from '../../utlis/ImagesPath';
-import { useNavigation, useRoute } from '@react-navigation/native';
-import { FontText } from '../../utlis/CustomFont';
+import {Img} from '../../utlis/ImagesPath';
+import {useNavigation, useRoute} from '@react-navigation/native';
+import {FontText} from '../../utlis/CustomFont';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Wifi from 'react-native-vector-icons/FontAwesome5';
 import Pool from 'react-native-vector-icons/MaterialIcons';
 import CalendarModal from '../../components/Calendarcmp';
 import RequestSentBtnSht from '../../components/RequestSentBtnSht';
 import GuestModal from '../../components/GuestModal';
-import { useDispatch, useSelector } from 'react-redux';
-import { get, post } from '../../utlis/Api';
+import {useDispatch, useSelector} from 'react-redux';
+import {get, post} from '../../utlis/Api';
 import VideoPlayer from '../../components/Video';
-import { setLandlordId, setPropertyId } from '../../store/Propert&LandlordId';
-import { getMyProperty } from '../../store/MyPropertySlice';
+import {setLandlordId, setPropertyId} from '../../store/Propert&LandlordId';
+import {getMyProperty} from '../../store/MyPropertySlice';
 import Toast from 'react-native-toast-message';
+import {Modal} from 'react-native';
 
 // import {Image} from 'react-native-svg';
 const PropertyDetail = () => {
@@ -47,7 +48,9 @@ const PropertyDetail = () => {
   const propertyID = route?.params?.propertyID ?? null;
   const [isModalVisible, setModalVisible] = useState(false);
   const [showGuestModal, setShowGuestModal] = useState(false);
-  const { token, _id } = useSelector(state => state.auth.user);
+  const [showWelcomeModal, setShowWelcomeModal] = useState(true);
+
+  const {token, _id} = useSelector(state => state.auth.user);
   const [property, setPropertyData] = useState({});
   const [selected, setSelected] = useState(null);
   const [loading, setloading] = useState();
@@ -57,15 +60,11 @@ const PropertyDetail = () => {
     amount: '',
     planDuration: '',
   });
-  const [NearByProperty, setNearByProperty] = useState({})
-  console.log("NearByProperty----------------" , NearByProperty)
-  console.log("property----------------" , property)
+  const [NearByProperty, setNearByProperty] = useState({});
+  console.log('NearByProperty----------------', NearByProperty);
+  console.log('property----------------', property);
 
-
-
-  const { data: hostetData } = useSelector(
-    state => state.getPropertiesSlice,
-  );
+  const {data: hostetData} = useSelector(state => state.getPropertiesSlice);
 
   const isEmpty = obj => JSON.stringify(obj) === '{}';
 
@@ -100,7 +99,6 @@ const PropertyDetail = () => {
 
   const bottomSheetRef = useRef(null);
 
-
   const handleVistRequest = async (date, time) => {
     console.log(
       'landlord id taking from the View one property Api',
@@ -119,7 +117,7 @@ const PropertyDetail = () => {
     try {
       const response = await post('visitRequest', data);
       if (response.success) {
-        bottomSheetRef.current?.expand()
+        bottomSheetRef.current?.expand();
       }
       console.log('response of the visitRequest API ', response);
     } catch (error) {
@@ -129,7 +127,6 @@ const PropertyDetail = () => {
       );
     }
   };
-
 
   const getOneProperty = async () => {
     const params = {
@@ -200,6 +197,29 @@ const PropertyDetail = () => {
     navigation.navigate('PaymentDone');
   };
 
+  const handleconnect = async () => {
+    const data = {
+      propertyId: propertyID,
+
+      landLordId: property?.property?.landLordId,
+    };
+    dispatch(setPropertyId(data.propertyId));
+    dispatch(setLandlordId(data.landLordId));
+    try {
+      const response = await post('visitRequest', data);
+      if (response.success) {
+        bottomSheetRef.current?.expand();
+      }
+      console.log('response of the visitRequest API in connect Now ', response);
+      setShowWelcomeModal(false);
+    } catch (error) {
+      console.log(
+        'error in visitRequest API',
+        error.message || error?.response?.data,
+      );
+    }
+  };
+
   useEffect(() => {
     getOneProperty();
     if (!token) {
@@ -207,25 +227,25 @@ const PropertyDetail = () => {
     } else {
       setShowGuestModal(false);
     }
-    // const res = hostetData?.find(item => item?._id !== property?.property?._id)
-    // console.log("data h bhai ==", hostetData[0], "property hai bhai===============", property)
-    // setNearByProperty(res)
-
+    setTimeout(() => {
+      setShowWelcomeModal(true);
+    }, 500);
   }, []);
 
   useEffect(() => {
     if (hostetData?.length > 0 && !isEmpty(property)) {
-      const res = hostetData?.find(item => item?._id !== property?.property?._id)
-      setNearByProperty(res)
+      const res = hostetData?.find(
+        item => item?._id !== property?.property?._id,
+      );
+      setNearByProperty(res);
     }
-  }, [hostetData, property])
+  }, [hostetData, property]);
 
   const propertyId = useSelector(state => state.property.propertyId);
   console.log('Property ID from Redux:', propertyId);
 
   return (
     <View style={styles.container}>
-
       <SafeAreaView />
 
       <SecondaryHeader
@@ -257,7 +277,7 @@ const PropertyDetail = () => {
               icon={
                 <Image
                   source={Img.parkingicon}
-                  style={{ width: 25, height: 20, resizeMode: 'contain' }}
+                  style={{width: 25, height: 20, resizeMode: 'contain'}}
                 />
               }
             />
@@ -267,7 +287,7 @@ const PropertyDetail = () => {
               icon={
                 <Image
                   source={Img.gymicon}
-                  style={{ width: 25, height: 20, resizeMode: 'contain' }}
+                  style={{width: 25, height: 20, resizeMode: 'contain'}}
                 />
               }
             />
@@ -293,7 +313,9 @@ const PropertyDetail = () => {
           )}
 
           <Text style={styles.neaerbytxt}>Near by Property</Text>
-         {NearByProperty && <NearLocationProperty nearproperty={NearByProperty} />}
+          {NearByProperty && (
+            <NearLocationProperty nearproperty={NearByProperty} />
+          )}
           {!isEmpty(rentAmount) && <PermonthRent rentAmount={rentAmount} />}
 
           <VisitRequestbtn
@@ -308,16 +330,51 @@ const PropertyDetail = () => {
             handleVistRequest={handleVistRequest}
           />
 
-
-          <View style={{ marginVertical: 20 }} />
+          <View style={{marginVertical: 20}} />
         </View>
       </ScrollView>
       <GuestModal
         modalVisible={showGuestModal}
         setModalVisible={setShowGuestModal}
       />
+      <Modal
+        visible={showWelcomeModal}
+        transparent
+        animationType="slide"
+        onRequestClose={() => setShowWelcomeModal(false)}>
+        <View
+          style={{
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: 'rgba(0,0,0,0.5)',
+          }}>
+          <View
+            style={{
+              backgroundColor: 'white',
+              borderRadius: 10,
+              width: '90%',
+              height: '15%',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+            <TouchableOpacity
+              onPress={() => handleconnect()}
+              style={{
+                alignSelf: 'center',
+                backgroundColor: Color.primary,
+                paddingHorizontal: 20,
+                paddingVertical: 10,
+                borderRadius: 10,
+              }}>
+              <Text style={{color: 'white', fontWeight: 'bold'}}>
+                Connect Now
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
       <RequestSentBtnSht bottomSheetRef={bottomSheetRef} />
-
     </View>
   );
 };

@@ -65,7 +65,7 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-   
+
     const handleDeepLink = response => {
       const deepLinkValue = response?.deepLinkValue; // Get the `deepLinkValue`
       console.log('Deep link value:', deepLinkValue);
@@ -175,5 +175,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
+
 
 
