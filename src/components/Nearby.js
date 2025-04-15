@@ -7,9 +7,9 @@ import {FontText} from '../utlis/CustomFont';
 const Nearby = ({name, bgcolor}) => {
   return (
     <TouchableOpacity style={[styles.container, {backgroundColor: bgcolor}]}>
-      <View style={styles.circlecontianer}>
+      {/* <View style={styles.circlecontianer}>
         <Image source={Img.buildingicon} />
-      </View>
+      </View> */}
       <Text style={styles.name}>{name}</Text>
     </TouchableOpacity>
   );

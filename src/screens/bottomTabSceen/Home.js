@@ -25,6 +25,7 @@ const Home = ({route}) => {
   const {propertid} = route.params || 'no data';
   const propertyidtaking = route.params;
   const [data, setData] = useState({});
+  console.log('data===== ,', data?.property_logo);
   const [banner, setBanner] = useState(null);
   const [refreshing, setRefreshing] = useState(false);
 
@@ -34,10 +35,12 @@ const Home = ({route}) => {
     const params = {
       propertyId: propertyidtaking,
     };
+
     try {
       const response = await get('propertyWithFood', params);
       console.log('->>>>>>>data of the  propertyWithFood', response.data);
       setData(response?.data[0]);
+      console.log('logo', data.property_logo);
       console.log('color', response?.data[0]?.property_logo);
       if (response?.data[0]?.theme?.colorValue) {
         dispatch(setString(response.data[0].theme.colorValue));
@@ -81,25 +84,27 @@ const Home = ({route}) => {
       <View
         style={[
           styles.header,
-          {backgroundColor: data?.theme?.colorValue || 'black'},
+          {
+            backgroundColor: data?.theme?.colorValue || 'black',
+          },
         ]}>
         <TouchableOpacity
           style={styles.cantocuable}
           onPress={() => navigation.openDrawer()}>
           <Image source={Img.draw} style={styles.icon} />
           <Image
-            source={data.property_logo|| Img.primarylogo}
-            // source={{
-            //   uri: 'https://mobileapplications.s3.ap-south-1.amazonaws.com/homieWeb1742288956928-profile894.2168308620641.jpg',
-            // }}
-            onError={data => console.log('error in image', data.nativeEvent)}
+            source={{uri: data?.property_logo} || Img.primarylogo}
+            // source={{ uri : 'https://m.media-amazon.com/images/I/61Rx9tHudUL.jpg'}}
+
+            onError={data => console.log('error in image', data.property_logo)}
             style={{
               width: 80,
               height: 80,
               resizeMode: 'contain',
-              tintColor: Color.primary,
+      
+              borderColor: 'white',
+              // tintColor: Color.primary,
               // marginLeft: 20,
-              // backgroundColor:"red"
             }}
           />
         </TouchableOpacity>

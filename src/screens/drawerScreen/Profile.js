@@ -126,8 +126,8 @@ const Profile = () => {
           style={[
             styles.circle,
             {
-              width: dimensions.screenWidth * 0.5,
-              height: dimensions.screenWidth * 0.5,
+              width: dimensions.screenWidth * 0.3,
+              height: dimensions.screenWidth * 0.3,
               marginTop: dimensions.screenHeight * 0.1,
             },
           ]}>

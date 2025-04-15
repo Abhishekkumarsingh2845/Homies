@@ -19,14 +19,17 @@ import {FontText} from '../utlis/CustomFont';
 import {useNavigation} from '@react-navigation/native';
 import {Screen} from 'react-native-screens';
 import {ScreenDimensions} from '../utlis/DimensionApi';
+import {Modal, ScrollView} from 'react-native';
 const PropertyInfoCard = ({data}) => {
   const hostel = data.property;
   const navigation = useNavigation();
+  const [modalVisible, setModalVisible] = useState(false);
   console.log('in=->>>>>>>>>>>>', hostel?._id);
   console.log(
     'checking the hostel id',
     hostel?.hostel_transportation || 'no data',
   );
+  console.log('nearby places', hostel?.near_by_places[0]?.place_name);
   return (
     <TouchableOpacity
       style={styles.container}
@@ -46,13 +49,16 @@ const PropertyInfoCard = ({data}) => {
             source={{uri: hostel?.property_images?.[1]}}
             style={styles.morehosteliconstyle}
           />
-          <ImageBackground
-            source={{uri: hostel?.property_images?.[1]}}
-            style={styles.mmorehostelicon}>
-            <Text style={{alignSelf: 'center', fontSize: 20, color: 'white'}}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('ExtraImage', {hostel})}>
+            <ImageBackground
+              source={{uri: hostel?.property_images?.[2]}}
+              style={styles.mmorehostelicon}>
+              {/* <Text style={{alignSelf: 'center', fontSize: 20, color: 'white'}}>
               +5
-            </Text>
-          </ImageBackground>
+            </Text> */}
+            </ImageBackground>
+          </TouchableOpacity>
         </View>
       </View>
       <View style={styles.idcontainer}>
@@ -90,8 +96,32 @@ const PropertyInfoCard = ({data}) => {
             <Location name="location-pin" size={18} color={'#000000'} />
             <Text style={styles.nearbytxt}>Nearby</Text>
           </View>
-          <Nearby name={'Fortis Hospital'} bgcolor={'#F3D5F9'} />
-          <Nearby name={'Bus Stand'} bgcolor={'#FFE3B1'} />
+          {hostel?.near_by_places[0]?.place_name && (
+            <Nearby
+              name={
+                hostel?.near_by_places[0]?.place_name.slice(0, 17) ||
+                'Bus Stand'
+              }
+              bgcolor={'#FFE3B1'}
+            />
+          )}
+
+          {hostel?.near_by_places[1]?.place_name && (
+            <Nearby
+              name={
+                hostel?.near_by_places[1]?.place_name.slice(0, 17) ||
+                'Bus Stand'
+              }
+              bgcolor={'#FFE3B1'}
+            />
+          )}
+
+          {/* <Nearby
+            name={
+              hostel?.near_by_places[1]?.place_name.slice(0, 17) || 'Bus Stand'
+            }
+            bgcolor={'#FFE3B1'}
+          /> */}
         </View>
         <View>
           <Text style={styles.overviewtxt}>Overview</Text>
@@ -291,5 +321,29 @@ const styles = StyleSheet.create({
   },
   foodfacilitycontainer: {
     marginTop: 10,
+  },
+  modalContainer: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalContent: {
+    width: '90%',
+    height: '80%',
+    backgroundColor: 'white',
+    borderRadius: 10,
+    padding: 10,
+  },
+  fullImage: {
+    width: '100%',
+    height: 200,
+    resizeMode: 'cover',
+    marginBottom: 10,
+    borderRadius: 10,
+  },
+  closeButton: {
+    alignSelf: 'flex-end',
+    padding: 10,
   },
 });

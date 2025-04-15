@@ -14,6 +14,7 @@ import PaymentHomeForm from '../screens/homeScreen/PaymentHomeForm';
 import LocationSearch from '../screens/homeScreen/LocationSearch';
 import DrawerNavigator from './DrawerNavigator';
 import PaymentDone from '../screens/homeScreen/PaymentDone';
+import ExtraImage from '../screens/homeScreen/ExtraImage';
 
 const HomeNavigator = () => {
   const Stack = createStackNavigator();
@@ -33,6 +34,8 @@ const HomeNavigator = () => {
       <Stack.Screen name="PaymentHomeForm" component={PaymentHomeForm} />
       <Stack.Screen name="DrawerNavigator" component={DrawerNavigator} />
       <Stack.Screen name="PaymentDone" component={PaymentDone} />
+      <Stack.Screen name="ExtraImage" component={ExtraImage} />
+
     </Stack.Navigator>
   );
 };
